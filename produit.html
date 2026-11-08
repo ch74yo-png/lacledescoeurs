@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Découvrez les détails de nos bijoux et montres LA CLÉ DES CŒURS.">
+  <meta name="description" content="Découvrez les bijoux et montres LA CLÉ DES CŒURS.">
   <title>Fiche produit | LA CLÉ DES CŒURS</title>
   <link rel="stylesheet" href="styles.css">
 
@@ -14,26 +13,19 @@
       margin: 0 auto;
       padding: 45px 20px 75px;
     }
-
     .back-link {
       display: inline-block;
       margin-bottom: 30px;
-      color: #806f5d;
+      color: var(--muted);
       text-decoration: none;
       font-size: 13px;
     }
-
-    .back-link:hover {
-      text-decoration: underline;
-    }
-
     .product-detail {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 55px;
       align-items: start;
     }
-
     .product-detail-image {
       width: 100%;
       aspect-ratio: 1 / 1;
@@ -42,115 +34,96 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      color: #948879;
-      font-size: 14px;
+      color: var(--muted);
     }
-
     .product-detail-image img {
       width: 100%;
       height: 100%;
       object-fit: contain;
       display: block;
     }
-
     .product-detail-info {
       padding-top: 15px;
     }
-
     .detail-brand {
-      color: #9a8873;
+      color: var(--gold);
       font-size: 12px;
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 15px;
     }
-
     .detail-name {
-      color: #403a33;
+      font-family: var(--serif);
+      color: var(--ink);
       font-size: clamp(25px, 4vw, 36px);
       font-weight: 400;
       line-height: 1.3;
       margin: 0 0 20px;
     }
-
     .detail-price {
       font-size: 23px;
-      color: #403a33;
+      color: var(--ink);
       margin-bottom: 25px;
     }
-
     .detail-old-price {
       color: #999;
       text-decoration: line-through;
       font-size: 16px;
       margin-right: 10px;
     }
-
     .detail-description {
-      color: #71695f;
+      color: var(--muted);
       font-size: 14px;
       line-height: 1.9;
       white-space: pre-line;
       margin-bottom: 25px;
     }
-
     .detail-reference {
-      color: #8b8176;
+      color: var(--muted);
       font-size: 13px;
       margin-bottom: 25px;
     }
-
     .detail-buttons {
       display: flex;
       flex-direction: column;
       gap: 12px;
       max-width: 380px;
     }
-
     .detail-buttons button {
       width: 100%;
       padding: 15px 20px;
-      border: 1px solid #b9a58d;
-      background: #b9a58d;
-      color: #fff;
+      border: 1px solid var(--gold);
+      background: var(--gold);
+      color: white;
       font: inherit;
-      font-size: 13px;
+      font-size: 12px;
       letter-spacing: 1px;
       cursor: pointer;
     }
-
     .detail-buttons button.secondary {
       background: transparent;
-      color: #55493b;
+      color: var(--ink);
     }
-
     .detail-buttons button:hover {
-      opacity: 0.85;
+      opacity: .82;
     }
-
     .product-message {
       text-align: center;
       padding: 70px 20px;
-      color: #71695f;
+      color: var(--muted);
     }
-
     .product-message h1 {
+      font-family: var(--serif);
       font-weight: 400;
-      color: #403a33;
+      color: var(--ink);
     }
-
     @media (max-width: 700px) {
       .product-page {
         padding: 25px 15px 50px;
       }
-
       .product-detail {
         grid-template-columns: 1fr;
         gap: 25px;
-      }
-
-      .product-detail-info {
-        padding-top: 0;
       }
     }
   </style>
@@ -158,15 +131,95 @@
 
 <body>
 
-  <main class="product-page">
-    <a href="catalogue.html" class="back-link">
-      ← Retour à la collection
+  <div class="announcement">
+    BIENVENUE CHEZ LA CLÉ DES CŒURS
+  </div>
+
+  <header class="header">
+    <button class="menu-button" id="menuButton" type="button"
+      aria-label="Ouvrir le menu" aria-expanded="false"
+      aria-controls="mainNav">☰</button>
+
+    <a href="index.html" class="brand">
+      <span class="brand-monogram">CDC</span>
+      <span class="brand-name">LA CLÉ DES CŒURS</span>
+      <span class="brand-tagline">BIJOUX FINS & RAFFINÉS</span>
     </a>
 
+    <div class="header-actions">
+      <a href="favoris.html" aria-label="Favoris">♡</a>
+      <a href="panier.html" aria-label="Panier">
+        ♧ <span id="cartCount">0</span>
+      </a>
+    </div>
+  </header>
+
+  <nav class="main-nav" id="mainNav">
+    <a href="index.html">Accueil</a>
+    <a href="catalogue.html?categorie=accessoires">Accessoires et bracelets</a>
+    <a href="catalogue.html?categorie=ap-swatch">AP x Swatch</a>
+    <a href="catalogue.html?categorie=femme">Montres femme</a>
+    <a href="catalogue.html?categorie=homme">Montres homme</a>
+    <a href="qui-sommes-nous.html">Qui sommes-nous</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="utility-bar">
+    <form class="search-form" id="searchForm">
+      <input type="search" id="searchInput"
+        placeholder="Rechercher un produit..."
+        aria-label="Rechercher un produit">
+      <button type="submit" aria-label="Rechercher">⌕</button>
+    </form>
+
+    <select id="languageSelect" aria-label="Choisir la langue">
+      <option value="fr">Français</option>
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="de">Deutsch</option>
+      <option value="it">Italiano</option>
+      <option value="pt">Português</option>
+    </select>
+  </div>
+
+  <main class="product-page">
+    <a href="catalogue.html" class="back-link">← Retour à la collection</a>
     <div id="contenuProduit">
       <p class="product-message">Chargement du produit...</p>
     </div>
   </main>
+
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="brand-monogram">CDC</span>
+      <h3>LA CLÉ DES CŒURS</h3>
+      <p>BIJOUX FINS & RAFFINÉS</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>LA BOUTIQUE</h4>
+      <a href="index.html">Accueil</a>
+      <a href="catalogue.html">Tous les produits</a>
+      <a href="favoris.html">Mes favoris</a>
+      <a href="panier.html">Mon panier</a>
+      <a href="qui-sommes-nous.html">Qui sommes-nous</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="footer-column">
+      <h4>INFORMATIONS</h4>
+      <a href="commande.html">Ma commande</a>
+      <a href="livraison-retours.html">Livraison et retours</a>
+      <a href="conditions-generales.html">Conditions générales de vente</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </div>
+
+    <div class="footer-bottom">
+      ©️ <span id="currentYear"></span> LA CLÉ DES CŒURS.
+      Tous droits réservés.
+    </div>
+  </footer>
 
   <script src="produits.js"></script>
 
@@ -175,46 +228,91 @@
 
     const contenuProduit = document.getElementById("contenuProduit");
 
-    function echapperHTML(texte) {
-      return String(texte ?? "").replace(/[&<>"']/g, function(c) {
-        const caracteres = {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#039;"
-        };
-
-        return caracteres[c];
-      });
-    }
-
-    function formaterPrix(prix) {
-      const montant = Number(prix);
-
-      if (!Number.isFinite(montant)) {
-        return "Prix sur demande";
-      }
-
-      return new Intl.NumberFormat("fr-FR", {
-        style: "currency",
-        currency: "EUR"
-      }).format(montant);
-    }
-
     function lireStock(cle) {
       try {
-        const contenu = localStorage.getItem(cle);
-        const donnees = contenu ? JSON.parse(contenu) : [];
+        const donnees = JSON.parse(localStorage.getItem(cle) || "[]");
         return Array.isArray(donnees) ? donnees : [];
-      } catch (erreur) {
-        console.error(erreur);
+      } catch (e) {
         return [];
       }
     }
 
     function enregistrer(cle, donnees) {
       localStorage.setItem(cle, JSON.stringify(donnees));
+      actualiserCompteur();
+    }
+
+    function actualiserCompteur() {
+      const compteur = document.getElementById("cartCount");
+      const panier = lireStock("cdc_cart");
+      compteur.textContent = panier.reduce(
+        (total, item) => total + Number(item.quantity || 0), 0
+      );
+    }
+
+    function echapperHTML(texte) {
+      return String(texte ?? "").replace(/[&<>"']/g, c => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[c]);
+    }
+
+    function formaterPrix(prix) {
+      const montant = Number(prix);
+      if (!Number.isFinite(montant)) return "Prix sur demande";
+      return new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: "EUR"
+      }).format(montant);
+    }
+
+    function ajouterAuPanier(produit, rediriger = false) {
+      const panier = lireStock("cdc_cart");
+      const existant = panier.find(item =>
+        String(item.id) === String(produit.id)
+      );
+
+      if (existant) {
+        existant.quantity = Number(existant.quantity || 0) + 1;
+      } else {
+        panier.push({
+          id: produit.id,
+          name: produit.nom,
+          price: Number(produit.prix),
+          quantity: 1,
+          image: produit.image || ""
+        });
+      }
+
+      enregistrer("cdc_cart", panier);
+
+      if (rediriger) {
+        window.location.href = "commande.html";
+      } else {
+        alert("Produit ajouté au panier.");
+      }
+    }
+
+    function ajouterAuxFavoris(produit) {
+      const favoris = lireStock("cdc_favorites");
+
+      if (favoris.some(item => String(item.id) === String(produit.id))) {
+        alert("Ce produit est déjà dans vos favoris.");
+        return;
+      }
+
+      favoris.push({
+        id: produit.id,
+        name: produit.nom,
+        price: Number(produit.prix),
+        image: produit.image || ""
+      });
+
+      enregistrer("cdc_favorites", favoris);
+      alert("Produit ajouté à vos favoris.");
     }
 
     function afficherErreur(message) {
@@ -222,96 +320,24 @@
         <div class="product-message">
           <h1>Produit indisponible</h1>
           <p>${echapperHTML(message)}</p>
-          <a href="catalogue.html" class="back-link">
-            Retour au catalogue
-          </a>
-        </div>
-      `;
-    }
-
-    const parametres = new URLSearchParams(window.location.search);
-    const idProduit = parametres.get("id");
-
-    function obtenirProduit() {
-      if (!Array.isArray(window.produits)) {
-        return null;
-      }
-
-      return window.produits.find(function(produit) {
-        return produit &&
-          produit.actif !== false &&
-          String(produit.id) === String(idProduit);
-      });
-    }
-
-    function ajouterAuPanier(produit) {
-      try {
-        const panier = lireStock("cdc_cart");
-
-        const existant = panier.find(function(item) {
-          return String(item.id) === String(produit.id);
-        });
-
-        if (existant) {
-          existant.quantity = Number(existant.quantity || 0) + 1;
-        } else {
-          panier.push({
-            id: produit.id,
-            name: produit.nom,
-            price: Number(produit.prix),
-            quantity: 1,
-            image: produit.image || ""
-          });
-        }
-
-        enregistrer("cdc_cart", panier);
-        alert("Produit ajouté au panier.");
-      } catch (erreur) {
-        console.error(erreur);
-        alert("Impossible d'enregistrer le panier.");
-      }
-    }
-
-    function ajouterAuxFavoris(produit) {
-      try {
-        const favoris = lireStock("cdc_favorites");
-
-        const dejaPresent = favoris.some(function(item) {
-          return String(item.id) === String(produit.id);
-        });
-
-        if (dejaPresent) {
-          alert("Ce produit est déjà dans vos favoris.");
-          return;
-        }
-
-        favoris.push({
-          id: produit.id,
-          name: produit.nom,
-          price: Number(produit.prix),
-          image: produit.image || ""
-        });
-
-        enregistrer("cdc_favorites", favoris);
-        alert("Produit ajouté à vos favoris.");
-      } catch (erreur) {
-        console.error(erreur);
-        alert("Impossible d'enregistrer les favoris.");
-      }
+          <a href="catalogue.html" class="back-link">Retour au catalogue</a>
+        </div>`;
     }
 
     function afficherProduit(produit) {
       const nom = echapperHTML(produit.nom);
       const marque = echapperHTML(produit.marque || "");
       const description = echapperHTML(
-        produit.description || "Découvrez ce modèle de notre sélection LA CLÉ DES CŒURS."
+        produit.description ||
+        "Découvrez ce modèle de notre sélection LA CLÉ DES CŒURS."
       );
       const reference = echapperHTML(produit.reference || "");
-      const image = produit.image ? echapperHTML(produit.image) : "";
+      const image = produit.image || "";
 
       const visuel = image
-        ? `<img src="${image}" alt="${nom}">`
-        : `<span>Photo à intégrer</span>`;
+        ? `<img src="${echapperHTML(image)}" alt="${nom}"
+             onerror="this.parentElement.textContent='Photo indisponible';">`
+        : `<span>Photo indisponible</span>`;
 
       const ancienPrix = produit.ancienPrix
         ? `<span class="detail-old-price">${formaterPrix(produit.ancienPrix)}</span>`
@@ -321,61 +347,76 @@
 
       contenuProduit.innerHTML = `
         <article class="product-detail">
-          <div class="product-detail-image">
-            ${visuel}
-          </div>
+          <div class="product-detail-image">${visuel}</div>
 
           <div class="product-detail-info">
             <div class="detail-brand">${marque}</div>
-
             <h1 class="detail-name">${nom}</h1>
 
             <div class="detail-price">
-              ${ancienPrix}
-              ${formaterPrix(produit.prix)}
+              ${ancienPrix}${formaterPrix(produit.prix)}
             </div>
 
-            ${reference ? `
-              <p class="detail-reference">
-                Référence : ${reference}
-              </p>
-            ` : ""}
+            ${reference ? `<p class="detail-reference">Référence : ${reference}</p>` : ""}
 
             <div class="detail-description">${description}</div>
 
             <div class="detail-buttons">
-              <button type="button" id="ajouterPanier">
+              <button type="button" id="acheterProduit">ACHETER</button>
+              <button type="button" class="secondary" id="ajouterPanier">
                 AJOUTER AU PANIER
               </button>
-
               <button type="button" class="secondary" id="ajouterFavoris">
                 ♡ AJOUTER AUX FAVORIS
               </button>
             </div>
           </div>
-        </article>
-      `;
+        </article>`;
 
-      document.getElementById("ajouterPanier").addEventListener("click", function() {
+      document.getElementById("acheterProduit").addEventListener("click", () => {
+        ajouterAuPanier(produit, true);
+      });
+
+      document.getElementById("ajouterPanier").addEventListener("click", () => {
         ajouterAuPanier(produit);
       });
 
-      document.getElementById("ajouterFavoris").addEventListener("click", function() {
+      document.getElementById("ajouterFavoris").addEventListener("click", () => {
         ajouterAuxFavoris(produit);
       });
     }
 
-    if (!idProduit) {
-      afficherErreur("Aucun produit n'a été sélectionné.");
-    } else {
-      const produit = obtenirProduit();
+    const idProduit = new URLSearchParams(location.search).get("id");
 
-      if (produit) {
-        afficherProduit(produit);
-      } else {
-        afficherErreur("Ce produit est introuvable dans notre catalogue.");
-      }
+    if (!Array.isArray(window.produits)) {
+      afficherErreur("Le catalogue produits.js n'a pas pu être chargé.");
+    } else {
+      const produit = window.produits.find(p =>
+        p && p.actif !== false && String(p.id) === String(idProduit)
+      );
+
+      if (produit) afficherProduit(produit);
+      else afficherErreur("Ce produit est introuvable dans notre catalogue.");
     }
+
+    document.getElementById("menuButton").addEventListener("click", () => {
+      const nav = document.getElementById("mainNav");
+      const bouton = document.getElementById("menuButton");
+      const ouvert = nav.classList.toggle("is-open");
+      bouton.setAttribute("aria-expanded", String(ouvert));
+      bouton.textContent = ouvert ? "✕" : "☰";
+    });
+
+    document.getElementById("searchForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const terme = document.getElementById("searchInput").value.trim();
+      location.href = terme
+        ? "catalogue.html?recherche=" + encodeURIComponent(terme)
+        : "catalogue.html";
+    });
+
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+    actualiserCompteur();
   </script>
 
 </body>
