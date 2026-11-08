@@ -1,2 +1,2 @@
-# lacledescoeurs
-Site de vente LA CLÉ DES CŒURS
+# la-cle-des-coeurs
+Site e-commerce officiel LA CLÉ DES CŒURS

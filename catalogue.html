@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Découvrez les bijoux et montres LA CLÉ DES CŒURS.">
+  <title>Notre catalogue | LA CLÉ DES CŒURS</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .catalogue-page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px 70px;
+    }
+
+    .catalogue-heading {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .catalogue-heading h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 400;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .catalogue-heading p {
+      color: #777;
+      font-size: 14px;
+    }
+
+    .catalogue-filters {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .catalogue-filters input,
+    .catalogue-filters select {
+      width: 100%;
+      min-width: 0;
+      padding: 13px 14px;
+      border: 1px solid #ded8ce;
+      background: #fff;
+      color: #403a33;
+      font: inherit;
+    }
+
+    .catalogue-count {
+      color: #777;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px 22px;
+    }
+
+    .product-card {
+      min-width: 0;
+      border: 1px solid #eee9e1;
+      background: #fff;
+      padding-bottom: 18px;
+      text-align: center;
+    }
+
+    .product-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #f5f2ed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: #948879;
+      font-size: 13px;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .product-info {
+      padding: 17px 15px 0;
+    }
+
+    .product-brand {
+      color: #9a8873;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .product-name {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.5;
+      margin: 0 0 10px;
+      color: #403a33;
+    }
+
+    .product-name a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .product-name a:hover {
+      color: #9a8873;
+    }
+
+    .product-price {
+      font-size: 16px;
+      color: #403a33;
+      margin-bottom: 15px;
+    }
+
+    .product-old-price {
+      color: #999;
+      text-decoration: line-through;
+      font-size: 13px;
+      margin-right: 8px;
+    }
+
+    .product-actions {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .product-actions button {
+      border: 1px solid #b9a58d;
+      background: transparent;
+      color: #55493b;
+      padding: 10px 13px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .product-actions button:hover {
+      background: #b9a58d;
+      color: #fff;
+    }
+
+    .no-products {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 45px 15px;
+      color: #777;
+    }
+
+    @media (max-width: 800px) {
+      .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .catalogue-filters {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .catalogue-filters input {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .catalogue-page {
+        padding: 28px 14px 50px;
+      }
+
+      .products-grid {
+        gap: 15px 10px;
+      }
+
+      .catalogue-filters {
+        grid-template-columns: 1fr;
+      }
+
+      .catalogue-filters input {
+        grid-column: auto;
+      }
+
+      .product-info {
+        padding-left: 9px;
+        padding-right: 9px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="catalogue-page">
+    <header class="catalogue-heading">
+      <h1>Notre collection</h1>
+      <p>Découvrez notre sélection de bijoux et de montres.</p>
+    </header>
+
+    <section class="catalogue-filters" aria-label="Filtres du catalogue">
+      <input
+        type="search"
+        id="recherche"
+        placeholder="Rechercher un produit ou une marque..."
+        aria-label="Rechercher un produit"
+      >
+
+      <select id="filtreCategorie" aria-label="Filtrer par catégorie">
+        <option value="">Toutes les catégories</option>
+        <option value="accessoires">Accessoires et bracelets</option>
+        <option value="ap-swatch">AP x Swatch</option>
+        <option value="femme">Montres femme</option>
+        <option value="homme">Montres homme</option>
+      </select>
+
+      <select id="triProduits" aria-label="Trier les produits">
+        <option value="recent">Ordre d'affichage</option>
+        <option value="prix-croissant">Prix croissant</option>
+        <option value="prix-decroissant">Prix décroissant</option>
+        <option value="nom">Nom A à Z</option>
+      </select>
+    </section>
+
+    <p class="catalogue-count" id="nombreProduits">
+      Chargement des produits...
+    </p>
+
+    <section class="products-grid" id="listeProduits" aria-live="polite">
+      <p class="no-products">Chargement du catalogue...</p>
+    </section>
+  </main>
+
+  <script src="produits.js"></script>
+
+  <script>
+    "use strict";
+
+    const listeProduits = document.getElementById("listeProduits");
+    const recherche = document.getElementById("recherche");
+    const filtreCategorie = document.getElementById("filtreCategorie");
+    const triProduits = document.getElementById("triProduits");
+    const nombreProduits = document.getElementById("nombreProduits");
+
+    const parametres = new URLSearchParams(window.location.search);
+    const categorieDemandee = parametres.get("categorie");
+    const rechercheDemandee = parametres.get("recherche");
+
+    if (categorieDemandee) {
+      const optionExiste = Array.from(filtreCategorie.options)
+        .some(option => option.value === categorieDemandee);
+
+      if (optionExiste) {
+        filtreCategorie.value = categorieDemandee;
+      }
+    }
+
+    if (rechercheDemandee) {
+      recherche.value = rechercheDemandee;
+    }
+
+    function lireStock(cle) {
+      try {
+        const contenu = localStorage.getItem(cle);
+        const donnees = contenu ? JSON.parse(contenu) : [];
+        return Array.isArray(donnees) ? donnees : [];
+      } catch (erreur) {
+        console.error(erreur);
+        return [];
+      }
+    }
+
+    function enregistrer(cle, donnees) {
+      localStorage.setItem(cle, JSON.stringify(donnees));
+    }
+
+    function formaterPrix(prix) {
+      const montant = Number(prix);
+
+      if (!Number.isFinite(montant)) {
+        return "Prix sur demande";
+      }
+
+      return new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: "EUR"
+      }).format(montant);
+    }
+
+    function echapperHTML(texte) {
+      return String(texte ?? "").replace(/[&<>"']/g, function(c) {
+        const caracteres = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;"
+        };
+
+        return caracteres[c];
+      });
+    }
+
+    function obtenirProduits() {
+      if (!Array.isArray(window.produits)) return [];
+
+      return window.produits.filter(function(produit) {
+        return produit && produit.actif !== false;
+      });
+    }
+
+    function afficherProduits() {
+      let produits = obtenirProduits();
+
+      const terme = recherche.value.trim().toLowerCase();
+      const categorie = filtreCategorie.value;
+      const tri = triProduits.value;
+
+      if (terme) {
+        produits = produits.filter(function(produit) {
+          const texte = [
+            produit.nom,
+            produit.marque,
+            produit.reference,
+            produit.description
+          ].join(" ").toLowerCase();
+
+          return texte.includes(terme);
+        });
+      }
+
+      // Gestion des produits associés à plusieurs catégories
+      if (categorie) {
+        produits = produits.filter(function(produit) {
+          if (Array.isArray(produit.categories)) {
+            return produit.categories.includes(categorie);
+          }
+
+          return produit.categorie === categorie;
+        });
+      }
+
+      if (tri === "prix-croissant") {
+        produits.sort((a, b) => Number(a.prix) - Number(b.prix));
+      }
+
+      if (tri === "prix-decroissant") {
+        produits.sort((a, b) => Number(b.prix) - Number(a.prix));
+      }
+
+      if (tri === "nom") {
+        produits.sort((a, b) =>
+          String(a.nom).localeCompare(String(b.nom), "fr")
+        );
+      }
+
+      nombreProduits.textContent =
+        produits.length + (produits.length > 1 ? " produits" : " produit");
+
+      if (produits.length === 0) {
+        listeProduits.innerHTML =
+          '<p class="no-products">Aucun produit ne correspond à votre recherche.</p>';
+        return;
+      }
+
+      listeProduits.innerHTML = produits.map(function(produit) {
+        const id = echapperHTML(produit.id);
+        const nom = echapperHTML(produit.nom);
+        const marque = echapperHTML(produit.marque || "");
+        const image = produit.image ? echapperHTML(produit.image) : "";
+        const prix = formaterPrix(produit.prix);
+        const lienProduit = "produit.html?id=" + encodeURIComponent(produit.id);
+
+        const ancienPrix = produit.ancienPrix
+          ? '<span class="product-old-price">' +
+            formaterPrix(produit.ancienPrix) +
+            '</span>'
+          : "";
+
+        const visuel = image
+          ? '<img src="' + image + '" alt="' + nom + '" loading="lazy">'
+          : '<span>Photo à intégrer</span>';
+
+        return `
+          <article class="product-card">
+            <a href="${lienProduit}" class="product-image" aria-label="Voir ${nom}">
+              ${visuel}
+            </a>
+
+            <div class="product-info">
+              <div class="product-brand">${marque}</div>
+
+              <h2 class="product-name">
+                <a href="${lienProduit}">${nom}</a>
+              </h2>
+
+              <div class="product-price">
+                ${ancienPrix}
+                ${prix}
+              </div>
+
+              <div class="product-actions">
+                <button type="button" data-action="panier" data-id="${id}">
+                  Ajouter au panier
+                </button>
+
+                <button type="button" data-action="favoris" data-id="${id}">
+                  ♡ Favoris
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function ajouterAuPanier(id) {
+      const produit = obtenirProduits().find(item =>
+        String(item.id) === String(id)
+      );
+
+      if (!produit) {
+        alert("Produit introuvable.");
+        return;
+      }
+
+      try {
+        const panier = lireStock("cdc_cart");
+
+        const existant = panier.find(item =>
+          String(item.id) === String(produit.id)
+        );
+
+        if (existant) {
+          existant.quantity = Number(existant.quantity || 0) + 1;
+        } else {
+          panier.push({
+            id: produit.id,
+            name: produit.nom,
+            price: Number(produit.prix),
+            quantity: 1,
+            image: produit.image || ""
+          });
+        }
+
+        enregistrer("cdc_cart", panier);
+        alert("Produit ajouté au panier.");
+      } catch (erreur) {
+        console.error(erreur);
+        alert("Impossible d'enregistrer le panier.");
+      }
+    }
+
+    function ajouterAuxFavoris(id) {
+      const produit = obtenirProduits().find(item =>
+        String(item.id) === String(id)
+      );
+
+      if (!produit) {
+        alert("Produit introuvable.");
+        return;
+      }
+
+      try {
+        const favoris = lireStock("cdc_favorites");
+
+        const dejaPresent = favoris.some(item =>
+          String(item.id) === String(produit.id)
+        );
+
+        if (dejaPresent) {
+          alert("Ce produit est déjà dans vos favoris.");
+          return;
+        }
+
+        favoris.push({
+          id: produit.id,
+          name: produit.nom,
+          price: Number(produit.prix),
+          image: produit.image || ""
+        });
+
+        enregistrer("cdc_favorites", favoris);
+        alert("Produit ajouté à vos favoris.");
+      } catch (erreur) {
+        console.error(erreur);
+        alert("Impossible d'enregistrer les favoris.");
+      }
+    }
+
+    listeProduits.addEventListener("click", function(evenement) {
+      const bouton = evenement.target.closest("button[data-action]");
+
+      if (!bouton) return;
+
+      const id = bouton.dataset.id;
+
+      if (bouton.dataset.action === "panier") {
+        ajouterAuPanier(id);
+      }
+
+      if (bouton.dataset.action === "favoris") {
+        ajouterAuxFavoris(id);
+      }
+    });
+
+    recherche.addEventListener("input", afficherProduits);
+    filtreCategorie.addEventListener("change", afficherProduits);
+    triProduits.addEventListener("change", afficherProduits);
+
+    if (Array.isArray(window.produits)) {
+      afficherProduits();
+    } else {
+      nombreProduits.textContent = "Catalogue indisponible";
+      listeProduits.innerHTML =
+        '<p class="no-products">Vérifiez le fichier produits.js.</p>';
+    }
+  </script>
+</body>
+</html>
