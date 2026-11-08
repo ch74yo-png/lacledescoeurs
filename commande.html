@@ -1,390 +1,253 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Finalisez votre commande LA CLÉ DES CŒURS.">
-  <title>Finaliser ma commande | LA CLÉ DES CŒURS</title>
-  <link rel="stylesheet" href="styles.css">
-
-  <style>
-    .checkout-page {
-      max-width: 1100px;
-      margin: 50px auto;
-      padding: 0 20px 70px;
-    }
-
-    .checkout-title {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .checkout-title h1 {
-      font-family: Georgia, serif;
-      font-weight: 400;
-      letter-spacing: 2px;
-    }
-
-    .checkout-layout {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr;
-      gap: 35px;
-      align-items: start;
-    }
-
-    .checkout-card {
-      background: #fff;
-      border: 1px solid #e9e1d6;
-      padding: 28px;
-      margin-bottom: 22px;
-    }
-
-    .checkout-card h2 {
-      font-family: Georgia, serif;
-      font-size: 21px;
-      font-weight: 400;
-      margin: 0 0 22px;
-    }
-
-    .checkout-form label {
-      display: block;
-      font-size: 13px;
-      margin: 15px 0 7px;
-      color: #55483d;
-    }
-
-    .checkout-form input,
-    .checkout-form select,
-    .checkout-form textarea {
-      box-sizing: border-box;
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #ded5c9;
-      background: #fff;
-      color: #40372f;
-      font: inherit;
-      border-radius: 2px;
-    }
-
-    .checkout-form textarea {
-      min-height: 90px;
-      resize: vertical;
-    }
-
-    .checkout-form input:focus,
-    .checkout-form select:focus,
-    .checkout-form textarea:focus {
-      outline: 1px solid #a58c70;
-    }
-
-    .checkout-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
-
-    .checkout-summary {
-      position: sticky;
-      top: 20px;
-    }
-
-    .checkout-line {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      margin: 13px 0;
-      font-size: 14px;
-    }
-
-    .checkout-total {
-      border-top: 1px solid #e9e1d6;
-      margin-top: 20px;
-      padding-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .payment-option {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin: 15px 0;
-      font-size: 14px;
-    }
-
-    .payment-option input {
-      width: auto;
-    }
-
-    .checkout-button {
-      display: block;
-      width: 100%;
-      padding: 16px;
-      margin-top: 22px;
-      border: none;
-      background: #8b745c;
-      color: white;
-      letter-spacing: 1px;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .checkout-button:hover {
-      background: #705b47;
-    }
-
-    .checkout-notice {
-      margin-top: 15px;
-      font-size: 12px;
-      line-height: 1.7;
-      color: #776b60;
-    }
-
-    .empty-cart {
-      text-align: center;
-      padding: 20px 0;
-      color: #776b60;
-    }
-
-    @media (max-width: 750px) {
-      .checkout-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .checkout-summary {
-        position: static;
-      }
-
-      .checkout-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Commande | LA CLÉ DES CŒURS</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+.checkout-page{max-width:1100px;margin:45px auto;padding:20px 18px 70px}
+.checkout-title{text-align:center;margin-bottom:32px}
+.checkout-title h1{font-family:Georgia,serif;font-size:36px;font-weight:400;letter-spacing:2px}
+.checkout-layout{display:grid;grid-template-columns:1.4fr 1fr;gap:25px;align-items:start}
+.checkout-card{background:#fff;border:1px solid #e8dfd4;padding:25px;margin-bottom:20px}
+.checkout-card h2{font-family:Georgia,serif;font-weight:400;font-size:21px;margin:0 0 20px}
+.checkout-form label{display:block;font-size:13px;margin:14px 0 7px}
+.checkout-form input,.checkout-form select,.checkout-form textarea{box-sizing:border-box;width:100%;padding:13px;border:1px solid #d9cfc2;background:#fff;color:#40372f;font:inherit;border-radius:2px}
+.checkout-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.checkout-summary{position:sticky;top:20px}
+.checkout-line{display:flex;justify-content:space-between;gap:12px;margin:13px 0;font-size:14px}
+.checkout-total{border-top:1px solid #e8dfd4;padding-top:18px;margin-top:18px;font-size:18px;font-weight:bold}
+.checkout-button{display:block;width:100%;padding:16px;margin-top:22px;border:0;background:#987d60;color:white;letter-spacing:2px;cursor:pointer;font-size:14px}
+.checkout-button:hover{background:#725b43}
+.checkout-notice{font-size:12px;line-height:1.6;color:#776b60;margin-top:14px}
+.terms-line{display:flex!important;align-items:flex-start;gap:10px}
+.terms-line input{width:auto!important;margin-top:3px}
+.empty-cart{text-align:center;padding:20px;color:#776b60}
+@media(max-width:750px){.checkout-layout{grid-template-columns:1fr}.checkout-summary{position:static}.checkout-row{grid-template-columns:1fr;gap:0}}
+</style>
 </head>
-
 <body>
+<div class="announcement">BIENVENUE CHEZ LA CLÉ DES CŒURS</div>
+<header class="header">
+<button class="menu-button" id="menuButton" type="button" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+<a href="index.html" class="brand">
+<span class="brand-monogram">CDC</span>
+<span class="brand-name">LA CLÉ DES CŒURS</span>
+<span class="brand-tagline">BIJOUX FINS & RAFFINÉS</span>
+</a>
+<div class="header-actions">
+<a href="favoris.html" aria-label="Favoris">♡</a>
+<a href="panier.html" aria-label="Panier">♧ <span id="cartCount">0</span></a>
+</div>
+</header>
+<nav class="main-nav" id="mainNav">
+<a href="index.html">Accueil</a>
+<a href="catalogue.html?categorie=accessoires">Accessoires et bracelets</a>
+<a href="catalogue.html?categorie=ap-swatch">AP x Swatch</a>
+<a href="catalogue.html?categorie=femme">Montres femme</a>
+<a href="catalogue.html?categorie=homme">Montres homme</a>
+<a href="qui-sommes-nous.html">Qui sommes-nous</a>
+<a href="contact.html">Contact</a>
+</nav>
+<div class="utility-bar">
+<form class="search-form" id="searchForm">
+<input type="search" id="searchInput" placeholder="Rechercher un produit..." aria-label="Rechercher">
+<button type="submit" aria-label="Rechercher">⌕</button>
+</form>
+<select id="languageSelect" aria-label="Langue">
+<option value="fr">Français</option><option value="en">English</option>
+<option value="es">Español</option><option value="de">Deutsch</option>
+<option value="it">Italiano</option><option value="pt">Português</option>
+</select>
+</div>
 
-  <main class="checkout-page">
+<main class="checkout-page">
+<div class="checkout-title">
+<h1>Finaliser ma commande</h1>
+<p>Veuillez renseigner vos coordonnées et votre adresse de livraison.</p>
+</div>
 
-    <div class="checkout-title">
-      <p>LA CLÉ DES CŒURS</p>
-      <h1>Finaliser ma commande</h1>
-      <p>Quelques dernières informations avant de poursuivre.</p>
-    </div>
+<div class="checkout-layout">
+<form class="checkout-form" id="checkoutForm">
+<section class="checkout-card">
+<h2>1. COORDONNÉES</h2>
+<label for="fullName">NOM COMPLET *</label>
+<input id="fullName" name="fullName" autocomplete="name" required>
+<label for="email">ADRESSE MAIL *</label>
+<input id="email" name="email" type="email" autocomplete="email" required>
+<label for="phone">TÉLÉPHONE *</label>
+<input id="phone" name="phone" type="tel" autocomplete="tel" required>
+</section>
 
-    <div class="checkout-layout">
+<section class="checkout-card">
+<h2>2. DÉTAILS DE LIVRAISON</h2>
+<label for="country">PAYS *</label>
+<select id="country" name="country" autocomplete="country-name" required>
+<option value="">Choisir un pays</option>
+</select>
+<label for="address">ADRESSE *</label>
+<input id="address" name="address" autocomplete="street-address" required>
+<div class="checkout-row">
+<div>
+<label for="postalCode">CODE POSTAL *</label>
+<input id="postalCode" name="postalCode" autocomplete="postal-code" required>
+</div>
+<div>
+<label for="city">VILLE *</label>
+<input id="city" name="city" autocomplete="address-level2" required>
+</div>
+</div>
+<label for="addressExtra">COMPLÉMENT D'ADRESSE</label>
+<input id="addressExtra" name="addressExtra" autocomplete="address-line2">
+</section>
 
-      <form class="checkout-form" id="checkoutForm">
+<section class="checkout-card">
+<h2>3. RÉCAPITULATIF</h2>
+<div id="summaryItems"><p class="empty-cart">Chargement du panier...</p></div>
+<div class="checkout-line"><span>Sous-total</span><span id="subtotal">0,00 €</span></div>
+<div class="checkout-line"><span>Livraison</span><span id="shipping">À calculer</span></div>
+<div class="checkout-line checkout-total"><span>TOTAL</span><span id="total">0,00 €</span></div>
+<label for="promoCode">CODE PROMOTIONNEL</label>
+<input id="promoCode" name="promoCode" placeholder="Votre code promo">
+<button type="button" id="applyPromo" class="checkout-button" style="margin-top:10px">APPLIQUER LE CODE</button>
+<p id="promoMessage" class="checkout-notice"></p>
+</section>
 
-        <section class="checkout-card">
-          <h2>1. Vos coordonnées</h2>
+<section class="checkout-card">
+<label class="terms-line" for="acceptTerms">
+<input type="checkbox" id="acceptTerms" required>
+<span>J’accepte les <a href="conditions-generales.html" target="_blank">conditions générales de vente</a>.</span>
+</label>
+<button class="checkout-button" type="submit">CONTINUER</button>
+<p class="checkout-notice">Le récapitulatif de votre commande sera affiché avant le paiement.</p>
+</section>
+</form>
 
-          <div class="checkout-row">
-            <div>
-              <label for="firstName">Prénom *</label>
-              <input id="firstName" name="firstName" required autocomplete="given-name">
-            </div>
+<aside class="checkout-summary">
+<section class="checkout-card">
+<h2>VOTRE COMMANDE</h2>
+<div id="sideItems"></div>
+<div class="checkout-line"><span>Sous-total</span><span id="sideSubtotal">0,00 €</span></div>
+<div class="checkout-line"><span>Livraison</span><span id="sideShipping">À calculer</span></div>
+<div class="checkout-line checkout-total"><span>Total</span><span id="sideTotal">0,00 €</span></div>
+</section>
+<p style="text-align:center;font-size:12px;color:#776b60">LA CLÉ DES CŒURS — BIJOUX FINS & RAFFINÉS</p>
+</aside>
+</div>
+</main>
 
-            <div>
-              <label for="lastName">Nom *</label>
-              <input id="lastName" name="lastName" required autocomplete="family-name">
-            </div>
-          </div>
+<footer class="footer">
+<div class="footer-brand">
+<span class="brand-monogram">CDC</span>
+<h3>LA CLÉ DES CŒURS</h3>
+<p>BIJOUX FINS & RAFFINÉS</p>
+</div>
+<div class="footer-column">
+<h4>LA BOUTIQUE</h4>
+<a href="index.html">Accueil</a><a href="catalogue.html">Tous les produits</a>
+<a href="favoris.html">Mes favoris</a><a href="panier.html">Mon panier</a>
+<a href="contact.html">Contact</a>
+</div>
+<div class="footer-column">
+<h4>INFORMATIONS</h4>
+<a href="livraison-retours.html">Livraison et retours</a>
+<a href="conditions-generales.html">Conditions générales de vente</a>
+<a href="mentions-legales.html">Mentions légales</a>
+<a href="confidentialite.html">Confidentialité</a>
+</div>
+<div class="footer-bottom">©️ <span id="currentYear"></span> LA CLÉ DES CŒURS. Tous droits réservés.</div>
+</footer>
 
-          <label for="email">Adresse e-mail *</label>
-          <input id="email" name="email" type="email" required autocomplete="email">
-
-          <label for="phone">Téléphone *</label>
-          <input id="phone" name="phone" type="tel" required autocomplete="tel">
-        </section>
-
-        <section class="checkout-card">
-          <h2>2. Adresse de livraison</h2>
-
-          <label for="address">Adresse *</label>
-          <input id="address" name="address" required autocomplete="street-address">
-
-          <label for="address2">Complément d'adresse</label>
-          <input id="address2" name="address2" autocomplete="address-line2">
-
-          <div class="checkout-row">
-            <div>
-              <label for="postalCode">Code postal *</label>
-              <input id="postalCode" name="postalCode" required autocomplete="postal-code">
-            </div>
-
-            <div>
-              <label for="city">Ville *</label>
-              <input id="city" name="city" required autocomplete="address-level2">
-            </div>
-          </div>
-
-          <label for="country">Pays *</label>
-          <select id="country" name="country" required autocomplete="country-name">
-            <option value="">Choisir un pays</option>
-            <option value="France">France</option>
-            <option value="Belgique">Belgique</option>
-            <option value="Suisse">Suisse</option>
-            <option value="Luxembourg">Luxembourg</option>
-            <option value="Autre">Autre</option>
-          </select>
-
-          <label for="deliveryNote">Instructions de livraison (facultatif)</label>
-          <textarea id="deliveryNote" name="deliveryNote"
-            placeholder="Informations utiles pour le transporteur..."></textarea>
-        </section>
-
-        <section class="checkout-card">
-          <h2>3. Mode de paiement</h2>
-
-          <label class="payment-option">
-            <input type="radio" name="payment" value="card" required>
-            Carte bancaire
-          </label>
-
-          <label class="payment-option">
-            <input type="radio" name="payment" value="transfer">
-            Virement bancaire
-          </label>
-
-          <p class="checkout-notice">
-            Les paiements ne sont pas encore activés. Aucun paiement ne sera
-            effectué depuis cette page tant que le système sécurisé ne sera
-            pas connecté.
-          </p>
-        </section>
-
-        <section class="checkout-card">
-          <label class="payment-option">
-            <input type="checkbox" id="acceptTerms" required>
-            J'accepte les conditions générales de vente.
-          </label>
-
-          <button class="checkout-button" type="submit">
-            POURSUIVRE MA COMMANDE
-          </button>
-
-          <p class="checkout-notice">
-            Cette version est une maquette. Le formulaire ne transmet pas
-            encore vos informations et ne crée aucune commande.
-          </p>
-        </section>
-
-      </form>
-
-      <aside class="checkout-summary">
-        <section class="checkout-card">
-          <h2>Récapitulatif</h2>
-
-          <div id="orderItems">
-            <p class="empty-cart">Chargement de votre panier...</p>
-          </div>
-
-          <div class="checkout-line">
-            <span>Sous-total</span>
-            <span id="subtotal">0,00 €</span>
-          </div>
-
-          <div class="checkout-line">
-            <span>Livraison</span>
-            <span>À confirmer</span>
-          </div>
-
-          <div class="checkout-line checkout-total">
-            <span>Total provisoire</span>
-            <span id="total">0,00 €</span>
-          </div>
-
-          <p class="checkout-notice">
-            Les frais et conditions de livraison seront confirmés avant
-            l'activation des commandes en ligne.
-          </p>
-        </section>
-
-        <p style="text-align:center;font-size:12px;color:#776b60;">
-          LA CLÉ DES CŒURS — BIJOUX FINS & RAFFINÉS
-        </p>
-      </aside>
-
-    </div>
-  </main>
-
-  <script>
-    const CART_KEY = "cdc_cart";
-
-    function getCart() {
-      try {
-        const cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-        return Array.isArray(cart) ? cart : [];
-      } catch {
-        return [];
-      }
-    }
-
-    function formatPrice(value) {
-      return Number(value).toLocaleString("fr-FR", {
-        style: "currency",
-        currency: "EUR"
-      });
-    }
-
-    function displayOrderSummary() {
-      const cart = getCart();
-      const container = document.getElementById("orderItems");
-
-      container.replaceChildren();
-
-      if (cart.length === 0) {
-        const message = document.createElement("p");
-        message.className = "empty-cart";
-        message.textContent = "Votre panier est vide.";
-        container.appendChild(message);
-      }
-
-      let subtotal = 0;
-
-      cart.forEach(item => {
-        const price = Number(item.price);
-        const quantity = Number(item.quantity);
-
-        if (!Number.isFinite(price) || !Number.isFinite(quantity)) return;
-
-        subtotal += price * quantity;
-
-        const line = document.createElement("div");
-        line.className = "checkout-line";
-
-        const name = document.createElement("span");
-        name.textContent = `${item.name || "Article"} × ${quantity}`;
-
-        const amount = document.createElement("span");
-        amount.textContent = formatPrice(price * quantity);
-
-        line.append(name, amount);
-        container.appendChild(line);
-      });
-
-      document.getElementById("subtotal").textContent = formatPrice(subtotal);
-      document.getElementById("total").textContent = formatPrice(subtotal);
-    }
-
-    document.getElementById("checkoutForm").addEventListener("submit", event => {
-      event.preventDefault();
-
-      if (getCart().length === 0) {
-        alert("Votre panier est vide. Ajoutez d'abord un article.");
-        return;
-      }
-
-      alert(
-        "Merci ! Cette page est encore en préparation. " +
-        "Aucune commande n'a été envoyée et aucun paiement n'a été effectué."
-      );
-    });
-
-    displayOrderSummary();
-  </script>
-
+<script>
+"use strict";
+const CART_KEY="cdc_cart";
+const cart=JSON.parse(localStorage.getItem(CART_KEY)||"[]");
+const countrySelect=document.getElementById("country");
+const money=n=>new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR"}).format(n);
+const escapeHTML=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const countryNames=new Intl.DisplayNames(["fr"],{type:"region"});
+const countries=[];
+for(let i=65;i<=90;i++)for(let j=65;j<=90;j++){
+ const code=String.fromCharCode(i,j);
+ const name=countryNames.of(code);
+ if(name&&name!==code&&!["AC","CP","DG","EA","IC","TA","XK"].includes(code))countries.push({code,name});
+}
+countries.sort((a,b)=>a.name.localeCompare(b.name,"fr"));
+countries.forEach(c=>{
+ const option=document.createElement("option");
+ option.value=c.code;option.textContent=c.name;countrySelect.appendChild(option);
+});
+const europe=new Set("AT BE BG HR CY CZ DK EE FI FR DE GR HU IS IE IT LV LI LT LU MT MC NL NO PL PT RO SM SK SI ES SE CH GB".split(" "));
+const northAmerica=new Set(["US","CA"]);
+const asiaOceania=new Set("AU NZ JP SG KR HK TW".split(" "));
+function shippingFor(code){
+ if(!code)return null;
+ if(code==="GH"||["NG","ZA","KE","UG","TZ","RW","SN","CI","CM","MA","TN","EG"].includes(code))return null;
+ if(europe.has(code))return 15.62;
+ if(northAmerica.has(code))return 39.90;
+ if(asiaOceania.has(code))return 49.90;
+ return 59.90;
+}
+let promoDiscount=0;
+function subtotalValue(){return cart.reduce((s,p)=>s+Math.max(0,Number(p.price)||0)*Math.max(0,Number(p.quantity)||0),0)}
+function shippingValue(){return shippingFor(countrySelect.value)}
+function totalValue(){return Math.max(0,subtotalValue()+(shippingValue()||0)-promoDiscount)}
+function render(){
+ const sub=subtotalValue(),ship=shippingValue();
+ const lines=cart.map(p=>`<div class="checkout-line"><span>${escapeHTML(p.name||p.nom||"Article")} × ${Number(p.quantity)||1}</span><span>${money((Number(p.price)||0)*(Number(p.quantity)||1))}</span></div>`).join("");
+ document.getElementById("summaryItems").innerHTML=lines||'<p class="empty-cart">Votre panier est vide.</p>';
+ document.getElementById("sideItems").innerHTML=lines||'<p class="empty-cart">Votre panier est vide.</p>';
+ document.getElementById("subtotal").textContent=money(sub);
+ document.getElementById("sideSubtotal").textContent=money(sub);
+ document.getElementById("shipping").textContent=ship===null?"Sélectionnez un pays":money(ship);
+ document.getElementById("sideShipping").textContent=ship===null?"À calculer":money(ship);
+ document.getElementById("total").textContent=money(totalValue());
+ document.getElementById("sideTotal").textContent=money(totalValue());
+ document.getElementById("cartCount").textContent=cart.reduce((s,p)=>s+(Number(p.quantity)||0),0);
+}
+countrySelect.addEventListener("change",render);
+document.getElementById("applyPromo").addEventListener("click",()=>{
+ const code=document.getElementById("promoCode").value.trim().toUpperCase();
+ promoDiscount=0;
+ document.getElementById("promoMessage").textContent="Ce code promotionnel doit être validé par la boutique.";
+ render();
+});
+document.getElementById("checkoutForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ if(!cart.length){alert("Votre panier est vide.");return}
+ const ship=shippingValue();
+ if(ship===null){alert("La livraison n'est pas disponible pour ce pays. Veuillez contacter la boutique.");return}
+ if(!e.currentTarget.reportValidity())return;
+ const customer={
+ fullName:document.getElementById("fullName").value.trim(),
+ email:document.getElementById("email").value.trim(),
+ phone:document.getElementById("phone").value.trim(),
+ country:countryNames.of(countrySelect.value),
+ countryCode:countrySelect.value,
+ address:document.getElementById("address").value.trim(),
+ addressExtra:document.getElementById("addressExtra").value.trim(),
+ postalCode:document.getElementById("postalCode").value.trim(),
+ city:document.getElementById("city").value.trim()
+ };
+ const shipping={amount:ship,currency:"EUR"};
+ localStorage.setItem("cdc_customer",JSON.stringify(customer));
+ localStorage.setItem("cdc_shipping",JSON.stringify(shipping));
+ localStorage.setItem("cdc_promo",JSON.stringify({code:document.getElementById("promoCode").value.trim(),discount:promoDiscount}));
+ window.location.href="paiement.html";
+});
+document.getElementById("menuButton").addEventListener("click",()=>{
+ const nav=document.getElementById("mainNav");
+ const open=nav.classList.toggle("is-open");
+ document.getElementById("menuButton").setAttribute("aria-expanded",String(open));
+});
+document.getElementById("searchForm").addEventListener("submit",e=>{
+ e.preventDefault();const q=document.getElementById("searchInput").value.trim();
+ location.href=q?"catalogue.html?recherche="+encodeURIComponent(q):"catalogue.html";
+});
+document.getElementById("currentYear").textContent=new Date().getFullYear();
+document.getElementById("languageSelect").addEventListener("change",()=>alert("La traduction automatique sera configurée séparément."));
+render();
+</script>
 </body>
 </html>
