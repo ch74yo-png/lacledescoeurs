@@ -20,67 +20,18 @@
 
   const logo = `
     <span class="cdc-logo" aria-hidden="true">
-      <svg viewBox="0 0 520 215"
-        xmlns="http://www.w3.org/2000/svg"
-        role="img"
-        aria-label="La Cle des Coeurs, bijoux fins et raffines, depuis 1974">
-
-        <g font-family="Arial,Helvetica,sans-serif"
-           font-weight="700" fill="#fff">
-
-          <text x="12" y="62" font-size="57"
-            letter-spacing="1">LA CL</text>
-
-          <text x="350" y="62" font-size="57"
-            fill="#e8bd43">E</text>
-
-          <text x="8" y="132" font-size="57"
-            letter-spacing="1">DES C</text>
-
-          <text x="363" y="132" font-size="57"
-            letter-spacing="1">EURS</text>
-        </g>
-
-        <g fill="none" stroke="#edc844"
-           stroke-linecap="round" stroke-linejoin="round">
-
-          <path d="M350 9 V88" stroke-width="11"/>
-          <path d="M350 27 H379 M350 49 H371"
-            stroke-width="7"/>
-
-          <path d="M350 87
-            C329 59 293 77 305 104
-            C314 126 350 151 350 151
-            C350 151 386 126 395 104
-            C407 77 371 59 350 87Z"
-            stroke-width="8"/>
-        </g>
-
-        <g fill="#edc844">
-          <path d="M341 82 L350 69 L359 82 Z"/>
-        </g>
-
-        <path d="M65 164 H175 M345 164 H455"
-          stroke="#edc844" stroke-width="1.5"/>
-
-        <text x="260" y="170"
-          text-anchor="middle"
-          font-family="Georgia,serif"
-          font-size="17"
-          letter-spacing="2"
-          fill="#f4e6d4">
-          BIJOUX FINS &amp; RAFFINES
-        </text>
-
-        <text x="260" y="203"
-          text-anchor="middle"
-          font-family="Georgia,serif"
-          font-size="21"
-          font-weight="700"
-          letter-spacing="1"
-          fill="#edc844">
-          Depuis 1974
-        </text>
+      <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg"
+        role="img" aria-label="CDC — La Clé des Cœurs, bijoux fins raffinés">
+        <circle cx="150" cy="52" r="42" fill="none" stroke="#c9a45c" stroke-width="2.5"/>
+        <text x="150" y="64" text-anchor="middle"
+          font-family="Georgia,serif" font-size="31" font-weight="700"
+          letter-spacing="1" fill="#c9a45c">CDC</text>
+        <text x="150" y="119" text-anchor="middle"
+          font-family="Georgia,serif" font-size="19" font-weight="600"
+          letter-spacing="1.2" fill="currentColor">LA CLÉ DES CŒURS</text>
+        <text x="150" y="140" text-anchor="middle"
+          font-family="Georgia,serif" font-size="10"
+          letter-spacing="2.1" fill="currentColor">BIJOUX FINS RAFFINÉS</text>
       </svg>
     </span>
   `;
