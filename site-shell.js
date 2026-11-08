@@ -14,12 +14,16 @@
     return icons[name] || "";
   };
 
-  /* LOGO OFFICIEL : LA CLE DES COEURS — DEPUIS 1974 */
+  /* LOGO : LA CLE DES COEURS
+     BIJOUX FINS & RAFFINES
+     DEPUIS 1974 */
+
   const logo = `
     <span class="cdc-logo" aria-hidden="true">
-      <svg viewBox="0 0 520 185"
+      <svg viewBox="0 0 520 215"
         xmlns="http://www.w3.org/2000/svg"
-        style="display:block;width:100%;height:auto;overflow:visible">
+        role="img"
+        aria-label="La Cle des Coeurs, bijoux fins et raffines, depuis 1974">
 
         <g font-family="Arial,Helvetica,sans-serif"
            font-weight="700" fill="#fff">
@@ -56,15 +60,27 @@
           <path d="M341 82 L350 69 L359 82 Z"/>
         </g>
 
-        <path d="M105 169 H190 M405 169 H490"
-          stroke="#edc844" stroke-width="2"/>
+        <path d="M65 164 H175 M345 164 H455"
+          stroke="#edc844" stroke-width="1.5"/>
 
-        <text x="298" y="176"
+        <text x="260" y="170"
           text-anchor="middle"
           font-family="Georgia,serif"
-          font-size="22"
+          font-size="17"
+          letter-spacing="2"
+          fill="#f4e6d4">
+          BIJOUX FINS &amp; RAFFINES
+        </text>
+
+        <text x="260" y="203"
+          text-anchor="middle"
+          font-family="Georgia,serif"
+          font-size="21"
           font-weight="700"
-          fill="#edc844">Depuis 1974</text>
+          letter-spacing="1"
+          fill="#edc844">
+          Depuis 1974
+        </text>
       </svg>
     </span>
   `;
@@ -168,6 +184,13 @@
         <a href="conditions-generales.html">Conditions générales de vente</a>
         <a href="mentions-legales.html">Mentions légales</a>
         <a href="confidentialite.html">Confidentialité</a>
+      </div>
+
+      <div class="footer-contact">
+        <h4>CONTACT</h4>
+        <a href="mailto:lacledescoeurs@outlook.fr">
+          lacledescoeurs@outlook.fr
+        </a>
       </div>
 
       <div class="footer-bottom">
