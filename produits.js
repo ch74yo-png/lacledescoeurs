@@ -2,9 +2,8 @@
 
 // =============================================
 // LA CLÉ DES CŒURS
-// Catalogue : 76 accessoires et 2 montres
-// Photos originales conservées
-// Images génériques ajoutées automatiquement
+// Catalogue original conservé
+// Produit supplémentaire : DETAILS à 2 €
 // =============================================
 
 const creerProduit = (id, nom, marque, prix, ancienPrix = null, categories = ["accessoires"], extra = {}) => ({
@@ -134,12 +133,24 @@ const produits = [
     reference: "WSSA0062",
     description: "Montre automatique Cartier Santos en acier, cadran vert, boîte et papiers.",
     ficheSource: "https://bijouterielamalmaison.fr/product/cartier-santos-de-cartierwssa0062-ensemble-complet-garantie/"
-  })
+  }),
+
+  // PRODUIT SUPPLÉMENTAIRE
+  creerProduit(
+    "details",
+    "DETAILS",
+    "LA CLÉ DES CŒURS",
+    2,
+    null,
+    ["accessoires"],
+    { image: "", description: "Frais de détails." }
+  )
 ];
 
 // =============================================
-// IMAGES DE REMPLACEMENT AUTOMATIQUES
-// Les images déjà renseignées ne sont jamais écrasées.
+// IMAGES DE REMPLACEMENT
+// Les images originales déjà renseignées sont conservées.
+// DETAILS reste sans photo générique.
 // =============================================
 
 const imagesBijoux = [
@@ -172,10 +183,9 @@ const imagesColliers = [
 ];
 
 produits.forEach((produit, index) => {
-  // Conserver toute image déjà présente.
-  if (produit.image && produit.image.trim() !== "") {
-    return;
-  }
+  if (produit.id === "details") return;
+
+  if (produit.image && produit.image.trim() !== "") return;
 
   const texte = [
     produit.nom || "",
