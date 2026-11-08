@@ -1,54 +1,216 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="description" content="LA CLÉ DES CŒURS — Bijoux fins et raffinés.">
+  <meta name="theme-color" content="#30231f">
   <title>LA CLÉ DES CŒURS | Bijoux fins & raffinés</title>
-
-  <meta name="description" content="Découvrez LA CLÉ DES CŒURS, une sélection de bijoux et de montres fins et raffinés.">
-  <meta name="theme-color" content="#f8f5f0">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="styles.css">
 
   <style>
-    .main-nav.is-open {
-      display: flex !important;
-      flex-wrap: wrap;
+    .home-category {
+      padding: 55px 5%;
+      background: #f7f2eb;
     }
 
-    .menu-button {
-      cursor: pointer;
+    .home-category:nth-child(even) {
+      background: #fffaf4;
     }
 
-    .header-actions a {
+    .home-category-heading {
+      max-width: 1250px;
+      margin: 0 auto 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 15px;
+    }
+
+    .home-category-heading h2 {
+      margin: 5px 0;
+      font: 400 clamp(27px,4vw,40px) "Cormorant Garamond", Georgia, serif;
+      color: #30231f;
+    }
+
+    .home-category-heading p {
+      margin: 0;
+      color: #76695d;
+      font-size: 12px;
+    }
+
+    .home-category-heading a {
+      color: #987d60;
+      text-decoration: none;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      white-space: nowrap;
+    }
+
+    .home-products {
+      max-width: 1250px;
+      margin: auto;
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 8px 2px 22px;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #b5966d #e9dfd2;
+    }
+
+    .home-products::-webkit-scrollbar {
+      height: 5px;
+    }
+
+    .home-products::-webkit-scrollbar-thumb {
+      background: #b5966d;
+      border-radius: 10px;
+    }
+
+    .home-product-card {
+      flex: 0 0 245px;
+      min-width: 0;
+      background: #fff;
+      border: 1px solid #e5d8c8;
+      text-align: center;
+      scroll-snap-align: start;
+      padding-bottom: 17px;
+    }
+
+    .home-product-image {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #f3eee7;
+      overflow: hidden;
+    }
+
+    .home-product-image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform .35s ease;
+    }
+
+    .home-product-card:hover .home-product-image img {
+      transform: scale(1.04);
+    }
+
+    .home-product-info {
+      padding: 14px 12px 0;
+    }
+
+    .home-product-brand {
+      color: #a58b6b;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .home-product-name {
+      min-height: 48px;
+      margin: 8px 0;
+      font: 500 18px/1.35 "Cormorant Garamond", Georgia, serif;
+      color: #30231f;
+    }
+
+    .home-product-name a {
+      color: inherit;
       text-decoration: none;
     }
 
-    .search-form {
-      display: flex;
-      align-items: center;
+    .home-product-price {
+      margin: 8px 0 13px;
+      font-size: 14px;
+      color: #30231f;
     }
 
-    .search-form button {
-      cursor: pointer;
+    .home-product-link {
+      display: inline-block;
+      padding: 9px 18px;
+      border: 1px solid #a58b6b;
+      color: #604a38;
+      text-decoration: none;
+      font-size: 9px;
+      letter-spacing: 1.5px;
     }
 
-    @media (max-width: 768px) {
-      .main-nav.is-open {
-        display: flex !important;
-        flex-direction: column;
-        width: 100%;
-        gap: 12px;
-        padding: 18px;
-        background: #f8f5f0;
-        position: relative;
-        z-index: 20;
+    .home-product-link:hover {
+      background: #a58b6b;
+      color: white;
+    }
+
+    .home-empty {
+      width: 100%;
+      padding: 25px;
+      text-align: center;
+      color: #76695d;
+      font-size: 13px;
+    }
+
+    .hero {
+      background:
+        linear-gradient(90deg,rgba(31,25,20,.78),rgba(31,25,20,.18)),
+        url("https://bijouterielamalmaison.fr/wp-content/uploads/2026/05/AA1.webp")
+        center/cover no-repeat;
+    }
+
+    .home-intro {
+      padding: 60px 20px;
+      text-align: center;
+      background: #eee5d9;
+    }
+
+    .home-intro h2 {
+      font: 400 clamp(30px,4vw,44px) "Cormorant Garamond", Georgia, serif;
+      margin: 8px 0 15px;
+    }
+
+    .home-intro p:last-child {
+      max-width: 650px;
+      margin: auto;
+      color: #76695d;
+    }
+
+    .home-contact {
+      padding: 55px 20px;
+      text-align: center;
+      background: #fffaf4;
+    }
+
+    @media(max-width:600px) {
+      .home-category {
+        padding: 38px 14px;
+      }
+
+      .home-category-heading {
+        align-items: center;
+      }
+
+      .home-product-card {
+        flex-basis: 190px;
+      }
+
+      .home-product-name {
+        font-size: 16px;
+      }
+
+      .home-category-heading h2 {
+        font-size: 27px;
+      }
+
+      .home-category-heading a {
+        font-size: 8px;
       }
     }
   </style>
@@ -56,360 +218,193 @@
 
 <body>
 
-  <div class="announcement">
-    BIENVENUE CHEZ LA CLÉ DES CŒURS
-  </div>
-
-  <header class="header">
-
-    <button
-      class="menu-button"
-      id="menuButton"
-      type="button"
-      aria-label="Ouvrir le menu"
-      aria-expanded="false"
-      aria-controls="mainNav"
-    >
-      ☰
-    </button>
-
-    <a href="index.html" class="brand">
-      <span class="brand-monogram">CDC</span>
-      <span class="brand-name">LA CLÉ DES CŒURS</span>
-      <span class="brand-tagline">BIJOUX FINS & RAFFINÉS</span>
-    </a>
-
-    <div class="header-actions">
-      <a href="favoris.html" aria-label="Favoris">♡</a>
-      <a href="panier.html" aria-label="Panier">
-        ♧ <span id="cartCount">0</span>
-      </a>
-    </div>
-
-  </header>
-
-  <nav class="main-nav" id="mainNav">
-
-    <a href="index.html">Accueil</a>
-
-    <a href="catalogue.html?categorie=accessoires">
-      Accessoires et bracelets
-    </a>
-
-    <a href="catalogue.html?categorie=ap-swatch">
-      AP x Swatch
-    </a>
-
-    <a href="catalogue.html?categorie=femme">
-      Montres femme
-    </a>
-
-    <a href="catalogue.html?categorie=homme">
-      Montres homme
-    </a>
-
-    <a href="qui-sommes-nous.html">
-      Qui sommes-nous
-    </a>
-
-    <a href="contact.html">
-      Contact
-    </a>
-
-  </nav>
-
-  <div class="utility-bar">
-
-    <form class="search-form" id="searchForm">
-
-      <input
-        type="search"
-        id="searchInput"
-        placeholder="Rechercher un produit..."
-        aria-label="Rechercher un produit"
-      >
-
-      <button type="submit" aria-label="Rechercher">
-        ⌕
-      </button>
-
-    </form>
-
-    <select id="languageSelect" aria-label="Choisir la langue">
-      <option value="fr">Français</option>
-      <option value="en">English</option>
-      <option value="es">Español</option>
-      <option value="de">Deutsch</option>
-      <option value="it">Italiano</option>
-      <option value="pt">Português</option>
-    </select>
-
-  </div>
-
   <main>
 
     <section class="hero">
-
       <div class="hero-content">
-
-        <p class="eyebrow">
-          L'ÉLÉGANCE DANS CHAQUE DÉTAIL
-        </p>
-
-        <h1>
-          Le raffinement<br>
-          à votre poignet
-        </h1>
-
+        <p class="eyebrow">L'ÉLÉGANCE DANS CHAQUE DÉTAIL</p>
+        <h1>Le raffinement<br>à votre poignet</h1>
         <p>
           Découvrez notre univers de bijoux et de montres
           fins et raffinés.
         </p>
-
         <a href="catalogue.html" class="primary-button">
           DÉCOUVRIR LA COLLECTION
         </a>
-
       </div>
-
     </section>
 
-    <section class="welcome-section">
-
+    <section class="home-intro">
       <p class="eyebrow">LA CLÉ DES CŒURS</p>
-
       <h2>Une élégance intemporelle</h2>
-
       <p>
         Des pièces soigneusement sélectionnées pour celles
         et ceux qui apprécient le style, le détail et le raffinement.
       </p>
-
     </section>
 
-    <section class="categories-section">
-
-      <div class="section-heading">
-        <p class="eyebrow">NOTRE UNIVERS</p>
-        <h2>Nos catégories</h2>
+    <section class="home-category" id="categorie-accessoires">
+      <div class="home-category-heading">
+        <div>
+          <p class="eyebrow">NOTRE SÉLECTION</p>
+          <h2>Accessoires et bracelets</h2>
+          <p>Découvrez notre collection d'accessoires.</p>
+        </div>
+        <a href="catalogue.html?categorie=accessoires">TOUT DÉCOUVRIR →</a>
       </div>
-
-      <div class="category-grid">
-
-        <a href="catalogue.html?categorie=accessoires" class="category-card">
-          <div class="category-image category-accessories">
-            <span>01</span>
-          </div>
-          <h3>Accessoires et bracelets</h3>
-          <span class="category-link">DÉCOUVRIR</span>
-        </a>
-
-        <a href="catalogue.html?categorie=ap-swatch" class="category-card">
-          <div class="category-image category-ap">
-            <span>02</span>
-          </div>
-          <h3>AP x Swatch</h3>
-          <span class="category-link">DÉCOUVRIR</span>
-        </a>
-
-        <a href="catalogue.html?categorie=femme" class="category-card">
-          <div class="category-image category-women">
-            <span>03</span>
-          </div>
-          <h3>Montres femme</h3>
-          <span class="category-link">DÉCOUVRIR</span>
-        </a>
-
-        <a href="catalogue.html?categorie=homme" class="category-card">
-          <div class="category-image category-men">
-            <span>04</span>
-          </div>
-          <h3>Montres homme</h3>
-          <span class="category-link">DÉCOUVRIR</span>
-        </a>
-
+      <div class="home-products" id="products-accessoires">
+        <p class="home-empty">Chargement des produits...</p>
       </div>
-
     </section>
 
-    <section class="featured-section">
-
-      <div class="section-heading">
-        <p class="eyebrow">SÉLECTION</p>
-        <h2>Nos pièces à découvrir</h2>
-        <p>Retrouvez notre sélection dans le catalogue.</p>
+    <section class="home-category" id="categorie-ap-swatch">
+      <div class="home-category-heading">
+        <div>
+          <p class="eyebrow">COLLECTION EXCLUSIVE</p>
+          <h2>AP x Swatch</h2>
+          <p>Découvrez la collection Royal Pop.</p>
+        </div>
+        <a href="catalogue.html?categorie=ap-swatch">TOUT DÉCOUVRIR →</a>
       </div>
-
-      <div class="featured-placeholder">
-
-        <p>
-          Découvrez notre sélection de bijoux et de montres.
-        </p>
-
-        <a href="catalogue.html" class="primary-button">
-          VOIR TOUS LES PRODUITS
-        </a>
-
+      <div class="home-products" id="products-ap-swatch">
+        <p class="home-empty">Chargement des produits...</p>
       </div>
-
     </section>
 
-    <section class="editorial-section">
-
-      <div class="editorial-content">
-
-        <p class="eyebrow">NOTRE PHILOSOPHIE</p>
-
-        <h2>Le détail fait toute la différence</h2>
-
-        <p>
-          LA CLÉ DES CŒURS célèbre les pièces qui traversent
-          le temps et accompagnent chaque moment important.
-        </p>
-
-        <a href="qui-sommes-nous.html" class="text-link">
-          EN SAVOIR PLUS →
-        </a>
-
+    <section class="home-category" id="categorie-femme">
+      <div class="home-category-heading">
+        <div>
+          <p class="eyebrow">ÉLÉGANCE AU FÉMININ</p>
+          <h2>Montres femme</h2>
+          <p>Une sélection de montres féminines.</p>
+        </div>
+        <a href="catalogue.html?categorie=femme">TOUT DÉCOUVRIR →</a>
       </div>
-
+      <div class="home-products" id="products-femme">
+        <p class="home-empty">Chargement des produits...</p>
+      </div>
     </section>
 
-    <section class="contact-strip">
+    <section class="home-category" id="categorie-homme">
+      <div class="home-category-heading">
+        <div>
+          <p class="eyebrow">STYLE ET CARACTÈRE</p>
+          <h2>Montres homme</h2>
+          <p>Découvrez notre sélection masculine.</p>
+        </div>
+        <a href="catalogue.html?categorie=homme">TOUT DÉCOUVRIR →</a>
+      </div>
+      <div class="home-products" id="products-homme">
+        <p class="home-empty">Chargement des produits...</p>
+      </div>
+    </section>
 
-      <p class="eyebrow">UNE QUESTION ?</p>
-
-      <h2>Nous sommes à votre écoute</h2>
-
-      <a href="contact.html" class="primary-button">
-        NOUS CONTACTER
+    <section class="home-intro">
+      <p class="eyebrow">NOTRE PHILOSOPHIE</p>
+      <h2>Le détail fait toute la différence</h2>
+      <p>
+        LA CLÉ DES CŒURS célèbre les pièces qui traversent
+        le temps et accompagnent chaque moment important.
+      </p>
+      <a href="qui-sommes-nous.html" class="primary-button">
+        EN SAVOIR PLUS
       </a>
+    </section>
 
+    <section class="home-contact">
+      <p class="eyebrow">UNE QUESTION ?</p>
+      <h2>Nous sommes à votre écoute</h2>
+      <a href="contact.html" class="primary-button">NOUS CONTACTER</a>
     </section>
 
   </main>
 
-  <footer class="footer">
-
-    <div class="footer-brand">
-
-      <span class="brand-monogram">CDC</span>
-
-      <h3>LA CLÉ DES CŒURS</h3>
-
-      <p>BIJOUX FINS & RAFFINÉS</p>
-
-    </div>
-
-    <div class="footer-column">
-
-      <h4>LA BOUTIQUE</h4>
-
-      <a href="index.html">Accueil</a>
-      <a href="catalogue.html">Tous les produits</a>
-      <a href="favoris.html">Mes favoris</a>
-      <a href="panier.html">Mon panier</a>
-      <a href="qui-sommes-nous.html">Qui sommes-nous</a>
-      <a href="contact.html">Contact</a>
-
-    </div>
-
-    <div class="footer-column">
-
-      <h4>INFORMATIONS</h4>
-
-      <a href="commande.html">Ma commande</a>
-      <a href="livraison-retours.html">Livraison et retours</a>
-      <a href="conditions-generales.html">Conditions générales de vente</a>
-      <a href="mentions-legales.html">Mentions légales</a>
-      <a href="confidentialite.html">Politique de confidentialité</a>
-
-    </div>
-
-    <div class="footer-bottom">
-
-      ©️ <span id="currentYear"></span> LA CLÉ DES CŒURS.
-      Tous droits réservés.
-
-    </div>
-
-  </footer>
-
+  <script src="produits.js"></script>
   <script>
     "use strict";
 
-    // Menu de navigation mobile
-    const menuButton = document.getElementById("menuButton");
-    const mainNav = document.getElementById("mainNav");
-
-    menuButton.addEventListener("click", function() {
-      const menuOuvert = mainNav.classList.toggle("is-open");
-
-      menuButton.setAttribute("aria-expanded", String(menuOuvert));
-      menuButton.setAttribute(
-        "aria-label",
-        menuOuvert ? "Fermer le menu" : "Ouvrir le menu"
-      );
-
-      menuButton.textContent = menuOuvert ? "✕" : "☰";
-    });
-
-    // Fermer le menu après avoir choisi une page
-    mainNav.querySelectorAll("a").forEach(function(lien) {
-      lien.addEventListener("click", function() {
-        mainNav.classList.remove("is-open");
-        menuButton.setAttribute("aria-expanded", "false");
-        menuButton.setAttribute("aria-label", "Ouvrir le menu");
-        menuButton.textContent = "☰";
-      });
-    });
-
-    // Recherche : ouvrir le catalogue avec le terme recherché
-    const searchForm = document.getElementById("searchForm");
-    const searchInput = document.getElementById("searchInput");
-
-    searchForm.addEventListener("submit", function(evenement) {
-      evenement.preventDefault();
-
-      const terme = searchInput.value.trim();
-
-      if (terme) {
-        window.location.href =
-          "catalogue.html?recherche=" + encodeURIComponent(terme);
-      } else {
-        window.location.href = "catalogue.html";
-      }
-    });
-
-    // Afficher l'année actuelle
-    document.getElementById("currentYear").textContent =
-      new Date().getFullYear();
-
-    // Mettre à jour le compteur du panier
-    function actualiserCompteurPanier() {
-      const compteur = document.getElementById("cartCount");
-
-      try {
-        const panier = JSON.parse(
-          localStorage.getItem("cdc_cart") || "[]"
-        );
-
-        const quantite = Array.isArray(panier)
-          ? panier.reduce(function(total, article) {
-              return total + Number(article.quantity || 0);
-            }, 0)
-          : 0;
-
-        compteur.textContent = quantite;
-
-      } catch (erreur) {
-        compteur.textContent = "0";
-        console.error("Impossible de lire le panier :", erreur);
-      }
+    function echapperHTML(texte) {
+      return String(texte ?? "").replace(/[&<>"']/g, caractere => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[caractere]);
     }
 
-    actualiserCompteurPanier();
+    function prixFormate(prix) {
+      return new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: "EUR"
+      }).format(Number(prix));
+    }
+
+    function carteProduit(produit) {
+      const nom = echapperHTML(produit.nom);
+      const marque = echapperHTML(produit.marque || "");
+      const image = echapperHTML(produit.image || "");
+      const lien = "produit.html?id=" + encodeURIComponent(produit.id);
+
+      return `
+        <article class="home-product-card">
+          <a class="home-product-image" href="${lien}">
+            <img
+              src="${image}"
+              alt="${nom}"
+              loading="lazy"
+              onerror="this.style.display='none';"
+            >
+          </a>
+          <div class="home-product-info">
+            <div class="home-product-brand">${marque}</div>
+            <h3 class="home-product-name">
+              <a href="${lien}">${nom}</a>
+            </h3>
+            <div class="home-product-price">${prixFormate(produit.prix)}</div>
+            <a class="home-product-link" href="${lien}">
+              DÉCOUVRIR
+            </a>
+          </div>
+        </article>
+      `;
+    }
+
+    function afficherCategorie(categorie, elementId) {
+      const conteneur = document.getElementById(elementId);
+
+      if (!Array.isArray(window.produits)) {
+        conteneur.innerHTML =
+          '<p class="home-empty">Le catalogue est momentanément indisponible.</p>';
+        return;
+      }
+
+      const selection = window.produits.filter(produit => {
+        if (!produit || produit.actif === false) return false;
+
+        const categories = Array.isArray(produit.categories)
+          ? produit.categories
+          : [produit.categorie];
+
+        return categories.includes(categorie);
+      });
+
+      if (selection.length === 0) {
+        conteneur.innerHTML =
+          '<p class="home-empty">Les produits de cette catégorie seront affichés ici dès que leur classement sera disponible.</p>';
+        return;
+      }
+
+      conteneur.innerHTML = selection.map(carteProduit).join("");
+    }
+
+    afficherCategorie("accessoires", "products-accessoires");
+    afficherCategorie("ap-swatch", "products-ap-swatch");
+    afficherCategorie("femme", "products-femme");
+    afficherCategorie("homme", "products-homme");
   </script>
+
+  <script src="site-shell.js" defer></script>
 
 </body>
 </html>
