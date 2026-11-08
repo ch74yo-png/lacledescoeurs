@@ -20,18 +20,22 @@
 
   const logo = `
     <span class="cdc-logo" aria-hidden="true">
-      <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg"
-        role="img" aria-label="CDC — La Clé des Cœurs, bijoux fins raffinés">
-        <circle cx="150" cy="52" r="42" fill="none" stroke="#c9a45c" stroke-width="2.5"/>
-        <text x="150" y="64" text-anchor="middle"
-          font-family="Georgia,serif" font-size="31" font-weight="700"
-          letter-spacing="1" fill="#c9a45c">CDC</text>
-        <text x="150" y="119" text-anchor="middle"
-          font-family="Georgia,serif" font-size="19" font-weight="600"
-          letter-spacing="1.2" fill="currentColor">LA CLÉ DES CŒURS</text>
-        <text x="150" y="140" text-anchor="middle"
-          font-family="Georgia,serif" font-size="10"
-          letter-spacing="2.1" fill="currentColor">BIJOUX FINS RAFFINÉS</text>
+      <svg viewBox="0 0 620 170" xmlns="http://www.w3.org/2000/svg"
+        role="img" aria-label="LA CLÉ DES CŒURS — Depuis 1971">
+        <g fill="#fff" font-family="Arial, Helvetica, sans-serif" font-weight="800">
+          <text x="72" y="62" font-size="57" letter-spacing="2">LA CL</text>
+          <text x="330" y="62" font-size="57" letter-spacing="2">É</text>
+          <text x="38" y="128" font-size="55" letter-spacing="1">DES C</text>
+          <text x="374" y="128" font-size="55" letter-spacing="1">EURS</text>
+        </g>
+        <g fill="none" stroke="#e5b928" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M344 4 L344 83"/>
+          <path d="M332 16 L356 16 M338 28 L350 28"/>
+          <path d="M344 78 C331 63 309 69 309 88 C309 106 344 128 344 128 C344 128 379 106 379 88 C379 69 357 63 344 78Z"/>
+        </g>
+        <text x="310" y="163" text-anchor="middle" fill="#e5b928"
+          font-family="Georgia,serif" font-size="25" font-weight="700"
+          letter-spacing="2">Depuis 1971</text>
       </svg>
     </span>
   `;
