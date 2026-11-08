@@ -49,7 +49,7 @@
         <a class="cdc-icon-button" href="favoris.html" aria-label="Mes favoris">${icon.heart}</a>
         <a class="cdc-icon-button cart-link" href="panier.html" aria-label="Mon panier">${icon.cart}<span id="cartCount">0</span></a>
         <label class="cdc-language" aria-label="Choisir la langue">
-          <span>${icon.globe}</span>
+          <span style="color:#d99caf">${icon.globe}</span>
           <select id="cdcLanguage" aria-label="Langue">
             <option value="fr">FR</option><option value="en">EN</option><option value="es">ES</option>
             <option value="de">DE</option><option value="it">IT</option><option value="pt">PT</option><option value="nl">NL</option>
@@ -64,7 +64,7 @@
       <a href="catalogue.html?categorie=ap-swatch">AP x Swatch</a>
       <a href="catalogue.html?categorie=femme">Montres femme</a>
       <a href="catalogue.html?categorie=homme">Montres homme</a>
-      <a href="qui-sommes-nous.html">Qui sommes-nous</a><a href="contact.html">Contact</a>
+      <a href="mentions-legales.html">La maison</a><a href="contact.html">Contact</a>
       <a href="livraison-retours.html">Livraison et retours</a>
     </nav>
     <div class="cdc-search" id="cdcSearch" hidden>
