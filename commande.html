@@ -1,91 +1,237 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#30231f">
-<title>Ma commande | LA CLÉ DES CŒURS</title>
+<meta name="theme-color" content="#211916">
+<title>Finaliser ma commande | LA CLE DES COEURS</title>
 <link rel="stylesheet" href="styles.css">
-
 <style>
-.checkout-page{max-width:1100px;margin:40px auto;padding:20px 18px 70px}
-.checkout-title{text-align:center;margin-bottom:32px}
-.checkout-title h1{font:400 clamp(32px,5vw,45px) var(--serif);letter-spacing:2px}
-.checkout-layout{display:grid;grid-template-columns:1.3fr 1fr;gap:25px;align-items:start}
-.checkout-card{background:#fffaf4;border:1px solid #e5d8c8;padding:25px;margin-bottom:20px}
-.checkout-card h2{font:400 23px var(--serif);margin:0 0 20px;color:#30231f}
-.checkout-form label{display:block;font-size:12px;margin:14px 0 7px;letter-spacing:.5px}
-.checkout-form input,.checkout-form select{box-sizing:border-box;width:100%;padding:13px;border:1px solid #d9cfc2;background:white;color:#40372f;font:inherit;border-radius:2px}
-.checkout-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.checkout-summary{position:sticky;top:20px}
-.checkout-line{display:flex;justify-content:space-between;gap:12px;margin:13px 0;font-size:13px}
-.checkout-total{border-top:1px solid #e5d8c8;padding-top:18px;margin-top:18px;font-size:19px;font-weight:bold}
-.checkout-button{display:block;width:100%;padding:17px;margin-top:22px;border:0;background:#987d60;color:white;letter-spacing:3px;cursor:pointer;font-size:14px}
-.checkout-button:hover{background:#725b43}
-.checkout-notice{font-size:11px;line-height:1.7;color:#776b60;margin-top:12px}
-.terms-line{display:flex!important;align-items:flex-start;gap:10px}
-.terms-line input{width:auto!important;margin-top:3px}
-.empty-cart{text-align:center;padding:20px;color:#776b60}
-@media(max-width:750px){.checkout-layout{grid-template-columns:1fr}.checkout-summary{position:static}.checkout-row{grid-template-columns:1fr;gap:0}.checkout-card{padding:18px}}
+.checkout-page{
+  max-width:850px;
+  margin:35px auto;
+  padding:20px 18px 70px;
+}
+.checkout-title{text-align:center;margin-bottom:35px}
+.checkout-title h1{
+  font:400 clamp(34px,5vw,48px) var(--serif);
+  letter-spacing:1px;
+  margin:8px 0;
+}
+.checkout-title p:last-child{color:var(--muted)}
+.checkout-layout{display:block;width:100%}
+.checkout-form{width:100%}
+.checkout-card{
+  width:100%;
+  padding:25px;
+  margin-bottom:20px;
+  background:#302720;
+  border:1px solid rgba(201,164,94,.55);
+  color:#f3e8d8;
+}
+.checkout-card h2{
+  margin:0 0 20px;
+  color:#e6c58e;
+  font:400 23px var(--serif);
+  letter-spacing:1px;
+}
+.checkout-form label:not(.terms-line){
+  display:block;
+  margin:15px 0 7px;
+  color:#e8d8c4;
+  font-size:11px;
+  letter-spacing:.8px;
+}
+.checkout-form input:not([type="checkbox"]),
+.checkout-form select{
+  box-sizing:border-box;
+  width:100%;
+  min-height:46px;
+  padding:12px;
+  border:1px solid #b9a994;
+  border-radius:2px;
+  background:#fffaf4;
+  color:#30231f;
+  font:13px var(--sans);
+}
+.checkout-form input:focus,
+.checkout-form select:focus{
+  outline:1px solid var(--gold);
+  border-color:var(--gold);
+}
+.checkout-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.checkout-line{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:15px;
+  margin:13px 0;
+  color:#f3e8d8;
+  font-size:13px;
+}
+.checkout-line span:last-child{text-align:right}
+.checkout-total{
+  margin-top:20px;
+  padding-top:18px;
+  border-top:1px solid var(--gold);
+  color:#e8c78e;
+  font-size:19px;
+  font-weight:600;
+}
+.checkout-customer-preview{
+  margin-bottom:22px;
+  padding:15px;
+  border:1px solid rgba(201,164,94,.35);
+  background:rgba(0,0,0,.12);
+  font-size:12px;
+  line-height:1.9;
+  overflow-wrap:anywhere;
+}
+.checkout-customer-preview strong{
+  display:block;
+  margin-bottom:7px;
+  color:#e6c58e;
+  letter-spacing:1px;
+}
+.checkout-customer-preview p{margin:2px 0;color:#e9d9c5}
+.checkout-promo{
+  margin-top:22px;
+  padding-top:15px;
+  border-top:1px solid rgba(201,164,94,.3);
+}
+.checkout-promo label{
+  display:block;
+  margin-bottom:8px;
+  color:#e8d8c4;
+  font-size:11px;
+  letter-spacing:.8px;
+}
+.checkout-promo input{
+  width:100%;
+  min-height:44px;
+  padding:12px;
+  background:#fffaf4;
+  color:#30231f;
+  border:1px solid #b9a994;
+}
+.checkout-button{
+  display:block;
+  width:100%;
+  min-height:52px;
+  padding:15px;
+  margin-top:22px;
+  border:0;
+  border-radius:1px;
+  background:var(--gold);
+  color:#211916;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:3px;
+  cursor:pointer;
+}
+.checkout-button:hover{background:#e2bd75}
+.checkout-notice{
+  margin-top:12px;
+  color:#b9a994;
+  font-size:11px;
+  line-height:1.7;
+}
+.terms-line{
+  display:flex!important;
+  align-items:flex-start;
+  gap:10px;
+  color:#f3e8d8;
+  font-size:12px;
+  line-height:1.7;
+}
+.terms-line input{
+  width:17px;
+  height:17px;
+  flex:0 0 17px;
+  margin:2px 0 0;
+  accent-color:var(--gold);
+}
+.terms-line a{color:#e6c58e}
+.empty-cart{text-align:center;padding:18px;color:#b9a994}
+@media(max-width:600px){
+  .checkout-page{margin:18px auto;padding:12px 13px 45px}
+  .checkout-card{padding:18px}
+  .checkout-row{grid-template-columns:1fr;gap:0}
+  .checkout-title{margin-bottom:25px}
+}
 </style>
 </head>
 
 <body>
-
 <main class="checkout-page">
 
   <div class="checkout-title">
-    <p class="eyebrow">LA CLÉ DES CŒURS</p>
-    <h1>Ma commande</h1>
-    <p>Vos coordonnées et les détails de votre livraison.</p>
+    <p class="eyebrow">LA CLE DES COEURS</p>
+    <h1>Finaliser ma commande</h1>
+    <p>Quelques dernières informations avant de poursuivre.</p>
   </div>
 
   <div class="checkout-layout">
-
     <form class="checkout-form" id="checkoutForm">
 
       <section class="checkout-card">
         <h2>1. COORDONNÉES</h2>
 
         <label for="fullName">NOM COMPLET *</label>
-        <input id="fullName" name="fullName" autocomplete="name" required>
+        <input id="fullName" name="fullName"
+          autocomplete="name" required>
 
         <label for="email">ADRESSE MAIL *</label>
-        <input id="email" name="email" type="email" autocomplete="email" required>
+        <input id="email" name="email" type="email"
+          autocomplete="email" required>
 
         <label for="phone">TÉLÉPHONE *</label>
-        <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+        <input id="phone" name="phone" type="tel"
+          autocomplete="tel" required>
       </section>
 
       <section class="checkout-card">
         <h2>2. DÉTAILS DE LIVRAISON</h2>
 
         <label for="country">PAYS *</label>
-        <select id="country" name="country" autocomplete="country-name" required>
+        <select id="country" name="country"
+          autocomplete="country-name" required>
           <option value="">Choisir un pays</option>
         </select>
 
         <label for="address">ADRESSE *</label>
-        <input id="address" name="address" autocomplete="street-address" required>
+        <input id="address" name="address"
+          autocomplete="street-address" required>
 
         <label for="addressExtra">COMPLÉMENT D'ADRESSE</label>
-        <input id="addressExtra" name="addressExtra" autocomplete="address-line2">
+        <input id="addressExtra" name="addressExtra"
+          autocomplete="address-line2">
 
         <div class="checkout-row">
           <div>
             <label for="postalCode">CODE POSTAL *</label>
-            <input id="postalCode" name="postalCode" autocomplete="postal-code" required>
+            <input id="postalCode" name="postalCode"
+              autocomplete="postal-code" required>
           </div>
           <div>
             <label for="city">VILLE *</label>
-            <input id="city" name="city" autocomplete="address-level2" required>
+            <input id="city" name="city"
+              autocomplete="address-level2" required>
           </div>
         </div>
       </section>
 
       <section class="checkout-card">
         <h2>3. RÉCAPITULATIF</h2>
+
+        <div class="checkout-customer-preview" id="customerPreview">
+          <strong>VOS COORDONNÉES</strong>
+          <p>Vos informations apparaîtront ici au fur et à mesure.</p>
+        </div>
 
         <div id="summaryItems">
           <p class="empty-cart">Chargement du panier...</p>
@@ -111,14 +257,18 @@
           <span id="total">0,00 €</span>
         </div>
 
-        <label for="promoCode">CODE PROMOTIONNEL</label>
-        <input id="promoCode" name="promoCode" placeholder="Votre code promotionnel">
+        <div class="checkout-promo">
+          <label for="promoCode">CODE PROMOTIONNEL</label>
+          <input id="promoCode" name="promoCode"
+            placeholder="Votre code promotionnel">
 
-        <button type="button" id="applyPromo" class="checkout-button">
-          APPLIQUER LE CODE
-        </button>
+          <button type="button" id="applyPromo"
+            class="checkout-button">
+            APPLIQUER LE CODE
+          </button>
 
-        <p id="promoMessage" class="checkout-notice"></p>
+          <p id="promoMessage" class="checkout-notice"></p>
+        </div>
       </section>
 
       <section class="checkout-card">
@@ -133,39 +283,15 @@
         </label>
 
         <button class="checkout-button" type="submit">
-          PAYER
+          PROCÉDER AU PAIEMENT
         </button>
 
         <p class="checkout-notice">
-          Vérifiez les informations de votre commande avant de poursuivre vers le paiement.
+          Vérifiez les informations de votre commande avant de poursuivre.
         </p>
       </section>
 
     </form>
-
-    <aside class="checkout-summary">
-      <section class="checkout-card">
-        <h2>VOTRE COMMANDE</h2>
-
-        <div id="sideItems"></div>
-
-        <div class="checkout-line">
-          <span>Sous-total</span>
-          <span id="sideSubtotal">0,00 €</span>
-        </div>
-
-        <div class="checkout-line">
-          <span>Livraison</span>
-          <span id="sideShipping">À calculer</span>
-        </div>
-
-        <div class="checkout-line checkout-total">
-          <span>TOTAL</span>
-          <span id="sideTotal">0,00 €</span>
-        </div>
-      </section>
-    </aside>
-
   </div>
 </main>
 
@@ -197,7 +323,10 @@ const escapeHTML = s => String(s ?? "").replace(/[&<>"']/g,c=>({
   "'":"&#39;"
 }[c]));
 
-const countryNames = new Intl.DisplayNames(["fr"],{type:"region"});
+const countryNames = new Intl.DisplayNames(["fr"],{
+  type:"region"
+});
+
 const countries = [];
 
 for(let i=65;i<=90;i++){
@@ -264,6 +393,39 @@ function totalValue(){
   );
 }
 
+function renderCustomerPreview(){
+  const get = id => document.getElementById(id).value.trim();
+
+  const name=get("fullName");
+  const email=get("email");
+  const phone=get("phone");
+  const country=countrySelect.value
+    ? countryNames.of(countrySelect.value)
+    : "";
+  const address=get("address");
+  const extra=get("addressExtra");
+  const postal=get("postalCode");
+  const city=get("city");
+
+  const lines=[
+    name,
+    email,
+    phone,
+    address,
+    extra,
+    [postal,city].filter(Boolean).join(" "),
+    country
+  ].filter(Boolean);
+
+  document.getElementById("customerPreview").innerHTML=`
+    <strong>VOS COORDONNÉES ET VOTRE LIVRAISON</strong>
+    ${lines.length
+      ? lines.map(line=>`<p>${escapeHTML(line)}</p>`).join("")
+      : "<p>Vos informations apparaîtront ici au fur et à mesure.</p>"
+    }
+  `;
+}
+
 function render(){
   const subtotal=subtotalValue();
   const shipping=shippingValue();
@@ -278,21 +440,13 @@ function render(){
   document.getElementById("summaryItems").innerHTML =
     lines || '<p class="empty-cart">Votre panier est vide.</p>';
 
-  document.getElementById("sideItems").innerHTML =
-    lines || '<p class="empty-cart">Votre panier est vide.</p>';
-
   document.getElementById("subtotal").textContent=money(subtotal);
-  document.getElementById("sideSubtotal").textContent=money(subtotal);
 
   document.getElementById("shipping").textContent =
     shipping===null ? "À calculer" : money(shipping);
 
-  document.getElementById("sideShipping").textContent =
-    shipping===null ? "À calculer" : money(shipping);
-
   document.getElementById("discount").textContent=money(promoDiscount);
   document.getElementById("total").textContent=money(totalValue());
-  document.getElementById("sideTotal").textContent=money(totalValue());
 
   const counter=document.getElementById("cartCount");
   if(counter){
@@ -300,15 +454,18 @@ function render(){
       (sum,p)=>sum+(Number(p.quantity)||0),0
     );
   }
+
+  renderCustomerPreview();
 }
+
+document.querySelectorAll(
+  "#fullName,#email,#phone,#address,#addressExtra,#postalCode,#city"
+).forEach(input=>{
+  input.addEventListener("input",renderCustomerPreview);
+});
 
 countrySelect.addEventListener("change",render);
 
-/*
-  Aucun code promotionnel n'est inventé.
-  La remise reste à zéro tant qu'un code réel
-  n'a pas été configuré par la boutique.
-*/
 document.getElementById("applyPromo").addEventListener("click",()=>{
   const code=document.getElementById("promoCode").value.trim();
 
