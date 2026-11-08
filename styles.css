@@ -1045,3 +1045,16 @@ body.theme-dark .cdc-header .cdc-language > span,
 body.theme-dark .cdc-header .cdc-language select {
   color: #f5eee5 !important;
 }
+
+
+/* Logo officiel fourni et validé */
+.cdc-logo img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-width:100%;
+  object-fit:contain;
+}
+.cdc-brand .cdc-logo{width:100%}
+.cdc-footer-brand .cdc-logo{width:100%;max-width:310px;margin:0 auto}
+.cdc-footer-brand .cdc-logo img{width:100%;height:auto}
