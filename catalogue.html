@@ -13,62 +13,54 @@
       margin: 0 auto;
       padding: 40px 20px 70px;
     }
-
     .catalogue-heading {
       text-align: center;
       margin-bottom: 35px;
     }
-
     .catalogue-heading h1 {
+      font-family: var(--serif);
       font-size: clamp(28px, 4vw, 42px);
       font-weight: 400;
       letter-spacing: 2px;
       margin-bottom: 12px;
     }
-
     .catalogue-heading p {
-      color: #777;
+      color: var(--muted);
       font-size: 14px;
     }
-
     .catalogue-filters {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr;
       gap: 12px;
       margin-bottom: 30px;
     }
-
     .catalogue-filters input,
     .catalogue-filters select {
       width: 100%;
       min-width: 0;
       padding: 13px 14px;
-      border: 1px solid #ded8ce;
-      background: #fff;
-      color: #403a33;
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--ink);
       font: inherit;
     }
-
     .catalogue-count {
-      color: #777;
+      color: var(--muted);
       font-size: 13px;
       margin-bottom: 20px;
     }
-
     .products-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 28px 22px;
     }
-
     .product-card {
       min-width: 0;
-      border: 1px solid #eee9e1;
-      background: #fff;
+      border: 1px solid var(--line);
+      background: white;
       padding-bottom: 18px;
       text-align: center;
     }
-
     .product-image {
       width: 100%;
       aspect-ratio: 1 / 1;
@@ -77,127 +69,171 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      color: #948879;
+      color: var(--muted);
       font-size: 13px;
+      text-decoration: none;
     }
-
     .product-image img {
       width: 100%;
       height: 100%;
       object-fit: contain;
       display: block;
     }
-
     .product-info {
       padding: 17px 15px 0;
     }
-
     .product-brand {
-      color: #9a8873;
+      color: var(--gold);
       font-size: 11px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       margin-bottom: 8px;
     }
-
     .product-name {
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.5;
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 500;
+      line-height: 1.4;
       margin: 0 0 10px;
-      color: #403a33;
+      color: var(--ink);
     }
-
     .product-name a {
       color: inherit;
       text-decoration: none;
     }
-
     .product-name a:hover {
-      color: #9a8873;
+      color: var(--gold);
     }
-
     .product-price {
       font-size: 16px;
-      color: #403a33;
+      color: var(--ink);
       margin-bottom: 15px;
     }
-
     .product-old-price {
       color: #999;
       text-decoration: line-through;
       font-size: 13px;
       margin-right: 8px;
     }
-
     .product-actions {
       display: flex;
       justify-content: center;
       gap: 8px;
       flex-wrap: wrap;
     }
-
     .product-actions button {
-      border: 1px solid #b9a58d;
+      border: 1px solid var(--gold);
       background: transparent;
-      color: #55493b;
+      color: var(--ink);
       padding: 10px 13px;
-      font-size: 12px;
+      font-size: 11px;
       cursor: pointer;
     }
-
     .product-actions button:hover {
-      background: #b9a58d;
-      color: #fff;
+      background: var(--gold);
+      color: white;
     }
-
     .no-products {
       grid-column: 1 / -1;
       text-align: center;
       padding: 45px 15px;
-      color: #777;
+      color: var(--muted);
     }
-
+    .catalogue-message {
+      text-align: center;
+      padding: 35px;
+      color: var(--muted);
+    }
     @media (max-width: 800px) {
       .products-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-
       .catalogue-filters {
         grid-template-columns: 1fr 1fr;
       }
-
       .catalogue-filters input {
         grid-column: 1 / -1;
       }
     }
-
     @media (max-width: 520px) {
       .catalogue-page {
         padding: 28px 14px 50px;
       }
-
       .products-grid {
         gap: 15px 10px;
       }
-
       .catalogue-filters {
         grid-template-columns: 1fr;
       }
-
       .catalogue-filters input {
         grid-column: auto;
       }
-
       .product-info {
         padding-left: 9px;
         padding-right: 9px;
+      }
+      .product-actions button {
+        padding: 9px 8px;
+        font-size: 10px;
       }
     }
   </style>
 </head>
 
 <body>
+
+  <div class="announcement">
+    BIENVENUE CHEZ LA CLÉ DES CŒURS
+  </div>
+
+  <header class="header">
+    <button class="menu-button" id="menuButton" type="button"
+      aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mainNav">
+      ☰
+    </button>
+
+    <a href="index.html" class="brand">
+      <span class="brand-monogram">CDC</span>
+      <span class="brand-name">LA CLÉ DES CŒURS</span>
+      <span class="brand-tagline">BIJOUX FINS & RAFFINÉS</span>
+    </a>
+
+    <div class="header-actions">
+      <a href="favoris.html" aria-label="Favoris">♡</a>
+      <a href="panier.html" aria-label="Panier">
+        ♧ <span id="cartCount">0</span>
+      </a>
+    </div>
+  </header>
+
+  <nav class="main-nav" id="mainNav">
+    <a href="index.html">Accueil</a>
+    <a href="catalogue.html?categorie=accessoires">Accessoires et bracelets</a>
+    <a href="catalogue.html?categorie=ap-swatch">AP x Swatch</a>
+    <a href="catalogue.html?categorie=femme">Montres femme</a>
+    <a href="catalogue.html?categorie=homme">Montres homme</a>
+    <a href="qui-sommes-nous.html">Qui sommes-nous</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="utility-bar">
+    <form class="search-form" id="searchForm">
+      <input type="search" id="searchInput"
+        placeholder="Rechercher un produit..."
+        aria-label="Rechercher un produit">
+      <button type="submit" aria-label="Rechercher">⌕</button>
+    </form>
+
+    <select id="languageSelect" aria-label="Choisir la langue">
+      <option value="fr">Français</option>
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="de">Deutsch</option>
+      <option value="it">Italiano</option>
+      <option value="pt">Português</option>
+    </select>
+  </div>
+
   <main class="catalogue-page">
     <header class="catalogue-heading">
       <h1>Notre collection</h1>
@@ -205,12 +241,9 @@
     </header>
 
     <section class="catalogue-filters" aria-label="Filtres du catalogue">
-      <input
-        type="search"
-        id="recherche"
+      <input type="search" id="recherche"
         placeholder="Rechercher un produit ou une marque..."
-        aria-label="Rechercher un produit"
-      >
+        aria-label="Rechercher un produit">
 
       <select id="filtreCategorie" aria-label="Filtrer par catégorie">
         <option value="">Toutes les catégories</option>
@@ -237,6 +270,38 @@
     </section>
   </main>
 
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="brand-monogram">CDC</span>
+      <h3>LA CLÉ DES CŒURS</h3>
+      <p>BIJOUX FINS & RAFFINÉS</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>LA BOUTIQUE</h4>
+      <a href="index.html">Accueil</a>
+      <a href="catalogue.html">Tous les produits</a>
+      <a href="favoris.html">Mes favoris</a>
+      <a href="panier.html">Mon panier</a>
+      <a href="qui-sommes-nous.html">Qui sommes-nous</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="footer-column">
+      <h4>INFORMATIONS</h4>
+      <a href="commande.html">Ma commande</a>
+      <a href="livraison-retours.html">Livraison et retours</a>
+      <a href="conditions-generales.html">Conditions générales de vente</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </div>
+
+    <div class="footer-bottom">
+      ©️ <span id="currentYear"></span> LA CLÉ DES CŒURS.
+      Tous droits réservés.
+    </div>
+  </footer>
+
   <script src="produits.js"></script>
 
   <script>
@@ -252,18 +317,12 @@
     const categorieDemandee = parametres.get("categorie");
     const rechercheDemandee = parametres.get("recherche");
 
-    if (categorieDemandee) {
-      const optionExiste = Array.from(filtreCategorie.options)
-        .some(option => option.value === categorieDemandee);
-
-      if (optionExiste) {
-        filtreCategorie.value = categorieDemandee;
-      }
+    if (categorieDemandee &&
+        Array.from(filtreCategorie.options).some(o => o.value === categorieDemandee)) {
+      filtreCategorie.value = categorieDemandee;
     }
 
-    if (rechercheDemandee) {
-      recherche.value = rechercheDemandee;
-    }
+    if (rechercheDemandee) recherche.value = rechercheDemandee;
 
     function lireStock(cle) {
       try {
@@ -278,15 +337,21 @@
 
     function enregistrer(cle, donnees) {
       localStorage.setItem(cle, JSON.stringify(donnees));
+      actualiserCompteurPanier();
+    }
+
+    function actualiserCompteurPanier() {
+      const compteur = document.getElementById("cartCount");
+      if (!compteur) return;
+      const panier = lireStock("cdc_cart");
+      compteur.textContent = panier.reduce(
+        (total, article) => total + Number(article.quantity || 0), 0
+      );
     }
 
     function formaterPrix(prix) {
       const montant = Number(prix);
-
-      if (!Number.isFinite(montant)) {
-        return "Prix sur demande";
-      }
-
+      if (!Number.isFinite(montant)) return "Prix sur demande";
       return new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "EUR"
@@ -294,122 +359,85 @@
     }
 
     function echapperHTML(texte) {
-      return String(texte ?? "").replace(/[&<>"']/g, function(c) {
-        const caracteres = {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#039;"
-        };
-
-        return caracteres[c];
-      });
+      return String(texte ?? "").replace(/[&<>"']/g, c => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;",
+        '"': "&quot;", "'": "&#039;"
+      })[c]);
     }
 
     function obtenirProduits() {
       if (!Array.isArray(window.produits)) return [];
-
-      return window.produits.filter(function(produit) {
-        return produit && produit.actif !== false;
-      });
+      return window.produits.filter(p => p && p.actif !== false);
     }
 
     function afficherProduits() {
-      let produits = obtenirProduits();
-
+      let liste = obtenirProduits();
       const terme = recherche.value.trim().toLowerCase();
       const categorie = filtreCategorie.value;
       const tri = triProduits.value;
 
       if (terme) {
-        produits = produits.filter(function(produit) {
-          const texte = [
-            produit.nom,
-            produit.marque,
-            produit.reference,
-            produit.description
-          ].join(" ").toLowerCase();
-
-          return texte.includes(terme);
-        });
+        liste = liste.filter(p =>
+          [p.nom, p.marque, p.reference, p.description]
+            .join(" ").toLowerCase().includes(terme)
+        );
       }
 
-      // Gestion des produits associés à plusieurs catégories
       if (categorie) {
-        produits = produits.filter(function(produit) {
-          if (Array.isArray(produit.categories)) {
-            return produit.categories.includes(categorie);
-          }
-
-          return produit.categorie === categorie;
-        });
+        liste = liste.filter(p =>
+          Array.isArray(p.categories)
+            ? p.categories.includes(categorie)
+            : p.categorie === categorie
+        );
       }
 
       if (tri === "prix-croissant") {
-        produits.sort((a, b) => Number(a.prix) - Number(b.prix));
-      }
-
-      if (tri === "prix-decroissant") {
-        produits.sort((a, b) => Number(b.prix) - Number(a.prix));
-      }
-
-      if (tri === "nom") {
-        produits.sort((a, b) =>
+        liste.sort((a, b) => Number(a.prix) - Number(b.prix));
+      } else if (tri === "prix-decroissant") {
+        liste.sort((a, b) => Number(b.prix) - Number(a.prix));
+      } else if (tri === "nom") {
+        liste.sort((a, b) =>
           String(a.nom).localeCompare(String(b.nom), "fr")
         );
       }
 
       nombreProduits.textContent =
-        produits.length + (produits.length > 1 ? " produits" : " produit");
+        liste.length + (liste.length > 1 ? " produits" : " produit");
 
-      if (produits.length === 0) {
+      if (!liste.length) {
         listeProduits.innerHTML =
           '<p class="no-products">Aucun produit ne correspond à votre recherche.</p>';
         return;
       }
 
-      listeProduits.innerHTML = produits.map(function(produit) {
-        const id = echapperHTML(produit.id);
-        const nom = echapperHTML(produit.nom);
-        const marque = echapperHTML(produit.marque || "");
-        const image = produit.image ? echapperHTML(produit.image) : "";
-        const prix = formaterPrix(produit.prix);
-        const lienProduit = "produit.html?id=" + encodeURIComponent(produit.id);
-
-        const ancienPrix = produit.ancienPrix
-          ? '<span class="product-old-price">' +
-            formaterPrix(produit.ancienPrix) +
-            '</span>'
-          : "";
-
+      listeProduits.innerHTML = liste.map(p => {
+        const id = echapperHTML(p.id);
+        const nom = echapperHTML(p.nom);
+        const marque = echapperHTML(p.marque || "");
+        const image = typeof p.image === "string" ? p.image : "";
+        const lien = "produit.html?id=" + encodeURIComponent(p.id);
         const visuel = image
-          ? '<img src="' + image + '" alt="' + nom + '" loading="lazy">'
-          : '<span>Photo à intégrer</span>';
+          ? `<img src="${echapperHTML(image)}" alt="${nom}" loading="lazy" onerror="this.parentElement.textContent='Photo indisponible';">`
+          : `<span>Photo indisponible</span>`;
+        const ancienPrix = p.ancienPrix
+          ? `<span class="product-old-price">${formaterPrix(p.ancienPrix)}</span>`
+          : "";
 
         return `
           <article class="product-card">
-            <a href="${lienProduit}" class="product-image" aria-label="Voir ${nom}">
+            <a href="${lien}" class="product-image" aria-label="Voir ${nom}">
               ${visuel}
             </a>
-
             <div class="product-info">
               <div class="product-brand">${marque}</div>
-
-              <h2 class="product-name">
-                <a href="${lienProduit}">${nom}</a>
-              </h2>
-
+              <h2 class="product-name"><a href="${lien}">${nom}</a></h2>
               <div class="product-price">
-                ${ancienPrix}
-                ${prix}
+                ${ancienPrix}${formaterPrix(p.prix)}
               </div>
-
               <div class="product-actions">
                 <button type="button" data-action="panier" data-id="${id}">
                   Ajouter au panier
                 </button>
-
                 <button type="button" data-action="favoris" data-id="${id}">
                   ♡ Favoris
                 </button>
@@ -421,105 +449,93 @@
     }
 
     function ajouterAuPanier(id) {
-      const produit = obtenirProduits().find(item =>
-        String(item.id) === String(id)
-      );
+      const produit = obtenirProduits().find(p => String(p.id) === String(id));
+      if (!produit) return alert("Produit introuvable.");
 
-      if (!produit) {
-        alert("Produit introuvable.");
-        return;
-      }
+      const panier = lireStock("cdc_cart");
+      const existant = panier.find(p => String(p.id) === String(produit.id));
 
-      try {
-        const panier = lireStock("cdc_cart");
-
-        const existant = panier.find(item =>
-          String(item.id) === String(produit.id)
-        );
-
-        if (existant) {
-          existant.quantity = Number(existant.quantity || 0) + 1;
-        } else {
-          panier.push({
-            id: produit.id,
-            name: produit.nom,
-            price: Number(produit.prix),
-            quantity: 1,
-            image: produit.image || ""
-          });
-        }
-
-        enregistrer("cdc_cart", panier);
-        alert("Produit ajouté au panier.");
-      } catch (erreur) {
-        console.error(erreur);
-        alert("Impossible d'enregistrer le panier.");
-      }
-    }
-
-    function ajouterAuxFavoris(id) {
-      const produit = obtenirProduits().find(item =>
-        String(item.id) === String(id)
-      );
-
-      if (!produit) {
-        alert("Produit introuvable.");
-        return;
-      }
-
-      try {
-        const favoris = lireStock("cdc_favorites");
-
-        const dejaPresent = favoris.some(item =>
-          String(item.id) === String(produit.id)
-        );
-
-        if (dejaPresent) {
-          alert("Ce produit est déjà dans vos favoris.");
-          return;
-        }
-
-        favoris.push({
+      if (existant) {
+        existant.quantity = Number(existant.quantity || 0) + 1;
+      } else {
+        panier.push({
           id: produit.id,
           name: produit.nom,
           price: Number(produit.prix),
+          quantity: 1,
           image: produit.image || ""
         });
-
-        enregistrer("cdc_favorites", favoris);
-        alert("Produit ajouté à vos favoris.");
-      } catch (erreur) {
-        console.error(erreur);
-        alert("Impossible d'enregistrer les favoris.");
       }
+
+      enregistrer("cdc_cart", panier);
+      alert("Produit ajouté au panier.");
     }
 
-    listeProduits.addEventListener("click", function(evenement) {
+    function ajouterAuxFavoris(id) {
+      const produit = obtenirProduits().find(p => String(p.id) === String(id));
+      if (!produit) return alert("Produit introuvable.");
+
+      const favoris = lireStock("cdc_favorites");
+      if (favoris.some(p => String(p.id) === String(produit.id))) {
+        return alert("Ce produit est déjà dans vos favoris.");
+      }
+
+      favoris.push({
+        id: produit.id,
+        name: produit.nom,
+        price: Number(produit.prix),
+        image: produit.image || ""
+      });
+
+      enregistrer("cdc_favorites", favoris);
+      alert("Produit ajouté à vos favoris.");
+    }
+
+    listeProduits.addEventListener("click", evenement => {
       const bouton = evenement.target.closest("button[data-action]");
-
       if (!bouton) return;
-
-      const id = bouton.dataset.id;
-
-      if (bouton.dataset.action === "panier") {
-        ajouterAuPanier(id);
-      }
-
-      if (bouton.dataset.action === "favoris") {
-        ajouterAuxFavoris(id);
-      }
+      if (bouton.dataset.action === "panier") ajouterAuPanier(bouton.dataset.id);
+      if (bouton.dataset.action === "favoris") ajouterAuxFavoris(bouton.dataset.id);
     });
 
     recherche.addEventListener("input", afficherProduits);
     filtreCategorie.addEventListener("change", afficherProduits);
     triProduits.addEventListener("change", afficherProduits);
 
+    const menuButton = document.getElementById("menuButton");
+    const mainNav = document.getElementById("mainNav");
+
+    menuButton.addEventListener("click", () => {
+      const ouvert = mainNav.classList.toggle("is-open");
+      menuButton.setAttribute("aria-expanded", String(ouvert));
+      menuButton.textContent = ouvert ? "✕" : "☰";
+    });
+
+    document.getElementById("searchForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const terme = document.getElementById("searchInput").value.trim();
+      window.location.href = terme
+        ? "catalogue.html?recherche=" + encodeURIComponent(terme)
+        : "catalogue.html";
+    });
+
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+    const languageSelect = document.getElementById("languageSelect");
+    languageSelect.addEventListener("change", () => {
+      const langue = languageSelect.value;
+      if (langue === "fr") return;
+      alert("La traduction automatique sera activée dans la prochaine étape.");
+      languageSelect.value = "fr";
+    });
+
     if (Array.isArray(window.produits)) {
       afficherProduits();
+      actualiserCompteurPanier();
     } else {
       nombreProduits.textContent = "Catalogue indisponible";
       listeProduits.innerHTML =
-        '<p class="no-products">Vérifiez le fichier produits.js.</p>';
+        '<p class="no-products">Le fichier produits.js est introuvable ou n’a pas chargé. Rechargez la page après vérification du déploiement.</p>';
     }
   </script>
 </body>
