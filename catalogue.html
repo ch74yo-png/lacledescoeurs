@@ -159,7 +159,7 @@ function afficherProduits() {
     const image = typeof p.image === "string" ? p.image : "";
     const lien = "produit.html?id=" + encodeURIComponent(p.id);
     const visuel = image
-      ? `<img src="${echapperHTML(image)}" alt="${nom}" loading="lazy" onerror="this.parentElement.textContent='Photo indisponible';">`
+      ? `<img src="${echapperHTML(image)}" alt="${nom}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.textContent='Photo indisponible';">`
       : "<span>Photo indisponible</span>";
 
     const ancienPrix = p.ancienPrix
