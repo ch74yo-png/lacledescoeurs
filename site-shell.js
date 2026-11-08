@@ -254,7 +254,7 @@
 
   function initialiser() {
     document.querySelectorAll(
-      ".announcement, header.header, nav.main-nav, .utility-bar, footer.footer"
+      ".announcement, header.header, nav.main-nav, .utility-bar, footer"
     ).forEach(element => element.remove());
 
     document.body.insertAdjacentHTML("afterbegin", header);
