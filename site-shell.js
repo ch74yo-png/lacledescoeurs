@@ -13,26 +13,11 @@
 
   const logo = `
     <span class="cdc-logo" aria-hidden="true">
-      <svg viewBox="0 0 700 235" xmlns="http://www.w3.org/2000/svg" role="img"
-        aria-label="La Clé des Cœurs — Depuis 1974 — Bijoux fins et raffinés">
-        <g fill="#f8f5f0" font-family="Montserrat,Arial,sans-serif" font-weight="300" letter-spacing="1">
-          <text x="142" y="73" font-size="59">LA CL</text>
-          <text x="405" y="73" font-size="59" fill="#e6bd57">É</text>
-          <text x="64" y="151" font-size="57">DES C</text>
-          <text x="448" y="151" font-size="57">EURS</text>
-        </g>
-        <g fill="none" stroke="#e6bd57" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M425 18V104"/>
-          <path d="M414 29H436"/>
-          <path d="M425 99C410 82 382 88 382 109C382 133 425 166 425 166C425 166 468 133 468 109C468 88 440 82 425 99Z"/>
-        </g>
-        <text x="485" y="181" fill="#e6bd57" font-family="Cormorant Garamond,Georgia,serif"
-          font-size="25" font-weight="500" letter-spacing=".5">Depuis 1974</text>
-        <path d="M80 211H190M510 211H620" stroke="#e6bd57" stroke-width="1.2"/>
-        <text x="350" y="218" text-anchor="middle" fill="#e6bd57"
-          font-family="Montserrat,Arial,sans-serif" font-size="17" font-weight="300" letter-spacing="4">
-          BIJOUX FINS ET RAFFINÉS
-        </text>
+      <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CDC — La Clé des Cœurs — bijoux fins raffinés">
+        <circle cx="180" cy="48" r="39" fill="none" stroke="#c9a45e" stroke-width="2"/>
+        <text x="180" y="61" text-anchor="middle" fill="#c9a45e" font-family="Cormorant Garamond,Georgia,serif" font-size="35" letter-spacing="1">CDC</text>
+        <text x="180" y="111" text-anchor="middle" fill="currentColor" font-family="Cormorant Garamond,Georgia,serif" font-size="25" letter-spacing="1.2">La Clé des Cœurs</text>
+        <text x="180" y="135" text-anchor="middle" fill="#c9a45e" font-family="Montserrat,Arial,sans-serif" font-size="10" letter-spacing="3">BIJOUX FINS RAFFINÉS</text>
       </svg>
     </span>`;
 
