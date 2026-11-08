@@ -1020,3 +1020,28 @@ body.theme-dark .cdc-header .cdc-language select{color:#e6b4c2!important}
   .cdc-header .cdc-language svg{width:14px!important;height:14px!important}
   .cdc-header .cdc-language select{width:21px!important}
 }
+
+
+/* Contraste uniforme des icônes de navigation */
+.cdc-header .header-actions .cdc-icon-button,
+.cdc-header .cdc-language,
+.cdc-header .cdc-language > span,
+.cdc-header .cdc-language svg,
+.cdc-header .cdc-language select { color: inherit !important; }
+.cdc-header .header-actions .cdc-icon-button svg,
+.cdc-header .cdc-language svg {
+  stroke: currentColor !important;
+  opacity: 1 !important;
+}
+body:not(.theme-dark) .cdc-header .header-actions .cdc-icon-button,
+body:not(.theme-dark) .cdc-header .cdc-language,
+body:not(.theme-dark) .cdc-header .cdc-language > span,
+body:not(.theme-dark) .cdc-header .cdc-language select {
+  color: #30231f !important;
+}
+body.theme-dark .cdc-header .header-actions .cdc-icon-button,
+body.theme-dark .cdc-header .cdc-language,
+body.theme-dark .cdc-header .cdc-language > span,
+body.theme-dark .cdc-header .cdc-language select {
+  color: #f5eee5 !important;
+}
