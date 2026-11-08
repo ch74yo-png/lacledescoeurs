@@ -335,7 +335,7 @@
       const image = produit.image || "";
 
       const visuel = image
-        ? `<img src="${echapperHTML(image)}" alt="${nom}"
+        ? `<img src="${echapperHTML(image)}" alt="${nom}" referrerpolicy="no-referrer" loading="eager"
              onerror="this.parentElement.textContent='Photo indisponible';">`
         : `<span>Photo indisponible</span>`;
 
