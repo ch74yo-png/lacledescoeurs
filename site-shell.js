@@ -12,23 +12,9 @@
   };
 
   const logo = `
-    <span class="cdc-logo" aria-hidden="true">
-      <svg viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="La Clé des Cœurs, depuis 1974, bijoux fins et raffinés">
-        <g fill="none" stroke="#f4e6d4" stroke-width="2">
-          <path d="M92 66h38"/>
-        </g>
-        <text x="300" y="68" text-anchor="middle" fill="#f4e6d4" font-family="Montserrat,Arial,sans-serif" font-size="45" font-weight="300" letter-spacing="2">LA CLÉ</text>
-        <text x="300" y="164" text-anchor="middle" fill="#f4e6d4" font-family="Montserrat,Arial,sans-serif" font-size="49" font-weight="300" letter-spacing="2">DES C</text>
-        <text x="300" y="164" text-anchor="middle" fill="#f4e6d4" font-family="Montserrat,Arial,sans-serif" font-size="49" font-weight="300" letter-spacing="2">ŒURS</text>
-        <g fill="none" stroke="#f0cf69" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M300 0v78"/>
-          <circle cx="300" cy="79" r="10"/>
-          <path d="M300 90c-13-19-38-8-34 11 3 14 34 39 34 39s31-25 34-39c4-19-21-30-34-11Z"/>
-        </g>
-        <text x="425" y="202" text-anchor="middle" fill="#f0cf69" font-family="Montserrat,Arial,sans-serif" font-size="25" font-weight="600">Depuis 1974</text>
-        <path d="M72 222l44-2 24 2-24 2Z M460 222l24-2 44 2-44 2Z" fill="#f0cf69"/>
-        <text x="300" y="230" text-anchor="middle" fill="#f0cf69" font-family="Montserrat,Arial,sans-serif" font-size="18" letter-spacing="7">BIJOUX FINS ET RAFFINÉS</text>
-      </svg>
+    <span class="cdc-logo">
+      <img src="assets/logo-la-cle-des-coeurs.jpg"
+           alt="LA CLÉ DES CŒURS — Depuis 1974 — Bijoux fins et raffinés">
     </span>`;
 
   const header = `
