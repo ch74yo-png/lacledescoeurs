@@ -34,7 +34,7 @@
         <a class="cdc-icon-button" href="favoris.html" aria-label="Mes favoris">${icon.heart}</a>
         <a class="cdc-icon-button cart-link" href="panier.html" aria-label="Mon panier">${icon.cart}<span id="cartCount">0</span></a>
         <label class="cdc-language" aria-label="Choisir la langue">
-          <span style="color:#d99caf">${icon.globe}</span>
+          <span>${icon.globe}</span>
           <select id="cdcLanguage" aria-label="Langue">
             <option value="fr">FR</option><option value="en">EN</option><option value="es">ES</option>
             <option value="de">DE</option><option value="it">IT</option><option value="pt">PT</option><option value="nl">NL</option>
