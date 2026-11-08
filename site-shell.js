@@ -64,7 +64,7 @@
       <a href="catalogue.html?categorie=ap-swatch">AP x Swatch</a>
       <a href="catalogue.html?categorie=femme">Montres femme</a>
       <a href="catalogue.html?categorie=homme">Montres homme</a>
-      <a href="mentions-legales.html">La maison</a><a href="contact.html">Contact</a>
+      <a href="qui-sommes-nous.html">Qui sommes-nous</a><a href="contact.html">Contact</a>
       <a href="livraison-retours.html">Livraison et retours</a>
     </nav>
     <div class="cdc-search" id="cdcSearch" hidden>
