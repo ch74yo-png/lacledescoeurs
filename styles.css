@@ -622,3 +622,55 @@ textarea:focus{
 }
 
 [hidden]{display:none!important}
+
+/* CORRECTIONS D'UNIFORMITÉ — CARTES, TEXTES ET NAVIGATION */
+.cdc-header{min-height:150px!important;background:#171310!important}
+.cdc-brand{max-width:430px!important;width:min(430px,100%)!important}
+.cdc-logo{max-width:430px!important}
+.cdc-footer{background:#171310!important;color:#f4e6d4!important}
+.cdc-footer .cdc-logo{max-width:310px!important}
+.cdc-footer a{color:#e9d6b8}
+.cdc-footer a:hover{color:var(--gold)}
+.products-grid .product-card,.favorites-grid .favorite-card,
+.product-card,.product-item,.favorite-card,
+.account-card,.cart-item{
+  background:#302720!important;
+  color:#f3e8d8!important;
+  border-color:rgba(201,164,94,.45)!important;
+}
+.product-name,.product-name a,.product-card h2,.product-card h3,
+.favorite-info h2,.cart-item h2,.account-card h2,
+.catalogue-heading h1,.favorites-heading h1,
+.account-heading h1,.cart-page h1,.detail-name{
+  color:#f4e6d4!important;
+}
+.product-info,.favorite-info,.cart-item-price,.favorites-heading p,
+.catalogue-heading p{color:#d2c2ad!important}
+.product-card .product-price,.favorite-price,.detail-price{color:#e5b928!important}
+.home-category,.home-category:nth-child(even){background:#211916!important}
+.home-category-heading h2,.home-category-heading p{color:#f4e6d4!important}
+.home-category-heading a{color:#e5b928!important}
+.product-image,.favorite-image,.cart-item-image,.product-detail-image{
+  background:#eee7dc!important;
+}
+.cdc-nav a:focus-visible,.cdc-icon-button:focus-visible,
+.cdc-footer a:focus-visible{outline:2px solid #e5b928;outline-offset:4px}
+@media(max-width:760px){
+ .cdc-header{min-height:112px!important;padding:8px 10px!important;grid-template-columns:36px minmax(110px,1fr) auto!important;gap:5px!important}
+ .cdc-brand{width:min(230px,100%)!important}
+ .cdc-logo{max-width:230px!important}
+ .header-actions{gap:1px!important}
+ .cdc-icon-button{width:31px;height:34px;padding:5px}
+ .cdc-icon-button svg{width:19px;height:19px}
+ .cdc-language>span{display:none}
+ .cdc-language select{width:30px;font-size:9px}
+ .products-grid,.favorites-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:420px){
+ .header-actions{gap:0!important}
+ .cdc-icon-button{width:27px;padding:3px}
+ .cdc-icon-button svg{width:17px;height:17px}
+ .cdc-brand{width:min(190px,100%)!important}
+ .cdc-logo{max-width:190px!important}
+}
+
