@@ -992,3 +992,31 @@ body.theme-dark .cdc-header .cdc-language select{color:#e6b4c2!important}
  .cdc-nav.is-open{display:flex!important}
  .cdc-nav a{padding:12px 8px!important;border-bottom:1px solid rgba(201,164,94,.25)}
 }
+
+
+/* FINITION DU LOGO CDC ET DE L'EN-TÊTE SUR MOBILE */
+.cdc-brand{color:#30231f!important}
+.cdc-logo{display:block;width:100%;max-width:315px!important}
+.cdc-logo svg{display:block;width:100%;height:auto}
+.cdc-footer .cdc-logo{color:#f3eee6!important}
+.cdc-header .cdc-language>span{display:inline-flex!important;color:#d99caf!important}
+.cdc-header .cdc-language svg{stroke:#d99caf!important}
+@media(max-width:760px){
+  .cdc-header{grid-template-columns:25px minmax(105px,1fr) auto!important;gap:2px!important}
+  .brand.cdc-brand{width: min(150px,100%)!important;max-width:150px!important}
+  .cdc-logo{max-width:150px!important}
+  .header-actions{gap:0!important}
+  .cdc-header .cdc-icon-button{flex:0 0 24px!important;width:24px!important;height:30px!important;padding:2px!important}
+  .cdc-header .cdc-icon-button svg{width:16px!important;height:16px!important}
+  .cdc-header .cdc-language{display:inline-flex!important;gap:0!important}
+  .cdc-header .cdc-language>span{display:inline-flex!important}
+  .cdc-header .cdc-language svg{width:16px!important;height:16px!important}
+  .cdc-header .cdc-language select{width:23px!important;font-size:8px!important}
+}
+@media(max-width:380px){
+  .brand.cdc-brand{width:min(125px,100%)!important;max-width:125px!important}
+  .cdc-logo{max-width:125px!important}
+  .cdc-header .cdc-icon-button{flex-basis:22px!important;width:22px!important}
+  .cdc-header .cdc-language svg{width:14px!important;height:14px!important}
+  .cdc-header .cdc-language select{width:21px!important}
+}
