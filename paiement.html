@@ -1,23 +1,25 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#30231f">
 <title>Paiement | LA CLÉ DES CŒURS</title>
 <link rel="stylesheet" href="styles.css">
 <script src="https://js.stripe.com/endive/stripe.js"></script>
 
 <style>
-.payment-page{max-width:950px;margin:45px auto;padding:20px 18px 70px}
+.payment-page{max-width:1050px;margin:45px auto;padding:20px 18px 70px}
 .payment-title{text-align:center;margin-bottom:30px}
 .payment-title h1{font-family:Georgia,serif;font-size:36px;font-weight:400;letter-spacing:2px}
 .payment-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:start}
-.payment-card{background:#fff;border:1px solid #e8dfd4;padding:25px;margin-bottom:20px}
-.payment-card h2{font-family:Georgia,serif;font-size:21px;font-weight:400;margin:0 0 20px}
+.payment-card{background:#fffaf4;border:1px solid #e5d8c8;padding:25px;margin-bottom:20px;color:#40372f}
+.payment-card h2{font-family:Georgia,serif;font-size:21px;font-weight:400;margin:0 0 20px;color:#30231f}
 .payment-line{display:flex;justify-content:space-between;gap:12px;margin:13px 0;font-size:14px}
 .payment-line strong{text-align:right;overflow-wrap:anywhere}
-.payment-total{border-top:1px solid #e8dfd4;padding-top:18px;margin-top:18px;font-size:18px;font-weight:bold}
-#payment-element{margin:15px 0 25px;min-height:100px}
+.payment-total{border-top:1px solid #e5d8c8;padding-top:18px;margin-top:18px;font-size:18px;font-weight:bold}
+#payment-element{margin:18px 0 25px;min-height:100px}
 .pay-button{width:100%;padding:16px;border:0;background:#987d60;color:white;letter-spacing:2px;cursor:pointer;font-size:15px}
 .pay-button:disabled{opacity:.5;cursor:not-allowed}
 .payment-message{font-size:13px;line-height:1.6;margin:15px 0;color:#795e4b}
@@ -25,6 +27,7 @@
 .payment-success{text-align:center;padding:30px 15px}
 .payment-success h2{font-family:Georgia,serif;font-weight:400;font-size:28px}
 .payment-success a{display:inline-block;margin-top:20px;color:#795e4b}
+[hidden]{display:none!important}
 @media(max-width:700px){
   .payment-grid{grid-template-columns:1fr}
   .payment-page{margin:20px auto}
@@ -36,36 +39,10 @@
 
 <body>
 
-<div class="announcement">BIENVENUE CHEZ LA CLÉ DES CŒURS</div>
-
-<header class="header">
-  <button class="menu-button" id="menuButton" type="button" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
-
-  <a href="index.html" class="brand">
-    <span class="brand-monogram">CDC</span>
-    <span class="brand-name">LA CLÉ DES CŒURS</span>
-    <span class="brand-tagline">BIJOUX FINS & RAFFINÉS</span>
-  </a>
-
-  <div class="header-actions">
-    <a href="favoris.html" aria-label="Favoris">♡</a>
-    <a href="panier.html" aria-label="Panier">♧</a>
-  </div>
-</header>
-
-<nav class="main-nav" id="mainNav">
-  <a href="index.html">Accueil</a>
-  <a href="catalogue.html">Catalogue</a>
-  <a href="catalogue.html?categorie=accessoires">Accessoires et bracelets</a>
-  <a href="catalogue.html?categorie=ap-swatch">AP x Swatch</a>
-  <a href="catalogue.html?categorie=femme">Montres femme</a>
-  <a href="catalogue.html?categorie=homme">Montres homme</a>
-  <a href="contact.html">Contact</a>
-</nav>
-
 <main class="payment-page">
 
   <div class="payment-title">
+    <p class="eyebrow">LA CLÉ DES CŒURS</p>
     <h1>RÉCAPITULATIF</h1>
     <p>Vérifiez votre commande avant de procéder au paiement.</p>
   </div>
@@ -128,32 +105,6 @@
   </div>
 </main>
 
-<footer class="footer">
-  <div class="footer-brand">
-    <span class="brand-monogram">CDC</span>
-    <h3>LA CLÉ DES CŒURS</h3>
-    <p>BIJOUX FINS & RAFFINÉS</p>
-  </div>
-
-  <div class="footer-column">
-    <h4>LA BOUTIQUE</h4>
-    <a href="index.html">Accueil</a>
-    <a href="catalogue.html">Catalogue</a>
-    <a href="contact.html">Contact</a>
-  </div>
-
-  <div class="footer-column">
-    <h4>INFORMATIONS</h4>
-    <a href="livraison-retours.html">Livraison et retours</a>
-    <a href="conditions-generales.html">Conditions générales de vente</a>
-    <a href="mentions-legales.html">Mentions légales</a>
-  </div>
-
-  <div class="footer-bottom">
-    ©️ <span id="currentYear"></span> LA CLÉ DES CŒURS. Tous droits réservés.
-  </div>
-</footer>
-
 <script>
 "use strict";
 
@@ -166,7 +117,13 @@ const money = cents =>
   new Intl.NumberFormat("fr-FR", {
     style: "currency",
     currency: "EUR"
-  }).format(cents / 100);
+  }).format(Number(cents || 0) / 100);
+
+const moneyEuros = euros =>
+  new Intl.NumberFormat("fr-FR", {
+    style: "currency",
+    currency: "EUR"
+  }).format(Number(euros || 0));
 
 const safe = value =>
   String(value ?? "").replace(/[&<>"']/g, c => ({
@@ -203,10 +160,11 @@ function showError(text) {
 
 function displayCustomer() {
   const rows = [
-    ["Nom", customer.fullName],
+    ["Nom complet", customer.fullName],
     ["E-mail", customer.email],
     ["Téléphone", customer.phone],
     ["Adresse", customer.address],
+    ["Complément d'adresse", customer.addressExtra],
     ["Code postal", customer.postalCode],
     ["Ville", customer.city],
     ["Pays", customer.country]
@@ -230,12 +188,7 @@ function displayCart() {
       return `
         <div class="payment-line">
           <span>${safe(item.name || item.nom || "Article")} × ${quantity}</span>
-          <strong>${safe(
-            new Intl.NumberFormat("fr-FR", {
-              style:"currency",
-              currency:"EUR"
-            }).format(price * quantity)
-          )}</strong>
+          <strong>${safe(moneyEuros(price * quantity))}</strong>
         </div>
       `;
     }).join("");
@@ -249,6 +202,7 @@ function validateBeforePayment() {
   if (
     !customer.email ||
     !customer.fullName ||
+    !customer.phone ||
     !customer.address ||
     !customer.postalCode ||
     !customer.city ||
@@ -324,7 +278,7 @@ async function verifyReturnedPayment() {
 
     } else {
       successMessage.textContent =
-        "Le paiement n'est pas encore confirmé. Si vous avez effectué un paiement, veuillez patienter quelques instants.";
+        "Le paiement n'est pas encore confirmé. Veuillez patienter quelques instants ou contacter la boutique.";
     }
 
   } catch (error) {
@@ -345,13 +299,6 @@ async function startPayment() {
 
     const items = validateBeforePayment();
 
-    const fullName = String(customer.fullName || "")
-      .trim()
-      .split(/\s+/);
-
-    const firstName = fullName.shift() || "";
-    const lastName = fullName.join(" ");
-
     const orderReference =
       "CDC-" + Date.now() + "-" +
       Math.random().toString(36).slice(2, 8).toUpperCase();
@@ -366,14 +313,15 @@ async function startPayment() {
         body: JSON.stringify({
           items,
           customer: {
-            firstName,
-            lastName,
+            fullName: customer.fullName,
             email: customer.email,
             phone: customer.phone || "",
             address: customer.address,
+            addressExtra: customer.addressExtra || "",
             postalCode: customer.postalCode,
             city: customer.city,
-            country: customer.country
+            country: customer.country,
+            countryCode: customer.countryCode
           },
           orderReference
         })
@@ -478,9 +426,15 @@ payButton.addEventListener("click", async () => {
     const result = await checkoutActions.confirm();
 
     if (result.type === "error") {
-      throw new Error(result.error.message);
+      throw new Error(
+        result.error?.message || "Le paiement a échoué."
+      );
     }
 
+    /*
+     * Stripe peut rediriger automatiquement vers return_url.
+     * Si une session est retournée, on vérifie son statut.
+     */
     if (result.type === "success" && result.session?.id) {
       location.assign(
         "paiement.html?session_id=" +
@@ -489,9 +443,12 @@ payButton.addEventListener("click", async () => {
       return;
     }
 
-    throw new Error(
-      "Le paiement n'a pas pu être confirmé. Veuillez réessayer."
-    );
+    /*
+     * Si Stripe ne retourne pas encore de session,
+     * on laisse le SDK terminer son éventuelle redirection.
+     */
+    message.textContent =
+      "Paiement transmis. Vérification en cours...";
 
   } catch (error) {
     console.error("CDC confirmation :", error);
@@ -509,18 +466,6 @@ payButton.addEventListener("click", async () => {
   }
 });
 
-document.getElementById("menuButton")
-  .addEventListener("click", () => {
-    const nav = document.getElementById("mainNav");
-    const opened = nav.classList.toggle("is-open");
-
-    document.getElementById("menuButton")
-      .setAttribute("aria-expanded", String(opened));
-  });
-
-document.getElementById("currentYear").textContent =
-  new Date().getFullYear();
-
 (async function init() {
   displayCustomer();
   displayCart();
@@ -531,5 +476,6 @@ document.getElementById("currentYear").textContent =
 })();
 </script>
 
+<script src="site-shell.js" defer></script>
 </body>
 </html>
