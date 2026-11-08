@@ -1,38 +1,117 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#30231f">
-<title>Paiement | LA CLÉ DES CŒURS</title>
+<meta name="theme-color" content="#211916">
+<title>Paiement | LA CLE DES COEURS</title>
 <link rel="stylesheet" href="styles.css">
 <script src="https://js.stripe.com/endive/stripe.js"></script>
 
 <style>
-.payment-page{max-width:1050px;margin:45px auto;padding:20px 18px 70px}
-.payment-title{text-align:center;margin-bottom:30px}
-.payment-title h1{font-family:Georgia,serif;font-size:36px;font-weight:400;letter-spacing:2px}
-.payment-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:start}
-.payment-card{background:#fffaf4;border:1px solid #e5d8c8;padding:25px;margin-bottom:20px;color:#40372f}
-.payment-card h2{font-family:Georgia,serif;font-size:21px;font-weight:400;margin:0 0 20px;color:#30231f}
-.payment-line{display:flex;justify-content:space-between;gap:12px;margin:13px 0;font-size:14px}
-.payment-line strong{text-align:right;overflow-wrap:anywhere}
-.payment-total{border-top:1px solid #e5d8c8;padding-top:18px;margin-top:18px;font-size:18px;font-weight:bold}
-#payment-element{margin:18px 0 25px;min-height:100px}
-.pay-button{width:100%;padding:16px;border:0;background:#987d60;color:white;letter-spacing:2px;cursor:pointer;font-size:15px}
+.payment-page{
+  max-width:850px;
+  margin:35px auto;
+  padding:20px 18px 70px;
+}
+.payment-title{text-align:center;margin-bottom:32px}
+.payment-title h1{
+  font:400 clamp(34px,5vw,47px) var(--serif);
+  letter-spacing:2px;
+  margin:8px 0;
+}
+.payment-title p:last-child{color:var(--muted)}
+.payment-grid{display:block;width:100%}
+.payment-card{
+  width:100%;
+  padding:25px;
+  margin-bottom:20px;
+  background:#302720;
+  border:1px solid rgba(201,164,94,.55);
+  color:#f3e8d8;
+}
+.payment-card h2{
+  font:400 23px var(--serif);
+  margin:0 0 20px;
+  color:#e6c58e;
+}
+.payment-line{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:15px;
+  margin:13px 0;
+  font-size:13px;
+  color:#f3e8d8;
+}
+.payment-line strong{
+  text-align:right;
+  overflow-wrap:anywhere;
+}
+.payment-total{
+  border-top:1px solid var(--gold);
+  padding-top:18px;
+  margin-top:20px;
+  font-size:19px;
+  color:#e8c78e;
+}
+.payment-section-intro{
+  margin:-8px 0 20px;
+  color:#b9a994;
+  font-size:12px;
+  line-height:1.8;
+}
+#payment-element{
+  margin:18px 0 25px;
+  min-height:100px;
+}
+.pay-button{
+  display:block;
+  width:100%;
+  min-height:52px;
+  padding:16px;
+  border:0;
+  background:var(--gold);
+  color:#211916;
+  letter-spacing:3px;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:600;
+}
+.pay-button:hover{background:#e2bd75}
 .pay-button:disabled{opacity:.5;cursor:not-allowed}
-.payment-message{font-size:13px;line-height:1.6;margin:15px 0;color:#795e4b}
-.payment-error{color:#a32929}
-.payment-success{text-align:center;padding:30px 15px}
-.payment-success h2{font-family:Georgia,serif;font-weight:400;font-size:28px}
-.payment-success a{display:inline-block;margin-top:20px;color:#795e4b}
+.payment-message{
+  font-size:12px;
+  line-height:1.7;
+  margin:15px 0;
+  color:#c8b9a7;
+}
+.payment-error{color:#ffaaa0}
+.payment-success{text-align:center;padding:35px 20px}
+.payment-success h2{
+  font:400 30px var(--serif);
+}
+.payment-success a{
+  display:inline-block;
+  margin-top:20px;
+  padding:13px 25px;
+  background:var(--gold);
+  color:#211916;
+  text-decoration:none;
+  letter-spacing:1px;
+  font-size:11px;
+}
+.payment-reference{
+  padding:13px;
+  margin:18px 0;
+  border:1px solid rgba(201,164,94,.4);
+  color:#e6c58e;
+  overflow-wrap:anywhere;
+}
 [hidden]{display:none!important}
-@media(max-width:700px){
-  .payment-grid{grid-template-columns:1fr}
-  .payment-page{margin:20px auto}
-  .payment-title h1{font-size:29px}
-  .payment-card{padding:19px}
+@media(max-width:600px){
+  .payment-page{margin:18px auto;padding:12px 13px 45px}
+  .payment-card{padding:18px}
 }
 </style>
 </head>
@@ -42,43 +121,26 @@
 <main class="payment-page">
 
   <div class="payment-title">
-    <p class="eyebrow">LA CLÉ DES CŒURS</p>
+    <p class="eyebrow">BIENVENUE CHEZ LA CLE DES COEURS</p>
     <h1>RÉCAPITULATIF</h1>
-    <p>Vérifiez votre commande avant de procéder au paiement.</p>
+    <p>Votre commande et votre paiement sont présentés ci-dessous.</p>
   </div>
 
   <div id="successPanel" class="payment-card payment-success" hidden>
     <h2>Merci pour votre commande</h2>
+    <div class="payment-reference" id="successReference"></div>
     <p id="successMessage">Vérification de votre paiement...</p>
-    <a href="index.html">Retour à la boutique</a>
+    <a href="index.html">RETOUR À L'ACCUEIL</a>
   </div>
 
   <div id="paymentContent" class="payment-grid">
 
-    <section>
-      <div class="payment-card">
-        <h2>VOS COORDONNÉES</h2>
-        <div id="customerDetails"></div>
-      </div>
-
-      <div class="payment-card">
-        <h2>MODE DE PAIEMENT</h2>
-        <p>Choisissez votre moyen de paiement sécurisé.</p>
-
-        <div id="payment-element"></div>
-
-        <p id="paymentMessage" class="payment-message">
-          Préparation du paiement...
-        </p>
-
-        <button id="payButton" class="pay-button" type="button" disabled>
-          PAYER
-        </button>
-      </div>
-    </section>
-
-    <aside class="payment-card">
+    <section class="payment-card">
       <h2>VOTRE COMMANDE</h2>
+
+      <div id="customerDetails"></div>
+
+      <div style="border-top:1px solid rgba(201,164,94,.35);margin:18px 0"></div>
 
       <div id="orderItems"></div>
 
@@ -92,15 +154,34 @@
         <strong id="shipping">—</strong>
       </div>
 
+      <div class="payment-line">
+        <span>Réduction</span>
+        <strong id="discount">—</strong>
+      </div>
+
       <div class="payment-line payment-total">
         <span>TOTAL À PAYER</span>
         <strong id="total">—</strong>
       </div>
+    </section>
 
-      <p class="payment-message">
-        Le montant définitif est calculé et vérifié par notre serveur avant le paiement.
+    <section class="payment-card">
+      <h2>MODE DE PAIEMENT</h2>
+      <p class="payment-section-intro">
+        Votre paiement est traité en toute sécurité.
+        Choisissez le moyen de paiement proposé par Stripe.
       </p>
-    </aside>
+
+      <div id="payment-element"></div>
+
+      <p id="paymentMessage" class="payment-message">
+        Préparation du paiement...
+      </p>
+
+      <button id="payButton" class="pay-button" type="button" disabled>
+        PAYER
+      </button>
+    </section>
 
   </div>
 </main>
@@ -114,19 +195,19 @@ const STRIPE_PUBLIC_KEY =
   "pk_live_51UYnKB8R9yJlbTy40jlXgQ6VY17BUzg4r1uYaO9K7DGvn6iBCZzBsqpnnjeP6craQlZXYQ6mlFh49IFE1ISJuMyf00LnUjFMgF";
 
 const money = cents =>
-  new Intl.NumberFormat("fr-FR", {
-    style: "currency",
-    currency: "EUR"
-  }).format(Number(cents || 0) / 100);
+  new Intl.NumberFormat("fr-FR",{
+    style:"currency",
+    currency:"EUR"
+  }).format(Number(cents||0)/100);
 
 const moneyEuros = euros =>
-  new Intl.NumberFormat("fr-FR", {
-    style: "currency",
-    currency: "EUR"
-  }).format(Number(euros || 0));
+  new Intl.NumberFormat("fr-FR",{
+    style:"currency",
+    currency:"EUR"
+  }).format(Number(euros||0));
 
 const safe = value =>
-  String(value ?? "").replace(/[&<>"']/g, c => ({
+  String(value??"").replace(/[&<>"']/g,c=>({
     "&":"&amp;",
     "<":"&lt;",
     ">":"&gt;",
@@ -134,343 +215,331 @@ const safe = value =>
     "'":"&#39;"
   }[c]));
 
-function readStorage(key) {
-  try {
-    return JSON.parse(localStorage.getItem(key) || "null");
-  } catch {
+function readStorage(key){
+  try{
+    return JSON.parse(localStorage.getItem(key)||"null");
+  }catch{
     return null;
   }
 }
 
-const cart = readStorage("cdc_cart") || [];
-const customer = readStorage("cdc_customer") || {};
+const cart=readStorage("cdc_cart")||[];
+const customer=readStorage("cdc_customer")||{};
+const shippingData=readStorage("cdc_shipping")||{};
+const promo=readStorage("cdc_promo")||{};
 
-const payButton = document.getElementById("payButton");
-const message = document.getElementById("paymentMessage");
+const payButton=document.getElementById("payButton");
+const message=document.getElementById("paymentMessage");
 
-let checkoutActions = null;
-let checkoutReady = false;
-let paymentInProgress = false;
+let checkoutActions=null;
+let checkoutReady=false;
+let paymentInProgress=false;
 
-function showError(text) {
-  message.textContent = text;
+function showError(text){
+  message.textContent=text;
   message.classList.add("payment-error");
-  payButton.disabled = true;
+  payButton.disabled=true;
 }
 
-function displayCustomer() {
-  const rows = [
-    ["Nom complet", customer.fullName],
-    ["E-mail", customer.email],
-    ["Téléphone", customer.phone],
-    ["Adresse", customer.address],
-    ["Complément d'adresse", customer.addressExtra],
-    ["Code postal", customer.postalCode],
-    ["Ville", customer.city],
-    ["Pays", customer.country]
+function displayCustomer(){
+  const rows=[
+    ["Nom complet",customer.fullName],
+    ["E-mail",customer.email],
+    ["Téléphone",customer.phone],
+    ["Adresse",customer.address],
+    ["Complément d'adresse",customer.addressExtra],
+    ["Code postal",customer.postalCode],
+    ["Ville",customer.city],
+    ["Pays",customer.country]
   ];
 
-  document.getElementById("customerDetails").innerHTML =
-    rows.map(([label, value]) => `
+  document.getElementById("customerDetails").innerHTML=
+    rows.map(([label,value])=>`
       <div class="payment-line">
         <span>${safe(label)}</span>
-        <strong>${safe(value || "—")}</strong>
+        <strong>${safe(value||"—")}</strong>
       </div>
     `).join("");
 }
 
-function displayCart() {
-  document.getElementById("orderItems").innerHTML =
-    cart.map(item => {
-      const quantity = Number(item.quantity) || 1;
-      const price = Number(item.price) || 0;
+function displayCart(){
+  document.getElementById("orderItems").innerHTML=
+    cart.map(item=>{
+      const quantity=Number(item.quantity)||1;
+      const price=Number(item.price)||0;
 
       return `
         <div class="payment-line">
-          <span>${safe(item.name || item.nom || "Article")} × ${quantity}</span>
-          <strong>${safe(moneyEuros(price * quantity))}</strong>
+          <span>${safe(item.name||item.nom||"Article")} × ${quantity}</span>
+          <strong>${safe(moneyEuros(price*quantity))}</strong>
         </div>
       `;
-    }).join("");
+    }).join("") || '<p class="payment-message">Panier vide.</p>';
+
+  document.getElementById("discount").textContent=
+    moneyEuros(Number(promo.discount)||0);
 }
 
-function validateBeforePayment() {
-  if (!Array.isArray(cart) || !cart.length) {
+function validateBeforePayment(){
+  if(!Array.isArray(cart)||!cart.length){
     throw new Error("Votre panier est vide.");
   }
 
-  if (
-    !customer.email ||
-    !customer.fullName ||
-    !customer.phone ||
-    !customer.address ||
-    !customer.postalCode ||
-    !customer.city ||
+  if(
+    !customer.email||
+    !customer.fullName||
+    !customer.phone||
+    !customer.address||
+    !customer.postalCode||
+    !customer.city||
     !customer.countryCode
-  ) {
+  ){
     throw new Error(
-      "Vos coordonnées ou votre adresse de livraison sont incomplètes. Retournez à la page commande."
+      "Vos coordonnées ou votre adresse sont incomplètes. Retournez à la page commande."
     );
   }
 
-  return cart.map(item => {
-    const id = String(
-      item.id || item.slug || item.productId || ""
+  return cart.map(item=>{
+    const id=String(
+      item.id||item.slug||item.productId||""
     );
+    const quantity=Number(item.quantity)||1;
 
-    const quantity = Number(item.quantity) || 1;
-
-    if (!/^[a-zA-Z0-9_-]+$/.test(id)) {
+    if(!/^[a-zA-Z0-9_-]+$/.test(id)){
       throw new Error(
         "Un article du panier n'a pas d'identifiant valide. Retournez au panier."
       );
     }
 
-    if (
-      !Number.isInteger(quantity) ||
-      quantity < 1 ||
-      quantity > 15
-    ) {
+    if(
+      !Number.isInteger(quantity)||
+      quantity<1||
+      quantity>15
+    ){
       throw new Error("Une quantité du panier est invalide.");
     }
 
-    return { id, quantity };
+    return {id,quantity};
   });
 }
 
-async function verifyReturnedPayment() {
-  const sessionId =
+async function verifyReturnedPayment(){
+  const sessionId=
     new URLSearchParams(location.search).get("session_id");
 
-  if (!sessionId) return false;
+  if(!sessionId)return false;
 
-  document.getElementById("paymentContent").hidden = true;
-  document.getElementById("successPanel").hidden = false;
+  document.getElementById("paymentContent").hidden=true;
+  document.getElementById("successPanel").hidden=false;
 
-  const successMessage =
+  const successMessage=
     document.getElementById("successMessage");
 
-  successMessage.textContent =
+  successMessage.textContent=
     "Nous vérifions le statut de votre paiement...";
 
-  try {
-    const response = await fetch(
-      API + "/checkout-session?session_id=" +
+  try{
+    const response=await fetch(
+      API+"/checkout-session?session_id="+
       encodeURIComponent(sessionId)
     );
 
-    const data = await response.json();
+    const data=await response.json();
 
-    if (!response.ok) {
+    if(!response.ok){
       throw new Error(
-        data.erreur || "Vérification impossible."
+        data.erreur||"Vérification impossible."
       );
     }
 
-    if (data.payment_status === "paid") {
-      successMessage.textContent =
+    if(data.payment_status==="paid"){
+      successMessage.textContent=
         "Votre paiement est confirmé. Merci de votre confiance.";
+
+      document.getElementById("successReference").textContent=
+        data.orderReference
+          ? "Référence : "+data.orderReference
+          : "Votre commande est confirmée.";
 
       localStorage.removeItem("cdc_cart");
       localStorage.removeItem("cdc_customer");
       localStorage.removeItem("cdc_shipping");
       localStorage.removeItem("cdc_promo");
 
-    } else {
-      successMessage.textContent =
-        "Le paiement n'est pas encore confirmé. Veuillez patienter quelques instants ou contacter la boutique.";
+    }else{
+      successMessage.textContent=
+        "Le paiement n'est pas encore confirmé. Veuillez patienter ou contacter la boutique.";
     }
 
-  } catch (error) {
-    successMessage.textContent =
-      error.message || "Impossible de vérifier le paiement.";
+  }catch(error){
+    successMessage.textContent=
+      error.message||"Impossible de vérifier le paiement.";
   }
 
   return true;
 }
 
-async function startPayment() {
-  try {
-    if (!window.Stripe) {
+async function startPayment(){
+  try{
+    if(!window.Stripe){
       throw new Error(
         "Le service de paiement Stripe n'a pas pu être chargé."
       );
     }
 
-    const items = validateBeforePayment();
+    const items=validateBeforePayment();
 
-    const orderReference =
-      "CDC-" + Date.now() + "-" +
-      Math.random().toString(36).slice(2, 8).toUpperCase();
-
-    const response = await fetch(
-      API + "/create-checkout-session",
+    const response=await fetch(
+      API+"/create-checkout-session",
       {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
           items,
-          customer: {
-            fullName: customer.fullName,
-            email: customer.email,
-            phone: customer.phone || "",
-            address: customer.address,
-            addressExtra: customer.addressExtra || "",
-            postalCode: customer.postalCode,
-            city: customer.city,
-            country: customer.country,
-            countryCode: customer.countryCode
+          customer:{
+            fullName:customer.fullName,
+            email:customer.email,
+            phone:customer.phone||"",
+            address:customer.address,
+            addressExtra:customer.addressExtra||"",
+            postalCode:customer.postalCode,
+            city:customer.city,
+            country:customer.country,
+            countryCode:customer.countryCode
           },
-          orderReference
+          promoCode:promo.code||""
         })
       }
     );
 
-    const data = await response.json();
+    const data=await response.json();
 
-    if (!response.ok) {
+    if(!response.ok){
       throw new Error(
-        data.erreur || "Impossible de préparer le paiement."
+        data.erreur||"Impossible de préparer le paiement."
       );
     }
 
-    if (!data.clientSecret) {
+    if(!data.clientSecret){
       throw new Error(
         "Stripe n'a pas fourni la référence de paiement."
       );
     }
 
-    document.getElementById("subtotal").textContent =
+    document.getElementById("subtotal").textContent=
       money(data.subtotal);
 
-    document.getElementById("shipping").textContent =
+    document.getElementById("shipping").textContent=
       money(data.shipping);
 
-    document.getElementById("total").textContent =
+    document.getElementById("total").textContent=
       money(data.total);
 
-    const stripe = Stripe(STRIPE_PUBLIC_KEY);
+    const stripe=Stripe(STRIPE_PUBLIC_KEY);
 
-    const checkout = stripe.initCheckoutElementsSdk({
-      clientSecret: data.clientSecret,
-      elementsOptions: {
-        appearance: {
-          theme: "stripe",
-          variables: {
-            colorPrimary: "#987d60",
-            colorText: "#40372f",
-            borderRadius: "3px",
-            fontFamily: "Arial, sans-serif"
+    const checkout=stripe.initCheckoutElementsSdk({
+      clientSecret:data.clientSecret,
+      elementsOptions:{
+        appearance:{
+          theme:"stripe",
+          variables:{
+            colorPrimary:"#987d60",
+            colorText:"#40372f",
+            borderRadius:"3px",
+            fontFamily:"Arial,sans-serif"
           }
         }
       }
     });
 
-    const loaded = await checkout.loadActions();
+    const loaded=await checkout.loadActions();
 
-    if (loaded.type !== "success") {
+    if(loaded.type!=="success"){
       throw new Error(
-        loaded.error?.message ||
+        loaded.error?.message||
         "Impossible d'initialiser le formulaire Stripe."
       );
     }
 
-    checkoutActions = loaded.actions;
+    checkoutActions=loaded.actions;
 
-    const paymentElement = checkout.createPaymentElement();
+    const paymentElement=checkout.createPaymentElement();
     paymentElement.mount("#payment-element");
 
-    checkout.on("change", session => {
-      if (!paymentInProgress) {
-        payButton.disabled = !session.canConfirm;
+    checkout.on("change",session=>{
+      if(!paymentInProgress){
+        payButton.disabled=!session.canConfirm;
       }
     });
 
-    checkoutReady = true;
-
-    payButton.disabled =
+    checkoutReady=true;
+    payButton.disabled=
       !checkoutActions.getSession().canConfirm;
 
-    message.textContent =
+    message.textContent=
       "Choisissez votre moyen de paiement.";
-
     message.classList.remove("payment-error");
 
-  } catch (error) {
-    console.error("CDC paiement :", error);
-    showError(error.message || "Une erreur est survenue.");
+  }catch(error){
+    console.error("CDC paiement :",error);
+    showError(error.message||"Une erreur est survenue.");
   }
 }
 
-payButton.addEventListener("click", async () => {
-  if (
-    !checkoutReady ||
-    !checkoutActions ||
+payButton.addEventListener("click",async()=>{
+  if(
+    !checkoutReady||
+    !checkoutActions||
     paymentInProgress
-  ) {
-    return;
-  }
+  )return;
 
-  paymentInProgress = true;
-  payButton.disabled = true;
-  payButton.textContent = "TRAITEMENT...";
+  paymentInProgress=true;
+  payButton.disabled=true;
+  payButton.textContent="TRAITEMENT...";
 
-  message.textContent =
-    "Validation de votre paiement...";
-
+  message.textContent="Validation de votre paiement...";
   message.classList.remove("payment-error");
 
-  try {
-    const result = await checkoutActions.confirm();
+  try{
+    const result=await checkoutActions.confirm();
 
-    if (result.type === "error") {
+    if(result.type==="error"){
       throw new Error(
-        result.error?.message || "Le paiement a échoué."
+        result.error?.message||"Le paiement a échoué."
       );
     }
 
-    /*
-     * Stripe peut rediriger automatiquement vers return_url.
-     * Si une session est retournée, on vérifie son statut.
-     */
-    if (result.type === "success" && result.session?.id) {
+    if(result.type==="success"&&result.session?.id){
       location.assign(
-        "paiement.html?session_id=" +
+        "paiement.html?session_id="+
         encodeURIComponent(result.session.id)
       );
       return;
     }
 
-    /*
-     * Si Stripe ne retourne pas encore de session,
-     * on laisse le SDK terminer son éventuelle redirection.
-     */
-    message.textContent =
+    message.textContent=
       "Paiement transmis. Vérification en cours...";
 
-  } catch (error) {
-    console.error("CDC confirmation :", error);
+  }catch(error){
+    console.error("CDC confirmation :",error);
 
-    paymentInProgress = false;
-    payButton.disabled =
+    paymentInProgress=false;
+    payButton.disabled=
       !checkoutActions.getSession().canConfirm;
 
-    payButton.textContent = "PAYER";
-
-    message.textContent =
-      error.message || "Le paiement n'a pas abouti.";
+    payButton.textContent="PAYER";
+    message.textContent=
+      error.message||"Le paiement n'a pas abouti.";
 
     message.classList.add("payment-error");
   }
 });
 
-(async function init() {
+(async function init(){
   displayCustomer();
   displayCart();
 
-  if (await verifyReturnedPayment()) return;
+  if(await verifyReturnedPayment())return;
 
   await startPayment();
 })();
