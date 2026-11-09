@@ -93,19 +93,35 @@
 
     const menuButton = document.getElementById("menuButton");
     const menu = document.getElementById("mainNav");
-    menuButton?.addEventListener("click", () => {
-      const open = menu.classList.toggle("is-open");
-      menuButton.setAttribute("aria-expanded", String(open));
-    });
-    menu?.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+    // Menu mobile : gestion directe et delegation pour rester fiable sur toutes les pages.
+    const fermerMenu = () => {
+      if (!menu || !menuButton) return;
       menu.classList.remove("is-open");
-      menuButton?.setAttribute("aria-expanded", "false");
-    }));
-    document.addEventListener("click", e => {
-      if (menu && menuButton && !menu.contains(e.target) && !menuButton.contains(e.target)) {
-        menu.classList.remove("is-open");
-        menuButton.setAttribute("aria-expanded", "false");
-      }
+      menu.style.removeProperty("display");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "Ouvrir le menu");
+    };
+    const basculerMenu = () => {
+      if (!menu || !menuButton) return;
+      const ouvrir = !menu.classList.contains("is-open");
+      menu.classList.toggle("is-open", ouvrir);
+      if (ouvrir) menu.style.setProperty("display", "flex", "important");
+      else menu.style.setProperty("display", "none", "important");
+      menuButton.setAttribute("aria-expanded", String(ouvrir));
+      menuButton.setAttribute("aria-label", ouvrir ? "Fermer le menu" : "Ouvrir le menu");
+    };
+    menuButton?.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      basculerMenu();
+    });
+    menu?.querySelectorAll("a").forEach(a => a.addEventListener("click", fermerMenu));
+    document.addEventListener("click", event => {
+      if (menu?.classList.contains("is-open") &&
+          !menu.contains(event.target) && !menuButton?.contains(event.target)) fermerMenu();
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") fermerMenu();
     });
 
     const searchButton = document.getElementById("cdcSearchButton");
