@@ -174,7 +174,7 @@
 
       <div id="payment-element"></div>
 
-      <p id="paymentMessage" class="payment-message">
+      <label class="payment-terms" style="display:flex;gap:10px;align-items:flex-start;margin:18px 0;color:#fff;font-size:12px"><input id="acceptPaymentTerms" type="checkbox" style="width:17px;height:17px;accent-color:#d9ad45"><span>J’accepte les <a href="conditions-generales.html" target="_blank" style="color:#d9ad45">conditions générales de vente</a>.</span></label>\n      <p id="paymentMessage" class="payment-message">
         Préparation du paiement...
       </p>
 
@@ -234,7 +234,7 @@ const message=document.getElementById("paymentMessage");
 
 let checkoutActions=null;
 let checkoutReady=false;
-let paymentInProgress=false;
+let paymentInProgress=false;\nlet termsAccepted=false;
 
 function showError(text){
   message.textContent=text;
@@ -474,13 +474,13 @@ async function startPayment(){
 
     checkout.on("change",session=>{
       if(!paymentInProgress){
-        payButton.disabled=!session.canConfirm;
+        payButton.disabled=!session.canConfirm||!termsAccepted;
       }
     });
 
     checkoutReady=true;
     payButton.disabled=
-      !checkoutActions.getSession().canConfirm;
+      !checkoutActions.getSession().canConfirm||!termsAccepted;
 
     message.textContent=
       "Choisissez votre moyen de paiement.";
@@ -517,7 +517,7 @@ payButton.addEventListener("click",async()=>{
 
     if(result.type==="success"&&result.session?.id){
       location.assign(
-        "paiement.html?session_id="+
+        "confirmation.html?session_id="+
         encodeURIComponent(result.session.id)
       );
       return;
@@ -541,7 +541,7 @@ payButton.addEventListener("click",async()=>{
   }
 });
 
-(async function init(){
+document.getElementById("acceptPaymentTerms").addEventListener("change",event=>{termsAccepted=event.target.checked;if(checkoutActions&&!paymentInProgress)payButton.disabled=!checkoutActions.getSession().canConfirm||!termsAccepted;});\n\n(async function init(){
   displayCustomer();
   displayCart();
 
