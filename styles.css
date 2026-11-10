@@ -1925,3 +1925,89 @@ body .confirmation-card{
 #cartCount[hidden],#favoriteCount[hidden]{
   display:none!important;
 }
+
+
+/* CORRECTION FINALE DEMANDEE — NOIR, BLANC ET OR UNIQUEMENT.
+   Le fichier/logo lui-même n'est pas modifié. */
+:root{
+  --paper:#000000!important;
+  --cream:#000000!important;
+  --white:#000000!important;
+  --brown:#000000!important;
+  --ink:#ffffff!important;
+  --gold:#d9ad45!important;
+  --line:#d9ad45!important;
+}
+html,body{
+  background:#000000!important;
+  color:#ffffff!important;
+  max-width:100%;
+  overflow-x:clip!important;
+  overflow-y:auto!important;
+}
+body,main,header,footer,section,article,aside,nav,
+.cdc-header,.cdc-nav,.cdc-search,.cdc-footer,
+.welcome-section,.categories-section,.featured-section,.editorial-section,
+.home-category,.home-category:nth-child(even),
+.catalogue-heading,.favorites-heading,.cart-page,.checkout-page,
+.payment-page,.confirmation-page,.contact-page,.legal-page,.info-page,
+.category-card,.category-image,.category-accessories,.category-ap,
+.category-women,.category-men,
+.products-grid .product-card,.product-card,.product-item,
+.favorites-grid .favorite-card,.favorite-card,.cart-item,
+.cart-summary,.empty-favorites,.cart-empty,.checkout-card,.payment-card,
+.contact-card,.info-card,.legal-card,.order-summary,.checkout-summary,
+.product-description,.product-details,.product-specifications,
+.description-box,.details-box,.accordion-item,.faq-item,
+.contact-info,.contact-form,.modal-content,.dropdown-menu{
+  background-color:#000000!important;
+  background-image:none!important;
+  color:#ffffff!important;
+  border-color:rgba(217,173,69,.55)!important;
+}
+h1,h2,h3,h4,h5,h6,
+p,li,dt,dd,label,small,strong,em,
+.product-name,.product-name a,.product-info,.product-description,
+.product-card p,.product-item p,.favorite-info,.favorite-info h2,
+.cart-item h2,.cart-item-price,.checkout-card h2,.payment-card h2,
+.checkout-card label,.payment-card label,.checkout-line,.payment-line,
+.catalogue-heading p,.favorites-heading p,.cdc-footer a{
+  color:#ffffff!important;
+}
+.product-price,.favorite-price,.detail-price,.checkout-total,
+.payment-total,.price,.home-category-heading a,
+.cdc-footer .footer-column h4,.cdc-footer .footer-contact h4,
+.section-heading h2,.home-category-heading h2{
+  color:#d9ad45!important;
+}
+.cdc-header,.cdc-footer,.cdc-nav,.cdc-search{
+  background:#000000!important;
+}
+.cdc-header .cdc-icon-button,.cdc-header .header-actions,
+.cdc-header .cdc-language,.cdc-header .cdc-language>span,
+.cdc-header .cdc-language select,
+.cdc-header .cdc-icon-button svg,.cdc-header .cdc-language svg{
+  color:#ffffff!important;
+  stroke:#ffffff!important;
+}
+.cdc-header .hamburger-lines i{background:#ffffff!important}
+.category-image,.category-accessories,.category-ap,
+.category-women,.category-men{
+  background:#000000!important;
+  background-image:none!important;
+}
+.category-image span{color:#ffffff!important}
+.category-link,.product-card .product-price,.favorite-price,.detail-price{
+  color:#d9ad45!important;
+}
+/* Défilement vertical normal de la page, sans débordement horizontal global.
+   Les carrousels de produits gardent leur défilement interne. */
+body{overflow-x:clip!important;overflow-y:auto!important}
+.category-products,.category-products-track{
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  max-width:100%;
+}
+img,.cdc-logo,.cdc-logo img,.cdc-logo svg{
+  filter:none!important;
+}
