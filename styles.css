@@ -1895,3 +1895,33 @@ body .hero h1,body .hero-content>p:not(.eyebrow){
 
 /* Aucun badge ne doit apparaître lorsque le panier ou les favoris sont vides. */
 #cartCount[hidden],#favoriteCount[hidden]{display:none!important;}
+
+
+/* Harmonisation demandée : fond général identique au fond chocolat du logo officiel. */
+html,body,body main,body section,body article,
+body .welcome-section,body .categories-section,body .featured-section,
+body .editorial-section,body .home-category,body .catalogue-heading,
+body .favorites-heading,body .cart-page,body .checkout-page,
+body .payment-page,body .confirmation-page,body .account-heading,
+body .contact-page,body .legal-page,body .info-page,
+body .cdc-header,body .cdc-nav,body .cdc-footer,
+body .product-card,body .product-item,body .favorite-card,
+body .cart-item,body .cart-summary,body .empty-favorites,
+body .cart-empty,body .checkout-card,body .payment-card,
+body .confirmation-card{
+  background-color:#2b1009!important;
+  background-image:none!important;
+}
+/* Le globe reprend exactement le blanc des autres icônes de navigation. */
+.cdc-header .cdc-language-globe>span svg,
+.cdc-header .cdc-language-globe svg,
+.cdc-header .cdc-language-globe>span{
+  color:#ffffff!important;
+  stroke:#ffffff!important;
+}
+.cdc-header .cdc-language-globe svg *{
+  stroke:#ffffff!important;
+}
+#cartCount[hidden],#favoriteCount[hidden]{
+  display:none!important;
+}
