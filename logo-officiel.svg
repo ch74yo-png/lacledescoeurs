@@ -8,10 +8,10 @@
 <g font-family="Arial, Helvetica, sans-serif" font-weight="800" fill="url(#ivory)">
  <text x="112" y="145" font-size="137" letter-spacing="2">LA CL</text>
  <text x="40" y="292" font-size="137" letter-spacing="2">DES C</text>
- <text x="590" y="292" font-size="137" letter-spacing="2">EURS</text>
+ <text x="610" y="292" font-size="137" letter-spacing="2">EURS</text>
 </g>
 <!-- E doré, sans accent. Sa hampe gauche se prolonge en ligne droite pour former la clé. -->
-<path d="M478 44 V145 H570 M478 91 H553 M478 145 H570" fill="none" stroke="url(#gold)" stroke-width="19" stroke-linecap="square" stroke-linejoin="miter"/>
+<path d="M478 44 H570 M478 44 V145 M478 91 H553 M478 145 H570" fill="none" stroke="url(#gold)" stroke-width="19" stroke-linecap="square" stroke-linejoin="miter"/>
 <path d="M478 145 V214" fill="none" stroke="url(#gold)" stroke-width="19" stroke-linecap="butt"/>
 <!-- Petite tête ronde de la clé, puis cœur symétrique et droit remplaçant le O de CŒURS. -->
 <circle cx="478" cy="222" r="25" fill="url(#gold)"/>
@@ -21,7 +21,7 @@
  C522 204 575 220 575 264
  C575 313 508 359 478 385Z"
  fill="none" stroke="url(#gold)" stroke-width="19" stroke-linejoin="round"/>
-<path d="M478 235 L455 253 L478 270 L501 253Z" fill="#2b160f"/>
+<path d="M500 235 L477 253 L500 270 L523 253Z" fill="#2b160f"/>
 <text x="690" y="350" font-family="Georgia, 'Times New Roman', serif" font-size="43" font-weight="700" fill="url(#gold)">Depuis 1974</text>
 <path d="M65 408 H250 M750 408 H935" stroke="url(#gold)" stroke-width="7"/>
 <text x="270" y="422" font-family="Georgia, 'Times New Roman', serif" font-size="45" font-weight="700" fill="url(#ivory)">Bijoux Fins &amp; Raffinés</text>
