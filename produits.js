@@ -240,6 +240,20 @@ const produits = [
   creerProduit("cartier-santos-grand-modele-blanc-wssa0018", "Cartier Santos De Cartier Grand Modèle 40 mm – Cadran blanc | Boîte & papiers WSSA0018", "Cartier", 2500, null, ["homme"]),
   creerProduit("cartier-santos-large-bleu-40mm", "Cartier Santos De Cartier Large 40 mm – Acier inoxydable – Cadran bleu | Boîte & papiers", "Cartier", 2500, null, ["homme"]),
 
+  // RESTAURATION — PAGE 3 DES MONTRES HOMME
+  creerProduit("cartier-santos-large-wssa0030-bleu", "Cartier Santos De Cartier Large 40 mm – Acier inoxydable – Cadran bleu WSSA0030 | Boîte & papiers | Excellent état", "Cartier", 2800, null, ["homme"]),
+  creerProduit("cartier-santos-wssa0030", "Cartier Santos de Cartier WSSA0030", "Cartier", 5300, null, ["homme"]),
+  creerProduit("cartier-santos-wssa0062-garantie", "Cartier Santos de CartierWSSA0062 – Ensemble complet – Garantie", "Cartier", 6000, null, ["homme"]),
+  creerProduit("cartier-santos-galbee-2319", "Cartier Santos Galbée Automatique 29 mm Acier & Or Jaune – Réf. 2319 – Boîte & Garantie", "Cartier", 6150, null, ["homme"]),
+  creerProduit("cartier-santos-grand-modele-wssa0018-blanc", "Cartier Santos Grand Modèle WSSA0018 – Montre Homme Acier 40 mm | Cadran Blanc | Boîte & Papiers", "Cartier", 3600, null, ["homme"]),
+  creerProduit("cartier-santos-large-4072-wssa0039", "Cartier Santos Large 4072 WSSA0039 Cadran noir Acier noir Boîte ADLC Papier", "Cartier", 3382, null, ["homme"]),
+  creerProduit("cartier-santos-large-wssa0018-4072", "Cartier Santos Large WSSA0018 4072 – Montre Homme Acier 40 mm | Cadran Blanc | Boîte & Papiers", "Cartier", 3600, null, ["homme"]),
+  creerProduit("cartier-santos-large-wssa0039-2025", "Cartier Santos Large WSSA0039 – Cadran noir, acier ADLC, 2025, boîte & papiers", "Cartier", 3529, null, ["homme"]),
+  creerProduit("cartier-santos-medium-wssa0029", "Cartier Santos Medium – Acier inoxydable – WSSA0029 – Coffret et papiers", "Cartier", 2800, 4299, ["homme"]),
+  creerProduit("cartier-santos-medium-tiger-eye-2024", "Cartier Santos Medium 2024 – Cadran Tiger Eye Marron | Montre Homme/Femme | Coffret Complet", "Cartier", 3150, null, ["homme"]),
+  creerProduit("cartier-santos-medium-vert-351", "Cartier Santos Medium 35,1 mm – Montre Homme/Femme Acier Inoxydable | Cadran Vert | Boîte et Papiers", "Cartier", 3500, null, ["homme"]),
+  creerProduit("cartier-santos-medium-wssa0061-vert", "Cartier Santos Medium en acier inoxydable cadran vert WSSA0061", "Cartier", 4500, null, ["homme"]),
+
   // PRODUIT SUPPLÉMENTAIRE
   creerProduit(
     "details",
