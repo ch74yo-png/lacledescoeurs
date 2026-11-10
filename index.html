@@ -151,7 +151,7 @@
     }
 
     .home-quantity-label{display:flex;justify-content:center;align-items:center;gap:8px;margin:8px auto;font-size:10px;letter-spacing:1px}
-    .home-quantity{width:65px;min-height:34px;text-align:center;background:#fff;color:#111;border:1px solid #a58b6b}
+    .home-quantity{width:65px;min-height:34px;text-align:center;background:#fff;color:#111;border:1px solid #a58b6b;cursor:pointer}
     .home-empty {
       width: 100%;
       padding: 25px;
@@ -366,7 +366,7 @@
             </h3>
             <div class="home-product-price">${prixFormate(produit.prix)}</div>
             <label class="home-quantity-label">QUANTITÉ
-              <input class="home-quantity" type="number" min="1" max="15" step="1" inputmode="numeric" value="1" aria-label="Quantité de ${nom}">
+              <select class="home-quantity" aria-label="Choisir une quantité"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>
             </label>
             <div class="home-product-actions">
               <button type="button" data-home-action="acheter" data-id="${echapperHTML(produit.id)}">ACHETER</button>
@@ -417,9 +417,9 @@
       if (!Array.isArray(panier)) panier = [];
       if (bouton.dataset.homeAction === "acheter" || bouton.dataset.homeAction === "panier") {
         const qtyInput=bouton.closest(".home-product-info")?.querySelector(".home-quantity");
-        const quantity=Math.max(1,Math.min(15,Math.floor(Number(qtyInput?.value)||1)));
+        const quantity=Math.max(1,Math.min(10,Math.floor(Number(qtyInput?.value)||1)));
         const existant = panier.find(item => String(item.id) === String(produit.id));
-        if (existant) existant.quantity = Math.min(15,Number(existant.quantity || 0) + quantity);
+        if (existant) existant.quantity = Math.min(10,Number(existant.quantity || 0) + quantity);
         else panier.push({id:produit.id,name:produit.nom,price:Number(produit.prix),quantity,image:produit.image || ""});
         localStorage.setItem("cdc_cart", JSON.stringify(panier));
         window.dispatchEvent(new Event("cdc-cart-updated"));
