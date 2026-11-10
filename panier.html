@@ -176,7 +176,16 @@ const cartTotal = document.getElementById("cartTotal");
 function lirePanier() {
   try {
     const panier = JSON.parse(localStorage.getItem("cdc_cart") || "[]");
-    return Array.isArray(panier) ? panier : [];
+    const valides = Array.isArray(panier) ? panier.filter(article =>
+      article && typeof article === "object" &&
+      (article.name || article.nom) &&
+      Number.isFinite(Number(article.price ?? article.prix)) &&
+      Number(article.price ?? article.prix) >= 0
+    ) : [];
+    if (JSON.stringify(valides) !== JSON.stringify(panier)) {
+      localStorage.setItem("cdc_cart", JSON.stringify(valides));
+    }
+    return valides;
   } catch {
     return [];
   }
