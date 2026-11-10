@@ -162,7 +162,7 @@
     function getFavorites() {
       try {
         const data = JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
-        return Array.isArray(data) ? data : [];
+        return Array.isArray(data) ? data.filter(item => item && typeof item === "object" && (item.name || item.nom)) : [];
       } catch {
         return [];
       }
@@ -184,6 +184,7 @@
 
     function saveCart(items) {
       localStorage.setItem(CART_KEY, JSON.stringify(items));
+      window.dispatchEvent(new Event("cdc-cart-updated"));
     }
 
     function formatPrice(price) {
