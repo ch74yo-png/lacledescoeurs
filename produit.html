@@ -247,9 +247,11 @@
     function actualiserCompteur() {
       const compteur = document.getElementById("cartCount");
       const panier = lireStock("cdc_cart");
-      compteur.textContent = panier.reduce(
-        (total, item) => total + Number(item.quantity || 0), 0
+      const total = panier.reduce(
+        (sum, item) => sum + Math.max(1, Number(item.quantity) || 1), 0
       );
+      compteur.textContent = total ? String(total) : "";
+      compteur.hidden = total === 0;
     }
 
     function echapperHTML(texte) {
