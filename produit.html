@@ -321,8 +321,8 @@
           name: produit.nom,
           price: Number(produit.prix),
           quantity: quantite,
-          image: imagesProduit[0] || produit.image || "",
-          images: imagesProduit.length ? imagesProduit : (produit.image ? [produit.image] : [])
+          image: (String(produit.id) === "bracelet-cartier-love-classic-or-jaune-16-certificat" ? "assets/cartier-love-classic-16-1.jpg" : produit.image || ""),
+          images: String(produit.id) === "bracelet-cartier-love-classic-or-jaune-16-certificat" ? Array.from({length:7},(_,i)=>`assets/cartier-love-classic-16-${i+1}.jpg`) : (Array.isArray(produit.images) ? produit.images : (produit.image ? [produit.image] : []))
         });
       }
 
