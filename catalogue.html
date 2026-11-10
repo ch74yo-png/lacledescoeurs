@@ -168,7 +168,10 @@ function afficherProduits() {
     const id = echapperHTML(p.id);
     const nom = echapperHTML(p.nom);
     const marque = echapperHTML(p.marque || "");
-    const image = typeof p.image === "string" ? p.image : "";
+    const images = String(p.id) === "bracelet-cartier-love-classic-or-jaune-16-certificat"
+      ? Array.from({length:7},(_,i)=>`assets/cartier-love-classic-16-${i+1}.jpg`)
+      : (Array.isArray(p.images) ? p.images : (p.image ? [p.image] : []));
+    const image = images[0] || (typeof p.image === "string" ? p.image : "");
     const lien = "produit.html?id=" + encodeURIComponent(p.id);
     const visuel = image
       ? `<img src="${echapperHTML(image)}" alt="${nom}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.textContent='Photo indisponible';">`
@@ -215,7 +218,8 @@ function ajouterAuPanier(id, quantity = 1) {
       name: produit.nom,
       price: Number(produit.prix),
       quantity: quantite,
-      image: produit.image || ""
+      image: (String(produit.id) === "bracelet-cartier-love-classic-or-jaune-16-certificat" ? "assets/cartier-love-classic-16-1.jpg" : produit.image || ""),
+      images: String(produit.id) === "bracelet-cartier-love-classic-or-jaune-16-certificat" ? Array.from({length:7},(_,i)=>`assets/cartier-love-classic-16-${i+1}.jpg`) : (Array.isArray(produit.images) ? produit.images : (produit.image ? [produit.image] : []))
     });
   }
 
