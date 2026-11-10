@@ -180,8 +180,8 @@
     const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
     const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
     nodes.forEach(node=>cdcTranslateNode(node,lang));
-    root.querySelectorAll("[placeholder],[aria-label],[title]").forEach(el=>{
-      ["placeholder","aria-label","title"].forEach(attr=>{
+    root.querySelectorAll("[placeholder],[aria-label],[title],[alt]").forEach(el=>{
+      ["placeholder","aria-label","title","alt"].forEach(attr=>{
         const value=el.getAttribute(attr);if(!value)return;
         const originals=el.__cdcOriginalAttrs||(el.__cdcOriginalAttrs={});
         if(!(attr in originals))originals[attr]=value;
