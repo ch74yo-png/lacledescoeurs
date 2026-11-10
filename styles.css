@@ -1149,3 +1149,68 @@ body.theme-dark .cdc-header{background:#11100f!important}
   letter-spacing:2px;
 }
 .cdc-footer .cdc-wordmark{margin:auto;color:#f5eee5}
+
+
+/* EN-TÊTE OFFICIEL LA CLE DES CŒURS — fond chocolat, logo vectoriel transparent */
+.cdc-header{
+  background:#2b160f!important;
+  border-bottom:2px solid #d7a928!important;
+  min-height:150px!important;
+}
+.brand.cdc-brand{
+  width:min(360px,100%)!important;
+  max-width:360px!important;
+}
+.cdc-logo{
+  width:100%!important;
+  max-width:360px!important;
+}
+.cdc-logo img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  object-fit:contain!important;
+  background:transparent!important;
+}
+.cdc-header .cdc-icon-button,
+.cdc-header .header-actions,
+.cdc-header .cdc-language,
+.cdc-header .cdc-language>span,
+.cdc-header .cdc-language select{
+  color:#f5eee5!important;
+}
+.cdc-header .cdc-icon-button svg,
+.cdc-header .cdc-language svg{
+  stroke:#f5eee5!important;
+}
+.cdc-header .hamburger-lines i{background:#f5eee5!important}
+.cdc-footer{background:#2b160f!important}
+@media(max-width:760px){
+  .cdc-header{
+    min-height:92px!important;
+    padding:7px 8px!important;
+    grid-template-columns:25px minmax(100px,1fr) auto!important;
+    gap:3px!important;
+  }
+  .brand.cdc-brand{
+    width:min(145px,100%)!important;
+    max-width:145px!important;
+  }
+  .cdc-logo{max-width:145px!important}
+  .header-actions{gap:0!important}
+  .cdc-header .cdc-icon-button{
+    flex:0 0 24px!important;
+    width:24px!important;
+    height:30px!important;
+    padding:2px!important;
+  }
+  .cdc-header .cdc-icon-button svg{width:16px!important;height:16px!important}
+  .cdc-header .cdc-language{display:inline-flex!important;gap:0!important}
+  .cdc-header .cdc-language svg{width:15px!important;height:15px!important}
+  .cdc-header .cdc-language select{width:21px!important;font-size:8px!important}
+}
+@media(max-width:380px){
+  .brand.cdc-brand{width:min(125px,100%)!important;max-width:125px!important}
+  .cdc-logo{max-width:125px!important}
+  .cdc-header .cdc-icon-button{flex-basis:21px!important;width:21px!important}
+}
