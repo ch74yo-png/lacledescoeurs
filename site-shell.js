@@ -19,15 +19,7 @@
         <button class="cdc-icon-button" id="cdcSearchButton" type="button" aria-label="Rechercher">${icon.search}</button>
         <a class="cdc-icon-button favorites-link" href="favoris.html" aria-label="Mes favoris">${icon.heart}<span id="favoriteCount" hidden></span></a>
         <a class="cdc-icon-button cart-link" href="panier.html" aria-label="Mon panier">${icon.cart}<span id="cartCount" hidden></span></a>
-        <label class="cdc-language cdc-language-globe" aria-label="Choisir la langue"><span>${icon.globe}</span><select id="cdcLanguage" aria-label="Langue" title="Choisir la langue">
-          <option value="fr">Français</option><option value="en">English</option>
-          <option value="es">Español</option><option value="de">Deutsch</option>
-          <option value="it">Italiano</option><option value="pt">Português</option>
-          <option value="ar">العربية</option><option value="zh-CN">中文</option>
-          <option value="ja">日本語</option><option value="hi">हिन्दी</option>
-          <option value="ru">Русский</option><option value="nl">Nederlands</option>
-          <option value="sw">Kiswahili</option>
-        </select></label>
+        <div class="cdc-language-flag" id="cdcLanguagePicker"><button class="cdc-language-flag-button" id="cdcLanguageButton" type="button" aria-label="Choisir la langue" aria-expanded="false">🇫🇷</button><div class="cdc-language-flag-menu" id="cdcLanguageMenu" hidden><button type="button" data-lang="fr" aria-label="Français">🇫🇷</button><button type="button" data-lang="en" aria-label="English">🇬🇧</button><button type="button" data-lang="es" aria-label="Espagnol">🇪🇸</button><button type="button" data-lang="de" aria-label="Allemand">🇩🇪</button><button type="button" data-lang="it" aria-label="Italien">🇮🇹</button><button type="button" data-lang="pt" aria-label="Portugais">🇵🇹</button><button type="button" data-lang="nl" aria-label="Néerlandais">🇳🇱</button><button type="button" data-lang="ar" aria-label="Arabe">🇸🇦</button><button type="button" data-lang="zh-CN" aria-label="Chinois">🇨🇳</button><button type="button" data-lang="ja" aria-label="Japonais">🇯🇵</button></div></div>
       </div>
     </header>
     <nav class="main-nav cdc-nav" id="mainNav" aria-label="Navigation principale">
@@ -111,6 +103,13 @@
         body .cdc-footer{grid-template-columns:1fr!important;gap:25px!important;padding:34px 20px 20px!important}
         body .cdc-footer .cdc-footer-brand,body .cdc-footer .footer-bottom{grid-column:1!important}
       }
+      body .cdc-language-flag{position:relative;display:inline-flex;align-items:center;justify-content:center;margin-left:5px}
+      body .cdc-language-flag-button{width:38px;height:38px;padding:0!important;border:0!important;background:transparent!important;color:#fff!important;font-size:23px!important;line-height:1;cursor:pointer}
+      body .cdc-language-flag-menu{position:absolute;right:0;top:calc(100% + 8px);z-index:99999;display:grid;grid-template-columns:repeat(2,42px);gap:5px;padding:8px;background:#080808!important;border:1px solid #d4af37!important;border-radius:5px;box-shadow:0 8px 25px #000}
+      body .cdc-language-flag-menu[hidden]{display:none!important}
+      body .cdc-language-flag-menu button{width:40px;height:38px;padding:0!important;background:#080808!important;color:#fff!important;border:1px solid rgba(212,175,55,.35)!important;font-size:22px!important;cursor:pointer}
+      body .cdc-language-flag-menu button:hover{background:#242424!important}
+      body .cdc-language-flag-menu button[aria-current="true"]{border-color:#d4af37!important}
       body .cdc-header .cdc-icon-button,body .cdc-header .header-actions,body .cdc-header .header-actions a,body .cdc-header .header-actions button,body .cdc-header .cdc-language,body .cdc-header .cdc-language>span,body .cdc-header .cdc-language select{color:#fff!important}
       body .cdc-header .cdc-icon-button svg,body .cdc-header .cdc-language svg{color:#fff!important;stroke:#fff!important}
       body .cdc-header .hamburger-lines i{background:#fff!important}
@@ -131,6 +130,112 @@
     document.body.appendChild(style);
   }
 
+  const CDC_LANGUAGES={
+    fr:{flag:"🇫🇷",name:"Français"},en:{flag:"🇬🇧",name:"English"},es:{flag:"🇪🇸",name:"Español"},
+    de:{flag:"🇩🇪",name:"Deutsch"},it:{flag:"🇮🇹",name:"Italiano"},pt:{flag:"🇵🇹",name:"Português"},
+    nl:{flag:"🇳🇱",name:"Nederlands"},ar:{flag:"🇸🇦",name:"العربية"},"zh-CN":{flag:"🇨🇳",name:"中文"},ja:{flag:"🇯🇵",name:"日本語"}
+  };
+  const cdcOriginalText=new WeakMap();
+  const cdcTranslated=new WeakMap();
+  let cdcTranslationObserver=null;
+  let cdcTranslationQueue=Promise.resolve();
+  function cdcTranslateNode(node,lang){
+    if(!node||node.nodeType!==Node.TEXT_NODE)return;
+    const parent=node.parentElement;
+    if(!parent||/^(SCRIPT|STYLE|NOSCRIPT|SVG|TEXTAREA|INPUT|OPTION|CODE|PRE)$/i.test(parent.tagName))return;
+    if(parent.closest("[data-no-translate],.cdc-language-flag,.cdc-logo,.product-image,.cdc-product-image"))return;
+    const original=cdcOriginalText.get(node)||node.nodeValue;
+    if(!original||!original.trim())return;
+    if(!cdcOriginalText.has(node))cdcOriginalText.set(node,original);
+    if(lang==="fr"){node.nodeValue=original;cdcTranslated.delete(node);return}
+    if(cdcTranslated.get(node)===lang)return;
+    const key="cdc_tr_"+lang+"_"+original;
+    let cached=null;try{cached=sessionStorage.getItem(key)}catch{}
+    const task=async()=>{
+      try{
+        let translated=cached;
+        if(!translated){
+          const url="https://translate.googleapis.com/translate_a/single?client=gtx&sl=fr&tl="+encodeURIComponent(lang)+"&dt=t&q="+encodeURIComponent(original);
+          const response=await fetch(url,{method:"GET"});
+          if(!response.ok)throw new Error("Traduction indisponible");
+          const data=await response.json();
+          translated=Array.isArray(data?.[0])?data[0].map(part=>part?.[0]||"").join(""):"";
+          if(!translated)throw new Error("Réponse de traduction vide");
+          try{sessionStorage.setItem(key,translated)}catch{}
+        }
+        if(localStorage.getItem("cdc_language")===lang&&node.isConnected){
+          node.nodeValue=translated;cdcTranslated.set(node,lang);
+        }
+      }catch(error){console.warn("CDC traduction automatique :",error)}
+    };
+    cdcTranslationQueue=cdcTranslationQueue.then(task,task);
+  }
+  function cdcTranslateDocument(lang,root=document){
+    if(lang==="fr"){
+      root.querySelectorAll("*").forEach(el=>{for(const node of el.childNodes)if(node.nodeType===Node.TEXT_NODE&&cdcOriginalText.has(node))node.nodeValue=cdcOriginalText.get(node)});
+      return;
+    }
+    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+    const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+    nodes.forEach(node=>cdcTranslateNode(node,lang));
+    root.querySelectorAll("[placeholder],[aria-label],[title]").forEach(el=>{
+      ["placeholder","aria-label","title"].forEach(attr=>{
+        const value=el.getAttribute(attr);if(!value)return;
+        const originals=el.__cdcOriginalAttrs||(el.__cdcOriginalAttrs={});
+        if(!(attr in originals))originals[attr]=value;
+        const cacheKey="cdc_attr_"+lang+"_"+originals[attr];
+        let cached=null;try{cached=sessionStorage.getItem(cacheKey)}catch{}
+        const apply=translated=>{if(localStorage.getItem("cdc_language")===lang&&el.isConnected)el.setAttribute(attr,translated)};
+        if(cached){apply(cached);return}
+        fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=fr&tl="+encodeURIComponent(lang)+"&dt=t&q="+encodeURIComponent(originals[attr]))
+          .then(r=>r.json()).then(data=>{const translated=Array.isArray(data?.[0])?data[0].map(x=>x?.[0]||"").join(""):"";if(translated){try{sessionStorage.setItem(cacheKey,translated)}catch{}apply(translated)}}).catch(()=>{});
+      });
+    });
+    document.documentElement.lang=lang;
+  }
+  function initialiserTraduction(){
+    const button=document.getElementById("cdcLanguageButton"),menu=document.getElementById("cdcLanguageMenu");
+    if(!button||!menu)return;
+    const lang=localStorage.getItem("cdc_language")||"fr";
+    const selected=CDC_LANGUAGES[lang]?lang:"fr";
+    button.textContent=CDC_LANGUAGES[selected].flag;
+    menu.querySelectorAll("button[data-lang]").forEach(item=>{
+      item.setAttribute("aria-current",item.dataset.lang===selected?"true":"false");
+      item.addEventListener("click",()=>{
+        const next=item.dataset.lang;
+        localStorage.setItem("cdc_language",next);
+        button.textContent=CDC_LANGUAGES[next].flag;
+        menu.hidden=true;button.setAttribute("aria-expanded","false");
+        location.reload();
+      });
+    });
+    button.addEventListener("click",event=>{
+      event.stopPropagation();menu.hidden=!menu.hidden;
+      button.setAttribute("aria-expanded",String(!menu.hidden));
+    });
+    document.addEventListener("click",event=>{
+      if(!document.getElementById("cdcLanguagePicker")?.contains(event.target)){
+        menu.hidden=true;button.setAttribute("aria-expanded","false");
+      }
+    });
+    if(selected!=="fr"){
+      cdcTranslateDocument(selected);
+      if(cdcTranslationObserver)cdcTranslationObserver.disconnect();
+      cdcTranslationObserver=new MutationObserver(records=>{
+        if(localStorage.getItem("cdc_language")!==selected)return;
+        records.forEach(record=>{
+          record.addedNodes.forEach(node=>{
+            if(node.nodeType===Node.TEXT_NODE)cdcTranslateNode(node,selected);
+            else if(node.nodeType===Node.ELEMENT_NODE)cdcTranslateDocument(selected,node);
+          });
+        });
+      });
+      cdcTranslationObserver.observe(document.body,{childList:true,subtree:true});
+    }else{
+      document.documentElement.lang="fr";
+    }
+  }
+
   function initialiser(){
     appliquerThemeNoirIntegral();
     document.querySelectorAll(".announcement, header.header, nav.main-nav, .utility-bar, footer").forEach(el=>el.remove());
@@ -149,8 +254,8 @@
     searchButton?.addEventListener("click",()=>{searchBox.hidden=!searchBox.hidden;if(!searchBox.hidden)searchInput.focus()});
     searchForm?.addEventListener("submit",e=>{e.preventDefault();const q=searchInput.value.trim();location.href=q?"catalogue.html?recherche="+encodeURIComponent(q):"catalogue.html"});
     /* Le bouton de changement de thème est volontairement retiré de l'en-tête. */
-    const language=document.getElementById("cdcLanguage");
-    if(language){language.value=localStorage.getItem("cdc_language")||"fr";language.addEventListener("change",()=>{const lang=language.value;localStorage.setItem("cdc_language",lang);if(lang==="fr")location.href=location.pathname+location.search+location.hash;else location.href="https://translate.google.com/translate?sl=fr&tl="+encodeURIComponent(lang)+"&u="+encodeURIComponent(location.href)})}
+    initialiserTraduction();
+
 
     const footerContactForm=document.getElementById("cdcFooterContactForm");
     footerContactForm?.addEventListener("submit",event=>{
