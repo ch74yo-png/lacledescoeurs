@@ -1,22 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 330" role="img" aria-labelledby="logoTitle">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 210" role="img" aria-labelledby="logoTitle">
 <title id="logoTitle">LA CLE DES CŒURS — Depuis 1974 — Bijoux Fins &amp; Raffinés</title>
 <defs>
- <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe99a"/><stop offset=".42" stop-color="#f8c52b"/><stop offset="1" stop-color="#c9890b"/></linearGradient>
- <linearGradient id="white" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#eeeae5"/></linearGradient>
+ <linearGradient id="or" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#ffe99a"/><stop offset=".48" stop-color="#f5bd20"/><stop offset="1" stop-color="#c98a0b"/>
+ </linearGradient>
+ <linearGradient id="blanc" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#ece8e2"/>
+ </linearGradient>
 </defs>
-<g font-family="Arial, Helvetica, sans-serif" font-weight="800" fill="url(#white)">
- <text x="65" y="81" font-size="78" letter-spacing="-1.5">LA CL</text>
- <text x="0" y="190" font-size="78" letter-spacing="-2">DES C</text>
- <text x="397" y="190" font-size="78" letter-spacing="-2">EURS</text>
+<!-- Première ligne : LA CL en blanc, E en or sans accent. -->
+<g font-family="Arial, Helvetica, sans-serif" font-size="49" font-weight="800" letter-spacing="-1.5" fill="url(#blanc)">
+ <text x="45" y="54">LA CL</text>
 </g>
-<!-- E doré sans accent : sa hampe verticale se prolonge directement en clé. -->
-<path d="M316 24 H370 V39 H332 V50 H365 V65 H332 V81 H370 V96 H316 Z" fill="url(#gold)"/>
-<path d="M316 81 V136" stroke="url(#gold)" stroke-width="16" stroke-linecap="butt"/>
-<circle cx="316" cy="139" r="16" fill="url(#gold)"/>
-<!-- Cœur vertical, droit et symétrique, remplaçant le O de CŒURS. -->
-<path d="M316 270 C296 253 254 222 254 188 C254 157 291 145 316 174 C341 145 378 157 378 188 C378 222 336 253 316 270Z" fill="none" stroke="url(#gold)" stroke-width="13" stroke-linejoin="round"/>
-<path d="M316 164 L302 177 L316 190 L330 177Z" fill="#2b160f"/>
-<text x="456" y="270" font-family="Georgia, 'Times New Roman', serif" font-size="37" font-weight="700" fill="url(#gold)">Depuis 1974</text>
-<path d="M0 313 H123 M617 313 H740" stroke="url(#gold)" stroke-width="6"/>
-<text x="137" y="325" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="700" fill="url(#white)">Bijoux Fins &amp; Raffinés</text>
+<text x="204" y="54" font-family="Arial, Helvetica, sans-serif" font-size="49" font-weight="800" letter-spacing="-1.5" fill="url(#or)">E</text>
+<!-- Deuxième ligne : le cœur remplace exactement le O de CŒURS. -->
+<g font-family="Arial, Helvetica, sans-serif" font-size="49" font-weight="800" letter-spacing="-1.7" fill="url(#blanc)">
+ <text x="0" y="132">DES C</text>
+ <text x="278" y="132">EURS</text>
+</g>
+<!-- La hampe du E descend verticalement et devient la clé du cœur. -->
+<path d="M229 55 V91" fill="none" stroke="url(#or)" stroke-width="9" stroke-linecap="butt"/>
+<circle cx="229" cy="94" r="9" fill="url(#or)"/>
+<!-- Cœur droit, symétrique, vertical et sans inclinaison. -->
+<path d="M229 166
+ C216 155 184 133 184 111
+ C184 91 209 83 229 102
+ C249 83 274 91 274 111
+ C274 133 242 155 229 166Z"
+ fill="none" stroke="url(#or)" stroke-width="7.5" stroke-linejoin="round"/>
+<path d="M229 96 L219 105 L229 114 L239 105Z" fill="#2b100b"/>
+<text x="318" y="169" font-family="Georgia, 'Times New Roman', serif" font-size="25" font-weight="700" fill="url(#or)">Depuis 1974</text>
+<!-- Signature encadrée par deux filets dorés. -->
+<path d="M0 197 H72 M428 197 H500" stroke="url(#or)" stroke-width="4"/>
+<text x="82" y="204" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-weight="700" fill="url(#blanc)">Bijoux Fins &amp; Raffinés</text>
 </svg>
