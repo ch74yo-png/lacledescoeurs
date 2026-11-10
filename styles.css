@@ -1421,3 +1421,16 @@ html body .cdc-header{
   background-color:#2b1009!important;
   background-image:none!important;
 }
+
+
+/* Pied de page : logo à la même échelle que celui de l’en-tête.
+   L’image officielle n’est ni recadrée ni modifiée par cette règle. */
+.cdc-footer-brand{margin:0 auto 22px!important}
+.cdc-footer-brand>a{width:170px!important;max-width:42vw!important}
+.cdc-footer-brand .cdc-logo{width:100%!important;max-width:170px!important}
+.cdc-footer-brand .cdc-logo img{width:100%!important;height:auto!important;object-fit:contain!important}
+@media(max-width:600px){
+  .cdc-footer-brand{margin:0 auto 18px!important}
+  .cdc-footer-brand>a{width:112px!important;max-width:35vw!important}
+  .cdc-footer-brand .cdc-logo{max-width:112px!important}
+}
