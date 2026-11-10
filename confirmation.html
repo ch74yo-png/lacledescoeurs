@@ -13,9 +13,17 @@ document.getElementById("orderRef").textContent=ref;
   const data=await response.json();
   if(!response.ok)throw new Error(data.erreur||"Vérification impossible.");
   if(data.payment_status==="paid"){
+   const read=k=>{try{return JSON.parse(localStorage.getItem(k)||"null")}catch{return null}};
+   const cart=read("cdc_cart")||[],customer=read("cdc_customer")||{},shipping=read("cdc_shipping")||{};
+   let orders=[];try{orders=JSON.parse(localStorage.getItem("cdc_orders")||"[]");if(!Array.isArray(orders))orders=[];}catch{orders=[];}
+   if(!orders.some(order=>order.sessionId===sessionId)){
+    const subtotal=cart.reduce((sum,item)=>sum+(Number(item.price)||0)*(Number(item.quantity)||1),0);
+    orders.push({sessionId,reference:ref,date:new Date().toISOString(),customer,items:cart.map(item=>({name:item.name||item.nom||"Article",quantity:Number(item.quantity)||1,price:Number(item.price)||0})),total:Number(data.amount_total)!=0?Number(data.amount_total)/100:subtotal+(Number(shipping.amount)||0),status:"paid"});
+    localStorage.setItem("cdc_orders",JSON.stringify(orders));
+   }
    title.textContent="PAIEMENT RÉUSSI";
    message.textContent="Vous avez bien reçu votre commande. Votre facture sera envoyée à l’adresse e-mail indiquée lors de la commande.";
-   localStorage.removeItem("cdc_cart");localStorage.removeItem("cdc_customer");localStorage.removeItem("cdc_shipping");localStorage.removeItem("cdc_promo");localStorage.removeItem("cdc_order_reference");localStorage.removeItem("cdc_order_cart_signature");
+   localStorage.removeItem("cdc_cart");localStorage.removeItem("cdc_shipping");localStorage.removeItem("cdc_promo");localStorage.removeItem("cdc_order_reference");localStorage.removeItem("cdc_order_cart_signature");
   }else{
    title.textContent="PAIEMENT EN ATTENTE";
    message.textContent="Le paiement n’est pas encore confirmé. Votre commande ne peut pas encore être considérée comme payée.";
