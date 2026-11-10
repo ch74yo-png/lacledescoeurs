@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#000000"><title>Confirmation de commande | LA CLÉ DES CŒURS</title><link rel="stylesheet" href="styles.css?v=20261110-logo-mobile-fix"><style>.confirmation-page{max-width:760px;margin:55px auto;padding:20px 18px 70px}.confirmation-card{text-align:center;padding:38px 24px;border:1px solid #806b4c;background:#000;color:#fff}.confirmation-card h1{font:400 clamp(30px,5vw,44px) var(--serif);color:#d9ad45}.confirmation-card p{line-height:1.8}.confirmation-ref{margin:22px 0;padding:15px;border:1px solid #806b4c;color:#d9ad45;overflow-wrap:anywhere}.confirmation-home{display:inline-block;margin-top:18px;padding:14px 25px;background:#d9ad45;color:#000;text-decoration:none;letter-spacing:1px}.confirmation-error{color:#ffb2a8}@media(max-width:600px){.confirmation-page{margin:20px auto;padding:12px}}</style></head><body><main class="confirmation-page"><section class="confirmation-card"><h1 id="statusTitle">VÉRIFICATION DU PAIEMENT</h1><p id="statusText">Nous vérifions votre paiement auprès de notre prestataire.</p><div class="confirmation-ref" id="orderRef"></div><a class="confirmation-home" href="index.html">RETOUR À L’ACCUEIL</a></section></main><script>
+"use strict";
+const API="https://cdc-paiement-api.bagzful.workers.dev";
+const sessionId=new URLSearchParams(location.search).get("session_id");
+const ref=localStorage.getItem("cdc_order_reference")||"";
+document.getElementById("orderRef").textContent=ref;
+(async()=>{
+ const title=document.getElementById("statusTitle"),message=document.getElementById("statusText");
+ if(!sessionId){title.textContent="PAIEMENT NON VÉRIFIÉ";message.textContent="Aucune référence de paiement n’a été reçue. Votre commande n’est pas encore confirmée.";message.className="confirmation-error";return}
+ try{
+  const response=await fetch(API+"/checkout-session?session_id="+encodeURIComponent(sessionId));
+  const data=await response.json();
+  if(!response.ok)throw new Error(data.erreur||"Vérification impossible.");
+  if(data.payment_status==="paid"){
+   title.textContent="PAIEMENT RÉUSSI";
+   message.textContent="Vous avez bien reçu votre commande. Votre facture sera envoyée à l’adresse e-mail indiquée lors de la commande.";
+   localStorage.removeItem("cdc_cart");localStorage.removeItem("cdc_customer");localStorage.removeItem("cdc_shipping");localStorage.removeItem("cdc_promo");localStorage.removeItem("cdc_order_reference");localStorage.removeItem("cdc_order_cart_signature");
+  }else{
+   title.textContent="PAIEMENT EN ATTENTE";
+   message.textContent="Le paiement n’est pas encore confirmé. Votre commande ne peut pas encore être considérée comme payée.";
+   message.className="confirmation-error";
+  }
+ }catch(error){title.textContent="VÉRIFICATION IMPOSSIBLE";message.textContent=error.message||"Veuillez contacter la boutique.";message.className="confirmation-error"}
+})();
+</script><script src="site-shell.js?v=20261110-logo-mobile-fix" defer></script></body></html>
