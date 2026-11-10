@@ -15,9 +15,9 @@ const determinerCategories = (nom, marque, categories) => {
   if (Array.isArray(categories) && categories.some(c => c === "femme" || c === "homme")) {
     return [categories.includes("femme") ? "femme" : "homme"];
   }
-  if (/\\b(montre|watch|chronographe|santos|tank|panth[eè]re|baignoire|reverso|seamaster|speedmaster|datejust|submariner|navitimer|el primero|patek philippe|rolex|tudor|omega|jaeger|breitling)\\b/.test(texte)) {
-    if (/\\b(femme|women|lady|dames|demoiselle|petit[e]? mod[eè]le femme)\\b/.test(texte)) return ["femme"];
-    if (/\\b(homme|men|masculin)\\b/.test(texte)) return ["homme"];
+  if (/\b(montre|watch|chronographe|santos|tank|panth[eè]re|baignoire|reverso|seamaster|speedmaster|datejust|submariner|navitimer|el primero|patek philippe|rolex|tudor|omega|jaeger|breitling)\b/.test(texte)) {
+    if (/\b(femme|women|lady|dames|demoiselle|petit[e]? mod[eè]le femme)\b/.test(texte)) return ["femme"];
+    if (/\b(homme|men|masculin)\b/.test(texte)) return ["homme"];
     return ["homme"];
   }
   return ["accessoires"];
