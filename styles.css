@@ -1060,3 +1060,22 @@ body.theme-dark .cdc-header .cdc-language select {
 .cdc-brand .cdc-logo{width:100%}
 .cdc-footer-brand .cdc-logo{width:100%;max-width:310px;margin:0 auto}
 .cdc-footer-brand .cdc-logo img{width:100%;height:auto}
+
+
+/* Logo original : fond sombre, lettrage ivoire et or, icones independantes */
+.cdc-header{
+  background:#171310!important;
+  border-bottom:1px solid #d9bd75!important;
+}
+.cdc-header .cdc-icon-button,
+.cdc-header .header-actions,
+.cdc-header .cdc-language,
+.cdc-header .cdc-language select{
+  color:#f5eee5!important;
+}
+.cdc-header .cdc-icon-button svg{stroke:#f5eee5!important}
+.cdc-header .hamburger-lines i{background:#f5eee5!important}
+.brand.cdc-brand{width:min(330px,100%)!important;max-width:330px!important}
+.cdc-logo{max-width:330px!important}
+.cdc-logo img{display:block;width:100%;height:auto;object-fit:contain}
+body.theme-dark .cdc-header{background:#11100f!important}
