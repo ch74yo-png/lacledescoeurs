@@ -11,17 +11,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261110-nav-cleanup-v3">
+  <link rel="stylesheet" href="styles.css?v=20261110-home-grid-cart-fix-v5">
 
   <style>
-    .home-category {
-      padding: 55px 5%;
-      background: #f7f2eb;
-    }
+    .home-categories-grid{max-width:1250px;margin:0 auto;padding:30px 18px 55px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;background:#000}
+    .home-category{min-width:0;padding:20px;background:#000;border:1px solid rgba(217,173,69,.55)}
+    .home-category:nth-child(even){background:#000}
+    .home-category-heading h2 a{color:#d9ad45;text-decoration:none}
+    .home-category-heading{min-height:92px}
+    .home-products{max-width:100%}
+    @media(max-width:600px){.home-categories-grid{padding:20px 12px 38px;gap:10px}.home-category{padding:10px}.home-category-heading{min-height:95px;display:block}.home-category-heading h2{font-size:22px}.home-category-heading p:not(.eyebrow){display:none}.home-category-heading a{display:inline-block;margin-top:8px}.home-product-card{flex-basis:165px}}
 
-    .home-category:nth-child(even) {
-      background: #fffaf4;
-    }
 
     .home-category-heading {
       max-width: 1250px;
@@ -170,7 +170,7 @@
     .home-intro {
       padding: 60px 20px;
       text-align: center;
-      background: #eee5d9;
+      background: #000;
     }
 
     .home-intro h2 {
@@ -187,7 +187,7 @@
     .home-contact {
       padding: 55px 20px;
       text-align: center;
-      background: #fffaf4;
+      background: #000;
     }
 
     @media(max-width:600px) {
@@ -245,11 +245,12 @@
       </p>
     </section>
 
+    <div class="home-categories-grid" aria-label="Notre sélection de catégories">
     <section class="home-category" id="categorie-accessoires">
       <div class="home-category-heading">
         <div>
           <p class="eyebrow">NOTRE SÉLECTION</p>
-          <h2>Accessoires et bracelets</h2>
+          <h2><a href="catalogue.html?categorie=accessoires">Accessoires et bracelets</a></h2>
           <p>Découvrez notre collection d'accessoires.</p>
         </div>
         <a href="catalogue.html?categorie=accessoires">TOUT DÉCOUVRIR →</a>
@@ -263,7 +264,7 @@
       <div class="home-category-heading">
         <div>
           <p class="eyebrow">COLLECTION EXCLUSIVE</p>
-          <h2>AP x Swatch</h2>
+          <h2><a href="catalogue.html?categorie=ap-swatch">APX Swatch</a></h2>
           <p>Découvrez la collection Royal Pop.</p>
         </div>
         <a href="catalogue.html?categorie=ap-swatch">TOUT DÉCOUVRIR →</a>
@@ -277,7 +278,7 @@
       <div class="home-category-heading">
         <div>
           <p class="eyebrow">ÉLÉGANCE AU FÉMININ</p>
-          <h2>Montres femme</h2>
+          <h2><a href="catalogue.html?categorie=femme">Montre femme</a></h2>
           <p>Une sélection de montres féminines.</p>
         </div>
         <a href="catalogue.html?categorie=femme">TOUT DÉCOUVRIR →</a>
@@ -291,7 +292,7 @@
       <div class="home-category-heading">
         <div>
           <p class="eyebrow">STYLE ET CARACTÈRE</p>
-          <h2>Montres homme</h2>
+          <h2><a href="catalogue.html?categorie=homme">Montre homme</a></h2>
           <p>Découvrez notre sélection masculine.</p>
         </div>
         <a href="catalogue.html?categorie=homme">TOUT DÉCOUVRIR →</a>
@@ -300,6 +301,7 @@
         <p class="home-empty">Chargement des produits...</p>
       </div>
     </section>
+    </div>
 
     <section class="home-intro">
       <p class="eyebrow">NOTRE PHILOSOPHIE</p>
@@ -445,7 +447,7 @@
     afficherCategorie("homme", "products-homme");
   </script>
 
-  <script src="site-shell.js?v=20261110-nav-cleanup-v3" defer></script>
+  <script src="site-shell.js?v=20261110-home-grid-cart-fix-v5" defer></script>
 
 </body>
 </html>
