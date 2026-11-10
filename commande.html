@@ -357,7 +357,7 @@ countries.forEach(c=>{
 });
 try{
   const saved=JSON.parse(localStorage.getItem("cdc_customer")||"null");
-  const preferred=saved?.countryCode||new Intl.Locale(navigator.language||"fr-FR").region;
+  const preferred=saved?.countryCode||new Intl.Locale(navigator.language||"fr-FR").region||"FR";
   if(preferred && countries.some(c=>c.code===preferred)) countrySelect.value=preferred;
 }catch{}
 
