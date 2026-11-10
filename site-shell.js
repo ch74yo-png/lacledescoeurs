@@ -145,7 +145,7 @@
     if(!node||node.nodeType!==Node.TEXT_NODE)return;
     const parent=node.parentElement;
     if(!parent||/^(SCRIPT|STYLE|NOSCRIPT|SVG|TEXTAREA|INPUT|OPTION|CODE|PRE)$/i.test(parent.tagName))return;
-    if(parent.closest("[data-no-translate],.cdc-language-flag,.cdc-logo,.product-image,.cdc-product-image"))return;
+    if(parent.closest("[data-no-translate],.cdc-language-flag,.cdc-logo,.product-image,.cdc-product-image,[href^=\"mailto:\"]"))return;
     const original=cdcOriginalText.get(node)||node.nodeValue;
     if(!original||!original.trim())return;
     if(!cdcOriginalText.has(node))cdcOriginalText.set(node,original);
@@ -194,6 +194,7 @@
       });
     });
     document.documentElement.lang=lang;
+    document.documentElement.dir=lang==="ar"?"rtl":"ltr";
   }
   function initialiserTraduction(){
     const button=document.getElementById("cdcLanguageButton"),menu=document.getElementById("cdcLanguageMenu");
@@ -234,7 +235,7 @@
       });
       cdcTranslationObserver.observe(document.body,{childList:true,subtree:true});
     }else{
-      document.documentElement.lang="fr";
+      document.documentElement.lang="fr";document.documentElement.dir="ltr";
     }
   }
 
