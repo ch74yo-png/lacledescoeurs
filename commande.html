@@ -428,11 +428,11 @@ document.getElementById("summaryItems").addEventListener("change",event=>{
   cart[index].quantity=Math.max(1,Math.min(15,Math.floor(Number(input.value)||1)));
   localStorage.setItem(CART_KEY,JSON.stringify(cart)); render();
 });
-const lettersOnly=value=>value.replace(/[^\\p{L}\\s'-]/gu,"");
+const lettersOnly=value=>value.replace(/[^\p{L}\s'-]/gu,"");
 document.getElementById("fullName").addEventListener("input",event=>{event.target.value=lettersOnly(event.target.value);});
 document.getElementById("city").addEventListener("input",event=>{event.target.value=lettersOnly(event.target.value);});
 ["phone","postalCode"].forEach(id=>{
-  document.getElementById(id).addEventListener("input",event=>{event.target.value=event.target.value.replace(/\\D/g,"");});
+  document.getElementById(id).addEventListener("input",event=>{event.target.value=event.target.value.replace(/\D/g,"");});
 });
 countrySelect.addEventListener("change",render);
 
