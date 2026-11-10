@@ -6,19 +6,39 @@
 // Produit supplémentaire : DETAILS à 2 €
 // =============================================
 
-const creerProduit = (id, nom, marque, prix, ancienPrix = null, categories = ["accessoires"], extra = {}) => ({
-  id,
-  nom,
-  marque,
-  categorie: categories.includes("homme") && !categories.includes("accessoires") ? "homme" : "accessoires",
-  categories,
-  prix,
-  ancienPrix,
-  devise: "EUR",
-  image: "",
-  actif: true,
-  ...extra
-});
+const determinerCategories = (nom, marque, categories) => {
+  const texte = String(nom || "").toLowerCase();
+  const marqueTexte = String(marque || "").toLowerCase();
+  if (marqueTexte.includes("ap x swatch") || texte.includes("royal pop") || texte.includes("bioceramic")) {
+    return ["ap-swatch"];
+  }
+  if (Array.isArray(categories) && categories.some(c => c === "femme" || c === "homme")) {
+    return [categories.includes("femme") ? "femme" : "homme"];
+  }
+  if (/\\b(montre|watch|chronographe|santos|tank|panth[eè]re|baignoire|reverso|seamaster|speedmaster|datejust|submariner|navitimer|el primero|patek philippe|rolex|tudor|omega|jaeger|breitling)\\b/.test(texte)) {
+    if (/\\b(femme|women|lady|dames|demoiselle|petit[e]? mod[eè]le femme)\\b/.test(texte)) return ["femme"];
+    if (/\\b(homme|men|masculin)\\b/.test(texte)) return ["homme"];
+    return ["homme"];
+  }
+  return ["accessoires"];
+};
+
+const creerProduit = (id, nom, marque, prix, ancienPrix = null, categories = ["accessoires"], extra = {}) => {
+  const categoriesFinales = determinerCategories(nom, marque, categories);
+  return {
+    id,
+    nom,
+    marque,
+    categorie: categoriesFinales[0],
+    categories: categoriesFinales,
+    prix,
+    ancienPrix,
+    devise: "EUR",
+    image: "",
+    actif: true,
+    ...extra
+  };
+};
 
 const produits = [
   // PAGE 1
@@ -176,7 +196,7 @@ const produits = [
 ];
 
 // =============================================
-// Les photos non encore identifiées restent vides.
+// Les produits non encore illustrés conservent leur fiche et leur catégorie.
 // Aucune image générique n'est attribuée à un produit.
 // =============================================
 
