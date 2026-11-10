@@ -83,6 +83,8 @@
       font-size: 13px;
       margin-bottom: 25px;
     }
+    .detail-quantity{display:flex;align-items:center;gap:12px;margin:0 0 16px;color:var(--ink);font-size:12px}
+    .detail-quantity input{width:82px;min-height:42px;text-align:center;background:#fff;color:#111;border:1px solid var(--gold);padding:8px}
     .detail-buttons {
       display: flex;
       flex-direction: column;
@@ -269,20 +271,21 @@
       }).format(montant);
     }
 
-    function ajouterAuPanier(produit, rediriger = false) {
+    function ajouterAuPanier(produit, rediriger = false, quantity = 1) {
       const panier = lireStock("cdc_cart");
       const existant = panier.find(item =>
         String(item.id) === String(produit.id)
       );
 
+      const quantite = Math.max(1,Math.min(15,Math.floor(Number(quantity)||1)));
       if (existant) {
-        existant.quantity = Number(existant.quantity || 0) + 1;
+        existant.quantity = Math.min(15,Number(existant.quantity || 0) + quantite);
       } else {
         panier.push({
           id: produit.id,
           name: produit.nom,
           price: Number(produit.prix),
-          quantity: 1,
+          quantity: quantite,
           image: produit.image || ""
         });
       }
@@ -360,6 +363,9 @@
 
             <div class="detail-description">${description}</div>
 
+            <label class="detail-quantity">QUANTITÉ
+              <input id="productQuantity" type="number" min="1" max="15" step="1" inputmode="numeric" value="1">
+            </label>
             <div class="detail-buttons">
               <button type="button" id="acheterProduit">ACHETER</button>
               <button type="button" class="secondary" id="ajouterPanier">
@@ -372,12 +378,13 @@
           </div>
         </article>`;
 
+      const quantityInput=document.getElementById("productQuantity");
       document.getElementById("acheterProduit").addEventListener("click", () => {
-        ajouterAuPanier(produit, true);
+        ajouterAuPanier(produit, true, quantityInput.value);
       });
 
       document.getElementById("ajouterPanier").addEventListener("click", () => {
-        ajouterAuPanier(produit);
+        ajouterAuPanier(produit, false, quantityInput.value);
       });
 
       document.getElementById("ajouterFavoris").addEventListener("click", () => {
