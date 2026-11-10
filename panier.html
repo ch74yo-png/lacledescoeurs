@@ -202,7 +202,7 @@ function nomArticle(article) {
   return article.name || article.nom || "Article";
 }
 function imageArticle(article) {
-  return article.image || article.photo || "";
+  return article.image || (Array.isArray(article.images) ? article.images[0] : "") || article.photo || "";
 }
 function quantiteArticle(article) {
   return Math.min(10, Math.max(1, Number(article.quantity) || 1));
