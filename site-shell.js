@@ -19,8 +19,8 @@
       <div class="header-actions">
         <button class="cdc-icon-button" id="cdcSearchButton" type="button" aria-label="Rechercher">${icon.search}</button>
         <a class="cdc-icon-button" href="compte.html" aria-label="Mon compte">${icon.account}</a>
-        <a class="cdc-icon-button favorites-link" href="favoris.html" aria-label="Mes favoris">${icon.heart}<span id="favoriteCount">0</span></a>
-        <a class="cdc-icon-button cart-link" href="panier.html" aria-label="Mon panier">${icon.cart}<span id="cartCount">0</span></a>
+        <a class="cdc-icon-button favorites-link" href="favoris.html" aria-label="Mes favoris">${icon.heart}<span id="favoriteCount" hidden></span></a>
+        <a class="cdc-icon-button cart-link" href="panier.html" aria-label="Mon panier">${icon.cart}<span id="cartCount" hidden></span></a>
         <label class="cdc-language cdc-language-globe" aria-label="Choisir la langue"><span>${icon.globe}</span><select id="cdcLanguage" aria-label="Langue" title="Choisir la langue">
           <option value="fr">Français</option><option value="en">English</option>
           <option value="es">Español</option><option value="de">Deutsch</option>
@@ -50,8 +50,8 @@
 
   function lirePanier(){try{const data=JSON.parse(localStorage.getItem("cdc_cart")||"[]");return Array.isArray(data)?data:[]}catch{return[]}}
   function lireFavoris(){try{const data=JSON.parse(localStorage.getItem("cdc_favorites")||"[]");return Array.isArray(data)?data:[]}catch{return[]}}
-  function actualiserCompteurPanier(){const compteur=document.getElementById("cartCount");if(compteur)compteur.textContent=lirePanier().reduce((sum,item)=>sum+(Number(item.quantity)||1),0)}
-  function actualiserCompteurFavoris(){const compteur=document.getElementById("favoriteCount");if(compteur)compteur.textContent=lireFavoris().length}
+  function actualiserCompteurPanier(){const compteur=document.getElementById("cartCount");if(compteur){const total=lirePanier().reduce((sum,item)=>sum+Math.max(1,Number(item.quantity)||1),0);compteur.textContent=total?String(total):"";compteur.hidden=total===0}}
+  function actualiserCompteurFavoris(){const compteur=document.getElementById("favoriteCount");if(compteur){const total=lireFavoris().length;compteur.textContent=total?String(total):"";compteur.hidden=total===0}}
   function initialiser(){
     document.querySelectorAll(".announcement, header.header, nav.main-nav, .utility-bar, footer").forEach(el=>el.remove());
     document.body.insertAdjacentHTML("afterbegin",header);
