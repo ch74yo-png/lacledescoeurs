@@ -40,7 +40,7 @@
   const footer = `
     <footer class="footer cdc-footer">
       <div class="footer-brand cdc-footer-brand"><a href="index.html" aria-label="Accueil">${logo}</a></div>
-      <div class="footer-column"><h4>LA BOUTIQUE</h4><a href="index.html">Accueil</a><a href="catalogue.html">Catalogue</a><a href="favoris.html">Favoris</a><a href="panier.html">Panier</a><a href="contact.html">Contact</a></div>
+      <div class="footer-column"><h4>LA BOUTIQUE</h4><a href="index.html">Accueil</a><a href="catalogue.html">Catalogue</a><a href="favoris.html">Favoris</a><a href="panier.html">Panier</a></div>
       <div class="footer-column"><h4>INFORMATIONS</h4><a href="livraison-retours.html">Livraison et retours</a><a href="conditions-generales.html">Conditions générales de vente</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a></div>
       <div class="footer-contact"><h4>CONTACTEZ-NOUS</h4><a href="mailto:lacledescoeurs@outlook.fr">lacledescoeurs@outlook.fr</a><a href="tel:+33780950371">+33 7 80 95 03 71</a><a href="https://www.google.com/maps/search/?api=1&query=38%20Bd%20du%20Mar%C3%A9chal%20Foch%2C%2049100%20Angers%2C%20France">38 Bd du Maréchal Foch, 49100 Angers, France</a></div>
       <div class="footer-bottom">© <span id="cdcYear"></span> LA CLÉ DES CŒURS. Tous droits réservés.</div>
