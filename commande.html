@@ -141,7 +141,7 @@
 .checkout-item{display:grid;grid-template-columns:minmax(0,1fr) 105px 70px minmax(85px,auto);align-items:center;gap:10px}
 .checkout-item-unit{font-size:11px;color:#e8d8c4}
 .checkout-item-name{overflow-wrap:anywhere}
-.checkout-item-qty{width:86px;min-height:38px;padding:6px;text-align:center;background:#fffaf4;color:#111;border:1px solid #b9a994}
+.checkout-item-qty{width:86px;min-height:38px;padding:6px;text-align:center;background:#fffaf4;color:#111;border:1px solid #b9a994;cursor:pointer}
 @media(max-width:600px){.checkout-item{grid-template-columns:minmax(0,1fr) 72px;gap:8px}.checkout-item-unit{grid-column:1}.checkout-item strong{grid-column:1/-1;text-align:right}}
 .checkout-notice{
   margin-top:12px;
@@ -413,7 +413,7 @@ function render(){
     const row=document.createElement("div"); row.className="checkout-line checkout-item";
     const name=document.createElement("span"); name.className="checkout-item-name"; name.textContent=p.name||p.nom||"Article";
     const unit=document.createElement("span"); unit.className="checkout-item-unit"; unit.textContent=money(Number(p.price)||0)+" / unité";
-    const qty=document.createElement("input"); qty.className="checkout-item-qty"; qty.type="number"; qty.min="1"; qty.max="15"; qty.step="1"; qty.inputMode="numeric"; qty.value=Math.max(1,Number(p.quantity)||1); qty.dataset.cartIndex=String(index); qty.setAttribute("aria-label","Quantité de "+(p.name||p.nom||"l'article"));
+    const qty=document.createElement("select"); qty.className="checkout-item-qty"; qty.dataset.cartIndex=String(index); qty.setAttribute("aria-label","Choisir une quantité"); qty.innerHTML="<option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option><option value=\"6\">6</option><option value=\"7\">7</option><option value=\"8\">8</option><option value=\"9\">9</option><option value=\"10\">10</option>"; qty.value=String(Math.max(1,Math.min(10,Number(p.quantity)||1)));
     const price=document.createElement("strong"); price.textContent=money((Number(p.price)||0)*(Number(p.quantity)||1));
     row.append(name,unit,qty,price); host.appendChild(row);
   });
@@ -427,7 +427,7 @@ function render(){
 document.getElementById("summaryItems").addEventListener("change",event=>{
   const input=event.target.closest("[data-cart-index]"); if(!input)return;
   const index=Number(input.dataset.cartIndex); if(!cart[index])return;
-  cart[index].quantity=Math.max(1,Math.min(15,Math.floor(Number(input.value)||1)));
+  cart[index].quantity=Math.max(1,Math.min(10,Number(input.value)||1));
   localStorage.setItem(CART_KEY,JSON.stringify(cart)); render();
 });
 const lettersOnly=value=>value.replace(/[^\p{L}\s'-]/gu,"");
