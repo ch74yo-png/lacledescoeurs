@@ -2095,3 +2095,37 @@ hr,.checkout-total,.payment-total{border-color:#d4af37!important}
   stroke:#ffffff!important;
 }
 .cdc-header .hamburger-lines i{background:#ffffff!important}
+
+/* Bandeau d'accueil : conserver strictement l'ancienne photo et son texte */
+.hero{
+  background-image:linear-gradient(90deg,rgba(31,25,20,.78),rgba(31,25,20,.18)),url("https://bijouterielamalmaison.fr/wp-content/uploads/2026/05/AA1.webp")!important;
+  background-position:center!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+}
+/* Nouvelle photo de la boutique sous le bandeau d'accueil */
+.store-showcase{
+  background:#000!important;
+  color:#fff!important;
+  padding:34px 18px 42px!important;
+  text-align:center!important;
+}
+.store-showcase-image{
+  max-width:1100px;
+  margin:0 auto;
+  background:#000!important;
+}
+.store-showcase-image img{
+  display:block;
+  width:100%;
+  max-height:620px;
+  object-fit:contain;
+  margin:0 auto;
+}
+.store-showcase p{
+  margin:22px auto 0;
+  color:#fff!important;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(24px,3.4vw,38px);
+  line-height:1.25;
+}
