@@ -46,9 +46,11 @@
       <div class="footer-bottom">© <span id="cdcYear"></span> LA CLÉ DES CŒURS. Tous droits réservés.</div>
     </footer>`;
 
-  function lirePanier(){try{const data=JSON.parse(localStorage.getItem("cdc_cart")||"[]");return Array.isArray(data)?data.filter(item=>item&&typeof item==="object"&&(item.name||item.nom)&&Number.isFinite(Number(item.price??item.prix))&&Number(item.price??item.prix)>=0):[]}catch{return[]}}
-  function lireFavoris(){try{const data=JSON.parse(localStorage.getItem("cdc_favorites")||"[]");return Array.isArray(data)?data.filter(item=>item&&typeof item==="object"&&(item.name||item.nom)):[]}catch{return[]}}
-  function actualiserCompteurPanier(){const compteur=document.getElementById("cartCount");if(compteur){const total=lirePanier().reduce((sum,item)=>sum+Math.min(10,Math.max(1,Number(item.quantity)||1)),0);compteur.textContent=total?String(total):"";compteur.hidden=total===0}}
+  // Nettoyage unique des anciens paniers/favoris fantômes créés par les versions précédentes.
+  try{if(localStorage.getItem("cdc_badges_reset_v2")!=="1"){localStorage.setItem("cdc_cart","[]");localStorage.setItem("cdc_favorites","[]");localStorage.setItem("cdc_badges_reset_v2","1");}}catch{}
+  function lirePanier(){try{const data=JSON.parse(localStorage.getItem("cdc_cart")||"[]");return Array.isArray(data)?data.filter(item=>item&&typeof item==="object"&&(item.name||item.nom)&&Number.isFinite(Number(item.price??item.prix))&&Number(item.price??item.prix)>=0&&Number(item.quantity??1)>0):[]}catch{return[]}}
+  function lireFavoris(){try{const data=JSON.parse(localStorage.getItem("cdc_favorites")||"[]");return Array.isArray(data)?data.filter(item=>item&&typeof item==="object"&&(item.name||item.nom)&&Number.isFinite(Number(item.price??item.prix))&&Number(item.price??item.prix)>=0):[]}catch{return[]}}
+  function actualiserCompteurPanier(){const compteur=document.getElementById("cartCount");if(compteur){const total=lirePanier().reduce((sum,item)=>sum+Math.min(10,Math.max(1,Math.floor(Number(item.quantity)||1))),0);compteur.textContent=total?String(total):"";compteur.hidden=total===0}}
   function actualiserCompteurFavoris(){const compteur=document.getElementById("favoriteCount");if(compteur){const total=lireFavoris().length;compteur.textContent=total?String(total):"";compteur.hidden=total===0}}
   function initialiser(){
     document.querySelectorAll(".announcement, header.header, nav.main-nav, .utility-bar, footer").forEach(el=>el.remove());
