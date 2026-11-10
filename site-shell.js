@@ -57,20 +57,24 @@
     const style=document.createElement("style");
     style.id="cdc-theme-noir-integral";
     style.textContent=`
-      html,body{background:#000!important;color:#fff!important}
+      html,body{background:#000!important;background-image:none!important;color:#fff!important}
       body *:not(img):not(video):not(canvas):not(svg):not(path):not(.cdc-logo-image){
         background-color:#000!important;background-image:none!important;
         color:#fff!important;border-color:rgba(212,175,55,.55)!important;box-shadow:none!important;
       }
+      /* Visuel de la bague intégré au dépôt : fond noir réel, pas de fond gris */
       body .hero{
+        box-sizing:border-box!important;position:relative!important;overflow:hidden!important;
+        min-height:690px!important;padding:72px 7% 34px!important;
         background-color:#000!important;
-        background-image:linear-gradient(rgba(0,0,0,.90),rgba(0,0,0,.90)),url("https://bijouterielamalmaison.fr/wp-content/uploads/2026/05/AA1.webp")!important;
-        background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important;
-        background-blend-mode:multiply!important;color:#fff!important;text-align:center!important;
-        display:flex!important;align-items:center!important;justify-content:center!important;
+        background-image:url("/images/hero-ring.svg")!important;
+        background-position:center 205px!important;
+        background-size:min(100%,880px) auto!important;background-repeat:no-repeat!important;
+        color:#fff!important;text-align:center!important;
+        display:flex!important;align-items:flex-start!important;justify-content:center!important;
       }
-      body .hero-content{width:100%!important;max-width:1000px!important;margin:0 auto!important;text-align:center!important}
-      body .hero h1{color:#fff!important;text-align:center!important}
+      body .hero-content{position:relative!important;z-index:1!important;width:100%!important;max-width:1000px!important;margin:0 auto!important;text-align:center!important}
+      body .hero h1{color:#fff!important;text-align:center!important;margin:20px auto 0!important;max-width:900px!important}
       body .hero .eyebrow,body .eyebrow{color:#d4af37!important}
       body .hero-content>p:not(.eyebrow),body .hero .primary-button{display:none!important}
       body .store-showcase,body .store-showcase-image{background:#000!important;background-image:none!important;text-align:center!important}
@@ -88,7 +92,7 @@
       body select option{background:#000!important;color:#fff!important}
       body button,body .primary-button,body .secondary-button,body .checkout-button,body .pay-button,body button.primary,body .btn-primary{background:#d4af37!important;color:#000!important;border:1px solid #d4af37!important}
       @media(max-width:600px){
-        body .hero{min-height:calc(100svh - 95px)!important;padding:65px 7%!important}
+        body .hero{min-height:680px!important;padding:58px 7% 28px!important;background-position:center 230px!important;background-size:100% auto!important}
         body .hero h1{font-size:clamp(42px,11vw,58px)!important;line-height:1.04!important}
         body .store-showcase{padding:22px 12px 48px!important}
         body .store-showcase img{width:100%!important;max-height:none!important}
