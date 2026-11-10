@@ -321,7 +321,8 @@
           name: produit.nom,
           price: Number(produit.prix),
           quantity: quantite,
-          image: produit.image || ""
+          image: imagesProduit[0] || produit.image || "",
+          images: imagesProduit.length ? imagesProduit : (produit.image ? [produit.image] : [])
         });
       }
 
