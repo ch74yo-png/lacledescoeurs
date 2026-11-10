@@ -175,7 +175,7 @@ function afficherProduits() {
       : (Array.isArray(p.images) ? p.images : (p.image ? [p.image] : []));
     const image = images[0] || (typeof p.image === "string" ? p.image : "");
     const lien = "produit.html?id=" + encodeURIComponent(p.id);
-    const logoAttente = '<img class="product-placeholder-logo" src="assets/logo-officiel.svg" alt="LA CLÉ DES CŒURS" loading="lazy">';
+    const logoAttente = '<img class="product-placeholder-logo" src="/logo-officiel.jpg?v=20261110" alt="LA CLÉ DES CŒURS — Depuis 1974 — Bijoux Fins & Raffinés" loading="lazy">';
     const visuel = image
       ? `<img src="${echapperHTML(image)}" alt="${nom}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.innerHTML = \`${logoAttente}\`; this.parentElement.classList.add('has-placeholder-logo');">`
       : logoAttente;
