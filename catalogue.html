@@ -191,7 +191,7 @@ function afficherProduits() {
 
 function ajouterAuPanier(id) {
   const produit = obtenirProduits().find(p => String(p.id) === String(id));
-  if (!produit) return alert("Produit introuvable.");
+  if (!produit) return false;
 
   const panier = lireStock("cdc_cart");
   const existant = panier.find(p => String(p.id) === String(id));
@@ -210,17 +210,16 @@ function ajouterAuPanier(id) {
 
   localStorage.setItem("cdc_cart", JSON.stringify(panier));
   actualiserCompteurPanier();
-  alert("Produit ajouté au panier.");
+  window.dispatchEvent(new Event("cdc-cart-updated"));
+  return true;
 }
 
 function ajouterAuxFavoris(id) {
   const produit = obtenirProduits().find(p => String(p.id) === String(id));
-  if (!produit) return alert("Produit introuvable.");
+  if (!produit) return;
 
   const favoris = lireStock("cdc_favorites");
-  if (favoris.some(p => String(p.id) === String(id))) {
-    return alert("Ce produit est déjà dans vos favoris.");
-  }
+  if (favoris.some(p => String(p.id) === String(id))) return;
 
   favoris.push({
     id: produit.id,
@@ -230,14 +229,19 @@ function ajouterAuxFavoris(id) {
   });
 
   localStorage.setItem("cdc_favorites", JSON.stringify(favoris));
-  alert("Produit ajouté à vos favoris.");
+  window.dispatchEvent(new Event("cdc-favorites-updated"));
 }
 
 listeProduits.addEventListener("click", event => {
   const bouton = event.target.closest("button[data-action]");
   if (!bouton) return;
 
-  if (bouton.dataset.action === "acheter") { ajouterAuPanier(bouton.dataset.id); location.href = "commande.html"; }
+  if (bouton.dataset.action === "acheter") {
+    if (ajouterAuPanier(bouton.dataset.id)) {
+      window.location.assign("commande.html");
+    }
+    return;
+  }
   if (bouton.dataset.action === "panier") ajouterAuPanier(bouton.dataset.id);
   if (bouton.dataset.action === "favoris") ajouterAuxFavoris(bouton.dataset.id);
 });
