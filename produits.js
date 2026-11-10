@@ -135,6 +135,19 @@ const produits = [
     ficheSource: "https://bijouterielamalmaison.fr/product/cartier-santos-de-cartierwssa0062-ensemble-complet-garantie/"
   }),
 
+  // NOUVEAU PRODUIT AJOUTÉ
+  creerProduit(
+    "bracelet-chaine-cartier-love-7-pouces",
+    "Bracelet chaîne Cartier Love 7 pouces à emboîtement en or jaune 18 carats",
+    "Cartier",
+    1999,
+    null,
+    ["accessoires"],
+    {
+      description: "Condition : Occasion – Très bon état.\nÉtat : Ce bracelet Cartier est en très bon état. Toutes les parties fonctionnent correctement."
+    }
+  ),
+
   // PRODUIT SUPPLÉMENTAIRE
   creerProduit(
     "details",
@@ -148,70 +161,9 @@ const produits = [
 ];
 
 // =============================================
-// IMAGES DE REMPLACEMENT
-// Les images originales déjà renseignées sont conservées.
-// DETAILS reste sans photo générique.
+// Les photos non encore identifiées restent vides.
+// Aucune image générique n'est attribuée à un produit.
 // =============================================
-
-const imagesBijoux = [
-  "https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=900&q=85",
-  "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=900&q=85",
-  "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=900&q=85",
-  "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=900&q=85",
-  "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=85"
-];
-
-const imagesMontres = [
-  "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=900&q=85",
-  "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=900&q=85"
-];
-
-const imagesBracelets = [
-  "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=900&q=85",
-  "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=900&q=85",
-  "https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=900&q=85"
-];
-
-const imagesBagues = [
-  "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=900&q=85",
-  "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=85"
-];
-
-const imagesColliers = [
-  "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=85",
-  "https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=900&q=85"
-];
-
-produits.forEach((produit, index) => {
-  if (produit.id === "details") return;
-
-  if (produit.image && produit.image.trim() !== "") return;
-
-  const texte = [
-    produit.nom || "",
-    produit.marque || "",
-    produit.categorie || "",
-    ...(produit.categories || [])
-  ].join(" ").toLowerCase();
-
-  let collection = imagesBracelets;
-
-  if (texte.includes("montre") || texte.includes("watch")) {
-    collection = imagesMontres;
-  } else if (texte.includes("bague") || texte.includes("ring")) {
-    collection = imagesBagues;
-  } else if (texte.includes("collier") || texte.includes("pendentif")) {
-    collection = imagesColliers;
-  } else if (texte.includes("royal pop") || texte.includes("swatch")) {
-    collection = imagesMontres;
-  } else if (texte.includes("bracelet")) {
-    collection = imagesBracelets;
-  } else {
-    collection = imagesBijoux;
-  }
-
-  produit.image = collection[index % collection.length];
-});
 
 // =============================================
 // EXPORT DU CATALOGUE
