@@ -21,8 +21,15 @@
         <a class="cdc-icon-button" href="compte.html" aria-label="Mon compte">${icon.account}</a>
         <a class="cdc-icon-button favorites-link" href="favoris.html" aria-label="Mes favoris">${icon.heart}<span id="favoriteCount">0</span></a>
         <a class="cdc-icon-button cart-link" href="panier.html" aria-label="Mon panier">${icon.cart}<span id="cartCount">0</span></a>
-        <label class="cdc-language" aria-label="Choisir la langue"><span>${icon.globe}</span><select id="cdcLanguage" aria-label="Langue"><option value="fr">FR</option><option value="en">EN</option><option value="es">ES</option><option value="de">DE</option><option value="it">IT</option><option value="pt">PT</option><option value="nl">NL</option></select></label>
-        <button class="cdc-icon-button theme-button" id="cdcThemeButton" type="button" aria-label="Changer le thème">${icon.moon}</button>
+        <label class="cdc-language cdc-language-globe" aria-label="Choisir la langue"><span>${icon.globe}</span><select id="cdcLanguage" aria-label="Langue" title="Choisir la langue">
+          <option value="fr">Français</option><option value="en">English</option>
+          <option value="es">Español</option><option value="de">Deutsch</option>
+          <option value="it">Italiano</option><option value="pt">Português</option>
+          <option value="ar">العربية</option><option value="zh-CN">中文</option>
+          <option value="ja">日本語</option><option value="hi">हिन्दी</option>
+          <option value="ru">Русский</option><option value="nl">Nederlands</option>
+          <option value="sw">Kiswahili</option>
+        </select></label>
       </div>
     </header>
     <nav class="main-nav cdc-nav" id="mainNav" aria-label="Navigation principale">
@@ -90,10 +97,7 @@
     const searchButton=document.getElementById("cdcSearchButton"),searchBox=document.getElementById("cdcSearch"),searchForm=document.getElementById("cdcSearchForm"),searchInput=document.getElementById("cdcSearchInput");
     searchButton?.addEventListener("click",()=>{searchBox.hidden=!searchBox.hidden;if(!searchBox.hidden)searchInput.focus()});
     searchForm?.addEventListener("submit",e=>{e.preventDefault();const q=searchInput.value.trim();location.href=q?"catalogue.html?recherche="+encodeURIComponent(q):"catalogue.html"});
-    const themeButton=document.getElementById("cdcThemeButton");
-    if(localStorage.getItem("cdc_theme")==="dark")document.body.classList.add("theme-dark");
-    const updateThemeIcon=()=>{if(themeButton)themeButton.innerHTML=document.body.classList.contains("theme-dark")?icon.sun:icon.moon};
-    updateThemeIcon();themeButton?.addEventListener("click",()=>{document.body.classList.toggle("theme-dark");localStorage.setItem("cdc_theme",document.body.classList.contains("theme-dark")?"dark":"light");updateThemeIcon()});
+    /* Le bouton de changement de thème est volontairement retiré de l'en-tête. */
     const language=document.getElementById("cdcLanguage");
     if(language){language.value=localStorage.getItem("cdc_language")||"fr";language.addEventListener("change",()=>{const lang=language.value;localStorage.setItem("cdc_language",lang);if(lang==="fr")location.href=location.pathname+location.search+location.hash;else location.href="https://translate.google.com/translate?sl=fr&tl="+encodeURIComponent(lang)+"&u="+encodeURIComponent(location.href)})}
     actualiserCompteurPanier();actualiserCompteurFavoris();
