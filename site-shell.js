@@ -42,7 +42,7 @@
       <div class="footer-brand cdc-footer-brand"><a href="index.html" aria-label="Accueil">${logo}</a></div>
       <div class="footer-column"><h4>LA BOUTIQUE</h4><a href="index.html">Accueil</a><a href="catalogue.html">Catalogue</a><a href="favoris.html">Favoris</a><a href="panier.html">Panier</a><a href="contact.html">Contact</a></div>
       <div class="footer-column"><h4>INFORMATIONS</h4><a href="livraison-retours.html">Livraison et retours</a><a href="conditions-generales.html">Conditions générales de vente</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a></div>
-      <div class="footer-contact"><h4>CONTACT</h4><a href="mailto:lacledescoeurs@outlook.fr">lacledescoeurs@outlook.fr</a><a href="tel:+33780950371">+33 7 80 95 03 71</a><a href="https://www.google.com/maps/search/?api=1&query=38%20Bd%20du%20Mar%C3%A9chal%20Foch%2C%2049100%20Angers%2C%20France">38 Bd du Maréchal Foch, 49100 Angers, France</a></div>
+      <div class="footer-contact"><h4>CONTACTEZ-NOUS</h4><a href="mailto:lacledescoeurs@outlook.fr">lacledescoeurs@outlook.fr</a><a href="tel:+33780950371">+33 7 80 95 03 71</a><a href="https://www.google.com/maps/search/?api=1&query=38%20Bd%20du%20Mar%C3%A9chal%20Foch%2C%2049100%20Angers%2C%20France">38 Bd du Maréchal Foch, 49100 Angers, France</a></div>
       <div class="footer-bottom">© <span id="cdcYear"></span> LA CLÉ DES CŒURS. Tous droits réservés.</div>
     </footer>`;
 
@@ -82,6 +82,24 @@
       body .store-collection-button{display:inline-flex!important;align-items:center!important;justify-content:center!important;margin:28px auto 0!important;padding:16px 38px!important;min-height:58px!important;background:#d4af37!important;color:#000!important;border:1px solid #d4af37!important}
       body img,body .cdc-logo,body .cdc-logo img,body .cdc-logo-image{filter:none!important;opacity:1!important}
       body .cdc-header,body .cdc-footer,body .cdc-nav,body .cdc-search{background:#000!important;color:#fff!important}
+      body .cdc-footer{
+        display:grid!important;
+        grid-template-columns:repeat(3,minmax(0,1fr))!important;
+        justify-items:center!important;
+        align-items:start!important;
+        gap:28px 36px!important;
+        padding:42px 6% 22px!important;
+        text-align:center!important;
+      }
+      body .cdc-footer .cdc-footer-brand{grid-column:1/-1!important;justify-self:center!important;text-align:center!important;width:100%!important;margin:0 auto 4px!important}
+      body .cdc-footer .footer-column,body .cdc-footer .footer-contact{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;text-align:center!important;min-width:0!important;width:100%!important;gap:10px!important}
+      body .cdc-footer .footer-column h4,body .cdc-footer .footer-contact h4{margin:0 0 8px!important;text-align:center!important}
+      body .cdc-footer .footer-column a,body .cdc-footer .footer-contact a{display:block!important;text-align:center!important;line-height:1.7!important;overflow-wrap:anywhere!important}
+      body .cdc-footer .footer-bottom{grid-column:1/-1!important;width:100%!important;text-align:center!important;margin-top:12px!important}
+      @media(max-width:650px){
+        body .cdc-footer{grid-template-columns:1fr!important;gap:25px!important;padding:34px 20px 20px!important}
+        body .cdc-footer .cdc-footer-brand,body .cdc-footer .footer-bottom{grid-column:1!important}
+      }
       body .cdc-header .cdc-icon-button,body .cdc-header .header-actions,body .cdc-header .header-actions a,body .cdc-header .header-actions button,body .cdc-header .cdc-language,body .cdc-header .cdc-language>span,body .cdc-header .cdc-language select{color:#fff!important}
       body .cdc-header .cdc-icon-button svg,body .cdc-header .cdc-language svg{color:#fff!important;stroke:#fff!important}
       body .cdc-header .hamburger-lines i{background:#fff!important}
