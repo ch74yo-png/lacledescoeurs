@@ -228,9 +228,10 @@
 
       <section class="checkout-card">
         <h2 class="checkout-step-number">3</h2>
-        <div id="step3Preview" class="checkout-customer-preview"><p>Vos coordonnées et votre adresse de livraison apparaîtront ici au fur et à mesure de la saisie.</p></div>
+        <div id="step3Preview" class="checkout-customer-preview"></div>
         <button class="checkout-button" type="submit">CONTINUER</button>
-      </section>\n    </form>
+      </section>
+    </form>
   </div>
 </main>
 
@@ -247,7 +248,12 @@ function shippingFor(code){if(!code)return null;if(code==="GH"||["NG","ZA","KE",
 function signature(){return cart.map(p=>String(p.id)+":"+Math.max(1,Number(p.quantity)||1)).sort().join("|");}
 function orderReference(){const sig=signature();let ref=localStorage.getItem(ORDER_REF_KEY);if(!ref||localStorage.getItem(ORDER_SIG_KEY)!==sig){const alphabet="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",bytes=new Uint8Array(8);crypto.getRandomValues(bytes);ref="CDC-"+Array.from(bytes,b=>alphabet[b%alphabet.length]).join("");localStorage.setItem(ORDER_REF_KEY,ref);localStorage.setItem(ORDER_SIG_KEY,sig);}return ref;}
 const value=id=>document.getElementById(id).value.trim(),escapeHtml=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function preview(){const rows=[["Nom",value("fullName")],["E-mail",value("email")],["Téléphone",value("phone")],["Adresse",value("address")],["Code postal",value("postalCode")],["Ville",value("city")],["Pays",countrySelect.value?countrySelect.options[countrySelect.selectedIndex].textContent:""]];document.getElementById("step3Preview").innerHTML=rows.map(([k,v])=>'<p><strong style="display:inline;color:#e6c58e;margin:0">'+k+' :</strong> '+escapeHtml(v||"—")+'</p>').join("");}
+function preview(){
+ const values=["fullName","email","phone","address","postalCode","city"].map(value);
+ const country=countrySelect.value?countrySelect.options[countrySelect.selectedIndex].textContent:"";
+ const all=[...values,country].filter(v=>v);
+ document.getElementById("step3Preview").textContent=all.join(" · ");
+}
 document.querySelectorAll("#checkoutForm input,#checkoutForm select").forEach(el=>el.addEventListener("input",preview));countrySelect.addEventListener("change",preview);
 document.getElementById("checkoutForm").addEventListener("submit",event=>{event.preventDefault();const form=event.currentTarget;if(!cart.length){alert("Votre panier est vide.");return;}if(!form.reportValidity())return;const shipping=shippingFor(countrySelect.value);if(shipping===null){alert("La livraison n'est pas disponible pour ce pays. Veuillez contacter la boutique.");return;}const fullName=value("fullName"),customer={fullName,firstName:fullName.split(/\s+/)[0],lastName:fullName.split(/\s+/).slice(1).join(" "),email:value("email"),phone:value("phone"),country:countryNames.of(countrySelect.value),countryCode:countrySelect.value,address:value("address"),postalCode:value("postalCode"),city:value("city")};localStorage.setItem("cdc_customer",JSON.stringify(customer));localStorage.setItem(ORDER_REF_KEY,orderReference());localStorage.setItem("cdc_shipping",JSON.stringify({amount:shipping,currency:"EUR"}));localStorage.setItem("cdc_promo",JSON.stringify({code:"",discount:0}));window.location.assign("recapitulatif.html");});
 preview();
