@@ -13,7 +13,7 @@
 
   const logo = `
     <span class="cdc-logo">
-      <img src="assets/logo-officiel.svg"
+      <img src="assets/logo-boutique-exact.jpg"
            alt="LA CLÉ DES CŒURS — Depuis 1974 — Bijoux fins et raffinés">
     </span>`;
 
