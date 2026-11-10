@@ -266,12 +266,15 @@ function afficherPanier() {
     details.append(titre, prixTexte, sousTotalTexte);
     const actions = document.createElement("div");
     actions.className = "cart-item-actions";
-    const quantityInput = document.createElement("input");
-    quantityInput.type = "number";
-    quantityInput.min = "1";
-    quantityInput.max = "10";
-    quantityInput.value = String(quantiteArticle(article));
+    const quantityInput = document.createElement("select");
     quantityInput.setAttribute("aria-label", "Quantité de " + nomArticle(article));
+    for (let q = 1; q <= 10; q++) {
+      const option = document.createElement("option");
+      option.value = String(q);
+      option.textContent = String(q);
+      if (q === quantiteArticle(article)) option.selected = true;
+      quantityInput.appendChild(option);
+    }
     quantityInput.addEventListener("change", () => {
       const panierMisAJour = lirePanier();
       if (!panierMisAJour[index]) return;
