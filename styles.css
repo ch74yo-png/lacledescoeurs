@@ -1836,3 +1836,21 @@ p,li,dt,dd,label,small,strong,em,
   stroke:#ffffff!important;
 }
 .cdc-header .hamburger-lines i{background:#ffffff!important}
+
+
+/* Accent doré prioritaire sur les sélecteurs globaux du thème noir */
+body .product-price,body .favorite-price,body .detail-price,
+body .checkout-total,body .payment-total,body .price,
+body .home-category-heading a,
+body .cdc-footer .footer-column h4,
+body .cdc-footer .footer-contact h4{
+  color:#d9ad45!important;
+}
+body .hero .eyebrow,
+body .section-heading h2,
+body .home-category-heading h2{
+  color:#d9ad45!important;
+}
+body .hero h1,body .hero-content>p:not(.eyebrow){
+  color:#ffffff!important;
+}
