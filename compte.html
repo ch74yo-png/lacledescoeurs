@@ -117,6 +117,10 @@
     <p>Retrouvez les coordonnées enregistrées lors de votre commande.</p>
   </header>
   <section class="account-card">
+    <h2>Mes commandes</h2>
+    <div id="ordersContent"><div class="account-empty">Chargement de vos commandes...</div></div>
+  </section>
+  <section class="account-card">
     <h2>Mes coordonnées</h2>
     <div id="accountContent">
       <div class="account-empty">
@@ -164,49 +168,40 @@ function afficherChamp(label, valeur) {
   conteneur.append(titre, texte);
   return conteneur;
 }
+function afficherCommandes(){
+  const host=document.getElementById("ordersContent");
+  let orders=[];
+  try{const data=JSON.parse(localStorage.getItem("cdc_orders")||"[]");orders=Array.isArray(data)?data:[];}catch{}
+  host.replaceChildren();
+  if(!orders.length){const empty=document.createElement("div");empty.className="account-empty";empty.textContent="Aucune commande enregistrée pour le moment.";host.appendChild(empty);return;}
+  orders.slice().sort((x,y)=>new Date(y.date||0)-new Date(x.date||0)).forEach(order=>{
+    const card=document.createElement("article");card.style.cssText="padding:16px 0;border-bottom:1px solid var(--line)";
+    const heading=document.createElement("div");heading.style.cssText="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-weight:600";
+    const ref=document.createElement("span");ref.textContent=order.reference||"Commande";
+    const date=document.createElement("span");date.textContent=order.date?new Date(order.date).toLocaleDateString("fr-FR"):"";
+    heading.append(ref,date);card.appendChild(heading);
+    (order.items||[]).forEach(item=>{const line=document.createElement("p");line.style.cssText="margin:8px 0;color:var(--muted);font-size:13px";line.textContent=(item.name||"Article")+" × "+(Number(item.quantity)||1);card.appendChild(line);});
+    const total=document.createElement("p");total.style.cssText="margin:10px 0 0;font-weight:600";total.textContent="Total : "+new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR"}).format(Number(order.total)||0);card.appendChild(total);
+    const status=document.createElement("p");status.style.cssText="margin:6px 0 0;color:var(--muted);font-size:11px";status.textContent="Paiement confirmé";card.appendChild(status);host.appendChild(card);
+  });
+}
 function afficherCompte() {
   const client = lireCoordonnees();
   accountContent.replaceChildren();
   if (!client) {
-    const message = document.createElement("div");
-    message.className = "account-empty";
-    const texte = document.createElement("p");
-    texte.textContent =
-      "Aucune coordonnée n'est encore enregistrée.";
-    const lien = document.createElement("a");
-    lien.href = "catalogue.html";
-    lien.className = "account-button";
-    lien.textContent = "DÉCOUVRIR LA BOUTIQUE";
-    message.append(texte, lien);
-    accountContent.appendChild(message);
-    return;
+    const message = document.createElement("div");message.className="account-empty";
+    const texte = document.createElement("p");texte.textContent="Aucune coordonnée n'est encore enregistrée.";
+    const lien = document.createElement("a");lien.href="catalogue.html";lien.className="account-button";lien.textContent="DÉCOUVRIR LA BOUTIQUE";
+    message.append(texte,lien);accountContent.appendChild(message);return;
   }
-  const grille = document.createElement("div");
-  grille.className = "account-details";
-  grille.append(
-    afficherChamp("NOM COMPLET", client.fullName),
-    afficherChamp("ADRESSE MAIL", client.email),
-    afficherChamp("TÉLÉPHONE", client.phone),
-    afficherChamp("PAYS", client.country),
-    afficherChamp("ADRESSE", client.address),
-    afficherChamp("COMPLÉMENT D'ADRESSE", client.addressExtra),
-    afficherChamp("CODE POSTAL", client.postalCode),
-    afficherChamp("VILLE", client.city)
-  );
-  const actions = document.createElement("div");
-  actions.className = "account-actions";
-  const modifier = document.createElement("a");
-  modifier.href = "commande.html";
-  modifier.className = "account-button";
-  modifier.textContent = "PASSER UNE COMMANDE";
-  actions.appendChild(modifier);
-  const notice = document.createElement("p");
-  notice.className = "account-notice";
-  notice.textContent =
-    "Ces coordonnées sont enregistrées dans le navigateur de cet appareil. " +
-    "Cette page ne constitue pas encore un compte client avec connexion sécurisée.";
-  accountContent.append(grille, actions, notice);
+  const grille=document.createElement("div");grille.className="account-details";
+  grille.append(afficherChamp("NOM COMPLET",client.fullName),afficherChamp("ADRESSE MAIL",client.email),afficherChamp("TÉLÉPHONE",client.phone),afficherChamp("PAYS",client.country),afficherChamp("ADRESSE",client.address),afficherChamp("COMPLÉMENT D'ADRESSE",client.addressExtra),afficherChamp("CODE POSTAL",client.postalCode),afficherChamp("VILLE",client.city));
+  const actions=document.createElement("div");actions.className="account-actions";
+  const modifier=document.createElement("a");modifier.href="commande.html";modifier.className="account-button";modifier.textContent="PASSER UNE COMMANDE";actions.appendChild(modifier);
+  const notice=document.createElement("p");notice.className="account-notice";notice.textContent="Ces informations et l’historique des commandes sont enregistrés dans le navigateur de cet appareil. Ils ne sont pas encore synchronisés entre plusieurs appareils par un compte avec connexion sécurisée.";
+  accountContent.append(grille,actions,notice);
 }
+afficherCommandes();
 afficherCompte();
 </script>
 <script src="site-shell.js?v=20261110-logo-mobile-fix" defer></script>
