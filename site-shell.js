@@ -58,7 +58,7 @@
     const style=document.createElement("style");
     style.id="cdc-theme-noir-integral";
     style.textContent=`
-      body .cdc-footer{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+      body .cdc-footer{grid-template-columns:repeat(4,minmax(0,1fr))!important}
       body .cdc-footer .footer-contact-form{grid-column:1/-1!important;max-width:680px!important;justify-self:center!important}
       body .cdc-footer .cdc-footer-contact-form{display:grid!important;grid-template-columns:1fr 1fr!important;gap:9px 14px!important;width:100%!important;text-align:left!important}
       body .cdc-footer .cdc-footer-contact-form label{display:block!important;text-align:left!important;font-size:11px!important}
@@ -95,7 +95,7 @@
       body .cdc-header,body .cdc-footer,body .cdc-nav,body .cdc-search{background:#000!important;color:#fff!important}
       body .cdc-footer{
         display:grid!important;
-        grid-template-columns:repeat(3,minmax(0,1fr))!important;
+        grid-template-columns:repeat(4,minmax(0,1fr))!important;
         justify-items:center!important;
         align-items:start!important;
         gap:28px 36px!important;
