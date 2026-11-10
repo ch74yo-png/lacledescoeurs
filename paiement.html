@@ -109,7 +109,7 @@
   .payment-page{margin:18px auto;padding:12px 13px 45px}
   .payment-card{padding:18px}
 }
-</style>
+ .payment-product-line{display:grid;grid-template-columns:76px minmax(0,1fr) auto;align-items:center;gap:12px}.payment-product-image{width:76px;height:76px;object-fit:contain;background:#111}@media(max-width:520px){.payment-product-line{grid-template-columns:58px minmax(0,1fr) auto}.payment-product-image{width:58px;height:58px}}\n</style>
 </head>
 
 <body>
@@ -206,7 +206,7 @@ function showError(text){
 }
 
 function displayCustomer(){
-  document.getElementById("orderReferenceDisplay").textContent=orderReference?"Numéro de commande : "+orderReference:"Commande";
+  document.getElementById("orderReferenceDisplay").textContent=orderReference?"N° "+orderReference:"N° indisponible";
   const rows=[
     ["Nom complet",customer.fullName],
     ["E-mail",customer.email],
@@ -232,8 +232,10 @@ function displayCart(){
       const quantity=Number(item.quantity)||1;
       const price=Number(item.price)||0;
 
+      const image=item.image||(Array.isArray(item.images)?item.images[0]:"")||item.photo||"";
       return `
-        <div class="payment-line">
+        <div class="payment-line payment-product-line">
+          ${image ? `<img class="payment-product-image" src="${safe(image)}" alt="${safe(item.name||item.nom||"Article")}" loading="eager">` : ""}
           <span>${safe(item.name||item.nom||"Article")} × ${quantity}</span>
           <strong>${safe(moneyEuros(price*quantity))}</strong>
         </div>
