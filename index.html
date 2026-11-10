@@ -363,9 +363,12 @@
               <a href="${lien}">${nom}</a>
             </h3>
             <div class="home-product-price">${prixFormate(produit.prix)}</div>
-            <a class="home-product-link" href="${lien}">
-              DÉCOUVRIR
-            </a>
+            <div class="home-product-actions">
+              <button type="button" data-home-action="acheter" data-id="${echapperHTML(produit.id)}">ACHETER</button>
+              <button type="button" data-home-action="panier" data-id="${echapperHTML(produit.id)}">AJOUTER AU PANIER</button>
+              <button type="button" data-home-action="favoris" data-id="${echapperHTML(produit.id)}">♡ FAVORIS</button>
+            </div>
+            <a class="home-product-link" href="${lien}">DÉCOUVRIR</a>
           </div>
         </article>
       `;
@@ -398,6 +401,36 @@
 
       conteneur.innerHTML = selection.map(carteProduit).join("");
     }
+
+    document.addEventListener("click", event => {
+      const bouton = event.target.closest("button[data-home-action]");
+      if (!bouton) return;
+      const produit = (window.produits || []).find(p => String(p.id) === String(bouton.dataset.id));
+      if (!produit) return;
+      let panier = [];
+      try { panier = JSON.parse(localStorage.getItem("cdc_cart") || "[]"); } catch {}
+      if (!Array.isArray(panier)) panier = [];
+      if (bouton.dataset.homeAction === "acheter" || bouton.dataset.homeAction === "panier") {
+        const existant = panier.find(item => String(item.id) === String(produit.id));
+        if (existant) existant.quantity = Number(existant.quantity || 0) + 1;
+        else panier.push({id:produit.id,name:produit.nom,price:Number(produit.prix),quantity:1,image:produit.image || ""});
+        localStorage.setItem("cdc_cart", JSON.stringify(panier));
+        window.dispatchEvent(new Event("cdc-cart-updated"));
+        if (bouton.dataset.homeAction === "acheter") location.href = "commande.html";
+        else alert("Produit ajouté au panier.");
+        return;
+      }
+      if (bouton.dataset.homeAction === "favoris") {
+        let favoris = [];
+        try { favoris = JSON.parse(localStorage.getItem("cdc_favorites") || "[]"); } catch {}
+        if (!Array.isArray(favoris)) favoris = [];
+        if (!favoris.some(item => String(item.id) === String(produit.id))) {
+          favoris.push({id:produit.id,name:produit.nom,price:Number(produit.prix),image:produit.image || ""});
+          localStorage.setItem("cdc_favorites", JSON.stringify(favoris));
+          alert("Produit ajouté à vos favoris.");
+        } else alert("Ce produit est déjà dans vos favoris.");
+      }
+    });
 
     afficherCategorie("accessoires", "products-accessoires");
     afficherCategorie("ap-swatch", "products-ap-swatch");
