@@ -174,8 +174,9 @@ function afficherProduits() {
           <h2 class="product-name"><a href="${lien}">${nom}</a></h2>
           <div class="product-price">${ancienPrix}${formaterPrix(p.prix)}</div>
           <div class="product-actions">
-            <button type="button" data-action="panier" data-id="${id}">Ajouter au panier</button>
-            <button type="button" data-action="favoris" data-id="${id}">♡ Favoris</button>
+            <button type="button" data-action="acheter" data-id="${id}">ACHETER</button>
+            <button type="button" data-action="panier" data-id="${id}">AJOUTER AU PANIER</button>
+            <button type="button" data-action="favoris" data-id="${id}">♡ AJOUTER AUX FAVORIS</button>
           </div>
         </div>
       </article>
@@ -231,6 +232,7 @@ listeProduits.addEventListener("click", event => {
   const bouton = event.target.closest("button[data-action]");
   if (!bouton) return;
 
+  if (bouton.dataset.action === "acheter") { ajouterAuPanier(bouton.dataset.id); location.href = "commande.html"; }
   if (bouton.dataset.action === "panier") ajouterAuPanier(bouton.dataset.id);
   if (bouton.dataset.action === "favoris") ajouterAuxFavoris(bouton.dataset.id);
 });
