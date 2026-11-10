@@ -242,7 +242,7 @@ listeProduits.addEventListener("click", event => {
   const bouton = event.target.closest("button[data-action]");
   if (!bouton) return;
   const quantityInput=bouton.closest(".product-info")?.querySelector(".catalogue-quantity");
-  const quantity=Math.max(1,Math.min(15,Math.floor(Number(quantityInput?.value)||1)));
+  const quantity=Math.max(1,Math.min(10,Math.floor(Number(quantityInput?.value)||1)));
 
   if (bouton.dataset.action === "acheter") {
     if (ajouterAuPanier(bouton.dataset.id,quantity)) {
