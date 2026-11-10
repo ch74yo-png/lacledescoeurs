@@ -1688,3 +1688,98 @@ button.primary,.btn-primary{
   color:#080808!important;
   border-color:#c9a45e!important;
 }
+
+
+/* THÈME NOIR UNIFORME — dernière règle prioritaire sur toutes les anciennes couleurs */
+html,body,body.theme-dark,body:not(.theme-dark),
+body *:not(img):not(video):not(canvas):not(svg):not(path):not(.cdc-logo-image){
+  background-color:transparent;
+}
+html,body,body.theme-dark,body:not(.theme-dark),
+main,header,footer,section,article,aside,nav,
+.page-content,.welcome-section,.categories-section,.featured-section,
+.editorial-section,.home-category,.home-category:nth-child(even),
+.checkout-page,.payment-page,.catalogue-heading,.favorites-heading,
+.account-heading,.cart-page,.contact-page,.legal-page,.info-page,
+.products-grid .product-card,.product-card,.product-item,
+.favorites-grid .favorite-card,.favorite-card,
+.account-card,.cart-item,.checkout-card,.payment-card,
+.category-card,.contact-card,.info-card,.legal-card,
+.checkout-customer-preview,.product-description,.product-details,
+.product-specifications,.description-box,.details-box,
+.accordion-item,.faq-item,.contact-info,.contact-form,
+.order-summary,.checkout-summary,.payment-method,
+.modal-content,.dropdown-menu,.cdc-search,.cdc-nav,
+.cdc-header,.cdc-header>.cdc-nav,.cdc-footer,
+.cdc-footer .footer-column,.cdc-footer .footer-contact{
+  background:#000000!important;
+  background-image:none!important;
+  color:#ffffff!important;
+  border-color:#242424!important;
+}
+body,body *:not(img):not(video):not(canvas):not(svg):not(path){
+  color:#ffffff!important;
+}
+h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,small,strong,em,
+.product-name,.product-name a,.product-info,.product-description,
+.product-card p,.product-item p,.favorite-info,.favorite-info h2,
+.cart-item h2,.cart-item-price,.checkout-card h2,.payment-card h2,
+.checkout-card label,.payment-card label,.checkout-line,.payment-line,
+.checkout-customer-preview p,.catalogue-heading p,.favorites-heading p,
+.section-heading p,.home-category-heading p,.contact-info p,
+.contact-card p,.info-card p,.legal-card p,
+.cdc-footer a,.cdc-footer .footer-bottom{
+  color:#ffffff!important;
+}
+.product-price,.favorite-price,.detail-price,.checkout-total,
+.payment-total,.price{
+  color:#ffffff!important;
+}
+/* Icônes de navigation blanches, sans modifier le logo */
+.cdc-header .cdc-icon-button,
+.cdc-header .header-actions,
+.cdc-header .cdc-language,
+.cdc-header .cdc-language>span,
+.cdc-header .cdc-language select,
+.cdc-header .menu-button{
+  color:#ffffff!important;
+}
+.cdc-header .cdc-icon-button svg,
+.cdc-header .cdc-language svg,
+.cdc-header .menu-button svg{
+  color:#ffffff!important;
+  stroke:#ffffff!important;
+}
+.cdc-header .hamburger-lines i{
+  background:#ffffff!important;
+}
+/* Champs de saisie noirs avec texte et bordures visibles */
+input:not([type="checkbox"]):not([type="radio"]),
+select,textarea,
+.cdc-search input,.search-form input,
+.checkout-form input:not([type="checkbox"]),
+.checkout-form select,.checkout-form textarea,.checkout-promo input{
+  background:#080808!important;
+  color:#ffffff!important;
+  border:1px solid #555555!important;
+}
+input::placeholder,textarea::placeholder{
+  color:#d0d0d0!important;
+  opacity:1!important;
+}
+select option{background:#000000!important;color:#ffffff!important}
+/* Les images des bijoux et le fichier logo restent strictement inchangés */
+img,.cdc-logo img,.cdc-logo-image{
+  filter:none!important;
+}
+.cdc-logo,.cdc-logo img,.cdc-logo-image{
+  background:transparent!important;
+  opacity:1!important;
+}
+/* Boutons noirs avec texte blanc pour conserver l'uniformité */
+.primary-button,.checkout-button,.pay-button,
+button.primary,.btn-primary{
+  background:#000000!important;
+  color:#ffffff!important;
+  border:1px solid #ffffff!important;
+}
