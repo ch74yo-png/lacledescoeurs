@@ -52,7 +52,55 @@
   function lireFavoris(){try{const data=JSON.parse(localStorage.getItem("cdc_favorites")||"[]");return Array.isArray(data)?data.filter(item=>item&&typeof item==="object"&&(item.name||item.nom)&&Number.isFinite(Number(item.price??item.prix))&&Number(item.price??item.prix)>=0):[]}catch{return[]}}
   function actualiserCompteurPanier(){const compteur=document.getElementById("cartCount");if(compteur){const total=lirePanier().reduce((sum,item)=>sum+Math.min(10,Math.max(1,Math.floor(Number(item.quantity)||1))),0);compteur.textContent=total?String(total):"";compteur.hidden=total===0}}
   function actualiserCompteurFavoris(){const compteur=document.getElementById("favoriteCount");if(compteur){const total=lireFavoris().length;compteur.textContent=total?String(total):"";compteur.hidden=total===0}}
+  function appliquerThemeNoirIntegral(){
+    if(document.getElementById("cdc-theme-noir-integral")) return;
+    const style=document.createElement("style");
+    style.id="cdc-theme-noir-integral";
+    style.textContent=`
+      html,body{background:#000!important;color:#fff!important}
+      body *:not(img):not(video):not(canvas):not(svg):not(path):not(.cdc-logo-image){
+        background-color:#000!important;background-image:none!important;
+        color:#fff!important;border-color:rgba(212,175,55,.55)!important;box-shadow:none!important;
+      }
+      body .hero{
+        background-color:#000!important;
+        background-image:linear-gradient(rgba(0,0,0,.90),rgba(0,0,0,.90)),url("https://bijouterielamalmaison.fr/wp-content/uploads/2026/05/AA1.webp")!important;
+        background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important;
+        background-blend-mode:multiply!important;color:#fff!important;text-align:center!important;
+        display:flex!important;align-items:center!important;justify-content:center!important;
+      }
+      body .hero-content{width:100%!important;max-width:1000px!important;margin:0 auto!important;text-align:center!important}
+      body .hero h1{color:#fff!important;text-align:center!important}
+      body .hero .eyebrow,body .eyebrow{color:#d4af37!important}
+      body .hero-content>p:not(.eyebrow),body .hero .primary-button{display:none!important}
+      body .store-showcase,body .store-showcase-image{background:#000!important;background-image:none!important;text-align:center!important}
+      body .store-showcase img{filter:none!important;opacity:1!important;object-fit:contain!important}
+      body .store-showcase p{color:#fff!important;text-align:center!important}
+      body .store-collection-button{display:inline-flex!important;align-items:center!important;justify-content:center!important;margin:28px auto 0!important;padding:16px 38px!important;min-height:58px!important;background:#d4af37!important;color:#000!important;border:1px solid #d4af37!important}
+      body img,body .cdc-logo,body .cdc-logo img,body .cdc-logo-image{filter:none!important;opacity:1!important}
+      body .cdc-header,body .cdc-footer,body .cdc-nav,body .cdc-search{background:#000!important;color:#fff!important}
+      body .cdc-header .cdc-icon-button,body .cdc-header .header-actions,body .cdc-header .header-actions a,body .cdc-header .header-actions button,body .cdc-header .cdc-language,body .cdc-header .cdc-language>span,body .cdc-header .cdc-language select{color:#fff!important}
+      body .cdc-header .cdc-icon-button svg,body .cdc-header .cdc-language svg{color:#fff!important;stroke:#fff!important}
+      body .cdc-header .hamburger-lines i{background:#fff!important}
+      body .product-price,body .favorite-price,body .detail-price,body .price,body .checkout-total,body .payment-total,body .home-category-heading h2 a,body .home-category-heading>a,body .cdc-footer .footer-column h4,body .cdc-footer .footer-contact h4,body .category-link{color:#d4af37!important}
+      body input:not([type=checkbox]):not([type=radio]),body select,body textarea{background:#080808!important;color:#fff!important;border:1px solid #d4af37!important}
+      body input::placeholder,body textarea::placeholder{color:#ddd!important;opacity:1!important}
+      body select option{background:#000!important;color:#fff!important}
+      body button,body .primary-button,body .secondary-button,body .checkout-button,body .pay-button,body button.primary,body .btn-primary{background:#d4af37!important;color:#000!important;border:1px solid #d4af37!important}
+      @media(max-width:600px){
+        body .hero{min-height:calc(100svh - 95px)!important;padding:65px 7%!important}
+        body .hero h1{font-size:clamp(42px,11vw,58px)!important;line-height:1.04!important}
+        body .store-showcase{padding:22px 12px 48px!important}
+        body .store-showcase img{width:100%!important;max-height:none!important}
+        body .store-showcase p{font-size:25px!important;line-height:1.3!important}
+        body .store-collection-button{width:min(100%,340px)!important;padding:15px 18px!important;font-size:10px!important}
+      }
+    `;
+    document.body.appendChild(style);
+  }
+
   function initialiser(){
+    appliquerThemeNoirIntegral();
     document.querySelectorAll(".announcement, header.header, nav.main-nav, .utility-bar, footer").forEach(el=>el.remove());
     document.body.insertAdjacentHTML("afterbegin",header);
     document.body.insertAdjacentHTML("beforeend",footer);
