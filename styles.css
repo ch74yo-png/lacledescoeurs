@@ -1214,3 +1214,54 @@ body.theme-dark .cdc-header{background:#11100f!important}
   .cdc-logo{max-width:125px!important}
   .cdc-header .cdc-icon-button{flex-basis:21px!important;width:21px!important}
 }
+
+
+/* Logo final validé : composition centrée, fond transparent, rendu net sur chocolat */
+.cdc-header{background:#2b160f!important}
+.cdc-footer{background:#2b160f!important;color:#f5eee5!important}
+.cdc-footer-brand{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  width:100%!important;
+  margin:0 auto 42px!important;
+}
+.cdc-footer-brand>a{
+  display:block!important;
+  width:min(520px,90vw)!important;
+  margin:0 auto!important;
+}
+.cdc-footer-brand .cdc-logo{
+  display:block!important;
+  width:100%!important;
+  max-width:520px!important;
+  margin:0 auto!important;
+}
+.cdc-footer-brand .cdc-logo img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  object-fit:contain!important;
+  background:transparent!important;
+}
+.cdc-footer .footer-column h4,
+.cdc-footer .footer-contact h4{color:#e7bd58!important}
+.cdc-footer .footer-column a,
+.cdc-footer .footer-contact a{color:#f0e8df!important}
+.cdc-brand .cdc-logo img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  object-fit:contain!important;
+  background:transparent!important;
+}
+@media(max-width:760px){
+  .cdc-footer-brand{margin-bottom:34px!important}
+  .cdc-footer-brand>a{width:min(460px,90vw)!important}
+  .cdc-footer-brand .cdc-logo{max-width:460px!important}
+  .cdc-brand .cdc-logo{max-width:150px!important}
+  .cdc-brand .cdc-logo img{width:100%!important}
+}
+@media(max-width:380px){
+  .cdc-brand .cdc-logo{max-width:128px!important}
+}
