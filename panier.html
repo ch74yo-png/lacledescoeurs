@@ -292,10 +292,12 @@ function afficherPanier() {
 function actualiserCompteur() {
   const compteur = document.getElementById("cartCount");
   if (!compteur) return;
-  compteur.textContent = lirePanier().reduce(
-    (total, article) => total + quantiteArticle(article),
+  const total = lirePanier().reduce(
+    (sum, article) => sum + quantiteArticle(article),
     0
   );
+  compteur.textContent = total ? String(total) : "";
+  compteur.hidden = total === 0;
 }
 window.addEventListener("storage", afficherPanier);
 window.addEventListener("cdc-cart-updated", actualiserCompteur);
