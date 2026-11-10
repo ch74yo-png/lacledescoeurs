@@ -2203,3 +2203,17 @@ button.primary,.btn-primary{
 .home-product-image,.category-image{background:#000!important}
 img,.cdc-logo,.cdc-logo img,.cdc-logo-image{filter:none!important}
 .cdc-logo,.cdc-logo img,.cdc-logo-image{opacity:1!important}
+
+/* Les adresses e-mail restent toujours sur une seule ligne. */
+.cdc-footer a[href^="mailto:"],
+a[href^="mailto:"],
+.cdc-email-nowrap{
+  white-space:nowrap!important;
+  overflow-wrap:normal!important;
+  word-break:keep-all!important;
+  hyphens:none!important;
+  display:inline-block!important;
+  max-width:100%!important;
+  font-size:clamp(10px,2.7vw,14px)!important;
+  letter-spacing:0!important;
+}
