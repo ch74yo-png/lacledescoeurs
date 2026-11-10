@@ -29,6 +29,8 @@
     .product-actions button{padding:10px 12px;border:1px solid var(--gold);background:transparent;color:var(--ink);font-size:10px}
     .product-actions button:hover{background:var(--gold);color:white}
 
+    .catalogue-quantity-label{display:flex;justify-content:center;align-items:center;gap:10px;margin:10px auto;font-size:10px;letter-spacing:1px}
+    .catalogue-quantity{width:72px;min-height:36px;text-align:center;background:#fff;color:#111;border:1px solid var(--gold)}
     .product-actions{display:flex;flex-direction:column;gap:7px;max-width:260px;margin:12px auto}
     .product-actions button{width:100%;min-height:38px;padding:9px 10px;border:1px solid var(--gold);background:transparent;color:var(--ink);font-size:10px;letter-spacing:.7px;cursor:pointer;text-transform:uppercase}
     .product-actions button:first-child{background:var(--gold);color:#211916;font-weight:600}
@@ -178,6 +180,9 @@ function afficherProduits() {
           <div class="product-brand">${marque}</div>
           <h2 class="product-name"><a href="${lien}">${nom}</a></h2>
           <div class="product-price">${ancienPrix}${formaterPrix(p.prix)}</div>
+          <label class="catalogue-quantity-label">QUANTITÉ
+            <input class="catalogue-quantity" type="number" min="1" max="15" step="1" inputmode="numeric" value="1" aria-label="Quantité de ${nom}">
+          </label>
           <div class="product-actions">
             <button type="button" data-action="acheter" data-id="${id}">ACHETER</button>
             <button type="button" data-action="panier" data-id="${id}">AJOUTER AU PANIER</button>
@@ -189,21 +194,22 @@ function afficherProduits() {
   }).join("");
 }
 
-function ajouterAuPanier(id) {
+function ajouterAuPanier(id, quantity = 1) {
   const produit = obtenirProduits().find(p => String(p.id) === String(id));
   if (!produit) return false;
 
   const panier = lireStock("cdc_cart");
   const existant = panier.find(p => String(p.id) === String(id));
 
+  const quantite = Math.max(1,Math.min(15,Math.floor(Number(quantity)||1)));
   if (existant) {
-    existant.quantity = Number(existant.quantity || 0) + 1;
+    existant.quantity = Math.min(15,Number(existant.quantity || 0) + quantite);
   } else {
     panier.push({
       id: produit.id,
       name: produit.nom,
       price: Number(produit.prix),
-      quantity: 1,
+      quantity: quantite,
       image: produit.image || ""
     });
   }
@@ -235,14 +241,16 @@ function ajouterAuxFavoris(id) {
 listeProduits.addEventListener("click", event => {
   const bouton = event.target.closest("button[data-action]");
   if (!bouton) return;
+  const quantityInput=bouton.closest(".product-info")?.querySelector(".catalogue-quantity");
+  const quantity=Math.max(1,Math.min(15,Math.floor(Number(quantityInput?.value)||1)));
 
   if (bouton.dataset.action === "acheter") {
-    if (ajouterAuPanier(bouton.dataset.id)) {
+    if (ajouterAuPanier(bouton.dataset.id,quantity)) {
       window.location.assign("commande.html");
     }
     return;
   }
-  if (bouton.dataset.action === "panier") ajouterAuPanier(bouton.dataset.id);
+  if (bouton.dataset.action === "panier") ajouterAuPanier(bouton.dataset.id,quantity);
   if (bouton.dataset.action === "favoris") ajouterAuxFavoris(bouton.dataset.id);
 });
 
