@@ -137,7 +137,7 @@
 
     <section class="payment-card">
       <h2>VOTRE COMMANDE</h2>
-
+      <div class="payment-reference" id="orderReferenceDisplay"></div>
       <div id="customerDetails"></div>
 
       <div style="border-top:1px solid rgba(201,164,94,.35);margin:18px 0"></div>
@@ -227,6 +227,7 @@ const cart=readStorage("cdc_cart")||[];
 const customer=readStorage("cdc_customer")||{};
 const shippingData=readStorage("cdc_shipping")||{};
 const promo=readStorage("cdc_promo")||{};
+const orderReference=localStorage.getItem("cdc_order_reference")||"";
 
 const payButton=document.getElementById("payButton");
 const message=document.getElementById("paymentMessage");
@@ -242,12 +243,12 @@ function showError(text){
 }
 
 function displayCustomer(){
+  document.getElementById("orderReferenceDisplay").textContent=orderReference?"Numéro de commande : "+orderReference:"Commande";
   const rows=[
     ["Nom complet",customer.fullName],
     ["E-mail",customer.email],
     ["Téléphone",customer.phone],
     ["Adresse",customer.address],
-    ["Complément d'adresse",customer.addressExtra],
     ["Code postal",customer.postalCode],
     ["Ville",customer.city],
     ["Pays",customer.country]
@@ -365,6 +366,8 @@ async function verifyReturnedPayment(){
       localStorage.removeItem("cdc_customer");
       localStorage.removeItem("cdc_shipping");
       localStorage.removeItem("cdc_promo");
+      localStorage.removeItem("cdc_order_reference");
+      localStorage.removeItem("cdc_order_cart_signature");
 
     }else{
       successMessage.textContent=
@@ -396,12 +399,14 @@ async function startPayment(){
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
           items,
+          orderReference,
           customer:{
             fullName:customer.fullName,
+            firstName:customer.firstName||String(customer.fullName||"").trim().split(/\s+/)[0],
+            lastName:customer.lastName||String(customer.fullName||"").trim().split(/\s+/).slice(1).join(" "),
             email:customer.email,
             phone:customer.phone||"",
             address:customer.address,
-            addressExtra:customer.addressExtra||"",
             postalCode:customer.postalCode,
             city:customer.city,
             country:customer.country,
