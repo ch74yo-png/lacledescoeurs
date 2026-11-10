@@ -106,8 +106,20 @@
       background: transparent;
       color: var(--ink);
     }
-    .detail-buttons button:hover {
-      opacity: .82;
+    .detail-buttons button:hover,
+    .detail-buttons button:focus,
+    .detail-buttons button:active {
+      opacity:1;
+      filter:none;
+      background:var(--gold);
+      color:#ffffff;
+      transform:none;
+    }
+    .detail-buttons button.secondary:hover,
+    .detail-buttons button.secondary:focus,
+    .detail-buttons button.secondary:active {
+      background:transparent;
+      color:#ffffff;
     }
     .product-message {
       text-align: center;
@@ -385,12 +397,16 @@
         ajouterAuPanier(produit, true, quantityInput.value);
       });
 
-      document.getElementById("ajouterPanier").addEventListener("click", () => {
+      const boutonPanier = document.getElementById("ajouterPanier");
+      boutonPanier.addEventListener("click", () => {
         ajouterAuPanier(produit, false, quantityInput.value);
+        boutonPanier.textContent = "AJOUTÉ AU PANIER";
       });
 
-      document.getElementById("ajouterFavoris").addEventListener("click", () => {
+      const boutonFavoris = document.getElementById("ajouterFavoris");
+      boutonFavoris.addEventListener("click", () => {
         ajouterAuxFavoris(produit);
+        boutonFavoris.textContent = "AJOUTÉ AUX FAVORIS";
       });
     }
 
