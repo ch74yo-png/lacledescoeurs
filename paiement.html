@@ -122,8 +122,7 @@
 
   <div class="payment-title">
     <p class="eyebrow">BIENVENUE CHEZ LA CLE DES COEURS</p>
-    <h1>RÉCAPITULATIF</h1>
-    <p>Votre commande et votre paiement sont présentés ci-dessous.</p>
+    <h1>MODE DE PAIEMENT</h1>
   </div>
 
   <div id="successPanel" class="payment-card payment-success" hidden>
@@ -134,36 +133,6 @@
   </div>
 
   <div id="paymentContent" class="payment-grid">
-
-    <section class="payment-card">
-      <h2>VOTRE COMMANDE</h2>
-      <div class="payment-reference" id="orderReferenceDisplay"></div>
-      <div id="customerDetails"></div>
-
-      <div style="border-top:1px solid rgba(201,164,94,.35);margin:18px 0"></div>
-
-      <div id="orderItems"></div>
-
-      <div class="payment-line">
-        <span>Sous-total</span>
-        <strong id="subtotal">—</strong>
-      </div>
-
-      <div class="payment-line">
-        <span>Livraison</span>
-        <strong id="shipping">—</strong>
-      </div>
-
-      <div class="payment-line">
-        <span>Réduction</span>
-        <strong id="discount">—</strong>
-      </div>
-
-      <div class="payment-line payment-total">
-        <span>TOTAL À PAYER</span>
-        <strong id="total">—</strong>
-      </div>
-    </section>
 
     <section class="payment-card">
       <h2>MODE DE PAIEMENT</h2>
@@ -436,15 +405,6 @@ async function startPayment(){
       );
     }
 
-    document.getElementById("subtotal").textContent=
-      money(data.subtotal);
-
-    document.getElementById("shipping").textContent=
-      money(data.shipping);
-
-    document.getElementById("total").textContent=
-      money(data.total);
-
     const stripe=Stripe(STRIPE_PUBLIC_KEY);
 
     const checkout=stripe.initCheckoutElementsSdk({
@@ -549,9 +509,6 @@ payButton.addEventListener("click",async()=>{
 document.getElementById("acceptPaymentTerms").addEventListener("change",event=>{termsAccepted=event.target.checked;if(checkoutActions&&!paymentInProgress)payButton.disabled=!checkoutActions.getSession().canConfirm||!termsAccepted;});
 
 (async function init(){
-  displayCustomer();
-  displayCart();
-
   if(await verifyReturnedPayment())return;
 
   await startPayment();
