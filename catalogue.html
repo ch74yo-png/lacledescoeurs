@@ -177,7 +177,7 @@ function afficherProduits() {
     const lien = "produit.html?id=" + encodeURIComponent(p.id);
     const logoAttente = '<img class="product-placeholder-logo" src="/logo-officiel.jpg?v=20261110" alt="LA CLÉ DES CŒURS — Depuis 1974 — Bijoux Fins & Raffinés" loading="lazy">';
     const visuel = image
-      ? `<img src="${echapperHTML(image)}" alt="${nom}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.innerHTML = \`${logoAttente}\`; this.parentElement.classList.add('has-placeholder-logo');">`
+      ? `<img src="${echapperHTML(image)}" alt="${nom}" loading="lazy" referrerpolicy="no-referrer">`
       : logoAttente;
 
     const ancienPrix = p.ancienPrix
@@ -249,6 +249,18 @@ function ajouterAuxFavoris(id) {
   localStorage.setItem("cdc_favorites", JSON.stringify(favoris));
   window.dispatchEvent(new Event("cdc-favorites-updated"));
 }
+
+// Remplace proprement une image indisponible par le logo officiel.
+listeProduits.addEventListener("error", event => {
+  const img = event.target;
+  if (!(img instanceof HTMLImageElement) || !img.closest(".product-image")) return;
+  if (img.classList.contains("product-placeholder-logo")) return;
+  img.onerror = null;
+  img.src = "/logo-officiel.jpg?v=20261110";
+  img.alt = "LA CLÉ DES CŒURS — Depuis 1974 — Bijoux Fins & Raffinés";
+  img.classList.add("product-placeholder-logo");
+  img.parentElement.classList.add("has-placeholder-logo");
+}, true);
 
 listeProduits.addEventListener("click", event => {
   const bouton = event.target.closest("button[data-action]");
