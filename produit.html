@@ -289,10 +289,9 @@
 
       enregistrer("cdc_cart", panier);
 
+      window.dispatchEvent(new Event("cdc-cart-updated"));
       if (rediriger) {
         window.location.href = "commande.html";
-      } else {
-        alert("Produit ajouté au panier.");
       }
     }
 
@@ -300,7 +299,7 @@
       const favoris = lireStock("cdc_favorites");
 
       if (favoris.some(item => String(item.id) === String(produit.id))) {
-        alert("Ce produit est déjà dans vos favoris.");
+        window.dispatchEvent(new Event("cdc-favorites-updated"));
         return;
       }
 
@@ -312,7 +311,7 @@
       });
 
       enregistrer("cdc_favorites", favoris);
-      alert("Produit ajouté à vos favoris.");
+      window.dispatchEvent(new Event("cdc-favorites-updated"));
     }
 
     function afficherErreur(message) {
