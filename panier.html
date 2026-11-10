@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Votre panier LA CLÉ DES CŒURS.">
   <title>Mon panier | LA CLÉ DES CŒURS</title>
-  <link rel="stylesheet" href="styles.css?v=20261110-black-cart-v4">
+  <link rel="stylesheet" href="styles.css?v=20261110-home-grid-cart-fix-v5">
   <style>
     .cart-page {
       max-width: 1050px;
@@ -266,18 +266,18 @@ function afficherPanier() {
     details.append(titre, prixTexte, sousTotalTexte);
     const actions = document.createElement("div");
     actions.className = "cart-item-actions";
-    const quantite = document.createElement("input");
-    quantite.type = "number";
-    quantite.min = "1";
-    quantite.max = "10";
-    quantite.value = String(quantiteArticle(article));
-    quantite.setAttribute("aria-label", "Quantité de " + nomArticle(article));
-    quantite.addEventListener("change", () => {
+    const quantityInput = document.createElement("input");
+    quantityInput.type = "number";
+    quantityInput.min = "1";
+    quantityInput.max = "10";
+    quantityInput.value = String(quantiteArticle(article));
+    quantityInput.setAttribute("aria-label", "Quantité de " + nomArticle(article));
+    quantityInput.addEventListener("change", () => {
       const panierMisAJour = lirePanier();
       if (!panierMisAJour[index]) return;
       panierMisAJour[index].quantity = Math.min(
         10,
-        Math.max(1, Number(quantite.value) || 1)
+        Math.max(1, Number(quantityInput.value) || 1)
       );
       enregistrerPanier(panierMisAJour);
     });
@@ -290,7 +290,7 @@ function afficherPanier() {
       panierMisAJour.splice(index, 1);
       enregistrerPanier(panierMisAJour);
     });
-    actions.append(quantite, supprimer);
+    actions.append(quantityInput, supprimer);
     ligne.append(imageConteneur, details, actions);
     cartContents.appendChild(ligne);
   });
@@ -312,6 +312,6 @@ window.addEventListener("storage", afficherPanier);
 window.addEventListener("cdc-cart-updated", actualiserCompteur);
 afficherPanier();
 </script>
-<script src="site-shell.js?v=20261110-black-cart-v4" defer></script>
+<script src="site-shell.js?v=20261110-home-grid-cart-fix-v5" defer></script>
 </body>
 </html>
