@@ -1407,3 +1407,9 @@ body.theme-dark .cdc-header{background:#11100f!important}
   .cdc-header .cdc-icon-button{width:21px!important}
   .cdc-header .header-actions{gap:0!important}
 }
+
+
+/* Fond de l’en-tête assorti au fond chocolat du logo original */
+.cdc-header{
+  background:#2a1009!important;
+}
