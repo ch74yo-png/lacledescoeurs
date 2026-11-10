@@ -134,6 +134,14 @@
   cursor:pointer;
 }
 .checkout-button:hover{background:#e2bd75}
+.checkout-step-number{text-align:center;color:#e6c58e;font:500 24px var(--sans);letter-spacing:1px;margin:0 0 22px!important}
+.checkout-order-reference{text-align:center;margin:0 0 22px;padding:15px;border:1px solid rgba(201,164,94,.4)}
+.checkout-order-reference span{display:block;color:#e6c58e;font-size:10px;letter-spacing:1.5px;margin-bottom:8px}
+.checkout-order-reference strong{color:#fff;font-size:19px;letter-spacing:2px}
+.checkout-item{display:grid;grid-template-columns:minmax(0,1fr) 86px minmax(85px,auto);align-items:center;gap:10px}
+.checkout-item-name{overflow-wrap:anywhere}
+.checkout-item-qty{width:86px;min-height:38px;padding:6px;text-align:center;background:#fffaf4;color:#111;border:1px solid #b9a994}
+@media(max-width:600px){.checkout-item{grid-template-columns:minmax(0,1fr) 72px;gap:8px}.checkout-item strong{grid-column:1/-1;text-align:right}}
 .checkout-notice{
   margin-top:12px;
   color:#b9a994;
@@ -172,70 +180,54 @@
   <div class="checkout-title">
     <p class="eyebrow">LA CLE DES COEURS</p>
     <h1>Finaliser ma commande</h1>
-    <p>Quelques dernières informations avant de poursuivre.</p>
+    
   </div>
 
   <div class="checkout-layout">
     <form class="checkout-form" id="checkoutForm">
 
       <section class="checkout-card">
-        <h2>1. COORDONNÉES</h2>
+        <h2 class="checkout-step-number">1</h2>
 
         <label for="fullName">NOM COMPLET *</label>
-        <input id="fullName" name="fullName"
-          autocomplete="name" required>
+        <input id="fullName" name="fullName" type="text" inputmode="text" autocomplete="name" required>
 
         <label for="email">ADRESSE MAIL *</label>
-        <input id="email" name="email" type="email"
-          autocomplete="email" required>
+        <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required>
 
         <label for="phone">TÉLÉPHONE *</label>
-        <input id="phone" name="phone" type="tel"
-          autocomplete="tel" required>
+        <input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" pattern="[0-9+() .-]{6,20}" title="Chiffres uniquement" required>
       </section>
 
       <section class="checkout-card">
-        <h2>2. DÉTAILS DE LIVRAISON</h2>
+        <h2 class="checkout-step-number">2</h2>
 
-        <label for="country">PAYS *</label>
+        <label for="country">CHOISIR PAYS *</label>
         <select id="country" name="country"
           autocomplete="country-name" required>
           <option value="">Choisir un pays</option>
         </select>
 
         <label for="address">ADRESSE *</label>
-        <input id="address" name="address"
-          autocomplete="street-address" required>
-
-        <label for="addressExtra">COMPLÉMENT D'ADRESSE</label>
-        <input id="addressExtra" name="addressExtra"
-          autocomplete="address-line2">
+        <input id="address" name="address" type="text" inputmode="text" autocomplete="street-address" required>
 
         <div class="checkout-row">
           <div>
             <label for="postalCode">CODE POSTAL *</label>
-            <input id="postalCode" name="postalCode"
-              autocomplete="postal-code" required>
+            <input id="postalCode" name="postalCode" type="text" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{1,12}" title="Chiffres uniquement" required>
           </div>
           <div>
             <label for="city">VILLE *</label>
-            <input id="city" name="city"
-              autocomplete="address-level2" required>
+            <input id="city" name="city" type="text" inputmode="text" autocomplete="address-level2" required>
           </div>
         </div>
       </section>
 
       <section class="checkout-card">
-        <h2>3. RÉCAPITULATIF</h2>
+        <h2 class="checkout-step-number">3 — RÉCAPITULATIF</h2>
 
-        <div class="checkout-customer-preview" id="customerPreview">
-          <strong>VOS COORDONNÉES</strong>
-          <p>Vos informations apparaîtront ici au fur et à mesure.</p>
-        </div>
-
-        <div id="summaryItems">
-          <p class="empty-cart">Chargement du panier...</p>
-        </div>
+        <div class="checkout-order-reference"><span>NUMÉRO DE COMMANDE</span><strong id="orderReference">CDC-XXXXXXXX</strong></div>
+        <div id="summaryItems"><p class="empty-cart">Chargement du panier...</p></div>
 
         <div class="checkout-line">
           <span>Sous-total</span>
@@ -299,6 +291,8 @@
 "use strict";
 
 const CART_KEY = "cdc_cart";
+const ORDER_REF_KEY = "cdc_order_reference";
+const ORDER_SIG_KEY = "cdc_order_cart_signature";
 let cart = [];
 
 try {
@@ -309,6 +303,19 @@ try {
 }
 
 const countrySelect = document.getElementById("country");
+function cartSignature(){return cart.map(p=>String(p.id)+":"+Math.max(1,Number(p.quantity)||1)).sort().join("|");}
+function ensureOrderReference(){
+  const signature=cartSignature();
+  let ref=localStorage.getItem(ORDER_REF_KEY);
+  if(!ref || localStorage.getItem(ORDER_SIG_KEY)!==signature){
+    const alphabet="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    const bytes=new Uint8Array(8); crypto.getRandomValues(bytes);
+    ref="CDC-"+Array.from(bytes,b=>alphabet[b%alphabet.length]).join("");
+    localStorage.setItem(ORDER_REF_KEY,ref); localStorage.setItem(ORDER_SIG_KEY,signature);
+  }
+  document.getElementById("orderReference").textContent=ref;
+  return ref;
+}
 
 const money = n => new Intl.NumberFormat("fr-FR", {
   style:"currency",
@@ -344,11 +351,14 @@ for(let i=65;i<=90;i++){
 countries.sort((a,b)=>a.name.localeCompare(b.name,"fr"));
 
 countries.forEach(c=>{
-  const option=document.createElement("option");
-  option.value=c.code;
-  option.textContent=c.name;
-  countrySelect.appendChild(option);
+  const option=document.createElement("option"); option.value=c.code;
+  option.textContent=c.name; countrySelect.appendChild(option);
 });
+try{
+  const saved=JSON.parse(localStorage.getItem("cdc_customer")||"null");
+  const preferred=saved?.countryCode||new Intl.Locale(navigator.language||"fr-FR").region;
+  if(preferred && countries.some(c=>c.code===preferred)) countrySelect.value=preferred;
+}catch{}
 
 const europe = new Set(
   "AT BE BG HR CY CZ DK EE FI FR DE GR HU IS IE IT LV LI LT LU MT MC NL NO PL PT RO SM SK SI ES SE CH GB".split(" ")
@@ -393,77 +403,31 @@ function totalValue(){
   );
 }
 
-function renderCustomerPreview(){
-  const get = id => document.getElementById(id).value.trim();
-
-  const name=get("fullName");
-  const email=get("email");
-  const phone=get("phone");
-  const country=countrySelect.value
-    ? countryNames.of(countrySelect.value)
-    : "";
-  const address=get("address");
-  const extra=get("addressExtra");
-  const postal=get("postalCode");
-  const city=get("city");
-
-  const lines=[
-    name,
-    email,
-    phone,
-    address,
-    extra,
-    [postal,city].filter(Boolean).join(" "),
-    country
-  ].filter(Boolean);
-
-  document.getElementById("customerPreview").innerHTML=`
-    <strong>VOS COORDONNÉES ET VOTRE LIVRAISON</strong>
-    ${lines.length
-      ? lines.map(line=>`<p>${escapeHTML(line)}</p>`).join("")
-      : "<p>Vos informations apparaîtront ici au fur et à mesure.</p>"
-    }
-  `;
-}
-
 function render(){
-  const subtotal=subtotalValue();
-  const shipping=shippingValue();
-
-  const lines=cart.map(p=>`
-    <div class="checkout-line">
-      <span>${escapeHTML(p.name||p.nom||"Article")} × ${Number(p.quantity)||1}</span>
-      <span>${money((Number(p.price)||0)*(Number(p.quantity)||1))}</span>
-    </div>
-  `).join("");
-
-  document.getElementById("summaryItems").innerHTML =
-    lines || '<p class="empty-cart">Votre panier est vide.</p>';
-
+  ensureOrderReference();
+  const subtotal=subtotalValue(); const shipping=shippingValue();
+  const host=document.getElementById("summaryItems"); host.innerHTML="";
+  if(!cart.length){host.innerHTML='<p class="empty-cart">Votre panier est vide.</p>';}
+  cart.forEach((p,index)=>{
+    const row=document.createElement("div"); row.className="checkout-line checkout-item";
+    const name=document.createElement("span"); name.className="checkout-item-name"; name.textContent=p.name||p.nom||"Article";
+    const qty=document.createElement("input"); qty.className="checkout-item-qty"; qty.type="number"; qty.min="1"; qty.max="15"; qty.step="1"; qty.inputMode="numeric"; qty.value=Math.max(1,Number(p.quantity)||1); qty.dataset.cartIndex=String(index); qty.setAttribute("aria-label","Quantité de "+(p.name||p.nom||"l'article"));
+    const price=document.createElement("strong"); price.textContent=money((Number(p.price)||0)*(Number(p.quantity)||1));
+    row.append(name,qty,price); host.appendChild(row);
+  });
   document.getElementById("subtotal").textContent=money(subtotal);
-
-  document.getElementById("shipping").textContent =
-    shipping===null ? "À calculer" : money(shipping);
-
+  document.getElementById("shipping").textContent=shipping===null?"À calculer":money(shipping);
   document.getElementById("discount").textContent=money(promoDiscount);
   document.getElementById("total").textContent=money(totalValue());
-
-  const counter=document.getElementById("cartCount");
-  if(counter){
-    counter.textContent=cart.reduce(
-      (sum,p)=>sum+(Number(p.quantity)||0),0
-    );
-  }
-
-  renderCustomerPreview();
+  const counter=document.getElementById("cartCount"); if(counter) counter.textContent=cart.reduce((sum,p)=>sum+(Number(p.quantity)||0),0);
 }
 
-document.querySelectorAll(
-  "#fullName,#email,#phone,#address,#addressExtra,#postalCode,#city"
-).forEach(input=>{
-  input.addEventListener("input",renderCustomerPreview);
+document.getElementById("summaryItems").addEventListener("change",event=>{
+  const input=event.target.closest("[data-cart-index]"); if(!input)return;
+  const index=Number(input.dataset.cartIndex); if(!cart[index])return;
+  cart[index].quantity=Math.max(1,Math.min(15,Math.floor(Number(input.value)||1)));
+  localStorage.setItem(CART_KEY,JSON.stringify(cart)); render();
 });
-
 countrySelect.addEventListener("change",render);
 
 document.getElementById("applyPromo").addEventListener("click",()=>{
@@ -498,12 +462,13 @@ document.getElementById("checkoutForm").addEventListener("submit",event=>{
 
   const customer={
     fullName:document.getElementById("fullName").value.trim(),
+    firstName:document.getElementById("fullName").value.trim().split(/\s+/)[0],
+    lastName:document.getElementById("fullName").value.trim().split(/\s+/).slice(1).join(" "),
     email:document.getElementById("email").value.trim(),
     phone:document.getElementById("phone").value.trim(),
     country:countryNames.of(countrySelect.value),
     countryCode:countrySelect.value,
     address:document.getElementById("address").value.trim(),
-    addressExtra:document.getElementById("addressExtra").value.trim(),
     postalCode:document.getElementById("postalCode").value.trim(),
     city:document.getElementById("city").value.trim()
   };
@@ -514,6 +479,7 @@ document.getElementById("checkoutForm").addEventListener("submit",event=>{
   };
 
   localStorage.setItem("cdc_customer",JSON.stringify(customer));
+  localStorage.setItem("cdc_order_reference",ensureOrderReference());
   localStorage.setItem("cdc_shipping",JSON.stringify(shippingData));
   localStorage.setItem("cdc_promo",JSON.stringify({
     code:document.getElementById("promoCode").value.trim(),
