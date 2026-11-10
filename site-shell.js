@@ -11,7 +11,7 @@
   };
 
   // Le même logo officiel est utilisé dans l'en-tête et dans le pied de page.
-  const logo = '<span class="cdc-logo"><img src="logo-officiel.svg?v=30a5ec2" alt="LA CLE DES CŒURS — Depuis 1974 — Bijoux Fins & Raffinés"></span>';
+  const logo = '<span class="cdc-logo"><img src="logo-officiel.svg?v=cdc-monogram-20261110" alt="LA CLE DES CŒURS — Depuis 1974 — Bijoux Fins & Raffinés"></span>';
   const header = `
     <header class="header cdc-header">
       <button class="menu-button cdc-icon-button" id="menuButton" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mainNav"><span class="hamburger-lines"><i></i><i></i><i></i></span></button>
