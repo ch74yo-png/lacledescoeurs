@@ -65,10 +65,10 @@
       /* Visuel de la bague intégré au dépôt : fond noir réel, pas de fond gris */
       body .hero{
         box-sizing:border-box!important;position:relative!important;overflow:hidden!important;
-        min-height:690px!important;padding:72px 7% 34px!important;
+        min-height:720px!important;padding:72px 7% 34px!important;
         background-color:#000!important;
         background-image:url("/images/hero-ring.svg")!important;
-        background-position:center 205px!important;
+        background-position:center 260px!important;
         background-size:min(100%,880px) auto!important;background-repeat:no-repeat!important;
         color:#fff!important;text-align:center!important;
         display:flex!important;align-items:flex-start!important;justify-content:center!important;
@@ -92,7 +92,7 @@
       body select option{background:#000!important;color:#fff!important}
       body button,body .primary-button,body .secondary-button,body .checkout-button,body .pay-button,body button.primary,body .btn-primary{background:#d4af37!important;color:#000!important;border:1px solid #d4af37!important}
       @media(max-width:600px){
-        body .hero{min-height:680px!important;padding:58px 7% 28px!important;background-position:center 230px!important;background-size:100% auto!important}
+        body .hero{min-height:680px!important;padding:58px 7% 28px!important;background-position:center 235px!important;background-size:100% auto!important}
         body .hero h1{font-size:clamp(42px,11vw,58px)!important;line-height:1.04!important}
         body .store-showcase{padding:22px 12px 48px!important}
         body .store-showcase img{width:100%!important;max-height:none!important}
