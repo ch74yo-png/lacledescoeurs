@@ -18,7 +18,7 @@ document.getElementById("orderRef").textContent=ref;
 const details=[["Nom complet",customer.fullName],["Adresse e-mail",customer.email],["Téléphone",customer.phone],["Adresse",customer.address],["Code postal",customer.postalCode],["Ville",customer.city],["Pays",customer.country]];
 document.getElementById("customer").innerHTML=details.map(([k,v])=>'<div class="order-line"><span>'+safe(k)+'</span><strong>'+safe(v||"—")+'</strong></div>').join("");
 document.getElementById("items").innerHTML=cart.map(p=>'<div class="order-line"><span>'+safe(p.name||p.nom||"Article")+' × '+Math.max(1,Number(p.quantity)||1)+'</span><strong>'+eur((Number(p.price)||0)*(Number(p.quantity)||1))+'</strong></div>').join("");
-const sub=cart.reduce((s,p)=>s+(Number(p.price)||0)*(Number(p.quantity)||1),0),ship=Number(shipping.amount)||0,discount=Number(promo.discount)||0,total=Math.max(0,sub+ship-discount);
+const sub=cart.reduce((s,p)=>s+(Number(p.price)||0)*(Number(p.quantity)||1),0),ship=Number(shipping.amount)||0,discount=promo.verified?Number(promo.discount)||0:0,total=Math.max(0,sub+ship-discount);
 document.getElementById("subtotal").textContent=eur(sub);document.getElementById("shipping").textContent=eur(ship);document.getElementById("discount").textContent=eur(discount);document.getElementById("total").textContent=eur(total);
 const promoInput=document.getElementById("promoCode"),promoMessage=document.getElementById("promoMessage");
 promoInput.value=promo.code||"";
