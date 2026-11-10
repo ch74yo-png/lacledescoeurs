@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Retrouvez votre sélection de bijoux et montres favoris chez LA CLÉ DES CŒURS.">
   <title>Mes favoris | LA CLÉ DES CŒURS</title>
-  <link rel="stylesheet" href="styles.css?v=20261110-nav-cleanup-v3">
+  <link rel="stylesheet" href="styles.css?v=20261110-black-cart-v4">
 
   <style>
     .favorites-page {
-      max-width: 1200px;
-      margin: 55px auto;
-      padding: 0 22px 70px;
+      max-width: 1120px;
+      margin: 35px auto;
+      padding: 0 18px 55px;
     }
 
     .favorites-heading {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 26px;
     }
 
     .favorites-heading h1 {
@@ -32,19 +32,20 @@
 
     .favorites-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
     }
 
     .favorite-card {
-      background: #fff;
-      border: 1px solid #eee6dc;
-      padding-bottom: 18px;
+      background: #000;
+      border: 1px solid rgba(217,173,69,.55);
+      padding-bottom: 12px;
+      min-width: 0;
     }
 
     .favorite-image {
-      height: 230px;
-      background: #f4f0e9;
+      height: 145px;
+      background: #000;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -59,12 +60,13 @@
     }
 
     .favorite-info {
-      padding: 15px;
+      padding: 10px;
     }
 
     .favorite-info h2 {
       font-family: Georgia, serif;
-      font-size: 17px;
+      font-size: 14px;
+      line-height: 1.35;
       font-weight: 400;
       margin: 0 0 8px;
     }
@@ -72,39 +74,53 @@
     .favorite-price {
       color: #806b54;
       font-weight: 600;
-      margin: 10px 0;
+      margin: 7px 0;
+      font-size: 13px;
     }
 
     .favorite-actions {
       display: flex;
-      gap: 8px;
-      margin-top: 15px;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 10px;
     }
 
     .favorite-actions button {
       flex: 1;
-      padding: 11px 8px;
+      width: 100%;
+      padding: 8px 6px;
       cursor: pointer;
-      border: 1px solid #9b856d;
-      font-size: 11px;
+      border: 1px solid #d9ad45;
+      background: #000;
+      color: #fff;
+      font-size: 10px;
       letter-spacing: .5px;
     }
 
-    .add-cart {
-      background: #8b745c;
-      color: white;
+    .buy-favorite {
+      background: #000;
+      color: #d9ad45;
     }
 
     .remove-favorite {
-      background: white;
-      color: #6e5b49;
+      background: #000;
+      color: #fff;
+    }
+    .favorite-actions button:hover,
+    .favorite-actions button:focus,
+    .favorite-actions button:active {
+      background: #000;
+      color: inherit;
+      filter: none;
+      opacity: 1;
     }
 
     .empty-favorites {
       text-align: center;
       padding: 65px 20px;
-      background: #faf8f4;
-      border: 1px solid #eee6dc;
+      background: #000;
+      color: #fff;
+      border: 1px solid rgba(217,173,69,.55);
     }
 
     .empty-favorites h2 {
@@ -116,8 +132,9 @@
       display: inline-block;
       margin-top: 15px;
       padding: 13px 24px;
-      background: #8b745c;
-      color: white;
+      background: #000;
+      color: #d9ad45;
+      border: 1px solid #d9ad45;
       text-decoration: none;
       font-size: 12px;
       letter-spacing: 1px;
@@ -125,18 +142,23 @@
 
     @media (max-width: 800px) {
       .favorites-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
 
     @media (max-width: 520px) {
       .favorites-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
       }
 
       .favorite-image {
-        height: 250px;
+        height: 112px;
       }
+      .favorite-info{padding:8px}
+      .favorite-info h2{font-size:12px}
+      .favorite-price{font-size:12px}
+      .favorite-actions button{font-size:9px;padding:7px 4px}
     }
   </style>
 </head>
@@ -256,9 +278,12 @@
         actions.className = "favorite-actions";
 
         const addButton = document.createElement("button");
-        addButton.className = "add-cart";
-        addButton.textContent = "AJOUTER AU PANIER";
-        addButton.addEventListener("click", () => addToCart(product));
+        addButton.className = "buy-favorite";
+        addButton.textContent = "ACHETER";
+        addButton.addEventListener("click", () => {
+          addToCart(product);
+          window.location.href = "commande.html";
+        });
 
         const removeButton = document.createElement("button");
         removeButton.className = "remove-favorite";
@@ -304,7 +329,6 @@
 
       saveCart(cart);
       window.dispatchEvent(new Event("cdc-cart-updated"));
-      alert("Article ajouté au panier.");
     }
 
     function removeFavorite(index) {
@@ -316,6 +340,6 @@
 
     renderFavorites();
   </script>
-<script src="site-shell.js?v=20261110-nav-cleanup-v3" defer></script>
+<script src="site-shell.js?v=20261110-black-cart-v4" defer></script>
 </body>
 </html>
