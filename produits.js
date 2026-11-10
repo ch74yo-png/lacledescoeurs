@@ -280,6 +280,30 @@ const produits = [
   creerProduit("iwc-aviateur-chronographe-bronze-bleu", "IWC Montre d’Aviateur Chronographe – Bronze & Cadran Bleu – IW288109 – Coffret et papiers", "IWC", 3099, 4500, ["homme"]),
   creerProduit("iwc-pilot-top-gun-lake-tahoe-iw389105", "IWC Pilot Top Gun Lake Tahoe – IW389105 – Chronographe – Céramique blanche 45 mm – Neuf", "IWC", 6299, 7500, ["homme"]),
 
+  // RESTAURATION — PAGES 6 ET 7 DES MONTRES HOMME
+  creerProduit("iwc-timezoner-petit-prince-iw395503", "IWC Pilot’s Watch Timezoner Edition “Le Petit Prince” IW395503 – Édition Limitée – Boîte et Papiers", "IWC", 4500, 7000, ["homme"]),
+  creerProduit("iwc-portugieser-chronograph-iw371445", "IWC Portugieser Chronograph White Dial Automatic Watch IW371445 *2025", "IWC", 2000, null, ["homme"]),
+  creerProduit("iwc-pilot-mercedes-amg-iw388108", "La IWC Pilot Mercedes-AMG Petronas IW388108", "IWC", 4000, 7300, ["homme"]),
+  creerProduit("cartier-santos-100-w20106x8", "Montre automatique Cartier Santos 100 en acier inoxydable – Taille moyenne W20106X8", "Cartier", 4000, null, ["homme"]),
+  creerProduit("cartier-santos-2018-wssa0009", "Montre automatique Cartier Santos 2018, cadran blanc, 39,8 mm, acier, WSSA0009 B+P", "Cartier", 3500, 4500, ["homme"]),
+  creerProduit("cartier-santos-homme-wssa0018-2580", "Montre automatique Cartier Santos pour homme, 40 mm, grand modèle, en acier, WSSA0018, avec boîte et bracelet", "Cartier", 2580, null, ["homme"]),
+  creerProduit("iwc-big-pilot-iw500401", "Montre automatique IWC Big Pilot 7 jours, cadran noir, 46 mm, acier, IW500401", "IWC", 2500, null, ["homme"]),
+  creerProduit("iwc-big-pilot-iw500401-carte", "Montre automatique IWC Big Pilot 7 jours, cadran noir, 46 mm, acier, IW500401, avec carte", "IWC", 2600, null, ["homme"]),
+  creerProduit("omega-seamaster-planet-ocean-215", "Montre automatique pour homme Omega Seamaster Planet Ocean 215.30.44.21.01.001", "Omega", 2500, 3299, ["homme"]),
+  creerProduit("rolex-datejust-126200", "Montre automatique Rolex Datejust 36 mm Jubilee en acier inoxydable avec cadran bleu 126200", "Rolex", 4000, null, ["homme"]),
+  creerProduit("cartier-santos-automatique-2319", "Montre Cartier Santos Automatique 29 mm en acier inoxydable guilloché – Réf. 2319 – Avec boîte", "Cartier", 4850, null, ["homme"]),
+  creerProduit("cartier-santos-bbc8346", "Montre Cartier Santos BBC8346 – Bicolore Acier Inoxydable et Or 18 Carats – État Neuf", "Cartier", 3500, 4500, ["homme"]),
+  creerProduit("cartier-santos-bleue-wssa0030", "Montre Cartier Santos de Cartier bleue WSSA0030", "Cartier", 3114, null, ["homme"]),
+  creerProduit("cartier-santos-caoutchouc-noir", "Montre CARTIER Santos de Cartier grand modèle avec bracelet en caoutchouc noir", "Cartier", 2990, null, ["homme"]),
+  creerProduit("cartier-santos-galbee-187901", "Montre Cartier Santos Galbée 187901 – Acier & Or 18K 29 mm Quartz 1994", "Cartier", 2600, null, ["homme"]),
+  creerProduit("cartier-santos-grand-noire-wssa0039", "Montre Cartier Santos Grand Modèle Automatique Noire – Réf. WSSA0039", "Cartier", 2850, null, ["homme"]),
+  creerProduit("cartier-santos-large-adlc-wssa0037", "Montre Cartier Santos Large ADLC WSSA0037 – Cadran gris, bracelet acier et caoutchouc, 40 mm, Homme, 2021", "Cartier", 2958, null, ["homme"]),
+  creerProduit("iwc-pilots-spitfire-iw387901", "Montre chronographe IWC Pilots Spitfire 41 mm IW387901 – Coffret complet 2021", "IWC", 3500, null, ["homme"]),
+  creerProduit("iwc-aviateur-bleue-iw388109", "Montre d’Aviateur IWC Bleue Homme IW388109 Chronographe Bronze 41 mm", "IWC", 2800, null, ["homme"]),
+  creerProduit("iwc-aviateur-noire-iw500401", "Montre d’aviateur IWC noire pour homme – IW500401", "IWC", 2770, null, ["homme"]),
+  creerProduit("iwc-aviateur-performance-amg", "Montre d’Aviateur IWC Performance Chronographe 41 mm AMG", "IWC", 4200, null, ["homme"]),
+  creerProduit("omega-speedmaster-moonwatch-bicolore", "Montre homme Omega Speedmaster Professional bicolore Moonwatch Co-Axial Master", "Omega", 7099, 8299, ["homme"]),
+
   // PRODUIT SUPPLÉMENTAIRE
   creerProduit(
     "details",
