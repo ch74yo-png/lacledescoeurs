@@ -11,7 +11,7 @@
   };
 
   // Le même logo officiel est utilisé dans l'en-tête et dans le pied de page.
-  const logo = '<span class="cdc-logo"><img src="logo-officiel.jpg?v=logo-IMG3996" alt="LA CLE DES CŒURS — Depuis 1974 — Bijoux Fins & Raffinés"></span>';
+  const logo = '<span class="cdc-logo"><img class="cdc-logo-image" src="logo-officiel.jpg?v=logo-IMG3996" alt="LA CLE DES CŒURS — Depuis 1974 — Bijoux Fins & Raffinés"></span>';
   const header = `
     <header class="header cdc-header">
       <button class="menu-button cdc-icon-button" id="menuButton" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mainNav"><span class="hamburger-lines"><i></i><i></i><i></i></span></button>
@@ -45,10 +45,39 @@
   function lireFavoris(){try{const data=JSON.parse(localStorage.getItem("cdc_favorites")||"[]");return Array.isArray(data)?data:[]}catch{return[]}}
   function actualiserCompteurPanier(){const compteur=document.getElementById("cartCount");if(compteur)compteur.textContent=lirePanier().reduce((sum,item)=>sum+(Number(item.quantity)||1),0)}
   function actualiserCompteurFavoris(){const compteur=document.getElementById("favoriteCount");if(compteur)compteur.textContent=lireFavoris().length}
+  function harmoniserFondLogo(){
+    document.querySelectorAll(".cdc-logo-image").forEach(img=>{
+      const traiter=()=>{
+        if(img.dataset.fondNoir==="1")return;
+        try{
+          const canvas=document.createElement("canvas");
+          canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;
+          const ctx=canvas.getContext("2d",{willReadFrequently:true});
+          ctx.drawImage(img,0,0);
+          const image=ctx.getImageData(0,0,canvas.width,canvas.height);
+          const pixels=image.data;
+          for(let i=0;i<pixels.length;i+=4){
+            const r=pixels[i],g=pixels[i+1],b=pixels[i+2];
+            if(r<85&&g<55&&b<40&&(r-g)<55){
+              pixels[i]=5;pixels[i+1]=5;pixels[i+2]=5;
+            }
+          }
+          ctx.putImageData(image,0,0);
+          img.dataset.fondNoir="1";
+          img.src=canvas.toDataURL("image/png");
+        }catch(error){
+          console.warn("Harmonisation du fond du logo impossible",error);
+        }
+      };
+      if(img.complete&&img.naturalWidth)traiter();
+      else img.addEventListener("load",traiter,{once:true});
+    });
+  }
   function initialiser(){
     document.querySelectorAll(".announcement, header.header, nav.main-nav, .utility-bar, footer").forEach(el=>el.remove());
     document.body.insertAdjacentHTML("afterbegin",header);
     document.body.insertAdjacentHTML("beforeend",footer);
+    harmoniserFondLogo();
     const year=document.getElementById("cdcYear");if(year)year.textContent=new Date().getFullYear();
     const menuButton=document.getElementById("menuButton"),menu=document.getElementById("mainNav"),headerElement=document.querySelector(".cdc-header");
     if(headerElement&&menu&&menu.parentElement!==headerElement)headerElement.appendChild(menu);
