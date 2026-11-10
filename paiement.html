@@ -409,8 +409,9 @@ async function startPayment(){
             address:customer.address,
             postalCode:customer.postalCode,
             city:customer.city,
-            country:customer.country,
-            countryCode:customer.countryCode
+            country:customer.countryCode,
+            countryCode:customer.countryCode,
+            countryName:customer.country
           },
           promoCode:promo.code||""
         })
