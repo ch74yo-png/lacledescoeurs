@@ -53,10 +53,6 @@
     <input type="search" id="recherche" placeholder="Rechercher un produit ou une marque..." aria-label="Rechercher">
     <select id="filtreCategorie" aria-label="Catégorie">
       <option value="">Toutes les catégories</option>
-      <option value="accessoires">Accessoires et bracelets</option>
-      <option value="ap-swatch">AP x Swatch</option>
-      <option value="femme">Montres femme</option>
-      <option value="homme">Montres homme</option>
     </select>
     <select id="triProduits" aria-label="Trier les produits">
       <option value="recent">Ordre d'affichage</option>
@@ -73,6 +69,7 @@
   </section>
 </main>
 
+<script src="categories.js?v=20261110-v1"></script>
 <script src="produits.js?v=20261110-cartier-love-3500-v1"></script>
 <script>
 "use strict";
@@ -81,6 +78,14 @@ const listeProduits = document.getElementById("listeProduits");
 const recherche = document.getElementById("recherche");
 const filtreCategorie = document.getElementById("filtreCategorie");
 const triProduits = document.getElementById("triProduits");
+
+const categoriesSite = Array.isArray(window.CDC_CATEGORIES) ? window.CDC_CATEGORIES : [];
+categoriesSite.forEach(categorie => {
+  const option = document.createElement("option");
+  option.value = categorie.id;
+  option.textContent = categorie.label;
+  filtreCategorie.appendChild(option);
+});
 const nombreProduits = document.getElementById("nombreProduits");
 
 const params = new URLSearchParams(location.search);
