@@ -55,12 +55,7 @@
   font-size:19px;
   color:#e8c78e;
 }
-.payment-section-intro{
-  margin:-8px 0 20px;
-  color:#b9a994;
-  font-size:12px;
-  line-height:1.8;
-}
+.payment-section-intro{display:none}
 #payment-element{
   margin:18px 0 25px;
   min-height:100px;
@@ -80,6 +75,7 @@
 }
 .pay-button:hover{background:#e2bd75}
 .pay-button:disabled{opacity:.5;cursor:not-allowed}
+.payment-message:empty{display:none}
 .payment-message{
   font-size:12px;
   line-height:1.7;
@@ -135,17 +131,13 @@
   <div id="paymentContent" class="payment-grid">
 
     <section class="payment-card">
-      <h2>MODE DE PAIEMENT</h2>
-      <p class="payment-section-intro">
-        Votre paiement est traité en toute sécurité.
-        Choisissez le moyen de paiement proposé par Stripe.
-      </p>
+      <div class="payment-section-intro" aria-hidden="true"></div>
 
       <div id="payment-element"></div>
 
-      <label class="payment-terms" style="display:flex;gap:10px;align-items:flex-start;margin:18px 0;color:#fff;font-size:12px"><input id="acceptPaymentTerms" type="checkbox" style="width:17px;height:17px;accent-color:#d9ad45"><span>J’accepte les <a href="conditions-generales.html" target="_blank" style="color:#d9ad45">conditions générales de vente</a>.</span></label>
+      <label class="payment-terms" style="display:flex;gap:10px;align-items:flex-start;margin:18px 0;color:#fff;font-size:12px"><input id="acceptPaymentTerms" type="checkbox" style="width:17px;height:17px;accent-color:#d9ad45"><span>J’accepte les <a href="conditions-generales.html" target="_blank" style="color:#d9ad45">conditions générales d’achat et de vente</a>.</span></label>
       <p id="paymentMessage" class="payment-message">
-        Préparation du paiement...
+        
       </p>
 
       <button id="payButton" class="pay-button" type="button" disabled>
@@ -446,8 +438,7 @@ async function startPayment(){
     payButton.disabled=
       !checkoutActions.getSession().canConfirm||!termsAccepted;
 
-    message.textContent=
-      "Choisissez votre moyen de paiement.";
+    message.textContent="";
     message.classList.remove("payment-error");
 
   }catch(error){
