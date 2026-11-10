@@ -254,6 +254,32 @@ const produits = [
   creerProduit("cartier-santos-medium-vert-351", "Cartier Santos Medium 35,1 mm – Montre Homme/Femme Acier Inoxydable | Cadran Vert | Boîte et Papiers", "Cartier", 3500, null, ["homme"]),
   creerProduit("cartier-santos-medium-wssa0061-vert", "Cartier Santos Medium en acier inoxydable cadran vert WSSA0061", "Cartier", 4500, null, ["homme"]),
 
+  // RESTAURATION — PAGES 4 ET 5 DES MONTRES HOMME
+  creerProduit("cartier-santos-medium-w2sa0016-2024", "Cartier Santos Medium W2SA0016 2024 – Bicolore Acier & Or 40 mm | Cadran Blanc | Boîte & Papiers", "Cartier", 2900, null, ["homme"]),
+  creerProduit("cartier-santos-medium-w2sa0016-500", "Cartier Santos Medium W2SA0016 2024 – Bicolore Acier & Or 40 mm | Cadran Blanc | Boîte & Papiers", "Cartier", 500, null, ["homme"]),
+  creerProduit("cartier-santos-medium-wssa0029-3550", "Cartier Santos Medium WSSA0029 – 35 mm, Acier Inoxydable, Cadran Blanc, Mouvement Automatique", "Cartier", 3550, 5000, ["homme"]),
+  creerProduit("cartier-santos-medium-wssa0029-homme-2500", "Cartier Santos Medium WSSA0029 Homme – Montre Automatique Acier avec Boîte et Papiers", "Cartier", 2500, null, ["homme"]),
+  creerProduit("cartier-santos-medium-wssa0061-6000", "Cartier Santos Medium WSSA0061 – Montre Homme Acier 40 mm | Cadran Vert | Boîte & Papiers", "Cartier", 6000, null, ["homme"]),
+  creerProduit("cartier-santos-w2020010", "Cartier Santos W2020010", "Cartier", 2450, 3500, ["homme"]),
+  creerProduit("cartier-santos-dumont-wssa0085", "Cartier Santos-Dumont WSSA0085 – 31,5 mm, Acier Inoxydable, Mouvement Quartz, Cadran Argenté, Bracelet en Cuir Alligator Bleu", "Cartier", 2599, 4000, ["homme"]),
+  creerProduit("cartier-tank-louis-grand-modele-2023", "Cartier Tank Louis Cartier – Grand Modèle 2023 – Cadran vert – Boîtier en or 18 carats 33,7 mm", "Cartier", 7099, 8500, ["homme"]),
+  creerProduit("cartier-tank-vermeil-ultra-rare", "CARTIER Tank Vermeil Cadran Romain Bicolore – Quartz – ULTRA RARE", "CARTIER", 2000, null, ["homme"]),
+  creerProduit("omega-seamaster-300-titane-2006", "Chronographe Omega Seamaster 300 Titane 2006 – Coffret complet & papiers révisés", "Chronographe", 2300, null, ["homme"]),
+  creerProduit("omega-speedmaster-57-trilogy-2017", "Coffret complet Omega Speedmaster 57 Trilogy Limited Edition 2017 (031.11.10.39.30.010)", "Coffret", 6500, 8000, ["homme"]),
+  creerProduit("omega-speedmaster-moonwatch-3113042", "Coffret complet OMEGA Speedmaster Moonwatch Professional 311.30.42.30.01.006 2020", "Coffret", 3099, 4299, ["homme"]),
+  creerProduit("glashutte-original-seaq", "Glashütte Original SeaQ", "Glashütte", 6000, null, ["homme"]),
+  creerProduit("glashutte-seaq-panorama-date-432", "Glashütte Original SeaQ Panorama Date 43,2 mm – Acier et Or – Cadran Gris Bicolore – Boîte et papiers", "Glashütte", 5800, null, ["homme"]),
+  creerProduit("glashutte-seaq-panorama-or-rouge", "Glashütte Original SeaQ Panorama Or Rouge – Cadran Noir – Boîte et papiers", "Glashütte", 10400, null, ["homme"]),
+  creerProduit("hublot-big-bang-all-black-ceramic-41", "Hublot Big Bang All Black Ceramic 41 mm", "Hublot", 3599, 4500, ["homme"]),
+  creerProduit("hublot-classic-fusion-king-gold-chrono", "Hublot Classic Fusion Chronographe – King Gold – Élégance sportive et luxe contemporain", "Hublot", 7000, 9500, ["homme"]),
+  creerProduit("hublot-classic-fusion-titanium-45", "Hublot Classic Fusion Titanium 45 mm – Référence 511.NX.1171.RX", "Hublot", 2599, 4000, ["homme"]),
+  creerProduit("iwc-big-pilot-43-noir", "IWC Big Pilot 43 mm – Cadran noir – 2 bracelets OEM – Garantie d’usine – Ensemble complet", "IWC", 4000, 5299, ["homme"]),
+  creerProduit("iwc-big-pilot-petit-prince-iw502703", "IWC Big Pilot Le Petit Prince – IW502703 – Calendrier Annuel – Édition Limitée", "IWC", 7500, 9099, ["homme"]),
+  creerProduit("iwc-big-pilot-top-gun-iw502001", "IWC Big Pilot Top Gun IW502001 Black Ceramic Leather Strap 7 Day Power Reserve", "IWC", 3500, null, ["homme"]),
+  creerProduit("iwc-aviateur-chronographe-43-noir", "IWC Montre d’Aviateur Chronographe – 43 mm – Cadran noir", "IWC", 3599, 5000, ["homme"]),
+  creerProduit("iwc-aviateur-chronographe-bronze-bleu", "IWC Montre d’Aviateur Chronographe – Bronze & Cadran Bleu – IW288109 – Coffret et papiers", "IWC", 3099, 4500, ["homme"]),
+  creerProduit("iwc-pilot-top-gun-lake-tahoe-iw389105", "IWC Pilot Top Gun Lake Tahoe – IW389105 – Chronographe – Céramique blanche 45 mm – Neuf", "IWC", 6299, 7500, ["homme"]),
+
   // PRODUIT SUPPLÉMENTAIRE
   creerProduit(
     "details",
