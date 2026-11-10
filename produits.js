@@ -198,6 +198,23 @@ const produits = [
     }
   ),
 
+  // RESTAURATION DES 14 PRODUITS DE LA CATÉGORIE MONTRES FEMME
+  // Fiches reprises du catalogue d'origine ; images laissées vides volontairement.
+  creerProduit("bracelet-cartier-juste-un-clou-femme-original", "BRACELET À ONGLES CLASSIQUE CARTIER AUTHENTIQUE JUSTE UN CLOU 18K taille 17 boîte et certificat.", "Cartier", 3699, null, ["femme"]),
+  creerProduit("cartier-baignoire-wgba0025-femme", "Cartier Baignoire Petit WGBA0025 « Femme » Quartz Or Jaune (2025) Taille 16 NEUF", "Cartier", 16000, null, ["femme"]),
+  creerProduit("cartier-panthere-22mm-femme", "Cartier Panthère 22 mm Femme – Montre Or Jaune | Service Officiel & Boîte", "Cartier", 7000, null, ["femme"]),
+  creerProduit("cartier-tank-must-femme", "Cartier Tank Must – Montre de Luxe avec Ensemble Complet, Boîte et Papiers", "Cartier", 2000, null, ["femme"]),
+  creerProduit("jaeger-lecoultre-reverso-2024-femme", "Jaeger-LeCoultre Reverso 2024 – Acier inoxydable – Réf. 214.8.62 Q3858522", "Jaeger-LeCoultre", 4599, 6000, ["femme"]),
+  creerProduit("cartier-faberge-67082-femme", "Montre Cartier Fabergé 67082 en or massif 18 carats", "Cartier", 3000, 3800, ["femme"]),
+  creerProduit("cartier-panthere-wgpn0045-femme", "Montre Cartier Panthere 2025 or jaune 18 carats 27 mm à quartz WGPN0045 4014 – Série complète", "Cartier", 15500, null, ["femme"]),
+  creerProduit("cartier-panthere-w2pn0007-femme", "Montre Cartier Panthère Medium W2PN0007 Femme – Acier & Or 2020", "Cartier", 5500, null, ["femme"]),
+  creerProduit("cartier-santos-carree-femme-0901", "Montre Cartier Santos Carrée Femme 24 mm 18 carats YG 90 grs Bordeaux Automatique", "Cartier", 7600, null, ["femme"]),
+  creerProduit("cartier-santos-demoiselle-2698", "Montre Cartier Santos Demoiselle 20 mm Acier Cadran Rose Nacré – Réf. 2698", "Cartier", 2300, null, ["femme"]),
+  creerProduit("patek-philippe-vintage-1908-femme", "Montre Patek Philippe vintage de 1908 en or jaune 18K. Rare, avec papiers d’origine.", "Patek Philippe", 5000, null, ["femme"]),
+  creerProduit("omega-seamaster-diver-300m-007-femme", "OMEGA Seamaster Diver 300M 007", "Omega", 3500, null, ["femme"]),
+  creerProduit("patek-philippe-1935-femme", "Patek Philippe 1935 Femme – Montre-bracelet en Or Blanc 18 carats avec Boîte et Papiers", "Patek Philippe", 2500, null, ["femme"]),
+  creerProduit("patek-philippe-3352-1-femme", "Patek Philippe Femme – 23 mm – Or massif 18 carats – Remontage manuel – Réf. 3352/1", "Patek Philippe", 3099, 4000, ["femme"]),
+
   // PRODUIT SUPPLÉMENTAIRE
   creerProduit(
     "details",
