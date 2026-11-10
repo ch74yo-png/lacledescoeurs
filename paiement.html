@@ -315,7 +315,7 @@ function validateBeforePayment(){
     if(
       !Number.isInteger(quantity)||
       quantity<1||
-      quantity>15
+      quantity>10
     ){
       throw new Error("Une quantité du panier est invalide.");
     }
