@@ -1783,3 +1783,56 @@ button.primary,.btn-primary{
   color:#ffffff!important;
   border:1px solid #ffffff!important;
 }
+
+
+/* RESTAURATION DU VISUEL ORIGINAL DE L'ACCUEIL + TYPOGRAPHIE BLANC/OR */
+.hero{
+  background-image:
+    linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.18)),
+    url("https://bijouterielamalmaison.fr/wp-content/uploads/2026/05/AA1.webp")!important;
+  background-position:center!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  background-color:#000!important;
+}
+.hero .eyebrow,
+.section-heading h2,
+.home-category-heading h2,
+.cdc-footer .footer-column h4,
+.cdc-footer .footer-contact h4,
+.catalogue-heading .eyebrow,
+.favorites-heading .eyebrow{
+  color:#d9ad45!important;
+}
+.hero h1,.hero-content>p:not(.eyebrow){
+  color:#ffffff!important;
+}
+h1,h2,h3,h4,h5,h6{
+  color:#ffffff!important;
+}
+h2,.section-title,.section-heading h2,
+.home-category-heading h2,
+.product-price,.favorite-price,.detail-price,
+.checkout-total,.payment-total,.price{
+  color:#d9ad45!important;
+}
+p,li,dt,dd,label,small,strong,em,
+.product-name,.product-name a,.product-info,.product-description,
+.product-card p,.product-item p,.favorite-info,
+.cart-item h2,.checkout-card label,.payment-card label,
+.checkout-line,.payment-line,.footer-bottom{
+  color:#ffffff!important;
+}
+.cdc-header .cdc-icon-button,
+.cdc-header .header-actions,
+.cdc-header .cdc-language,
+.cdc-header .cdc-language>span,
+.cdc-header .cdc-language select{
+  color:#ffffff!important;
+}
+.cdc-header .cdc-icon-button svg,
+.cdc-header .cdc-language svg{
+  color:#ffffff!important;
+  stroke:#ffffff!important;
+}
+.cdc-header .hamburger-lines i{background:#ffffff!important}
