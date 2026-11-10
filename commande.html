@@ -226,220 +226,31 @@
 
       
 
-      <section class="checkout-card"><h2 class="checkout-step-number">3</h2><button class="checkout-button" type="submit">CONTINUER</button></section>\n    </form>
+      <section class="checkout-card">
+        <h2 class="checkout-step-number">3</h2>
+        <div id="step3Preview" class="checkout-customer-preview"><p>Vos coordonnées et votre adresse de livraison apparaîtront ici au fur et à mesure de la saisie.</p></div>
+        <button class="checkout-button" type="submit">CONTINUER</button>
+      </section>\n    </form>
   </div>
 </main>
 
 <script>
 "use strict";
-
-const CART_KEY = "cdc_cart";
-const ORDER_REF_KEY = "cdc_order_reference";
-const ORDER_SIG_KEY = "cdc_order_cart_signature";
-let cart = [];
-
-try {
-  cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-  if (!Array.isArray(cart)) cart = [];
-} catch {
-  cart = [];
-}
-
-const countrySelect = document.getElementById("country");
-function cartSignature(){return cart.map(p=>String(p.id)+":"+Math.max(1,Number(p.quantity)||1)).sort().join("|");}
-function ensureOrderReference(){
-  const signature=cartSignature();
-  let ref=localStorage.getItem(ORDER_REF_KEY);
-  if(!ref || localStorage.getItem(ORDER_SIG_KEY)!==signature){
-    const alphabet="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-    const bytes=new Uint8Array(8); crypto.getRandomValues(bytes);
-    ref="CDC-"+Array.from(bytes,b=>alphabet[b%alphabet.length]).join("");
-    localStorage.setItem(ORDER_REF_KEY,ref); localStorage.setItem(ORDER_SIG_KEY,signature);
-  }
-  document.getElementById("orderReference").textContent=ref;
-  return ref;
-}
-
-const money = n => new Intl.NumberFormat("fr-FR", {
-  style:"currency",
-  currency:"EUR"
-}).format(n);
-
-const escapeHTML = s => String(s ?? "").replace(/[&<>"']/g,c=>({
-  "&":"&amp;",
-  "<":"&lt;",
-  ">":"&gt;",
-  '"':"&quot;",
-  "'":"&#39;"
-}[c]));
-
-const countryNames = new Intl.DisplayNames(["fr"],{
-  type:"region"
-});
-
-const countries = [];
-
-for(let i=65;i<=90;i++){
-  for(let j=65;j<=90;j++){
-    const code=String.fromCharCode(i,j);
-    const name=countryNames.of(code);
-
-    if(name && name!==code &&
-      !["AC","CP","DG","EA","IC","TA","XK"].includes(code)){
-      countries.push({code,name});
-    }
-  }
-}
-
-countries.sort((a,b)=>a.name.localeCompare(b.name,"fr"));
-
-countries.forEach(c=>{
-  const option=document.createElement("option"); option.value=c.code;
-  option.textContent=c.name; countrySelect.appendChild(option);
-});
-try{
-  const saved=JSON.parse(localStorage.getItem("cdc_customer")||"null");
-  const preferred=saved?.countryCode||new Intl.Locale(navigator.language||"fr-FR").region||"FR";
-  if(preferred && countries.some(c=>c.code===preferred)) countrySelect.value=preferred;
-}catch{}
-
-const europe = new Set(
-  "AT BE BG HR CY CZ DK EE FI FR DE GR HU IS IE IT LV LI LT LU MT MC NL NO PL PT RO SM SK SI ES SE CH GB".split(" ")
-);
-
-const northAmerica = new Set(["US","CA"]);
-const asiaOceania = new Set("AU NZ JP SG KR HK TW".split(" "));
-
-function shippingFor(code){
-  if(!code)return null;
-
-  if(code==="GH" ||
-    ["NG","ZA","KE","UG","TZ","RW","SN","CI","CM","MA","TN","EG"].includes(code)){
-    return null;
-  }
-
-  if(europe.has(code))return 15.62;
-  if(northAmerica.has(code))return 39.90;
-  if(asiaOceania.has(code))return 49.90;
-
-  return 59.90;
-}
-
-let promoDiscount = 0;
-
-function subtotalValue(){
-  return cart.reduce((sum,p)=>{
-    return sum +
-      Math.max(0,Number(p.price)||0) *
-      Math.max(0,Number(p.quantity)||0);
-  },0);
-}
-
-function shippingValue(){
-  return shippingFor(countrySelect.value);
-}
-
-function totalValue(){
-  return Math.max(
-    0,
-    subtotalValue()+(shippingValue()||0)-promoDiscount
-  );
-}
-
-function render(){
-  ensureOrderReference();
-  const subtotal=subtotalValue(); const shipping=shippingValue();
-  const host=document.getElementById("summaryItems"); host.innerHTML="";
-  if(!cart.length){host.innerHTML='<p class="empty-cart">Votre panier est vide.</p>';}
-  cart.forEach((p,index)=>{
-    const row=document.createElement("div"); row.className="checkout-line checkout-item";
-    const name=document.createElement("span"); name.className="checkout-item-name"; name.textContent=p.name||p.nom||"Article";
-    const unit=document.createElement("span"); unit.className="checkout-item-unit"; unit.textContent=money(Number(p.price)||0)+" / unité";
-    const qty=document.createElement("select"); qty.className="checkout-item-qty"; qty.dataset.cartIndex=String(index); qty.setAttribute("aria-label","Choisir une quantité"); qty.innerHTML="<option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option><option value=\"6\">6</option><option value=\"7\">7</option><option value=\"8\">8</option><option value=\"9\">9</option><option value=\"10\">10</option>"; qty.value=String(Math.max(1,Math.min(10,Number(p.quantity)||1)));
-    const price=document.createElement("strong"); price.textContent=money((Number(p.price)||0)*(Number(p.quantity)||1));
-    row.append(name,unit,qty,price); host.appendChild(row);
-  });
-  document.getElementById("subtotal").textContent=money(subtotal);
-  document.getElementById("shipping").textContent=shipping===null?"À calculer":money(shipping);
-  document.getElementById("discount").textContent=money(promoDiscount);
-  document.getElementById("total").textContent=money(totalValue());
-  const counter=document.getElementById("cartCount"); if(counter) counter.textContent=cart.reduce((sum,p)=>sum+(Number(p.quantity)||0),0);
-}
-
-document.getElementById("summaryItems").addEventListener("change",event=>{
-  const input=event.target.closest("[data-cart-index]"); if(!input)return;
-  const index=Number(input.dataset.cartIndex); if(!cart[index])return;
-  cart[index].quantity=Math.max(1,Math.min(10,Number(input.value)||1));
-  localStorage.setItem(CART_KEY,JSON.stringify(cart)); render();
-});
-const lettersOnly=value=>value.replace(/[^\p{L}\s'-]/gu,"");
-document.getElementById("fullName").addEventListener("input",event=>{event.target.value=lettersOnly(event.target.value);});
-document.getElementById("city").addEventListener("input",event=>{event.target.value=lettersOnly(event.target.value);});
-["phone","postalCode"].forEach(id=>{
-  document.getElementById(id).addEventListener("input",event=>{event.target.value=event.target.value.replace(/\D/g,"");});
-});
-countrySelect.addEventListener("change",render);
-
-document.getElementById("applyPromo").addEventListener("click",()=>{
-  const code=document.getElementById("promoCode").value.trim();
-
-  promoDiscount=0;
-
-  document.getElementById("promoMessage").textContent =
-    code
-      ? "Ce code doit être vérifié par la boutique avant application."
-      : "Veuillez saisir un code promotionnel.";
-
-  render();
-});
-
-document.getElementById("checkoutForm").addEventListener("submit",event=>{
-  event.preventDefault();
-
-  if(!cart.length){
-    alert("Votre panier est vide.");
-    return;
-  }
-
-  if(!event.currentTarget.reportValidity())return;
-
-  const shipping=shippingValue();
-
-  if(shipping===null){
-    alert("La livraison n'est pas disponible pour ce pays. Veuillez contacter la boutique.");
-    return;
-  }
-
-  const customer={
-    fullName:document.getElementById("fullName").value.trim(),
-    firstName:document.getElementById("fullName").value.trim().split(/\s+/)[0],
-    lastName:document.getElementById("fullName").value.trim().split(/\s+/).slice(1).join(" "),
-    email:document.getElementById("email").value.trim(),
-    phone:document.getElementById("phone").value.trim(),
-    country:countryNames.of(countrySelect.value),
-    countryCode:countrySelect.value,
-    address:document.getElementById("address").value.trim(),
-    postalCode:document.getElementById("postalCode").value.trim(),
-    city:document.getElementById("city").value.trim()
-  };
-
-  const shippingData={
-    amount:shipping,
-    currency:"EUR"
-  };
-
-  localStorage.setItem("cdc_customer",JSON.stringify(customer));
-  localStorage.setItem("cdc_order_reference",ensureOrderReference());
-  localStorage.setItem("cdc_shipping",JSON.stringify(shippingData));
-  localStorage.setItem("cdc_promo",JSON.stringify({
-    code:document.getElementById("promoCode").value.trim(),
-    discount:promoDiscount
-  }));
-
-  window.location.href="recapitulatif.html";
-});
-
-render();
+const CART_KEY="cdc_cart",ORDER_REF_KEY="cdc_order_reference",ORDER_SIG_KEY="cdc_order_cart_signature";
+let cart=[];try{cart=JSON.parse(localStorage.getItem(CART_KEY)||"[]");if(!Array.isArray(cart))cart=[];}catch{cart=[];}
+const countrySelect=document.getElementById("country"),countryNames=new Intl.DisplayNames(["fr"],{type:"region"});
+const countries=[];for(let i=65;i<=90;i++){for(let j=65;j<=90;j++){const code=String.fromCharCode(i,j),name=countryNames.of(code);if(name&&name!==code&&!["AC","CP","DG","EA","IC","TA","XK"].includes(code))countries.push({code,name});}}
+countries.sort((a,b)=>a.name.localeCompare(b.name,"fr"));countries.forEach(c=>{const o=document.createElement("option");o.value=c.code;o.textContent=c.name;countrySelect.appendChild(o);});
+try{const saved=JSON.parse(localStorage.getItem("cdc_customer")||"null"),preferred=saved?.countryCode||new Intl.Locale(navigator.language||"fr-FR").region||"FR";if(preferred&&countries.some(c=>c.code===preferred))countrySelect.value=preferred;}catch{}
+const europe=new Set("AT BE BG HR CY CZ DK EE FI FR DE GR HU IS IE IT LV LI LT LU MT MC NL NO PL PT RO SM SK SI ES SE CH GB".split(" ")),northAmerica=new Set(["US","CA"]),asiaOceania=new Set("AU NZ JP SG KR HK TW".split(" "));
+function shippingFor(code){if(!code)return null;if(code==="GH"||["NG","ZA","KE","UG","TZ","RW","SN","CI","CM","MA","TN","EG"].includes(code))return null;if(europe.has(code))return 15.62;if(northAmerica.has(code))return 39.90;if(asiaOceania.has(code))return 49.90;return 59.90;}
+function signature(){return cart.map(p=>String(p.id)+":"+Math.max(1,Number(p.quantity)||1)).sort().join("|");}
+function orderReference(){const sig=signature();let ref=localStorage.getItem(ORDER_REF_KEY);if(!ref||localStorage.getItem(ORDER_SIG_KEY)!==sig){const alphabet="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",bytes=new Uint8Array(8);crypto.getRandomValues(bytes);ref="CDC-"+Array.from(bytes,b=>alphabet[b%alphabet.length]).join("");localStorage.setItem(ORDER_REF_KEY,ref);localStorage.setItem(ORDER_SIG_KEY,sig);}return ref;}
+const value=id=>document.getElementById(id).value.trim(),escapeHtml=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function preview(){const rows=[["Nom",value("fullName")],["E-mail",value("email")],["Téléphone",value("phone")],["Adresse",value("address")],["Code postal",value("postalCode")],["Ville",value("city")],["Pays",countrySelect.value?countrySelect.options[countrySelect.selectedIndex].textContent:""]];document.getElementById("step3Preview").innerHTML=rows.map(([k,v])=>'<p><strong style="display:inline;color:#e6c58e;margin:0">'+k+' :</strong> '+escapeHtml(v||"—")+'</p>').join("");}
+document.querySelectorAll("#checkoutForm input,#checkoutForm select").forEach(el=>el.addEventListener("input",preview));countrySelect.addEventListener("change",preview);
+document.getElementById("checkoutForm").addEventListener("submit",event=>{event.preventDefault();const form=event.currentTarget;if(!cart.length){alert("Votre panier est vide.");return;}if(!form.reportValidity())return;const shipping=shippingFor(countrySelect.value);if(shipping===null){alert("La livraison n'est pas disponible pour ce pays. Veuillez contacter la boutique.");return;}const fullName=value("fullName"),customer={fullName,firstName:fullName.split(/\s+/)[0],lastName:fullName.split(/\s+/).slice(1).join(" "),email:value("email"),phone:value("phone"),country:countryNames.of(countrySelect.value),countryCode:countrySelect.value,address:value("address"),postalCode:value("postalCode"),city:value("city")};localStorage.setItem("cdc_customer",JSON.stringify(customer));localStorage.setItem(ORDER_REF_KEY,orderReference());localStorage.setItem("cdc_shipping",JSON.stringify({amount:shipping,currency:"EUR"}));localStorage.setItem("cdc_promo",JSON.stringify({code:"",discount:0}));window.location.assign("recapitulatif.html");});
+preview();
 </script>
 
 <script src="site-shell.js?v=20261110-logo-mobile-fix" defer></script>
