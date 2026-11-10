@@ -1574,3 +1574,117 @@ main,.page-content{
 .product-detail-image img,.cdc-logo img{
   object-fit:contain;
 }
+
+
+/* CONTRASTE RENFORCÉ — thème noir lisible sur toutes les pages */
+:root{
+  --cdc-bg:#050505!important;
+  --cdc-panel:#11100f!important;
+  --cdc-text:#fffaf2!important;
+  --cdc-card-text:#fffaf2!important;
+  --cdc-border:#806b4c!important;
+}
+html,body,main,.page-content,
+.welcome-section,.categories-section,.featured-section,.editorial-section,
+.home-category,.home-category:nth-child(even),
+.checkout-page,.payment-page,.catalogue-heading,.favorites-heading,
+.account-heading,.cart-page,.contact-page,.legal-page,.info-page{
+  background-color:#050505!important;
+  color:#fffaf2!important;
+}
+/* Tous les panneaux et cartes : noir profond au lieu du gris */
+.products-grid .product-card,.product-card,.product-item,
+.favorites-grid .favorite-card,.favorite-card,
+.account-card,.cart-item,.checkout-card,.payment-card,
+.category-card,.contact-card,.info-card,.legal-card,
+.checkout-customer-preview,.product-description,.product-details,
+.product-specifications,.description-box,.details-box,
+.accordion-item,.faq-item,.contact-info,.contact-form,
+.order-summary,.checkout-summary,.payment-method,
+.modal-content,.dropdown-menu,.cdc-search,.cdc-nav,
+.cdc-header>.cdc-nav{
+  background:#11100f!important;
+  color:#fffaf2!important;
+  border-color:rgba(201,164,94,.48)!important;
+}
+/* Titres, textes descriptifs, libellés et informations */
+h1,h2,h3,h4,h5,h6,
+p,li,dt,dd,label,small,strong,
+.product-name,.product-name a,.product-info,.product-description,
+.product-card p,.product-item p,.favorite-info,
+.favorite-info h2,.cart-item h2,.cart-item-price,
+.checkout-card h2,.payment-card h2,
+.checkout-card label,.payment-card label,
+.checkout-line,.payment-line,.checkout-customer-preview p,
+.catalogue-heading p,.favorites-heading p,
+.section-heading p,.home-category-heading p,
+.contact-info p,.contact-card p,.info-card p,.legal-card p,
+.cdc-footer,.cdc-footer a{
+  color:#fffaf2!important;
+}
+/* Textes secondaires : ivoire clair, jamais gris moyen */
+.caption,.muted,.text-muted,.description-muted,
+.product-condition,.product-state,.product-meta,
+.footer-bottom,.help-text,.form-hint,.field-hint{
+  color:#e2d8ca!important;
+}
+/* Prix, liens d'action et éléments de mise en valeur */
+.product-price,.favorite-price,.detail-price,
+.checkout-total,.payment-total,.price,
+a:hover,.home-category-heading a,
+.cdc-footer .footer-column h4,
+.cdc-footer .footer-contact h4{
+  color:#e6bd58!important;
+}
+/* Les zones contenant les photos ont un fond noir, sans filtre sur les images */
+.product-image,.favorite-image,.cart-item-image,.product-detail-image,
+.category-image,.category-accessories,.category-ap,
+.category-women,.category-men{
+  background:#080808!important;
+}
+/* Formulaires sombres et lisibles */
+input:not([type="checkbox"]):not([type="radio"]),
+select,textarea,
+.cdc-search input,.search-form input,
+.checkout-form input:not([type="checkbox"]),
+.checkout-form select,.checkout-form textarea,
+.checkout-promo input{
+  background:#191715!important;
+  color:#fffaf2!important;
+  border:1px solid #806b4c!important;
+  caret-color:#e6bd58!important;
+}
+input::placeholder,textarea::placeholder{
+  color:#d6cabb!important;
+  opacity:1!important;
+}
+select option{background:#11100f!important;color:#fffaf2!important}
+input:focus,select:focus,textarea:focus{
+  outline:2px solid #c9a45e!important;
+  outline-offset:1px!important;
+}
+/* En-tête, menu et pied de page unifiés avec le noir du site */
+.cdc-header,.cdc-footer,
+body.theme-dark .cdc-header,body.theme-dark .cdc-footer,
+body:not(.theme-dark) .cdc-header,body:not(.theme-dark) .cdc-footer{
+  background:#050505!important;
+  color:#fffaf2!important;
+}
+.cdc-nav,.cdc-header>.cdc-nav,.cdc-search{
+  background:#080808!important;
+  color:#fffaf2!important;
+}
+.cdc-nav a,.cdc-header>.cdc-nav a,.cdc-footer a{
+  color:#fffaf2!important;
+}
+.cdc-footer .footer-bottom{
+  color:#e2d8ca!important;
+  border-color:rgba(201,164,94,.35)!important;
+}
+/* Les boutons dorés conservent un texte noir bien contrasté */
+.primary-button,.checkout-button,.pay-button,
+button.primary,.btn-primary{
+  background:#c9a45e!important;
+  color:#080808!important;
+  border-color:#c9a45e!important;
+}
