@@ -42,6 +42,27 @@
       object-fit: contain;
       display: block;
     }
+    .product-gallery { width: 100%; min-width: 0; }
+    .product-gallery .product-detail-image { aspect-ratio: 1 / 1; }
+    .product-thumbnails {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .product-thumbnail {
+      border: 1px solid #ddd;
+      padding: 0;
+      background: #f5f2ed;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .product-thumbnail.active { border: 2px solid var(--gold); }
+    .product-thumbnail img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    @media (max-width: 420px) {
+      .product-thumbnails { gap: 5px; }
+    }
     .product-detail-info {
       padding-top: 15px;
     }
@@ -348,12 +369,30 @@
         "Découvrez ce modèle de notre sélection LA CLÉ DES CŒURS."
       );
       const reference = echapperHTML(produit.reference || "");
-      const image = produit.image || "";
-
-      const visuel = image
-        ? `<img src="${echapperHTML(image)}" alt="${nom}" referrerpolicy="no-referrer" loading="eager"
-             onerror="this.parentElement.textContent='Photo indisponible';">`
-        : `<span>Photo indisponible</span>`;
+      const imagesProduit = String(produit.id) === "bracelet-cartier-love-classic-or-jaune-16-certificat"
+        ? [
+            "assets/cartier-love-classic-16-1.jpg",
+            "assets/cartier-love-classic-16-2.jpg",
+            "assets/cartier-love-classic-16-3.jpg",
+            "assets/cartier-love-classic-16-4.jpg",
+            "assets/cartier-love-classic-16-5.jpg",
+            "assets/cartier-love-classic-16-6.jpg",
+            "assets/cartier-love-classic-16-7.jpg"
+          ]
+        : (produit.image ? [produit.image] : []);
+      const imagePrincipale = imagesProduit[0] || "";
+      const visuel = imagePrincipale
+        ? `<div class="product-gallery">
+             <div class="product-detail-image">
+               <img id="mainProductImage" src="${echapperHTML(imagePrincipale)}" alt="${nom}" loading="eager">
+             </div>
+             ${imagesProduit.length > 1 ? `<div class="product-thumbnails" aria-label="Photos du produit">
+               ${imagesProduit.map((src, index) => `<button type="button" class="product-thumbnail ${index === 0 ? "active" : ""}" data-image="${echapperHTML(src)}" aria-label="Afficher la photo ${index + 1}">
+                 <img src="${echapperHTML(src)}" alt="" loading="lazy">
+               </button>`).join("")}
+             </div>` : ""}
+           </div>`
+        : `<div class="product-detail-image"><span>Photo indisponible</span></div>`;
 
       const ancienPrix = produit.ancienPrix
         ? `<span class="detail-old-price">${formaterPrix(produit.ancienPrix)}</span>`
@@ -363,7 +402,7 @@
 
       contenuProduit.innerHTML = `
         <article class="product-detail">
-          <div class="product-detail-image">${visuel}</div>
+          ${visuel}
 
           <div class="product-detail-info">
             <div class="detail-brand">${marque}</div>
@@ -391,6 +430,16 @@
             </div>
           </div>
         </article>`;
+
+      document.querySelectorAll(".product-thumbnail").forEach(bouton => {
+        bouton.addEventListener("click", () => {
+          const image = bouton.dataset.image;
+          const principale = document.getElementById("mainProductImage");
+          if (principale && image) principale.src = image;
+          document.querySelectorAll(".product-thumbnail").forEach(item => item.classList.remove("active"));
+          bouton.classList.add("active");
+        });
+      });
 
       const quantityInput=document.getElementById("productQuantity");
       document.getElementById("acheterProduit").addEventListener("click", () => {
