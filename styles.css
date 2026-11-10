@@ -1892,3 +1892,6 @@ body .hero h1,body .hero-content>p:not(.eyebrow){
   font-size:16px!important;
 }
 .cdc-header #cdcThemeButton{display:none!important}
+
+/* Aucun badge ne doit apparaître lorsque le panier ou les favoris sont vides. */
+#cartCount[hidden],#favoriteCount[hidden]{display:none!important;}
