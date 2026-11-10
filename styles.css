@@ -2129,3 +2129,77 @@ hr,.checkout-total,.payment-total{border-color:#d4af37!important}
   font-size:clamp(24px,3.4vw,38px);
   line-height:1.25;
 }
+
+
+/* MAQUETTE VALIDÉE — THÈME NOIR, BLANC ET OR SUR TOUT LE SITE */
+:root{
+  color-scheme:dark!important;
+  --paper:#000!important;--cream:#000!important;--white:#000!important;
+  --brown:#000!important;--ink:#fff!important;--muted:#fff!important;
+  --gold:#d4af37!important;--line:#d4af37!important;
+}
+html,body,body *:not(img):not(video):not(canvas):not(svg):not(path):not(.cdc-logo-image){
+  background-color:#000!important;
+}
+html,body,body main,body section,body article,body aside,body nav,
+body header,body footer,body form,body div,body fieldset,body details,
+.cdc-header,.cdc-nav,.cdc-search,.cdc-footer,.hero,.home-intro,.home-contact,
+.home-category,.home-categories-grid,.store-showcase,.store-showcase-image,
+.categories-section,.featured-section,.editorial-section,.welcome-section,
+.catalogue-heading,.favorites-heading,.cart-page,.checkout-page,.payment-page,
+.contact-page,.legal-page,.info-page,.confirmation-page,
+.product-card,.product-item,.favorite-card,.account-card,.cart-item,
+.cart-summary,.cart-empty,.checkout-card,.payment-card,.contact-information,
+.contact-form-box,.contact-hero,.contact-info,.contact-form,.category-image,
+.product-image,.favorite-image,.cart-item-image,.product-detail-image,
+.home-product-image,.home-product-card,.home-product-info{
+  background:#000!important;background-image:none!important;color:#fff!important;
+  border-color:rgba(212,175,55,.55)!important;
+}
+body,body *:not(img):not(svg):not(path):not(.cdc-logo-image){
+  color:#fff!important;
+}
+h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,small,strong,em,
+.product-name,.product-info,.product-description,.cart-item-price,
+.checkout-line,.payment-line,.footer-bottom,.footer-column a{
+  color:#fff!important;
+}
+.eyebrow,.category-link,.home-category-heading h2 a,
+.home-category-heading>a,.product-price,.favorite-price,.detail-price,
+.checkout-total,.payment-total,.cdc-footer .footer-column h4,
+.cdc-footer .footer-contact h4,.store-showcase .eyebrow{
+  color:#d4af37!important;
+}
+.cdc-header,.cdc-footer,.cdc-nav,.cdc-search{
+  background:#000!important;color:#fff!important;
+}
+.cdc-header .cdc-icon-button,.cdc-header .header-actions,
+.cdc-header .header-actions a,.cdc-header .header-actions button,
+.cdc-header .cdc-language,.cdc-header .cdc-language>span,
+.cdc-header .cdc-language select,.cdc-header .menu-button{
+  color:#fff!important;
+}
+.cdc-header .cdc-icon-button svg,.cdc-header .cdc-language svg,
+.cdc-header .menu-button svg{
+  color:#fff!important;stroke:#fff!important;
+}
+.cdc-header .hamburger-lines i{background:#fff!important}
+.cdc-header .cdc-icon-button{border-color:transparent!important}
+.cdc-nav a,.cdc-footer a{color:#fff!important}
+input:not([type=checkbox]):not([type=radio]),select,textarea,
+.cdc-search input,.search-form input,.checkout-form input:not([type=checkbox]),
+.checkout-form select,.checkout-form textarea,.checkout-promo input{
+  background:#080808!important;color:#fff!important;
+  border:1px solid #d4af37!important;
+}
+input::placeholder,textarea::placeholder{color:#d8d8d8!important;opacity:1!important}
+select option{background:#000!important;color:#fff!important}
+button,.primary-button,.secondary-button,.checkout-button,.pay-button,
+button.primary,.btn-primary{
+  background:#d4af37!important;color:#000!important;
+  border:1px solid #d4af37!important;
+}
+.product-image,.favorite-image,.cart-item-image,.product-detail-image,
+.home-product-image,.category-image{background:#000!important}
+img,.cdc-logo,.cdc-logo img,.cdc-logo-image{filter:none!important}
+.cdc-logo,.cdc-logo img,.cdc-logo-image{opacity:1!important}
