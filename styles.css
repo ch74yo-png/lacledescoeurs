@@ -1110,3 +1110,16 @@ body.theme-dark .cdc-header{background:#11100f!important}
 }
 .cdc-header>.cdc-nav a:last-child{border-bottom:0!important}
 .cdc-header>.cdc-nav a:hover{color:#a57c35!important;background:rgba(201,164,94,.08)!important}
+
+/* Actions produit uniformes : acheter, panier, favoris */
+.home-product-actions{display:flex;flex-direction:column;gap:7px;margin:12px auto;max-width:260px}
+.home-product-actions button,.product-actions button{
+  width:100%;min-height:38px;padding:9px 10px;border:1px solid var(--gold);
+  background:transparent;color:var(--gold);font-size:10px;letter-spacing:.7px;
+  cursor:pointer;text-transform:uppercase
+}
+.home-product-actions button:first-child,.product-actions button:first-child{
+  background:var(--gold);color:#211916;font-weight:600
+}
+.home-product-actions button:hover,.product-actions button:hover{background:#e2bd75;color:#211916}
+@media(max-width:520px){.home-product-actions{gap:5px}.home-product-actions button{font-size:9px;padding:8px 5px}}
