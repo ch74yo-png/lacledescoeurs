@@ -1,17 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 260" role="img" aria-labelledby="title desc">
-<title id="title">LA CLÉ DES CŒURS</title>
-<desc id="desc">Depuis 1974 — Bijoux fins et raffinés</desc>
-<g font-family="Montserrat,Arial,sans-serif" font-weight="300" text-anchor="middle">
-  <text x="340" y="82" fill="#f8f5ef" font-size="57" letter-spacing="2">LA CLÉ</text>
-  <text x="340" y="169" fill="#f8f5ef" font-size="55" letter-spacing="2">DES C</text>
-  <text x="452" y="169" fill="#f8f5ef" font-size="55" letter-spacing="2">EURS</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" role="img" aria-labelledby="title desc">
+<title id="title">LA CLÉ DES CŒURS — Depuis 1974</title>
+<desc id="desc">Logo avec une clé intégrée au É de LA CLÉ, un cœur doré à la place du O de CŒURS et la signature BIJOUX FINS ET RAFFINÉS.</desc>
+<defs>
+  <linearGradient id="or" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0a8"/><stop offset=".48" stop-color="#e7bd55"/><stop offset="1" stop-color="#bd8730"/></linearGradient>
+</defs>
+<g fill="#f7f4ef" font-family="Montserrat,Arial,sans-serif" font-weight="300" text-anchor="middle">
+  <text x="450" y="91" font-size="70" letter-spacing="3">LA CLÉ</text>
+  <text x="300" y="184" font-size="68" letter-spacing="2">DES C</text>
+  <text x="573" y="184" font-size="68" letter-spacing="2">EURS</text>
 </g>
-<g fill="none" stroke="#f2d477" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M340 0v96"/>
-  <circle cx="340" cy="101" r="8" fill="#f2d477" stroke="none"/>
-  <path d="M340 116 C315 85 278 109 291 139 C301 162 340 193 340 193 C340 193 379 162 389 139 C402 109 365 85 340 116Z"/>
+<g fill="none" stroke="url(#or)" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Clé verticale intégrée à l'accent du É -->
+  <path d="M450 0V112" stroke-width="4"/>
+  <circle cx="450" cy="116" r="8" fill="url(#or)" stroke="none"/>
+  <path d="M450 126v-12m0 0c-8-13-23-13-28-3-5 10 5 19 28 32 23-13 33-22 28-32-5-10-20-10-28 3Z" stroke-width="4"/>
+  <!-- Cœur remplaçant le O de CŒURS -->
+  <path d="M450 149C426 119 391 137 399 165c6 22 51 55 51 55s45-33 51-55c8-28-27-46-51-16Z" stroke-width="4.5"/>
 </g>
-<text x="505" y="207" fill="#f2d477" font-family="Montserrat,Arial,sans-serif" font-size="29" font-weight="700">Depuis 1974</text>
-<path d="M65 244h55m440 0h55" stroke="#f2d477" stroke-width="2"/>
-<text x="340" y="251" fill="#f2d477" font-family="Montserrat,Arial,sans-serif" font-size="19" letter-spacing="8" text-anchor="middle">BIJOUX FINS ET RAFFINÉS</text>
+<text x="596" y="222" fill="url(#or)" font-family="Montserrat,Arial,sans-serif" font-size="31" font-weight="700">Depuis 1974</text>
+<path d="M150 270h75l18 0 12-4 12 4h20m318 0h20l12-4 12 4h18 75" fill="none" stroke="url(#or)" stroke-width="2"/>
+<text x="450" y="278" fill="url(#or)" font-family="Montserrat,Arial,sans-serif" font-size="23" font-weight="400" letter-spacing="9" text-anchor="middle">BIJOUX FINS ET RAFFINÉS</text>
 </svg>
