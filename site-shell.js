@@ -19,7 +19,7 @@
       <div class="header-actions">
         <button class="cdc-icon-button" id="cdcSearchButton" type="button" aria-label="Rechercher">${icon.search}</button>
         <a class="cdc-icon-button" href="compte.html" aria-label="Mon compte">${icon.account}</a>
-        <a class="cdc-icon-button" href="favoris.html" aria-label="Mes favoris">${icon.heart}</a>
+        <a class="cdc-icon-button favorites-link" href="favoris.html" aria-label="Mes favoris">${icon.heart}<span id="favoriteCount">0</span></a>
         <a class="cdc-icon-button cart-link" href="panier.html" aria-label="Mon panier">${icon.cart}<span id="cartCount">0</span></a>
         <label class="cdc-language" aria-label="Choisir la langue"><span>${icon.globe}</span><select id="cdcLanguage" aria-label="Langue"><option value="fr">FR</option><option value="en">EN</option><option value="es">ES</option><option value="de">DE</option><option value="it">IT</option><option value="pt">PT</option><option value="nl">NL</option></select></label>
         <button class="cdc-icon-button theme-button" id="cdcThemeButton" type="button" aria-label="Changer le thème">${icon.moon}</button>
@@ -42,7 +42,9 @@
     </footer>`;
 
   function lirePanier(){try{const data=JSON.parse(localStorage.getItem("cdc_cart")||"[]");return Array.isArray(data)?data:[]}catch{return[]}}
+  function lireFavoris(){try{const data=JSON.parse(localStorage.getItem("cdc_favorites")||"[]");return Array.isArray(data)?data:[]}catch{return[]}}
   function actualiserCompteurPanier(){const compteur=document.getElementById("cartCount");if(compteur)compteur.textContent=lirePanier().reduce((sum,item)=>sum+(Number(item.quantity)||1),0)}
+  function actualiserCompteurFavoris(){const compteur=document.getElementById("favoriteCount");if(compteur)compteur.textContent=lireFavoris().length}
   function initialiser(){
     document.querySelectorAll(".announcement, header.header, nav.main-nav, .utility-bar, footer").forEach(el=>el.remove());
     document.body.insertAdjacentHTML("afterbegin",header);
@@ -65,7 +67,10 @@
     updateThemeIcon();themeButton?.addEventListener("click",()=>{document.body.classList.toggle("theme-dark");localStorage.setItem("cdc_theme",document.body.classList.contains("theme-dark")?"dark":"light");updateThemeIcon()});
     const language=document.getElementById("cdcLanguage");
     if(language){language.value=localStorage.getItem("cdc_language")||"fr";language.addEventListener("change",()=>{const lang=language.value;localStorage.setItem("cdc_language",lang);if(lang==="fr")location.href=location.pathname+location.search+location.hash;else location.href="https://translate.google.com/translate?sl=fr&tl="+encodeURIComponent(lang)+"&u="+encodeURIComponent(location.href)})}
-    actualiserCompteurPanier();window.addEventListener("storage",actualiserCompteurPanier);window.addEventListener("cdc-cart-updated",actualiserCompteurPanier);
+    actualiserCompteurPanier();actualiserCompteurFavoris();
+    window.addEventListener("storage",()=>{actualiserCompteurPanier();actualiserCompteurFavoris()});
+    window.addEventListener("cdc-cart-updated",actualiserCompteurPanier);
+    window.addEventListener("cdc-favorites-updated",actualiserCompteurFavoris);
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initialiser,{once:true});else initialiser();
 })();
