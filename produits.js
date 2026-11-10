@@ -148,6 +148,21 @@ const produits = [
     }
   ),
 
+  // PRODUITS AJOUTÉS À PARTIR DES FICHES TRANSMISES LE 10/11/2026
+  creerProduit("bague-cartier-love-classique-jaune", "Bague Cartier Love classique en or jaune 18 carats", "Cartier", 1400, null, ["accessoires"], { description: "Bague Cartier Love classique en or jaune 18 carats." }),
+  creerProduit("bracelet-cartier-love-classique-rose", "Bracelet Cartier Love classique en or rose 18 carats", "Cartier", 3999, null, ["accessoires"], { description: "Bracelet Cartier Love classique en or rose 18 carats." }),
+  creerProduit("bague-cartier-love-petit-modele", "Bague Cartier Love petit modèle", "Cartier", 1099, null, ["accessoires"], { description: "Bague Cartier Love petit modèle." }),
+  creerProduit("bague-cartier-ecrou-deux-rangs", "Bague Cartier Écrou deux rangs", "Cartier", 1999, null, ["accessoires"], { description: "Bague Cartier Écrou deux rangs." }),
+  creerProduit("bracelet-cartier-love-petit-jaune", "Bracelet Cartier Love petit modèle en or jaune 18 carats", "Cartier", 3700, null, ["accessoires"], { description: "Bracelet Cartier Love petit modèle en or jaune 18 carats." }),
+  creerProduit("bracelet-cartier-love-rose-16-4200", "Bracelet Cartier Love en or rose 18 carats – Taille 16", "Cartier", 4200, null, ["accessoires"], { description: "Bracelet Cartier Love en or rose 18 carats, taille 16." }),
+  creerProduit("montre-cartier-panthere-wspn0006", "Montre Cartier Panthère WSPN0006", "Cartier", 4500, null, ["femme"], { reference: "WSPN0006", description: "Montre Cartier Panthère WSPN0006 en acier, cadran argenté à chiffres romains, bracelet acier, mouvement quartz. Numéro de série communiqué : 4022764889XX. Carte datée du 01/05/2019." }),
+  creerProduit("bracelet-cartier-love-rose-16-3799", "Bracelet Cartier Love en or rose 18 carats – Taille 16", "Cartier", 3799, null, ["accessoires"], { description: "Bracelet Cartier Love en or rose 18 carats, taille 16." }),
+  creerProduit("bracelet-bulgari-serpenti-viper", "Bracelet Bvlgari Serpenti Viper", "Bvlgari", 4200, null, ["accessoires"], { description: "Bracelet Bvlgari Serpenti Viper." }),
+  creerProduit("bracelet-cartier-maillon-panthere-vintage", "Bracelet Cartier Maillon de Panthère vintage", "Cartier", 3299, null, ["accessoires"], { description: "Bracelet Cartier Maillon de Panthère vintage." }),
+  creerProduit("bracelet-cartier-panthere-cougar-trinity", "Bracelet Cartier Panthère Cougar Trinity", "Cartier", 4599, null, ["accessoires"], { description: "Bracelet Cartier Panthère Cougar Trinity." }),
+  creerProduit("boucles-oreilles-cartier-panthere-cougar-trinity", "Boucles d’oreilles Cartier Panthère Cougar Trinity", "Cartier", 2200, null, ["accessoires"], { description: "Boucles d’oreilles Cartier Panthère Cougar Trinity." }),
+  creerProduit("montre-cartier-tank-louis-verte-grand-modele", "Montre Cartier Tank Louis Cartier grand modèle – Cadran vert", "Cartier", 7299, null, ["homme"], { description: "Montre Cartier Tank Louis Cartier grand modèle à cadran vert." }),
+
   // PRODUIT SUPPLÉMENTAIRE
   creerProduit(
     "details",
