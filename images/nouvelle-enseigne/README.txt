@@ -1,0 +1,1 @@
+Déposez ici la nouvelle photo JPG de l’enseigne de la boutique. Ne supprimez pas l’ancienne photo.
