@@ -1413,3 +1413,11 @@ body.theme-dark .cdc-header{background:#11100f!important}
 .cdc-header{
   background:#2a1009!important;
 }
+
+
+/* Harmonisation exacte avec le fond du fichier logo-officiel.jpg */
+html body header.cdc-header,
+html body .cdc-header{
+  background-color:#2b1009!important;
+  background-image:none!important;
+}
