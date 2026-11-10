@@ -1452,3 +1452,125 @@ html body .cdc-header{
   line-height:15px;
   text-align:center;
 }
+
+
+/* THÈME NOIR GLOBAL — changement des fonds uniquement.
+   Logo, images, structure, dimensions et contenu conservés. */
+:root{
+  --paper:#050505!important;
+  --cream:#080808!important;
+  --white:#0d0d0d!important;
+  --brown:#050505!important;
+  --ink:#f5eee5!important;
+  --cdc-bg:#050505!important;
+  --cdc-panel:#101010!important;
+  --cdc-text:#f5eee5!important;
+}
+html,body{
+  background:#050505!important;
+  color:#f5eee5!important;
+}
+body:not(.theme-dark),body.theme-dark{
+  background:#050505!important;
+  color:#f5eee5!important;
+}
+.cdc-header,
+body.theme-dark .cdc-header,
+body:not(.theme-dark) .cdc-header{
+  background:#050505!important;
+  color:#f5eee5!important;
+  border-bottom:1px solid #c9a45e!important;
+}
+.cdc-header .cdc-icon-button,
+.cdc-header .header-actions,
+.cdc-header .cdc-language,
+.cdc-header .cdc-language>span,
+.cdc-header .cdc-language select{
+  color:#c9a45e!important;
+}
+.cdc-header .cdc-icon-button svg,
+.cdc-header .cdc-language svg{stroke:#c9a45e!important}
+.cdc-header .hamburger-lines i{background:#c9a45e!important}
+.cdc-nav,
+.cdc-header>.cdc-nav,
+body.theme-dark .cdc-nav,
+body:not(.theme-dark) .cdc-nav{
+  background:#080808!important;
+  color:#f5eee5!important;
+  border-color:#806b4c!important;
+}
+.cdc-nav a,.cdc-header>.cdc-nav a,
+body.theme-dark .cdc-nav a{color:#f5eee5!important}
+.cdc-search,body.theme-dark .cdc-search{background:#080808!important;color:#f5eee5!important}
+.announcement,.utility-bar{background:#050505!important;color:#f5eee5!important}
+.welcome-section,.categories-section,.featured-section,.editorial-section,
+.home-category,.home-category:nth-child(even),
+.checkout-page,.payment-page,
+.catalogue-heading,.favorites-heading,.account-heading,
+.cart-page,.contact-page,.legal-page,.info-page,
+main,.page-content{
+  background:#050505!important;
+  color:#f5eee5!important;
+}
+.section-heading h2,.welcome-section h2,.editorial-content h2,
+.home-category-heading h2,.home-category-heading p,
+.catalogue-heading h1,.favorites-heading h1,
+.account-heading h1,.cart-page h1,.checkout-title h1,.payment-title h1{
+  color:#f5eee5!important;
+}
+.products-grid .product-card,.product-card,.product-item,
+.favorites-grid .favorite-card,.favorite-card,
+.account-card,.cart-item,.checkout-card,.payment-card,
+.category-card,.contact-card,.info-card,.legal-card{
+  background:#101010!important;
+  color:#f5eee5!important;
+  border-color:rgba(201,164,94,.55)!important;
+}
+.product-name,.product-name a,.product-card h2,.product-card h3,
+.favorite-info h2,.cart-item h2,.account-card h2,
+.checkout-card h2,.payment-card h2,
+.checkout-card label,.payment-card label{
+  color:#f5eee5!important;
+}
+.product-info,.favorite-info,.cart-item-price,
+.catalogue-heading p,.favorites-heading p,
+.checkout-line,.payment-line,.product-card p,.product-item p{
+  color:#d4c7b5!important;
+}
+.product-card .product-price,.favorite-price,.detail-price,
+.checkout-total,.payment-total,.home-category-heading a{
+  color:#e2bd65!important;
+}
+.category-image,.category-accessories,.category-ap,
+.category-women,.category-men,
+.product-image,.favorite-image,.cart-item-image,.product-detail-image{
+  background:#080808!important;
+}
+.category-products,.category-products-track{
+  scrollbar-color:#c9a45e #080808!important;
+}
+.cdc-footer,body.theme-dark .cdc-footer,body:not(.theme-dark) .cdc-footer{
+  background:#050505!important;
+  color:#f5eee5!important;
+  border-top:1px solid #c9a45e!important;
+}
+.cdc-footer .footer-column h4,.cdc-footer .footer-contact h4{color:#e2bd65!important}
+.cdc-footer .footer-column a,.cdc-footer .footer-contact a,
+.cdc-footer a{color:#f5eee5!important}
+.cdc-footer .footer-bottom{color:#cbbda9!important}
+.primary-button,.checkout-button,.pay-button{
+  background:#c9a45e!important;
+  color:#080808!important;
+}
+/* Les champs restent clairs pour conserver une saisie lisible. */
+.cdc-search input,.search-form input,.search-form button,
+.utility-bar select,.checkout-card input,.checkout-card select,
+.checkout-card textarea,.checkout-form input:not([type="checkbox"]),
+.checkout-form select,.checkout-promo input{
+  background:#fff!important;
+  color:#211916!important;
+}
+.product-image img,.favorite-image img,.cart-item-image img,
+.product-detail-image img,.cdc-logo img{
+  object-fit:contain;
+}
