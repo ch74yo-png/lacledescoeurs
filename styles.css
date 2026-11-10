@@ -1123,3 +1123,29 @@ body.theme-dark .cdc-header{background:#11100f!important}
 }
 .home-product-actions button:hover,.product-actions button:hover{background:#e2bd75;color:#211916}
 @media(max-width:520px){.home-product-actions{gap:5px}.home-product-actions button{font-size:9px;padding:8px 5px}}
+
+
+/* Remplacement temporaire du logo image par le nom en texte simple */
+.cdc-wordmark{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  width:100%;
+  color:#f5eee5;
+  text-align:center;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(17px,2.2vw,25px);
+  font-weight:600;
+  letter-spacing:2px;
+  line-height:1.1;
+}
+.cdc-wordmark small{
+  color:#d9bd75;
+  font-family:Arial,sans-serif;
+  font-size:9px;
+  font-weight:400;
+  letter-spacing:2px;
+}
+.cdc-footer .cdc-wordmark{margin:auto;color:#f5eee5}
