@@ -64,17 +64,16 @@
       }
       body .hero{
         position:relative!important;isolation:isolate!important;overflow:hidden!important;
-        min-height:560px!important;display:flex!important;align-items:center!important;justify-content:center!important;
-        padding:70px 7% 45px!important;text-align:center!important;background:#000!important;background-image:none!important;
+        min-height:470px!important;display:flex!important;align-items:center!important;justify-content:center!important;
+        padding:55px 7% 35px!important;text-align:center!important;background-color:#000!important;
+        background-image:linear-gradient(rgba(0,0,0,.16),rgba(0,0,0,.16)),url("/images/hero-ring.jpg")!important;
+        background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important;
       }
-      body .hero .hero-bg{
-        position:absolute!important;inset:0!important;z-index:-1!important;display:block!important;
-        width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 48%!important;
-        opacity:1!important;filter:none!important;pointer-events:none!important;
+      body .hero .hero-content,body .hero .hero-content *{
+        background:transparent!important;background-color:transparent!important;background-image:none!important;box-shadow:none!important;
       }
-      body .hero::after{content:"";position:absolute;inset:0;z-index:0;background:rgba(0,0,0,.26);pointer-events:none}
-      body .hero-content{position:relative!important;z-index:2!important;width:100%!important;max-width:1000px!important;margin:0 auto!important;text-align:center!important}
-      body .hero h1{color:#fff!important;text-align:center!important}
+      body .hero .hero-content{position:relative!important;z-index:2!important;width:100%!important;max-width:1000px!important;margin:0 auto!important;text-align:center!important}
+      body .hero::after{display:none!important}
       body .hero .eyebrow,body .eyebrow{color:#d4af37!important}
       body .hero-content>p:not(.eyebrow),body .hero .primary-button{display:none!important}
       body .store-showcase,body .store-showcase-image{background:#000!important;background-image:none!important;text-align:center!important;margin:0!important;padding-top:8px!important}
@@ -92,7 +91,7 @@
       body select option{background:#000!important;color:#fff!important}
       body button,body .primary-button,body .secondary-button,body .checkout-button,body .pay-button,body button.primary,body .btn-primary{background:#d4af37!important;color:#000!important;border:1px solid #d4af37!important}
       @media(max-width:600px){
-        body .hero{min-height:460px!important;padding:58px 7% 30px!important}
+        body .hero{min-height:420px!important;padding:48px 6% 28px!important;background-position:center center!important;background-size:cover!important}
         body .hero h1{font-size:clamp(42px,11vw,58px)!important;line-height:1.04!important}
         body .store-showcase{padding:22px 12px 48px!important}
         body .store-showcase img{width:100%!important;max-height:none!important}
