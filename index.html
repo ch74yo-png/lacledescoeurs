@@ -417,7 +417,7 @@
         localStorage.setItem("cdc_cart", JSON.stringify(panier));
         window.dispatchEvent(new Event("cdc-cart-updated"));
         if (bouton.dataset.homeAction === "acheter") location.href = "commande.html";
-        else alert("Produit ajouté au panier.");
+        else { /* Ajout silencieux : le compteur confirme l’action. */ }
         return;
       }
       if (bouton.dataset.homeAction === "favoris") {
@@ -427,8 +427,8 @@
         if (!favoris.some(item => String(item.id) === String(produit.id))) {
           favoris.push({id:produit.id,name:produit.nom,price:Number(produit.prix),image:produit.image || ""});
           localStorage.setItem("cdc_favorites", JSON.stringify(favoris));
-          alert("Produit ajouté à vos favoris.");
-        } else alert("Ce produit est déjà dans vos favoris.");
+          window.dispatchEvent(new Event("cdc-favorites-updated"));
+        } else window.dispatchEvent(new Event("cdc-favorites-updated"));
       }
     });
 
