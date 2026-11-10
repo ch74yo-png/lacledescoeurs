@@ -138,7 +138,9 @@
   const cdcOriginalText=new WeakMap();
   const cdcTranslated=new WeakMap();
   let cdcTranslationObserver=null;
-  let cdcTranslationQueue=Promise.resolve();
+  const cdcTranslationPending=[];
+  let cdcTranslationActive=0;
+  function cdcRunTranslationQueue(){while(cdcTranslationActive<6&&cdcTranslationPending.length){const task=cdcTranslationPending.shift();cdcTranslationActive++;task().finally(()=>{cdcTranslationActive--;cdcRunTranslationQueue()})}}
   function cdcTranslateNode(node,lang){
     if(!node||node.nodeType!==Node.TEXT_NODE)return;
     const parent=node.parentElement;
@@ -168,7 +170,7 @@
         }
       }catch(error){console.warn("CDC traduction automatique :",error)}
     };
-    cdcTranslationQueue=cdcTranslationQueue.then(task,task);
+    cdcTranslationPending.push(task);cdcRunTranslationQueue();
   }
   function cdcTranslateDocument(lang,root=document){
     if(lang==="fr"){
