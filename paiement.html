@@ -235,7 +235,8 @@ const message=document.getElementById("paymentMessage");
 
 let checkoutActions=null;
 let checkoutReady=false;
-let paymentInProgress=false;\nlet termsAccepted=false;
+let paymentInProgress=false;
+let termsAccepted=false;
 
 function showError(text){
   message.textContent=text;
@@ -545,7 +546,9 @@ payButton.addEventListener("click",async()=>{
   }
 });
 
-document.getElementById("acceptPaymentTerms").addEventListener("change",event=>{termsAccepted=event.target.checked;if(checkoutActions&&!paymentInProgress)payButton.disabled=!checkoutActions.getSession().canConfirm||!termsAccepted;});\n\n(async function init(){
+document.getElementById("acceptPaymentTerms").addEventListener("change",event=>{termsAccepted=event.target.checked;if(checkoutActions&&!paymentInProgress)payButton.disabled=!checkoutActions.getSession().canConfirm||!termsAccepted;});
+
+(async function init(){
   displayCustomer();
   displayCart();
 
