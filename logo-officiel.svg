@@ -1,23 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1756 896" role="img" aria-labelledby="title">
-<title id="title">LA CLÉ DES CŒURS — Depuis 1974 — Bijoux Fins &amp; Raffinés</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1756 896" role="img" aria-labelledby="logo-title">
+<title id="logo-title">LA CLÉ DES CŒURS — Depuis 1974 — Bijoux Fins &amp; Raffinés</title>
 <defs>
- <linearGradient id="gold" x1="0" y1="0" x2="0.15" y2="1"><stop stop-color="#fff0a0"/><stop offset=".35" stop-color="#ffc928"/><stop offset=".7" stop-color="#d99500"/><stop offset="1" stop-color="#ffce32"/></linearGradient>
- <linearGradient id="white" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset=".55" stop-color="#f4f4f4"/><stop offset="1" stop-color="#ddd"/></linearGradient>
+  <linearGradient id="or" x1="0" y1="0" x2="0.15" y2="1">
+    <stop offset="0" stop-color="#fff0a0"/><stop offset=".34" stop-color="#ffd12d"/>
+    <stop offset=".72" stop-color="#d99500"/><stop offset="1" stop-color="#ffce32"/>
+  </linearGradient>
+  <linearGradient id="ivoire" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#fff"/><stop offset=".58" stop-color="#f4f4f4"/><stop offset="1" stop-color="#dedede"/>
+  </linearGradient>
 </defs>
-<!-- Aucun rectangle de fond : le logo se fond dans la couleur du site. -->
-<g font-family="Arial, Helvetica, sans-serif" font-weight="800" fill="url(#white)">
- <text x="215" y="328" font-size="178" letter-spacing="8">LA CL</text>
- <text x="79" y="603" font-size="178" letter-spacing="8">DES C</text>
- <text x="956" y="603" font-size="178" letter-spacing="8">EURS</text>
+<!-- Logo vectoriel sans fond : la couleur chocolat de l'en-tête reste visible derrière. -->
+<g font-family="Arial, Helvetica, sans-serif" font-weight="800" fill="url(#ivoire)">
+  <text x="215" y="328" font-size="178" letter-spacing="8">LA CL</text>
+  <text x="79" y="603" font-size="178" letter-spacing="8">DES C</text>
+  <text x="956" y="603" font-size="178" letter-spacing="8">EURS</text>
 </g>
-<text x="745" y="328" font-family="Arial, Helvetica, sans-serif" font-size="244" font-weight="800" fill="url(#gold)">F</text>
-<g transform="translate(768 548)" fill="none" stroke="url(#gold)" stroke-width="24" stroke-linejoin="round">
- <path d="M0 116 C-42 78 -139 9 -139 -70 C-139 -145 -45 -171 0 -105 C45 -171 139 -145 139 -70 C139 9 42 78 0 116Z"/>
- <path d="M0 -102 L-31 -128 L0 -151 L31 -128Z" fill="none"/>
+<!-- E accentué de CLÉ -->
+<text x="745" y="328" font-family="Arial, Helvetica, sans-serif" font-size="244" font-weight="800" fill="url(#or)">É</text>
+<!-- Clé dont la tête forme un cœur -->
+<g transform="translate(768 548)" fill="none" stroke="url(#or)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M0 116 C-42 78 -139 9 -139 -70 C-139 -145 -45 -171 0 -105 C45 -171 139 -145 139 -70 C139 9 42 78 0 116Z"/>
+  <path d="M0 -102 L-31 -128 L0 -151 L31 -128Z" stroke-width="18"/>
 </g>
-<circle cx="768" cy="420" r="38" fill="url(#gold)"/>
-<path d="M768 382 V327" stroke="url(#gold)" stroke-width="20"/>
-<text x="1157" y="682" fill="url(#gold)" font-family="Georgia,serif" font-size="65" font-weight="700">Depuis 1974</text>
-<path d="M112 758 H372 M1380 758 H1644" stroke="url(#gold)" stroke-width="9"/>
-<text x="400" y="780" fill="url(#white)" font-family="Georgia,serif" font-size="78">Bijoux Fins &amp; Raffinés</text>
+<circle cx="768" cy="420" r="38" fill="url(#or)"/>
+<path d="M768 382 V327" stroke="url(#or)" stroke-width="20" stroke-linecap="round"/>
+<text x="1157" y="682" fill="url(#or)" font-family="Georgia, 'Times New Roman', serif" font-size="65" font-weight="700">Depuis 1974</text>
+<path d="M112 758 H372 M1380 758 H1644" stroke="url(#or)" stroke-width="9"/>
+<text x="400" y="780" fill="url(#ivoire)" font-family="Georgia, 'Times New Roman', serif" font-size="78">Bijoux Fins &amp; Raffinés</text>
 </svg>
