@@ -11,10 +11,10 @@ const safe=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"
 const subtotal=cart.reduce((s,p)=>s+(Number(p.price??p.prix)||0)*Math.max(1,Number(p.quantity)||1),0),shippingAmount=Number(shipping.amount)||0;
 let discount=promo.verified?Number(promo.discount)||0:0;
 const total=()=>Math.max(0,subtotal+shippingAmount-discount);
-document.getElementById("orderRef").textContent=ref?"COMMANDE N° "+ref:"NUMÉRO DE COMMANDE INDISPONIBLE";
+document.getElementById("orderRef").textContent=ref?"N° "+ref:"N° INDISPONIBLE";
 const customerValues=[customer.fullName,customer.email,customer.phone,customer.address,[customer.postalCode,customer.city].filter(Boolean).join(" "),customer.country].filter(Boolean);
 document.getElementById("customer").innerHTML=customerValues.map(v=>"<p>"+safe(v)+"</p>").join("");
-document.getElementById("items").innerHTML=cart.map(p=>{const q=Math.max(1,Number(p.quantity)||1),price=Number(p.price??p.prix)||0,img=p.image||p.photo||"";return '<div class="order-item">'+(img?'<img src="'+safe(img)+'" alt="'+safe(p.name||p.nom||"Article")+'">':'<div></div>')+'<div class="order-item-name">'+safe(p.name||p.nom||"Article")+' × '+q+'</div><strong class="order-item-price">'+eur(price*q)+'</strong></div>'}).join("");
+document.getElementById("items").innerHTML=cart.map(p=>{const q=Math.max(1,Number(p.quantity)||1),price=Number(p.price??p.prix)||0,img=p.image||(Array.isArray(p.images)?p.images[0]:"")||p.photo||"";return '<div class="order-item">'+(img?'<img src="'+safe(img)+'" alt="'+safe(p.name||p.nom||"Article")+'">':'<div></div>')+'<div class="order-item-name">'+safe(p.name||p.nom||"Article")+' × '+q+'</div><strong class="order-item-price">'+eur(price*q)+'</strong></div>'}).join("");
 document.getElementById("subtotal").textContent=eur(subtotal);document.getElementById("shipping").textContent=eur(shippingAmount);
 function refreshTotals(){document.getElementById("discount").textContent=eur(discount);document.getElementById("total").textContent=eur(total())}refreshTotals();
 const promoInput=document.getElementById("promoCode"),promoMessage=document.getElementById("promoMessage");promoInput.value=promo.code||"";promoMessage.textContent=promo.code?(promo.verified?"Code promotionnel appliqué.":"Code enregistré, réduction en attente de validation au paiement."):"";
