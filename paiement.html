@@ -355,6 +355,8 @@ async function verifyReturnedPayment(){
     }
 
     if(data.payment_status==="paid"){
+      location.replace("confirmation.html?session_id="+encodeURIComponent(sessionId));
+      return true;
       successMessage.textContent=
         "Votre paiement est confirmé. Merci de votre confiance.";
 
@@ -495,6 +497,7 @@ async function startPayment(){
 
 payButton.addEventListener("click",async()=>{
   if(
+    !termsAccepted||
     !checkoutReady||
     !checkoutActions||
     paymentInProgress
@@ -532,7 +535,7 @@ payButton.addEventListener("click",async()=>{
 
     paymentInProgress=false;
     payButton.disabled=
-      !checkoutActions.getSession().canConfirm;
+      !checkoutActions.getSession().canConfirm||!termsAccepted;
 
     payButton.textContent="PAYER";
     message.textContent=
