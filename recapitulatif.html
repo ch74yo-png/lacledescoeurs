@@ -1,23 +1,139 @@
 <!DOCTYPE html>
-<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#000000"><title>Récapitulatif | LA CLÉ DES CŒURS</title><link rel="stylesheet" href="styles.css?v=20261110-home-grid-cart-fix-v5"><style>
-.order-page{max-width:850px;margin:35px auto;padding:20px 18px 70px}.order-title{text-align:center;margin:8px 0 30px;font:400 clamp(34px,5vw,47px) var(--serif);letter-spacing:2px;color:#d9ad45}.order-card{padding:25px;background:#000;border:1px solid #806b4c;color:#fff}.order-ref{text-align:center;padding:15px;border:1px solid #806b4c;margin-bottom:20px;font-size:19px;letter-spacing:2px;color:#d9ad45;overflow-wrap:anywhere}.customer-details{font-size:13px;line-height:1.8;overflow-wrap:anywhere}.customer-details p{margin:3px 0}.order-items{display:grid;gap:13px;margin:20px 0}.order-item{display:grid;grid-template-columns:76px minmax(0,1fr) auto;align-items:center;gap:13px;padding:10px 0;border-bottom:1px solid rgba(128,107,76,.5)}.order-item img{width:76px;height:76px;object-fit:contain;background:#111}.order-item-name{font-size:13px}.order-item-price{text-align:right}.order-line{display:flex;justify-content:space-between;gap:15px;margin:13px 0;font-size:13px}.order-line strong{text-align:right}.order-total{border-top:1px solid #d9ad45;padding-top:18px;margin-top:20px;font-size:19px;color:#d9ad45}.promo-box{margin-top:22px;padding-top:18px;border-top:1px solid #806b4c}.promo-box label{display:block;margin-bottom:9px;color:#fff;font-size:12px}.promo-controls{display:flex;gap:9px}.promo-controls input{flex:1;min-width:0;padding:12px;background:#080808;color:#fff;border:1px solid #b9a994}.promo-controls button{padding:12px 16px;background:#d9ad45;color:#000;border:0;font-weight:700;cursor:pointer}#promoMessage{font-size:12px;line-height:1.6;color:#d9ad45;margin:10px 0 0}.order-button{display:block;width:100%;min-height:52px;margin-top:24px;background:#d9ad45;color:#000;border:0;font-weight:700;letter-spacing:2px;cursor:pointer}@media(max-width:600px){.order-page{margin:18px auto;padding:12px 13px 45px}.order-card{padding:18px}.order-item{grid-template-columns:60px minmax(0,1fr)}.order-item img{width:60px;height:60px}.order-item-price{grid-column:2;text-align:left}}
-</style></head><body><main class="order-page"><h1 class="order-title">RÉCAPITULATIF</h1><section class="order-card"><div class="order-ref" id="orderRef"></div><div id="customer" class="customer-details"></div><div style="border-top:1px solid #806b4c;margin:18px 0"></div><div id="items" class="order-items"></div><div class="order-line"><span>Sous-total</span><strong id="subtotal"></strong></div><div class="order-line"><span>Livraison</span><strong id="shipping"></strong></div><div class="promo-box"><label for="promoCode">CODE PROMOTIONNEL</label><div class="promo-controls"><input id="promoCode" type="text" autocomplete="off" placeholder="Saisir votre code promo"><button id="applyPromo" type="button">APPLIQUER</button></div><p id="promoMessage" aria-live="polite"></p></div><div class="order-line"><span>Réduction</span><strong id="discount"></strong></div><div class="order-line order-total"><span>TOTAL À PAYER</span><strong id="total"></strong></div><button id="continuePay" class="order-button" type="button">PROCÉDER AU PAIEMENT</button></section></main>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>Récapitulatif | LA CLÉ DES CŒURS</title>
+<link rel="stylesheet" href="styles.css?v=20261110-home-grid-cart-fix-v5">
+<style>
+.order-page{max-width:850px;margin:35px auto;padding:20px 18px 70px}
+.order-title{text-align:center;margin:8px 0 30px;font:400 clamp(34px,5vw,47px) var(--serif);letter-spacing:2px;color:#d9ad45}
+.order-card{padding:25px;background:#000;border:1px solid #806b4c;color:#fff}
+.order-ref{text-align:center;padding:15px;border:1px solid #806b4c;margin-bottom:20px;font-size:19px;letter-spacing:2px;color:#d9ad45;overflow-wrap:anywhere}
+.customer-details{font-size:13px;line-height:1.8;overflow-wrap:anywhere}
+.customer-details p{margin:3px 0}
+.order-items{display:grid;gap:13px;margin:20px 0}
+.order-item{display:grid;grid-template-columns:76px minmax(0,1fr) auto;align-items:center;gap:13px;padding:10px 0;border-bottom:1px solid rgba(128,107,76,.5)}
+.order-item img{width:76px;height:76px;object-fit:contain;background:#111}
+.order-item-name{font-size:13px}
+.order-item-price{text-align:right}
+.order-line{display:flex;justify-content:space-between;gap:15px;margin:13px 0;font-size:13px}
+.order-line strong{text-align:right}
+.order-total{border-top:1px solid #d9ad45;padding-top:18px;margin-top:20px;font-size:19px;color:#d9ad45}
+.promo-box{margin-top:22px;padding-top:18px;border-top:1px solid #806b4c}
+.promo-box label{display:block;margin-bottom:9px;color:#fff;font-size:12px}
+.promo-controls{display:flex;gap:9px}
+.promo-controls input{flex:1;min-width:0;padding:12px;background:#080808;color:#fff;border:1px solid #b9a994}
+.promo-controls button{padding:12px 16px;background:#d9ad45;color:#000;border:0;font-weight:700;cursor:pointer}
+#promoMessage{font-size:12px;line-height:1.6;margin:10px 0 0;min-height:19px}
+.promo-valid{color:#62d58b}
+.promo-invalid{color:#ff928b}
+.promo-check{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;background:#62d58b;color:#061b0d;font-weight:900;margin-right:7px}
+.order-button{display:block;width:100%;min-height:52px;margin-top:24px;background:#d9ad45;color:#000;border:0;font-weight:700;letter-spacing:2px;cursor:pointer}
+@media(max-width:600px){.order-page{margin:18px auto;padding:12px 13px 45px}.order-card{padding:18px}.order-item{grid-template-columns:60px minmax(0,1fr)}.order-item img{width:60px;height:60px}.order-item-price{grid-column:2;text-align:left}}
+</style>
+</head>
+<body>
+<main class="order-page">
+<h1 class="order-title">RÉCAPITULATIF</h1>
+<section class="order-card">
+<div class="order-ref" id="orderRef"></div>
+<div id="customer" class="customer-details"></div>
+<div style="border-top:1px solid #806b4c;margin:18px 0"></div>
+<div id="items" class="order-items"></div>
+<div class="order-line"><span>Sous-total</span><strong id="subtotal"></strong></div>
+<div class="order-line"><span>Livraison</span><strong id="shipping"></strong></div>
+<div class="promo-box">
+<label for="promoCode">CODE PROMOTIONNEL</label>
+<div class="promo-controls">
+<input id="promoCode" type="text" autocomplete="off" placeholder="Saisir votre code promo" aria-describedby="promoMessage">
+<button id="applyPromo" type="button">APPLIQUER</button>
+</div>
+<p id="promoMessage" aria-live="polite" role="status"></p>
+</div>
+<div class="order-line"><span>Réduction</span><strong id="discount"></strong></div>
+<div class="order-line order-total"><span>TOTAL À PAYER</span><strong id="total"></strong></div>
+<button id="continuePay" class="order-button" type="button">PROCÉDER AU PAIEMENT</button>
+</section>
+</main>
 <script>
 "use strict";
 const read=k=>{try{return JSON.parse(localStorage.getItem(k)||"null")}catch{return null}};
 const cart=read("cdc_cart")||[],customer=read("cdc_customer")||{},shipping=read("cdc_shipping")||{},promo=read("cdc_promo")||{},ref=localStorage.getItem("cdc_order_reference")||"";
-const eur=n=>new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR"}).format(Number(n)||0);
+const PROMO_CODE="CDCXBAGZ19XX";
+const PROMO_PERCENT=10;
+const eur=n=>new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR"}).format((Number(n)||0)/100);
 const safe=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const subtotal=cart.reduce((s,p)=>s+(Number(p.price??p.prix)||0)*Math.max(1,Number(p.quantity)||1),0),shippingAmount=Number(shipping.amount)||0;
-let discount=promo.verified?Number(promo.discount)||0:0;
-const total=()=>Math.max(0,subtotal+shippingAmount-discount);
+const priceCents=p=>Math.max(0,Math.round((Number(p.price??p.prix)||0)*100));
+const quantity=p=>Math.max(1,Number(p.quantity)||1);
+const subtotalCents=cart.reduce((s,p)=>s+priceCents(p)*quantity(p),0);
+const shippingCents=Math.max(0,Math.round((Number(shipping.amount)||0)*100));
+const promoDiscountCents=()=>cart.reduce((sum,p)=>sum+(Math.round(priceCents(p)*(100-PROMO_PERCENT)/100)*quantity(p)),0);
+const discountForValidPromo=()=>Math.max(0,subtotalCents-promoDiscountCents());
+let discountCents=promo.verified&&promo.code===PROMO_CODE?discountForValidPromo():0;
+const totalCents=()=>Math.max(0,subtotalCents+shippingCents-discountCents);
 document.getElementById("orderRef").textContent=ref?"N° "+ref:"N° INDISPONIBLE";
 const customerValues=[customer.fullName,customer.email,customer.phone,customer.address,[customer.postalCode,customer.city].filter(Boolean).join(" "),customer.country].filter(Boolean);
 document.getElementById("customer").innerHTML=customerValues.map(v=>"<p>"+safe(v)+"</p>").join("");
-document.getElementById("items").innerHTML=cart.map(p=>{const q=Math.max(1,Number(p.quantity)||1),price=Number(p.price??p.prix)||0,img=p.image||(Array.isArray(p.images)?p.images[0]:"")||p.photo||"";return '<div class="order-item">'+(img?'<img src="'+safe(img)+'" alt="'+safe(p.name||p.nom||"Article")+'">':'<div></div>')+'<div class="order-item-name">'+safe(p.name||p.nom||"Article")+' × '+q+'</div><strong class="order-item-price">'+eur(price*q)+'</strong></div>'}).join("");
-document.getElementById("subtotal").textContent=eur(subtotal);document.getElementById("shipping").textContent=eur(shippingAmount);
-function refreshTotals(){document.getElementById("discount").textContent=eur(discount);document.getElementById("total").textContent=eur(total())}refreshTotals();
-const promoInput=document.getElementById("promoCode"),promoMessage=document.getElementById("promoMessage");promoInput.value=promo.code||"";promoMessage.textContent=promo.code?(promo.verified?"Code promotionnel appliqué.":"Code enregistré, réduction en attente de validation au paiement."):"";
-document.getElementById("applyPromo").addEventListener("click",()=>{const code=promoInput.value.trim();if(!code){promoMessage.textContent="Saisissez un code promotionnel.";return}localStorage.setItem("cdc_promo",JSON.stringify({code,discount:0,verified:false}));discount=0;refreshTotals();promoMessage.textContent="Code enregistré. La réduction sera appliquée uniquement si le code est validé au paiement."});
-document.getElementById("continuePay").addEventListener("click",()=>{if(!cart.length){alert("Votre panier est vide.");return}if(!customer.fullName||!customer.email||!customer.phone||!customer.address||!customer.postalCode||!customer.city||!customer.countryCode||!ref){alert("Les informations de commande sont incomplètes. Retournez à la page de commande.");return}location.href="paiement.html"});
-</script><script src="site-shell.js?v=20261110-shared-header-footer-v15" defer></script></body></html>
+document.getElementById("items").innerHTML=cart.map(p=>{const q=quantity(p),price=priceCents(p),img=p.image||(Array.isArray(p.images)?p.images[0]:"")||p.photo||"";return '<div class="order-item">'+(img?'<img src="'+safe(img)+'" alt="'+safe(p.name||p.nom||"Article")+'">':'<div></div>')+'<div class="order-item-name">'+safe(p.name||p.nom||"Article")+' × '+q+'</div><strong class="order-item-price">'+eur(price*q)+'</strong></div>'}).join("");
+document.getElementById("subtotal").textContent=eur(subtotalCents);
+document.getElementById("shipping").textContent=eur(shippingCents);
+const promoInput=document.getElementById("promoCode");
+const promoMessage=document.getElementById("promoMessage");
+function refreshTotals(){
+  document.getElementById("discount").textContent=eur(discountCents);
+  document.getElementById("total").textContent=eur(totalCents());
+}
+function showPromoState(valid,message){
+  promoMessage.className=valid?"promo-valid":"promo-invalid";
+  promoMessage.innerHTML=valid?'<span class="promo-check" aria-label="Code validé">✓</span>'+safe(message):safe(message);
+}
+function applyPromo(){
+  const code=promoInput.value.trim().toUpperCase();
+  if(!code){
+    discountCents=0;
+    localStorage.removeItem("cdc_promo");
+    refreshTotals();
+    showPromoState(false,"Saisissez un code promotionnel.");
+    return;
+  }
+  if(code!==PROMO_CODE){
+    discountCents=0;
+    localStorage.setItem("cdc_promo",JSON.stringify({code,discount:0,verified:false}));
+    refreshTotals();
+    showPromoState(false,"Code promotionnel invalide. Vérifiez votre saisie.");
+    return;
+  }
+  discountCents=discountForValidPromo();
+  const discountEuros=discountCents/100;
+  localStorage.setItem("cdc_promo",JSON.stringify({
+    code:PROMO_CODE,
+    discount:discountEuros,
+    discountCents,
+    percent:PROMO_PERCENT,
+    verified:true
+  }));
+  refreshTotals();
+  showPromoState(true,"Code validé : 10 % de réduction appliqués sur vos articles.");
+}
+promoInput.value=promo.code||"";
+if(promo.verified&&promo.code===PROMO_CODE){
+  showPromoState(true,"Code validé : 10 % de réduction appliqués sur vos articles.");
+}else if(promo.code){
+  showPromoState(false,"Appuyez sur APPLIQUER pour vérifier votre code.");
+}
+refreshTotals();
+document.getElementById("applyPromo").addEventListener("click",applyPromo);
+promoInput.addEventListener("keydown",event=>{if(event.key==="Enter"){event.preventDefault();applyPromo()}});
+document.getElementById("continuePay").addEventListener("click",()=>{
+  if(!cart.length){alert("Votre panier est vide.");return}
+  if(!customer.fullName||!customer.email||!customer.phone||!customer.address||!customer.postalCode||!customer.city||!customer.countryCode||!ref){
+    alert("Les informations de commande sont incomplètes. Retournez à la page de commande.");return
+  }
+  location.href="paiement.html";
+});
+</script>
+<script src="site-shell.js?v=20261110-shared-header-footer-v15" defer></script>
+</body>
+</html>
