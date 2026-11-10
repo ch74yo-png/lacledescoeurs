@@ -30,7 +30,7 @@
     .product-actions button:hover{background:var(--gold);color:white}
 
     .catalogue-quantity-label{display:flex;justify-content:center;align-items:center;gap:10px;margin:10px auto;font-size:10px;letter-spacing:1px}
-    .catalogue-quantity{width:72px;min-height:36px;text-align:center;background:#fff;color:#111;border:1px solid var(--gold)}
+    .catalogue-quantity{width:72px;min-height:36px;text-align:center;background:#fff;color:#111;border:1px solid var(--gold);cursor:pointer}
     .product-actions{display:flex;flex-direction:column;gap:7px;max-width:260px;margin:12px auto}
     .product-actions button{width:100%;min-height:38px;padding:9px 10px;border:1px solid var(--gold);background:transparent;color:var(--ink);font-size:10px;letter-spacing:.7px;cursor:pointer;text-transform:uppercase}
     .product-actions button:first-child{background:var(--gold);color:#211916;font-weight:600}
@@ -181,7 +181,7 @@ function afficherProduits() {
           <h2 class="product-name"><a href="${lien}">${nom}</a></h2>
           <div class="product-price">${ancienPrix}${formaterPrix(p.prix)}</div>
           <label class="catalogue-quantity-label">QUANTITÉ
-            <input class="catalogue-quantity" type="number" min="1" max="15" step="1" inputmode="numeric" value="1" aria-label="Quantité de ${nom}">
+            <select class="catalogue-quantity" aria-label="Choisir une quantité"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>
           </label>
           <div class="product-actions">
             <button type="button" data-action="acheter" data-id="${id}">ACHETER</button>
@@ -201,9 +201,9 @@ function ajouterAuPanier(id, quantity = 1) {
   const panier = lireStock("cdc_cart");
   const existant = panier.find(p => String(p.id) === String(id));
 
-  const quantite = Math.max(1,Math.min(15,Math.floor(Number(quantity)||1)));
+  const quantite = Math.max(1,Math.min(10,Math.floor(Number(quantity)||1)));
   if (existant) {
-    existant.quantity = Math.min(15,Number(existant.quantity || 0) + quantite);
+    existant.quantity = Math.min(10,Number(existant.quantity || 0) + quantite);
   } else {
     panier.push({
       id: produit.id,
