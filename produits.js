@@ -183,6 +183,20 @@ const produits = [
   creerProduit("boucles-oreilles-cartier-panthere-cougar-trinity", "Boucles d’oreilles Cartier Panthère Cougar Trinity", "Cartier", 2200, null, ["accessoires"], { description: "Boucles d’oreilles Cartier Panthère Cougar Trinity." }),
   creerProduit("montre-cartier-tank-louis-verte-grand-modele", "Montre Cartier Tank Louis Cartier grand modèle – Cadran vert", "Cartier", 7299, null, ["homme"], { description: "Montre Cartier Tank Louis Cartier grand modèle à cadran vert." }),
 
+  // BRACELET CARTIER LOVE CLASSIC — FICHE AJOUTÉE LE 10/11/2026
+  creerProduit(
+    "bracelet-cartier-love-classic-or-jaune-16-certificat",
+    "Bracelet Cartier Classic Love en or jaune 18 carats, taille 16 — Ensemble complet authentique",
+    "Cartier",
+    3500,
+    null,
+    ["accessoires"],
+    {
+      description: "Bracelet Cartier Classic Love en or jaune 18 carats, taille 16 cm. Ensemble présenté avec écrin Cartier, tournevis et certificat.\n\nÉtat : Neuf avec imperfections.\nForme : Ovale. Fermoir : À vis. Ajustable : Non.\nMétal : Or jaune 18 carats (750). Longueur : 16 cm.\nMatériaux provenant de : France. Couleur : Or. Pierre principale : Aucune.\nMarque : Cartier. Type : Bracelet jonc. Collection : Cartier Love.\nStyle : Jonc. Thème : Amour. Vintage : Non. Personnalisé : Non.\nNuméro indiqué sur le certificat : 0EH 025. Date d’achat indiquée : 01/11/2016.\nCertification déclarée dans les informations transmises : GIA. Garantie vendeur : Oui. Poinçonné : Oui.",
+      reference: "0EH 025"
+    }
+  ),
+
   // PRODUIT SUPPLÉMENTAIRE
   creerProduit(
     "details",
