@@ -84,7 +84,7 @@
       margin-bottom: 25px;
     }
     .detail-quantity{display:flex;align-items:center;gap:12px;margin:0 0 16px;color:var(--ink);font-size:12px}
-    .detail-quantity input{width:82px;min-height:42px;text-align:center;background:#fff;color:#111;border:1px solid var(--gold);padding:8px}
+    .detail-quantity select{width:82px;min-height:42px;text-align:center;background:#fff;color:#111;border:1px solid var(--gold);padding:8px;cursor:pointer}
     .detail-buttons {
       display: flex;
       flex-direction: column;
@@ -277,9 +277,9 @@
         String(item.id) === String(produit.id)
       );
 
-      const quantite = Math.max(1,Math.min(15,Math.floor(Number(quantity)||1)));
+      const quantite = Math.max(1,Math.min(10,Math.floor(Number(quantity)||1)));
       if (existant) {
-        existant.quantity = Math.min(15,Number(existant.quantity || 0) + quantite);
+        existant.quantity = Math.min(10,Number(existant.quantity || 0) + quantite);
       } else {
         panier.push({
           id: produit.id,
@@ -364,7 +364,7 @@
             <div class="detail-description">${description}</div>
 
             <label class="detail-quantity">QUANTITÉ
-              <input id="productQuantity" type="number" min="1" max="15" step="1" inputmode="numeric" value="1">
+              <select id="productQuantity" aria-label="Choisir une quantité"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>
             </label>
             <div class="detail-buttons">
               <button type="button" id="acheterProduit">ACHETER</button>
