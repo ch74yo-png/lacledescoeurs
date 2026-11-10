@@ -224,65 +224,7 @@
         </div>
       </section>
 
-      <section class="checkout-card">
-        <h2 class="checkout-step-number">3 — RÉCAPITULATIF</h2>
-
-        <div class="checkout-order-reference"><span>NUMÉRO DE COMMANDE</span><strong id="orderReference">CDC-XXXXXXXX</strong></div>
-        <div id="summaryItems"><p class="empty-cart">Chargement du panier...</p></div>
-
-        <div class="checkout-line">
-          <span>Sous-total</span>
-          <span id="subtotal">0,00 €</span>
-        </div>
-
-        <div class="checkout-line">
-          <span>Livraison</span>
-          <span id="shipping">À calculer</span>
-        </div>
-
-        <div class="checkout-line">
-          <span>Réduction</span>
-          <span id="discount">0,00 €</span>
-        </div>
-
-        <div class="checkout-line checkout-total">
-          <span>TOTAL</span>
-          <span id="total">0,00 €</span>
-        </div>
-
-        <div class="checkout-promo">
-          <label for="promoCode">CODE PROMOTIONNEL</label>
-          <input id="promoCode" name="promoCode"
-            placeholder="Votre code promotionnel">
-
-          <button type="button" id="applyPromo"
-            class="checkout-button">
-            APPLIQUER LE CODE
-          </button>
-
-          <p id="promoMessage" class="checkout-notice"></p>
-        </div>
-      </section>
-
-      <section class="checkout-card">
-        <label class="terms-line" for="acceptTerms">
-          <input type="checkbox" id="acceptTerms" required>
-          <span>
-            J’accepte les
-            <a href="conditions-generales.html" target="_blank">
-              conditions générales de vente
-            </a>.
-          </span>
-        </label>
-
-        <button class="checkout-button" type="submit">
-          PAYER
-        </button>
-
-        <p class="checkout-notice">
-          Vérifiez les informations de votre commande avant de poursuivre.
-        </p>
-      </section>
+      
 
     </form>
   </div>
@@ -494,7 +436,7 @@ document.getElementById("checkoutForm").addEventListener("submit",event=>{
     discount:promoDiscount
   }));
 
-  window.location.href="paiement.html";
+  window.location.href="recapitulatif.html";
 });
 
 render();
