@@ -331,6 +331,36 @@
   }
 }
 
+
+/* Ajustement exact de la maquette validée : titre centré et texte/bouton sous la photo boutique */
+.hero{
+  min-height:760px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  padding:70px 7%!important;text-align:center!important;
+  background-color:#000!important;
+  background-image:linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.30)),url("https://bijouterielamalmaison.fr/wp-content/uploads/2026/05/AA1.webp")!important;
+  background-blend-mode:multiply!important;background-position:center!important;
+  background-size:cover!important;background-repeat:no-repeat!important;
+}
+.hero-content{width:100%!important;max-width:1000px!important;margin:0 auto!important;text-align:center!important}
+.hero .eyebrow{color:#d4af37!important;letter-spacing:5px!important;margin:0 0 28px!important}
+.hero h1{color:#fff!important;text-align:center!important;margin:0 auto!important;max-width:900px!important;font-size:clamp(48px,8vw,92px)!important;line-height:1.02!important}
+.hero-content>p:not(.eyebrow),.hero .primary-button{display:none!important}
+.store-showcase{background:#000!important;color:#fff!important;padding:34px 18px 70px!important;text-align:center!important}
+.store-showcase-image{background:#000!important}
+.store-showcase-image img{object-fit:contain!important;filter:none!important}
+.store-showcase p{color:#fff!important;text-align:center!important}
+.store-collection-button{display:inline-flex!important;align-items:center!important;justify-content:center!important;margin:28px auto 0!important;min-height:58px!important;padding:16px 38px!important;background:#d4af37!important;color:#000!important;border:1px solid #d4af37!important;letter-spacing:2px!important}
+@media(max-width:600px){
+ .hero{min-height:calc(100svh - 95px)!important;padding:65px 7%!important;background-position:center!important}
+ .hero .eyebrow{font-size:10px!important;letter-spacing:3px!important}
+ .hero h1{font-size:clamp(42px,11vw,58px)!important;line-height:1.04!important}
+ .store-showcase{padding:22px 12px 48px!important}
+ .store-showcase-image img{width:100%!important;max-height:none!important}
+ .store-showcase p{font-size:25px!important;line-height:1.3!important}
+ .store-collection-button{width:min(100%,340px)!important;padding:15px 18px!important;font-size:10px!important}
+}
+
 </style>
 </head>
 
@@ -342,13 +372,6 @@
       <div class="hero-content">
         <p class="eyebrow">L'ÉLÉGANCE DANS CHAQUE DÉTAIL</p>
         <h1>Le raffinement<br>à votre poignet</h1>
-        <p>
-          Découvrez notre univers de bijoux et de montres
-          fins et raffinés.
-        </p>
-        <a href="catalogue.html" class="primary-button">
-          DÉCOUVRIR LA COLLECTION
-        </a>
       </div>
     </section>
 
@@ -357,6 +380,7 @@
         <img src="images/IMG_4006%202.jpg" alt="La boutique physique LA CLÉ DES CŒURS">
       </div>
       <p>Découvrez notre univers de bijoux et de montres fins et raffinés.</p>
+      <a href="catalogue.html" class="primary-button store-collection-button">DÉCOUVRIR LA COLLECTION</a>
     </section>
 
 
