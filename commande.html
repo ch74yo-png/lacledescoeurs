@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#211916">
 <title>Finaliser ma commande | LA CLE DES COEURS</title>
-<link rel="stylesheet" href="styles.css?v=20261110-black-cart-v4">
+<link rel="stylesheet" href="styles.css?v=20261110-home-grid-cart-fix-v5">
 <style>
 .checkout-page{
   max-width:850px;
@@ -226,11 +226,8 @@
 
       
 
-      <section class="checkout-card">
-        <h2 class="checkout-step-number">3</h2>
-        <div id="step3Preview" class="checkout-customer-preview"></div>
-        <button class="checkout-button" type="submit">CONTINUER</button>
-      </section>
+      <button class="checkout-button" type="submit">CONTINUER</button>
+
     </form>
   </div>
 </main>
@@ -255,10 +252,10 @@ function preview(){
  document.getElementById("step3Preview").textContent=all.join(" · ");
 }
 document.querySelectorAll("#checkoutForm input,#checkoutForm select").forEach(el=>el.addEventListener("input",preview));countrySelect.addEventListener("change",preview);
-document.getElementById("checkoutForm").addEventListener("submit",event=>{event.preventDefault();const form=event.currentTarget;if(!cart.length){alert("Votre panier est vide.");return;}if(!form.reportValidity())return;const shipping=shippingFor(countrySelect.value);if(shipping===null){alert("La livraison n'est pas disponible pour ce pays. Veuillez contacter la boutique.");return;}const fullName=value("fullName");localStorage.setItem(ORDER_REF_KEY,orderReference());localStorage.setItem("cdc_shipping",JSON.stringify({amount:shipping,currency:"EUR"}));localStorage.setItem("cdc_promo",JSON.stringify({code:"",discount:0}));window.location.assign("recapitulatif.html");});
+document.getElementById("checkoutForm").addEventListener("submit",event=>{event.preventDefault();const form=event.currentTarget;if(!cart.length){alert("Votre panier est vide.");return;}if(!form.reportValidity())return;const shipping=shippingFor(countrySelect.value);if(shipping===null){alert("La livraison n'est pas disponible pour ce pays. Veuillez contacter la boutique.");return;}const countryName=countrySelect.options[countrySelect.selectedIndex].textContent;localStorage.setItem("cdc_customer",JSON.stringify({fullName:value("fullName"),email:value("email"),phone:value("phone"),address:value("address"),postalCode:value("postalCode"),city:value("city"),country:countryName,countryCode:countrySelect.value}));localStorage.setItem(ORDER_REF_KEY,orderReference());localStorage.setItem("cdc_shipping",JSON.stringify({amount:shipping,currency:"EUR"}));localStorage.setItem("cdc_promo",JSON.stringify({code:"",discount:0,verified:false}));window.location.assign("recapitulatif.html");});
 preview();
 </script>
 
-<script src="site-shell.js?v=20261110-black-cart-v4" defer></script>
+<script src="site-shell.js?v=20261110-home-grid-cart-fix-v5" defer></script>
 </body>
 </html>
