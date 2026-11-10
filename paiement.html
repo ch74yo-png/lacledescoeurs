@@ -358,9 +358,9 @@ async function verifyReturnedPayment(){
         "Votre paiement est confirmé. Merci de votre confiance.";
 
       document.getElementById("successReference").textContent=
-        data.orderReference
-          ? "Référence : "+data.orderReference
-          : "Votre commande est confirmée.";
+        orderReference
+          ? "Référence : "+orderReference
+          : (data.orderReference ? "Référence : "+data.orderReference : "Votre commande est confirmée.");
 
       localStorage.removeItem("cdc_cart");
       localStorage.removeItem("cdc_customer");
