@@ -1265,3 +1265,94 @@ body.theme-dark .cdc-header{background:#11100f!important}
 @media(max-width:380px){
   .cdc-brand .cdc-logo{max-width:128px!important}
 }
+
+
+
+/* Pied de page conforme à la référence fournie : chocolat, logo centré, rubriques à gauche. */
+.cdc-footer{
+  display:block!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+  background:linear-gradient(112deg,#2b100b 0%,#35150e 48%,#2b100b 100%)!important;
+  color:#f4eee7!important;
+  padding:18px 3.6% 26px!important;
+  border-top:1px solid #c99a31!important;
+  text-align:left!important;
+}
+.cdc-footer-brand{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0 auto 52px!important;
+  text-align:center!important;
+}
+.cdc-footer-brand>a{
+  display:block!important;
+  width:min(670px,88vw)!important;
+  margin:0 auto!important;
+}
+.cdc-footer-brand .cdc-logo{
+  display:block!important;
+  width:100%!important;
+  max-width:670px!important;
+  margin:0 auto!important;
+}
+.cdc-footer-brand .cdc-logo img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  background:transparent!important;
+  object-fit:contain!important;
+}
+.cdc-footer .footer-column,
+.cdc-footer .footer-contact{
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0 0 24px!important;
+  padding:0!important;
+  text-align:left!important;
+}
+.cdc-footer .footer-column h4,
+.cdc-footer .footer-contact h4{
+  margin:0 0 19px!important;
+  color:#e6bd58!important;
+  font-family:Arial,Helvetica,sans-serif!important;
+  font-size:21px!important;
+  font-weight:800!important;
+  letter-spacing:2px!important;
+  text-align:left!important;
+}
+.cdc-footer .footer-column a,
+.cdc-footer .footer-contact a{
+  display:block!important;
+  width:max-content!important;
+  max-width:100%!important;
+  margin:0 0 9px!important;
+  padding:0!important;
+  color:#f0e9e2!important;
+  font-family:Arial,Helvetica,sans-serif!important;
+  font-size:20px!important;
+  line-height:1.35!important;
+  font-weight:400!important;
+  text-align:left!important;
+  text-decoration:none!important;
+}
+.cdc-footer .footer-bottom{
+  margin-top:28px!important;
+  text-align:center!important;
+  color:#c9b7a8!important;
+  border-top:1px solid rgba(201,164,94,.25)!important;
+}
+@media(max-width:760px){
+  .cdc-footer{padding:16px 5% 24px!important}
+  .cdc-footer-brand{margin-bottom:38px!important}
+  .cdc-footer-brand>a{width:min(470px,90vw)!important}
+  .cdc-footer-brand .cdc-logo{max-width:470px!important}
+  .cdc-footer .footer-column h4,
+  .cdc-footer .footer-contact h4{font-size:17px!important;letter-spacing:1.8px!important;margin-bottom:15px!important}
+  .cdc-footer .footer-column a,
+  .cdc-footer .footer-contact a{font-size:16px!important;margin-bottom:8px!important}
+}
