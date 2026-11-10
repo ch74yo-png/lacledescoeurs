@@ -136,7 +136,7 @@ button{cursor:pointer}
 }
 .header-actions button{font-size:inherit}
 .cart-link{position:relative}
-#cartCount{
+#cartCount:not([hidden]){
   position:absolute;
   top:-3px;
   right:-5px;
@@ -1438,7 +1438,7 @@ html body .cdc-header{
 
 /* Compteur des favoris : même présentation que celui du panier. */
 .favorites-link{position:relative}
-#favoriteCount{
+#favoriteCount:not([hidden]){
   position:absolute;
   top:-3px;
   right:-5px;
@@ -1773,7 +1773,6 @@ img,.cdc-logo img,.cdc-logo-image{
   filter:none!important;
 }
 .cdc-logo,.cdc-logo img,.cdc-logo-image{
-  background:transparent!important;
   opacity:1!important;
 }
 /* Boutons noirs avec texte blanc pour conserver l'uniformité */
