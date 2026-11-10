@@ -2011,3 +2011,72 @@ body{overflow-x:clip!important;overflow-y:auto!important}
 img,.cdc-logo,.cdc-logo img,.cdc-logo svg{
   filter:none!important;
 }
+
+
+/* THÈME GLOBAL NOIR, BLANC ET OR — TOUTES LES PAGES */
+:root{
+  color-scheme:dark;
+  --ink:#ffffff!important;
+  --muted:#ffffff!important;
+  --gold:#d4af37!important;
+  --line:#d4af37!important;
+  --paper:#000000!important;
+  --cream:#000000!important;
+  --white:#000000!important;
+  --brown:#000000!important;
+}
+html,body{
+  background:#000000!important;
+  color:#ffffff!important;
+}
+body,main,header,footer,section,article,aside,nav,
+div,form,fieldset,details,summary,
+.cdc-header,.cdc-nav,.cdc-search,.announcement,.utility-bar,
+.cdc-footer,.hero,.home-intro,.home-contact,
+.home-category,.home-categories-grid,.category-card,.category-image,
+.checkout-card,.payment-card,.product-card,.product-item,
+.favorite-card,.account-card,.cart-item,
+.catalogue-section,.catalogue-heading,.favorites-heading,
+.checkout-page,.payment-page,.cart-page,.account-page,
+.welcome-section,.categories-section,.featured-section,.editorial-section{
+  background-color:#000000!important;
+  color:#ffffff!important;
+}
+.hero{
+  background-color:#000000!important;
+  background-image:linear-gradient(90deg,rgba(0,0,0,.68),rgba(0,0,0,.18)),url("images/IMG_4006%202.jpg")!important;
+  background-position:center!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+}
+h1,h2,h3,h4,h5,h6,p,span,label,li,small,strong,em,
+.product-name,.product-info,.product-price,.price,
+.detail-name,.detail-price,.home-product-name,.home-product-brand,
+.home-product-price,.checkout-line,.payment-line,
+.footer-bottom,.footer-column{
+  color:#ffffff!important;
+}
+a,.eyebrow,.category-link,.home-category-heading h2 a,
+.home-category-heading>a,.cdc-nav a,.footer-column a,
+.product-card a,.product-item a,.favorite-price,
+.checkout-total,.payment-total{
+  color:#d4af37!important;
+}
+button,.primary-button,.secondary-button,.checkout-button,.pay-button{
+  background:#d4af37!important;
+  color:#000000!important;
+  border:1px solid #d4af37!important;
+}
+input,select,textarea{
+  background:#000000!important;
+  color:#ffffff!important;
+  border:1px solid #d4af37!important;
+}
+input::placeholder,textarea::placeholder{color:#d4af37!important;opacity:1}
+option{background:#000000!important;color:#ffffff!important}
+.product-image,.favorite-image,.cart-item-image,.product-detail-image,
+.home-product-image,.home-product-card,.home-product-info{
+  background:#000000!important;
+}
+hr,.checkout-total,.payment-total{border-color:#d4af37!important}
+::selection{background:#d4af37!important;color:#000000!important}
