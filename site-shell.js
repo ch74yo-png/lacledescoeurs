@@ -62,24 +62,24 @@
         background-color:#000!important;background-image:none!important;
         color:#fff!important;border-color:rgba(212,175,55,.55)!important;box-shadow:none!important;
       }
-      /* Visuel de la bague intégré au dépôt : fond noir réel, pas de fond gris */
       body .hero{
-        box-sizing:border-box!important;position:relative!important;overflow:hidden!important;
-        min-height:720px!important;padding:72px 7% 34px!important;
-        background-color:#000!important;
-        background-image:url("/images/hero-ring.svg")!important;
-        background-position:center 260px!important;
-        background-size:min(100%,880px) auto!important;background-repeat:no-repeat!important;
-        color:#fff!important;text-align:center!important;
-        display:flex!important;align-items:flex-start!important;justify-content:center!important;
+        position:relative!important;isolation:isolate!important;overflow:hidden!important;
+        min-height:560px!important;display:flex!important;align-items:center!important;justify-content:center!important;
+        padding:70px 7% 45px!important;text-align:center!important;background:#000!important;background-image:none!important;
       }
-      body .hero-content{position:relative!important;z-index:1!important;width:100%!important;max-width:1000px!important;margin:0 auto!important;text-align:center!important}
-      body .hero h1{color:#fff!important;text-align:center!important;margin:20px auto 0!important;max-width:900px!important}
+      body .hero .hero-bg{
+        position:absolute!important;inset:0!important;z-index:-1!important;display:block!important;
+        width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 48%!important;
+        opacity:1!important;filter:none!important;pointer-events:none!important;
+      }
+      body .hero::after{content:"";position:absolute;inset:0;z-index:0;background:rgba(0,0,0,.26);pointer-events:none}
+      body .hero-content{position:relative!important;z-index:2!important;width:100%!important;max-width:1000px!important;margin:0 auto!important;text-align:center!important}
+      body .hero h1{color:#fff!important;text-align:center!important}
       body .hero .eyebrow,body .eyebrow{color:#d4af37!important}
       body .hero-content>p:not(.eyebrow),body .hero .primary-button{display:none!important}
-      body .store-showcase,body .store-showcase-image{background:#000!important;background-image:none!important;text-align:center!important}
+      body .store-showcase,body .store-showcase-image{background:#000!important;background-image:none!important;text-align:center!important;margin:0!important;padding-top:8px!important}
       body .store-showcase img{filter:none!important;opacity:1!important;object-fit:contain!important}
-      body .store-showcase p{color:#fff!important;text-align:center!important}
+      body .store-showcase p{color:#fff!important;text-align:center!important;margin-top:12px!important}
       body .store-collection-button{display:inline-flex!important;align-items:center!important;justify-content:center!important;margin:28px auto 0!important;padding:16px 38px!important;min-height:58px!important;background:#d4af37!important;color:#000!important;border:1px solid #d4af37!important}
       body img,body .cdc-logo,body .cdc-logo img,body .cdc-logo-image{filter:none!important;opacity:1!important}
       body .cdc-header,body .cdc-footer,body .cdc-nav,body .cdc-search{background:#000!important;color:#fff!important}
@@ -92,7 +92,7 @@
       body select option{background:#000!important;color:#fff!important}
       body button,body .primary-button,body .secondary-button,body .checkout-button,body .pay-button,body button.primary,body .btn-primary{background:#d4af37!important;color:#000!important;border:1px solid #d4af37!important}
       @media(max-width:600px){
-        body .hero{min-height:680px!important;padding:58px 7% 28px!important;background-position:center 235px!important;background-size:100% auto!important}
+        body .hero{min-height:460px!important;padding:58px 7% 30px!important}
         body .hero h1{font-size:clamp(42px,11vw,58px)!important;line-height:1.04!important}
         body .store-showcase{padding:22px 12px 48px!important}
         body .store-showcase img{width:100%!important;max-height:none!important}
