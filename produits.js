@@ -215,6 +215,31 @@ const produits = [
   creerProduit("patek-philippe-1935-femme", "Patek Philippe 1935 Femme – Montre-bracelet en Or Blanc 18 carats avec Boîte et Papiers", "Patek Philippe", 2500, null, ["femme"]),
   creerProduit("patek-philippe-3352-1-femme", "Patek Philippe Femme – 23 mm – Or massif 18 carats – Remontage manuel – Réf. 3352/1", "Patek Philippe", 3099, 4000, ["femme"]),
 
+  // RESTAURATION COMPLÉMENTAIRE — PRODUITS RETROUVÉS DANS LE CATALOGUE SOURCE
+  // Les photos ne sont pas attribuées ici : les images du ZIP ont des noms techniques
+  // et doivent être rapprochées visuellement pour éviter les erreurs.
+  creerProduit("bracelet-cartier-juste-un-clou-homme-15-complet", "Bracelet Cartier Juste Un Clou en or jaune 18 carats, taille 15 – Coffret complet avec boîte et certificat.", "Cartier", 2899, null, ["homme"]),
+  creerProduit("bracelet-cartier-love-moyen-jaune-16-homme", "Bracelet Cartier Love – Modèle moyen – Or jaune 18K – Taille 16", "Cartier", 3900, null, ["homme"]),
+  creerProduit("bracelet-cartier-love-rose-17-homme", "Bracelet Cartier Love – Or rose 18 carats – Taille 17", "Cartier", 3199, 4500, ["homme"]),
+  creerProduit("bracelet-cartier-love-jaune-4-diamants-18-homme", "BRACELET CARTIER LOVE EN OR JAUNE 18 CARATS, 4 DIAMANTS, 0,42 CT, TAILLE 18, ENSEMBLE COMPLET", "Cartier", 4899, null, ["homme"]),
+  creerProduit("bracelet-cartier-love-jaune-classique-18-homme", "Bracelet Love Cartier en or jaune, modèle classique – Taille 18", "Cartier", 3099, null, ["homme"]),
+  creerProduit("bracelet-cartier-love-manchette-blanc-homme", "Bracelet manchette Love Cartier en or blanc 18 carats", "Cartier", 2599, 3500, ["homme"]),
+  creerProduit("breitling-ab0162121g1s1-superocean-heritage", "Breitling AB0162121G1S1 Superocean Heritage B01 Chronographe 44 mm 2019 Kit complet", "Breitling", 2500, null, ["homme"]),
+  creerProduit("breitling-navitimer-b01-ab0137241l1a1", "Breitling Navitimer B01 Chronographe 46 mm AB0137241L1A1", "Breitling", 3200, null, ["homme"]),
+
+  creerProduit("breitling-super-avenger-ii-a13371", "Breitling Super Avenger II A13371 Homme – Montre Chronographe 48 mm Acier Cadran Argent Rare", "Breitling", 1700, null, ["homme"]),
+  creerProduit("breitling-superocean-heritage-ab2020", "Breitling Superocean Heritage AB2020 – 46 mm – Cadran Bleu Soleil – Acier Inoxydable – Étanche 200 m", "Breitling", 2200, null, ["homme"]),
+  creerProduit("cartier-panthere-wspn0006-homme-source", "Cartier Panthère pour femme WSPN0006 Quartz", "Cartier", 4100, null, ["homme"]),
+  creerProduit("cartier-santos-wssa0062-cadran-vert-source", "Cartier Santos – WSSA0062 – Grande taille – Cadran vert – Coffret et papiers", "Cartier", 4099, 5299, ["homme"]),
+  creerProduit("cartier-santos-wssa0037-noir-source", "Cartier Santos 2025 – WSSA0037 – Boîtier Noir ADLC & Acier – Coffret et papiers", "Cartier", 4400, 6000, ["homme"]),
+  creerProduit("cartier-santos-2025-grand-modele-vert", "Cartier Santos 2025 Grand Modèle – Cadran Vert – WSSA0062 – Bracelet Acier & Cuir – Coffret Complet", "Cartier", 4600, 5500, ["homme"]),
+  creerProduit("cartier-santos-carree-2961-bordeaux", "Cartier Santos Carrée 2961 – Cadran Bordeaux « Swiss Only » – 1982 – Boîte & Papiers – Rare", "Cartier", 4300, 5100, ["homme"]),
+  creerProduit("cartier-santos-grand-modele-vert-degrade", "Cartier Santos de Cartier – Grand Modèle Vert Dégradé", "Cartier", 4000, null, ["homme"]),
+  creerProduit("cartier-santos-wssa0018-source", "Cartier Santos de Cartier – WSSA0018", "Cartier", 3500, 7300, ["homme"]),
+  creerProduit("cartier-santos-cadran-vert-398mm", "Cartier Santos de Cartier cadran vert grand modèle 39,8 mm WSSA0062", "Cartier", 6500, null, ["homme"]),
+  creerProduit("cartier-santos-grand-modele-blanc-wssa0018", "Cartier Santos De Cartier Grand Modèle 40 mm – Cadran blanc | Boîte & papiers WSSA0018", "Cartier", 2500, null, ["homme"]),
+  creerProduit("cartier-santos-large-bleu-40mm", "Cartier Santos De Cartier Large 40 mm – Acier inoxydable – Cadran bleu | Boîte & papiers", "Cartier", 2500, null, ["homme"]),
+
   // PRODUIT SUPPLÉMENTAIRE
   creerProduit(
     "details",
