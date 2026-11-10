@@ -93,6 +93,8 @@
 
     const menuButton = document.getElementById("menuButton");
     const menu = document.getElementById("mainNav");
+    const headerElement = document.querySelector(".cdc-header");
+    if (headerElement && menu && menu.parentElement !== headerElement) headerElement.appendChild(menu);
     // Menu mobile : gestion directe et delegation pour rester fiable sur toutes les pages.
     const fermerMenu = () => {
       if (!menu || !menuButton) return;
