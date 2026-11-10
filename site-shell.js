@@ -42,7 +42,8 @@
       <div class="footer-brand cdc-footer-brand"><a href="index.html" aria-label="Accueil">${logo}</a></div>
       <div class="footer-column"><h4>LA BOUTIQUE</h4><a href="index.html">Accueil</a><a href="catalogue.html">Catalogue</a><a href="favoris.html">Favoris</a><a href="panier.html">Panier</a></div>
       <div class="footer-column"><h4>INFORMATIONS</h4><a href="livraison-retours.html">Livraison et retours</a><a href="conditions-generales.html">Conditions générales de vente</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a></div>
-      <div class="footer-contact"><h4>CONTACTEZ-NOUS</h4><a href="mailto:lacledescoeurs@outlook.fr">lacledescoeurs@outlook.fr</a><a href="tel:+33780950371">+33 7 80 95 03 71</a><a href="https://www.google.com/maps/search/?api=1&query=38%20Bd%20du%20Mar%C3%A9chal%20Foch%2C%2049100%20Angers%2C%20France">38 Bd du Maréchal Foch, 49100 Angers, France</a></div>
+      <div class="footer-contact"><h4>COORDONNÉES</h4><a href="mailto:lacledescoeurs@outlook.fr">lacledescoeurs@outlook.fr</a><a href="tel:+33780950371">+33 7 80 95 03 71</a><a href="https://www.google.com/maps/search/?api=1&query=38%20Bd%20du%20Mar%C3%A9chal%20Foch%2C%2049100%20Angers%2C%20France">38 Bd du Maréchal Foch, 49100 Angers, France</a></div>
+      <div class="footer-contact footer-contact-form"><h4>FORMULAIRE DE CONTACT</h4><form id="cdcFooterContactForm" class="cdc-footer-contact-form"><label for="cdcFooterName">Nom et prénom *</label><input id="cdcFooterName" name="name" type="text" autocomplete="name" required placeholder="Votre nom"><label for="cdcFooterEmail">Adresse e-mail *</label><input id="cdcFooterEmail" name="email" type="email" autocomplete="email" required placeholder="Votre adresse e-mail"><label for="cdcFooterSubject">Objet *</label><input id="cdcFooterSubject" name="subject" type="text" required placeholder="Objet de votre demande"><label for="cdcFooterMessage">Votre message *</label><textarea id="cdcFooterMessage" name="message" rows="4" required placeholder="Écrivez votre message..."></textarea><button type="submit">ENVOYER</button><p class="cdc-footer-form-note">L’envoi ouvre votre application e-mail avec votre message prêt à être envoyé.</p></form></div>
       <div class="footer-bottom">© <span id="cdcYear"></span> LA CLÉ DES CŒURS. Tous droits réservés.</div>
     </footer>`;
 
@@ -57,6 +58,16 @@
     const style=document.createElement("style");
     style.id="cdc-theme-noir-integral";
     style.textContent=`
+      body .cdc-footer{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+      body .cdc-footer .footer-contact-form{grid-column:1/-1!important;max-width:680px!important;justify-self:center!important}
+      body .cdc-footer .cdc-footer-contact-form{display:grid!important;grid-template-columns:1fr 1fr!important;gap:9px 14px!important;width:100%!important;text-align:left!important}
+      body .cdc-footer .cdc-footer-contact-form label{display:block!important;text-align:left!important;font-size:11px!important}
+      body .cdc-footer .cdc-footer-contact-form input,body .cdc-footer .cdc-footer-contact-form textarea{box-sizing:border-box!important;width:100%!important;padding:10px!important;background:#080808!important;color:#fff!important;border:1px solid #d4af37!important}
+      body .cdc-footer .cdc-footer-contact-form textarea,body .cdc-footer .cdc-footer-contact-form button,body .cdc-footer .cdc-footer-contact-form .cdc-footer-form-note{grid-column:1/-1!important}
+      body .cdc-footer .cdc-footer-contact-form button{padding:13px!important;background:#d4af37!important;color:#000!important;border:1px solid #d4af37!important;cursor:pointer!important;letter-spacing:1.5px!important}
+      body .cdc-footer .cdc-footer-form-note{font-size:10px!important;color:#ccc!important;text-align:center!important}
+      @media(max-width:650px){body .cdc-footer{grid-template-columns:1fr!important}body .cdc-footer .footer-contact-form{grid-column:1!important}body .cdc-footer .cdc-footer-contact-form{grid-template-columns:1fr!important}}
+
       html,body{background:#000!important;background-image:none!important;color:#fff!important}
       body *:not(img):not(video):not(canvas):not(svg):not(path):not(.cdc-logo-image){
         background-color:#000!important;background-image:none!important;
@@ -140,6 +151,15 @@
     /* Le bouton de changement de thème est volontairement retiré de l'en-tête. */
     const language=document.getElementById("cdcLanguage");
     if(language){language.value=localStorage.getItem("cdc_language")||"fr";language.addEventListener("change",()=>{const lang=language.value;localStorage.setItem("cdc_language",lang);if(lang==="fr")location.href=location.pathname+location.search+location.hash;else location.href="https://translate.google.com/translate?sl=fr&tl="+encodeURIComponent(lang)+"&u="+encodeURIComponent(location.href)})}
+
+    const footerContactForm=document.getElementById("cdcFooterContactForm");
+    footerContactForm?.addEventListener("submit",event=>{
+      event.preventDefault();
+      const data=new FormData(footerContactForm);
+      const subject=String(data.get("subject")||"Demande depuis le site LA CLÉ DES CŒURS").trim();
+      const body="Nom : "+String(data.get("name")||"")+"\nE-mail : "+String(data.get("email")||"")+"\n\nMessage :\n"+String(data.get("message")||"");
+      location.href="mailto:lacledescoeurs@outlook.fr?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
+    });
     actualiserCompteurPanier();actualiserCompteurFavoris();
     window.addEventListener("storage",()=>{actualiserCompteurPanier();actualiserCompteurFavoris()});
     window.addEventListener("cdc-cart-updated",actualiserCompteurPanier);
