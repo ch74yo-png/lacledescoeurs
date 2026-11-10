@@ -1854,3 +1854,42 @@ body .home-category-heading h2{
 body .hero h1,body .hero-content>p:not(.eyebrow){
   color:#ffffff!important;
 }
+
+
+/* Sélecteur de langue : seul le globe est visible, le menu reste accessible au clic */
+.cdc-header .cdc-language-globe{
+  position:relative!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:30px!important;
+  height:32px!important;
+  min-width:30px!important;
+  gap:0!important;
+  cursor:pointer!important;
+  overflow:visible!important;
+}
+.cdc-header .cdc-language-globe>span{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  pointer-events:none!important;
+}
+.cdc-header .cdc-language-globe>span svg{
+  width:20px!important;
+  height:20px!important;
+  stroke:#ffffff!important;
+  color:#ffffff!important;
+}
+.cdc-header .cdc-language-globe select{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  opacity:0!important;
+  cursor:pointer!important;
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  font-size:16px!important;
+}
+.cdc-header #cdcThemeButton{display:none!important}
