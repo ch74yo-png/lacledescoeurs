@@ -215,7 +215,24 @@
         font-size: 8px;
       }
     }
-  </style>
+  
+/* Accueil : quatre tuiles de catégories, sans boutons d'achat ni quantité */
+.home-categories-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-flow:row;gap:18px!important;max-width:1250px;margin:0 auto;padding:28px 18px 55px;background:#000}
+.home-category{display:flex!important;flex-direction:column;min-width:0;padding:16px!important;background:#000!important;border:1px solid #d9ad45!important}
+.home-category-heading{display:block!important;min-height:0!important;margin:0 0 12px!important;text-align:center}
+.home-category-heading h2{margin:4px 0!important;font-size:clamp(19px,2.5vw,28px)!important;color:#d9ad45!important}
+.home-category-heading h2 a{color:#d9ad45!important;text-decoration:none!important}
+.home-category-heading p:not(.eyebrow){display:none!important}
+.home-category-heading>a{display:none!important}
+.home-products{display:flex!important;flex-wrap:nowrap!important;gap:10px!important;overflow:hidden!important;max-width:100%!important}
+.home-product-card{flex:1 1 0!important;min-width:0!important;max-width:100%!important;background:#000!important;border:0!important;padding:0!important}
+.home-product-image{display:block!important;width:100%!important;aspect-ratio:1/1!important;background:#000!important;overflow:hidden!important}
+.home-product-image img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important}
+.home-product-info{padding:7px 2px!important;text-align:center!important}
+.home-product-brand,.home-product-name,.home-product-price{color:#fff!important}
+.home-product-card button,.home-product-card select,.home-product-card label,.home-product-actions,.home-product-price{display:none!important}
+@media(max-width:600px){.home-categories-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;padding:18px 10px 38px!important}.home-category{padding:8px!important}.home-category-heading h2{font-size:17px!important}.home-products{gap:5px!important}.home-product-card{flex-basis:calc(50% - 3px)!important}.home-product-info{font-size:11px!important}}
+</style>
 </head>
 
 <body>
@@ -349,33 +366,14 @@
       const marque = echapperHTML(produit.marque || "");
       const image = echapperHTML(produit.image || "");
       const lien = "produit.html?id=" + encodeURIComponent(produit.id);
-
       return `
         <article class="home-product-card">
           <a class="home-product-image" href="${lien}">
-            <img
-              src="${image}"
-              alt="${nom}"
-              loading="lazy"
-              referrerpolicy="no-referrer"
-              onerror="this.style.display='none';"
-            >
+            <img src="${image}" alt="${nom}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';">
           </a>
           <div class="home-product-info">
             <div class="home-product-brand">${marque}</div>
-            <h3 class="home-product-name">
-              <a href="${lien}">${nom}</a>
-            </h3>
-            <div class="home-product-price">${prixFormate(produit.prix)}</div>
-            <label class="home-quantity-label">QUANTITÉ
-              <select class="home-quantity" aria-label="Choisir une quantité"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>
-            </label>
-            <div class="home-product-actions">
-              <button type="button" data-home-action="acheter" data-id="${echapperHTML(produit.id)}">ACHETER</button>
-              <button type="button" data-home-action="panier" data-id="${echapperHTML(produit.id)}">AJOUTER AU PANIER</button>
-              <button type="button" data-home-action="favoris" data-id="${echapperHTML(produit.id)}">♡ FAVORIS</button>
-            </div>
-            <a class="home-product-link" href="${lien}">DÉCOUVRIR</a>
+            <h3 class="home-product-name"><a href="${lien}">${nom}</a></h3>
           </div>
         </article>
       `;
