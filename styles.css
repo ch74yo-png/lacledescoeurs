@@ -1356,3 +1356,54 @@ body.theme-dark .cdc-header{background:#11100f!important}
   .cdc-footer .footer-column a,
   .cdc-footer .footer-contact a{font-size:16px!important;margin-bottom:8px!important}
 }
+
+
+/* LOGO CDC — mise en page compacte et centrée sur mobile */
+.cdc-header{
+  position:relative!important;
+  min-height:112px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:10px!important;
+  padding:10px 18px!important;
+}
+.cdc-header .menu-button{flex:0 0 38px!important}
+.cdc-header .brand.cdc-brand{
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  transform:translate(-50%,-50%)!important;
+  width:170px!important;
+  max-width:42vw!important;
+  margin:0!important;
+}
+.cdc-header .cdc-logo,
+.cdc-header .cdc-logo img{width:100%!important;max-width:none!important}
+.cdc-header .header-actions{
+  display:flex!important;
+  flex:0 0 auto!important;
+  margin-left:auto!important;
+  gap:5px!important;
+}
+.cdc-header .cdc-icon-button{width:32px!important;height:34px!important;padding:4px!important}
+.cdc-header .cdc-icon-button svg{width:18px!important;height:18px!important}
+.cdc-header .cdc-language select{width:28px!important}
+@media(max-width:600px){
+  .cdc-header{min-height:82px!important;padding:6px 7px!important;gap:2px!important}
+  .cdc-header .menu-button{flex-basis:25px!important;width:25px!important;height:29px!important;padding:3px!important}
+  .cdc-header .hamburger-lines,
+  .cdc-header .hamburger-lines i{width:16px!important}
+  .cdc-header .brand.cdc-brand{width:112px!important;max-width:35vw!important}
+  .cdc-header .header-actions{gap:0!important}
+  .cdc-header .cdc-icon-button{width:24px!important;height:28px!important;padding:2px!important}
+  .cdc-header .cdc-icon-button svg{width:15px!important;height:15px!important}
+  .cdc-header .cdc-language{gap:0!important}
+  .cdc-header .cdc-language svg{width:14px!important;height:14px!important}
+  .cdc-header .cdc-language select{width:20px!important;font-size:8px!important}
+}
+@media(max-width:360px){
+  .cdc-header .brand.cdc-brand{width:96px!important}
+  .cdc-header .cdc-icon-button{width:21px!important}
+  .cdc-header .header-actions{gap:0!important}
+}
