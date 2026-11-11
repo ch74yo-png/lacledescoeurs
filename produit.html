@@ -385,7 +385,7 @@
       const visuel = imagePrincipale
         ? `<div class="product-gallery">
              <div class="product-detail-image">
-               <img id="mainProductImage" src="${echapperHTML(imagePrincipale)}" alt="${nom}" loading="eager" onerror="this.onerror=null;this.src='/logo-officiel.jpg?v=mobile-fix-20261110';this.alt='LA CLÉ DES CŒURS — Bijoux fins et raffinés';">
+               <img id="mainProductImage" src="${echapperHTML(imagePrincipale)}" alt="${nom}" loading="eager" onerror="this.onerror=null;this.src='/logo-officiel.svg?v=mobile-fix-20261110';this.alt='LA CLÉ DES CŒURS — Bijoux fins et raffinés';">
              </div>
              ${imagesProduit.length > 1 ? `<div class="product-thumbnails" aria-label="Photos du produit">
                ${imagesProduit.map((src, index) => `<button type="button" class="product-thumbnail ${index === 0 ? "active" : ""}" data-image="${echapperHTML(src)}" aria-label="Afficher la photo ${index + 1}">
@@ -393,7 +393,7 @@
                </button>`).join("")}
              </div>` : ""}
            </div>`
-        : `<div class="product-detail-image"><img src="/logo-officiel.jpg?v=mobile-fix-20261110" alt="LA CLÉ DES CŒURS — Bijoux fins et raffinés" loading="eager" onerror="this.onerror=null;this.src='/logo-officiel.jpg';"></div>`;
+        : `<div class="product-detail-image"><img src="/logo-officiel.svg?v=mobile-fix-20261110" alt="LA CLÉ DES CŒURS — Bijoux fins et raffinés" loading="eager" onerror="this.onerror=null;this.src='/logo-officiel.svg';"></div>`;
 
       const ancienPrix = produit.ancienPrix
         ? `<span class="detail-old-price">${formaterPrix(produit.ancienPrix)}</span>`
