@@ -173,7 +173,7 @@ const produits = [
   ),
 
   // PRODUITS AJOUTÉS À PARTIR DES FICHES TRANSMISES LE 10/11/2026
-  creerProduit("bague-cartier-love-classique-jaune", "Bague Cartier Love classique en or jaune 18 carats", "Cartier", 1400, null, ["accessoires"], { description: "Bague Cartier Love classique en or jaune 18 carats." }),
+  creerProduit("bague-cartier-love-classique-jaune", "Bague Cartier Love classique en or jaune 18 carats", "Cartier", 1400, null, ["accessoires"], { image: "assets/301c92e9-d3a2-4cd5-abad-100d625900b4.JPG", description: "Bague Cartier Love classique en or jaune 18 carats." }),
   creerProduit("bracelet-cartier-love-classique-rose", "Bracelet Cartier Love classique en or rose 18 carats", "Cartier", 3999, null, ["accessoires"], { description: "Bracelet Cartier Love classique en or rose 18 carats." }),
   creerProduit("bague-cartier-love-petit-modele", "Bague Cartier Love petit modèle", "Cartier", 1099, null, ["accessoires"], { description: "Bague Cartier Love petit modèle." }),
   creerProduit("bague-cartier-ecrou-deux-rangs", "Bague Cartier Écrou deux rangs", "Cartier", 1999, null, ["accessoires"], { description: "Bague Cartier Écrou deux rangs." }),
@@ -297,7 +297,7 @@ const produits = [
   creerProduit("omega-seamaster-planet-ocean-215", "Montre automatique pour homme Omega Seamaster Planet Ocean 215.30.44.21.01.001", "Omega", 2500, 3299, ["homme"]),
   creerProduit("rolex-datejust-126200", "Montre automatique Rolex Datejust 36 mm Jubilee en acier inoxydable avec cadran bleu 126200", "Rolex", 4000, null, ["homme"]),
   creerProduit("cartier-santos-automatique-2319", "Montre Cartier Santos Automatique 29 mm en acier inoxydable guilloché – Réf. 2319 – Avec boîte", "Cartier", 4850, null, ["homme"]),
-  creerProduit("cartier-santos-bbc8346", "Montre Cartier Santos BBC8346 – Bicolore Acier Inoxydable et Or 18 Carats – État Neuf", "Cartier", 3500, 4500, ["homme"], { image: "aafb5040-ebde-40db-889b-593f572e8304.JPG" }),
+  creerProduit("cartier-santos-bbc8346", "Montre Cartier Santos BBC8346 – Bicolore Acier Inoxydable et Or 18 Carats – État Neuf", "Cartier", 3500, 4500, ["homme"], { image: "assets/30fe696a-6851-488d-90ba-0e7f67b34c89.JPG", images: ["assets/30fe696a-6851-488d-90ba-0e7f67b34c89.JPG", "assets/30b217bc-05bf-43b9-b89f-006c2f8e936a.JPG"] }),
   creerProduit("cartier-santos-bleue-wssa0030", "Montre Cartier Santos de Cartier bleue WSSA0030", "Cartier", 3114, null, ["homme"]),
   creerProduit("cartier-santos-caoutchouc-noir", "Montre CARTIER Santos de Cartier grand modèle avec bracelet en caoutchouc noir", "Cartier", 2990, null, ["homme"]),
   creerProduit("cartier-santos-galbee-187901", "Montre Cartier Santos Galbée 187901 – Acier & Or 18K 29 mm Quartz 1994", "Cartier", 2600, null, ["homme"]),
