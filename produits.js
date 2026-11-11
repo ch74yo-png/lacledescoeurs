@@ -168,6 +168,7 @@ const produits = [
     ["accessoires"],
     {
       image: "assets/1d611b43-7cb8-4617-b08b-ae332ea032bb.JPG",
+      images: ["assets/1d611b43-7cb8-4617-b08b-ae332ea032bb.JPG", "assets/41bc7c65-efad-4b9d-9f41-303a01d9df48.JPG"],
       description: "Condition : Occasion – Très bon état.\nÉtat : Ce bracelet Cartier est en très bon état. Toutes les parties fonctionnent correctement."
     }
   ),
@@ -322,7 +323,7 @@ const produits = [
   creerProduit("omega-seamaster-green-bond-titane", "Omega Seamaster Diver 300M « Green Bond » Titane 2025 – État neuf", "Omega", 6800, null, ["homme"]),
   creerProduit("omega-seamaster-diver-james-bond-21090", "Omega Seamaster Diver 300M 210.90.42.20.01.001 James Bond", "Omega", 3269, null, ["homme"]),
   creerProduit("omega-speedmaster-kit-complet", "Omega Speedmaster – Kit complet – Coffret et accessoires officiels", "Omega", 3399, 5000, ["homme"]),
-  creerProduit("omega-speedmaster-snoopy-2025", "OMEGA Speedmaster 2025 « Silver Snoopy Award » 50e montre 310.32.42.50.02.001", "Omega", 15500, 18000, ["homme"], { image: "assets/3561c5e3-69ff-4d0c-b211-25b3becd041f.JPG", images: ["assets/3561c5e3-69ff-4d0c-b211-25b3becd041f.JPG", "assets/3a773331-3710-4af8-9161-cfed5c89dc6a.JPG", "assets/2717b264-9083-4571-8d28-7533b90482c0.JPG", "assets/3a4a72f5-e185-42f7-b51d-29c30baabebe.JPG", "a58be40a-988e-4de3-af07-58f096bce6bd.JPG"] }),
+  creerProduit("omega-speedmaster-snoopy-2025", "OMEGA Speedmaster 2025 « Silver Snoopy Award » 50e montre 310.32.42.50.02.001", "Omega", 15500, 18000, ["homme"], { image: "assets/3561c5e3-69ff-4d0c-b211-25b3becd041f.JPG", images: ["assets/3561c5e3-69ff-4d0c-b211-25b3becd041f.JPG", "assets/3a773331-3710-4af8-9161-cfed5c89dc6a.JPG", "assets/2717b264-9083-4571-8d28-7533b90482c0.JPG", "assets/3a4a72f5-e185-42f7-b51d-29c30baabebe.JPG", "a58be40a-988e-4de3-af07-58f096bce6bd.JPG", "assets/4246792d-be2d-4e09-9f54-b482f61ac808.JPG"] }),
   creerProduit("omega-speedmaster-apollo-8", "Omega Speedmaster Apollo 8 « Dark Side of the Moon » – 311.92.44.30 – Céramique – Kit complet", "Omega", 5000, 6500, ["homme"]),
   creerProduit("omega-speedmaster-ck2998-blue-panda", "Omega Speedmaster CK2998 Édition Limitée « Blue Panda » – Coffret complet", "Omega", 5000, 6500, ["homme"], { image: "a0c4cb4f-c571-4e96-97a2-a64527550fe4.JPG" }),
   creerProduit("omega-speedmaster-dark-side-31192", "Omega Speedmaster Dark Side of the Moon – 311.92.44.51.01.006 – Automatique – Coffret et cartes", "Omega", 4099, 5200, ["homme"]),
