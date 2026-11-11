@@ -473,6 +473,22 @@
 .home-category-heading>a{display:inline-block!important;margin-top:8px!important;color:#fff!important;text-shadow:0 1px 5px #000!important}
 @media(max-width:600px){.home-category{min-height:170px!important}.home-category-heading{padding:14px 6px!important}.home-category-heading h2{font-size:17px!important}.home-category-heading>a{font-size:8px!important}}
 
+
+/* Accueil : aperçu défilant des vrais produits de chaque catégorie */
+.home-category{min-height:0!important;justify-content:flex-start!important;padding:0 0 14px!important}
+.home-category-photo{height:220px!important;position:relative!important;inset:auto!important;opacity:.92!important;object-fit:cover!important}
+.home-category:after{display:none!important}
+.home-category-heading{position:relative!important;z-index:2!important;padding:15px 10px 8px!important}
+.home-products{position:relative!important;z-index:3!important;display:flex!important;flex-wrap:nowrap!important;gap:10px!important;overflow-x:auto!important;overflow-y:hidden!important;padding:8px 12px 14px!important;scroll-snap-type:x mandatory!important}
+.home-product-card{flex:0 0 155px!important;min-width:155px!important;background:#080808!important;border:1px solid rgba(217,173,69,.35)!important;scroll-snap-align:start!important}
+.home-product-image{display:block!important;width:100%!important;aspect-ratio:1/1!important;background:#111!important;overflow:hidden!important}
+.home-product-image img{width:100%!important;height:100%!important;object-fit:contain!important}
+.home-product-info{padding:8px 7px!important}
+.home-product-brand,.home-product-name,.home-product-price{color:#fff!important}
+.home-product-name{font-size:14px!important;line-height:1.25!important;min-height:52px!important;margin:5px 0!important}
+.home-product-name a{color:#fff!important;text-decoration:none!important}
+.home-product-price{font-size:12px!important;margin:5px 0!important}
+@media(max-width:600px){.home-category-photo{height:145px!important}.home-product-card{flex-basis:132px!important;min-width:132px!important}.home-product-name{font-size:12px!important;min-height:48px!important}}
 </style>
 </head>
 
@@ -567,8 +583,36 @@
 
   </main>
 
+  <script src="categories.js?v=20261111-restore-all-products"></script>
+  <script src="produits.js?v=20261111-restore-all-products"></script>
   <script>
     "use strict";
+
+    // Affiche des produits réels dans chacune des quatre catégories de l'accueil.
+    const accueilProduits = Array.isArray(window.produits) ? window.produits : [];
+    const accueilEchapper = value => String(value ?? "").replace(/[&<>"']/g, c => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    })[c]);
+    document.querySelectorAll(".home-category[data-category-url]").forEach(section => {
+      const categorie = new URL(section.dataset.categoryUrl, location.href).searchParams.get("categorie");
+      const selection = accueilProduits.filter(p => p && p.actif !== false &&
+        (Array.isArray(p.categories) ? p.categories : [p.categorie]).includes(categorie)).slice(0, 8);
+      const rail = document.createElement("div");
+      rail.className = "home-products";
+      rail.setAttribute("aria-label", "Produits de la catégorie " + categorie);
+      rail.innerHTML = selection.map(p => {
+        const image = Array.isArray(p.images) && p.images.length ? p.images[0] : (p.image || "");
+        const imageHTML = image
+          ? '<img src="' + accueilEchapper(image) + '" alt="' + accueilEchapper(p.nom) + '" loading="lazy" onerror="this.onerror=null;this.src=\'/logo-officiel.svg\';">'
+          : '<img src="/logo-officiel.svg" alt="LA CLÉ DES CŒURS" loading="lazy">';
+        return '<article class="home-product-card">' +
+          '<a class="home-product-image" href="produit.html?id=' + encodeURIComponent(p.id) + '">' + imageHTML + '</a>' +
+          '<div class="home-product-info"><div class="home-product-brand">' + accueilEchapper(p.marque || "") + '</div>' +
+          '<h3 class="home-product-name"><a href="produit.html?id=' + encodeURIComponent(p.id) + '">' + accueilEchapper(p.nom) + '</a></h3>' +
+          '<p class="home-product-price">' + new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR"}).format(Number(p.prix)||0) + '</p></div></article>';
+      }).join("");
+      if (selection.length) section.appendChild(rail);
+    });
 
     document.querySelectorAll(".home-category[data-category-url]").forEach(card => {
       card.style.cursor = "pointer";
