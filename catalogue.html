@@ -175,9 +175,9 @@ function afficherProduits() {
       : (Array.isArray(p.images) ? p.images : (p.image ? [p.image] : []));
     const image = images[0] || (typeof p.image === "string" ? p.image : "");
     const lien = "produit.html?id=" + encodeURIComponent(p.id);
-    const logoBoutique = '<img class="product-placeholder-logo" src="/logo-officiel.jpg?v=mobile-fix-20261110" alt="LA CLÉ DES CŒURS — Depuis 1974 — Bijoux Fins & Raffinés" loading="lazy">';
+    const logoBoutique = '<img class="product-placeholder-logo" src="/logo-officiel.svg?v=mobile-fix-20261110" alt="LA CLÉ DES CŒURS — Depuis 1974 — Bijoux Fins & Raffinés" loading="lazy">';
     const visuel = image
-      ? `<img src="${echapperHTML(image)}" alt="${nom}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='/logo-officiel.jpg?v=mobile-fix-20261110';this.classList.add('product-placeholder-logo');">`
+      ? `<img src="${echapperHTML(image)}" alt="${nom}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='/logo-officiel.svg?v=mobile-fix-20261110';this.classList.add('product-placeholder-logo');">`
       : logoBoutique;
 
     const ancienPrix = p.ancienPrix
