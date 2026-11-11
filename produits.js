@@ -347,7 +347,7 @@ const produits = [
   creerProduit("tudor-black-bay-54-lagoon", "Tudor Black Bay 54 Lagoon Blue – 37 mm – Bracelet 5 maillons", "Tudor", 3200, null, ["homme"]),
   creerProduit("tudor-black-bay-58-bronze", "TUDOR Black Bay 58 BRONZE – Réf. M79012M-0001 – Exclusivité", "Tudor", 2900, null, ["homme"]),
   creerProduit("tudor-black-bay-58-burgundy", "Tudor Black Bay 58 Burgundy Jubilee – 39 mm – Bracelet 5 maillons Rouge", "Tudor", 2950, null, ["homme"]),
-  creerProduit("zenith-chronomaster-el-primero-032150", "Zenith Chronomaster El Primero réf. 03.2150.400/69.C713, avec boîte et papiers", "Zenith", 2890, null, ["homme"]),
+  creerProduit("zenith-chronomaster-el-primero-032150", "Zenith Chronomaster El Primero réf. 03.2150.400/69.C713, avec boîte et papiers", "Zenith", 2890, null, ["homme"], { image: "assets/19cc9025-f09e-4c19-9fea-c005b8bae947.JPG", images: ["assets/19cc9025-f09e-4c19-9fea-c005b8bae947.JPG"] }),
   creerProduit("zenith-chronomaster-sport-yoshida", "Zenith Chronomaster Sport Yoshida Édition Spéciale – Réf. 30.3107.3600/56.M3100", "Zenith", 3500, null, ["homme"]),
   creerProduit("zenith-el-primero-or-rose-1998", "Zenith El Primero – Chronomètre et Chronographe en Or Rose 18K – Édition Limitée (1998)", "Zenith", 3500, null, ["homme"]),
   creerProduit("zenith-chronomaster-38-gris", "Zenith El Primero Chronomaster 38 mm Cadran Gris – Chronographe Automatique Homme", "Zenith", 2700, null, ["homme"]),
