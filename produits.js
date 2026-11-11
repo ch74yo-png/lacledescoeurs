@@ -318,7 +318,7 @@ const produits = [
   creerProduit("omega-seamaster-green-bond-titane", "Omega Seamaster Diver 300M « Green Bond » Titane 2025 – État neuf", "Omega", 6800, null, ["homme"]),
   creerProduit("omega-seamaster-diver-james-bond-21090", "Omega Seamaster Diver 300M 210.90.42.20.01.001 James Bond", "Omega", 3269, null, ["homme"]),
   creerProduit("omega-speedmaster-kit-complet", "Omega Speedmaster – Kit complet – Coffret et accessoires officiels", "Omega", 3399, 5000, ["homme"]),
-  creerProduit("omega-speedmaster-snoopy-2025", "OMEGA Speedmaster 2025 « Silver Snoopy Award » 50e montre 310.32.42.50.02.001", "Omega", 15500, 18000, ["homme"]),
+  creerProduit("omega-speedmaster-snoopy-2025", "OMEGA Speedmaster 2025 « Silver Snoopy Award » 50e montre 310.32.42.50.02.001", "Omega", 15500, 18000, ["homme"], { image: "a58be40a-988e-4de3-af07-58f096bce6bd.JPG" }),
   creerProduit("omega-speedmaster-apollo-8", "Omega Speedmaster Apollo 8 « Dark Side of the Moon » – 311.92.44.30 – Céramique – Kit complet", "Omega", 5000, 6500, ["homme"]),
   creerProduit("omega-speedmaster-ck2998-blue-panda", "Omega Speedmaster CK2998 Édition Limitée « Blue Panda » – Coffret complet", "Omega", 5000, 6500, ["homme"]),
   creerProduit("omega-speedmaster-dark-side-31192", "Omega Speedmaster Dark Side of the Moon – 311.92.44.51.01.006 – Automatique – Coffret et cartes", "Omega", 4099, 5200, ["homme"]),
