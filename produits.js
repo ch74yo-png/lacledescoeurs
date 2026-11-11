@@ -206,7 +206,7 @@ const produits = [
   // RESTAURATION DES 14 PRODUITS DE LA CATÉGORIE MONTRES FEMME
   // Fiches reprises du catalogue d'origine ; images laissées vides volontairement.
   creerProduit("bracelet-cartier-juste-un-clou-femme-original", "BRACELET À ONGLES CLASSIQUE CARTIER AUTHENTIQUE JUSTE UN CLOU 18K taille 17 boîte et certificat.", "Cartier", 3699, null, ["femme"]),
-  creerProduit("cartier-baignoire-wgba0025-femme", "Cartier Baignoire Petit WGBA0025 « Femme » Quartz Or Jaune (2025) Taille 16 NEUF", "Cartier", 16000, null, ["femme"], { images: ["assets/17174298-608b-48f7-8e3d-7a42cf23795e.JPG", "assets/231f2837-a847-4679-a615-8474d2343c3b.JPG"] }),
+  creerProduit("cartier-baignoire-wgba0025-femme", "Cartier Baignoire Petit WGBA0025 « Femme » Quartz Or Jaune (2025) Taille 16 NEUF", "Cartier", 16000, null, ["femme"], { image: "assets/279bc8c3-7a0c-425b-8b96-fa4214b75f3e.JPG", images: ["assets/279bc8c3-7a0c-425b-8b96-fa4214b75f3e.JPG", "assets/31b55f37-31b0-4f46-8a38-af551223bee2.JPG", "assets/17174298-608b-48f7-8e3d-7a42cf23795e.JPG", "assets/231f2837-a847-4679-a615-8474d2343c3b.JPG"] }),
   creerProduit("cartier-panthere-22mm-femme", "Cartier Panthère 22 mm Femme – Montre Or Jaune | Service Officiel & Boîte", "Cartier", 7000, null, ["femme"], { image: "assets/13c78fcb-e84a-4cd1-9928-7e5b9ad10a34.JPG" }),
   creerProduit("cartier-tank-must-femme", "Cartier Tank Must – Montre de Luxe avec Ensemble Complet, Boîte et Papiers", "Cartier", 2000, null, ["femme"]),
   creerProduit("jaeger-lecoultre-reverso-2024-femme", "Jaeger-LeCoultre Reverso 2024 – Acier inoxydable – Réf. 214.8.62 Q3858522", "Jaeger-LeCoultre", 4599, 6000, ["femme"]),
