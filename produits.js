@@ -88,7 +88,7 @@ const produits = [
   creerProduit("bracelet-cartier-love-blanc-19", "Bracelet Cartier Love Or Blanc 18K 6,1 mm – Taille 19 – Authentique avec Boîte et Papiers", "Cartier", 4300),
   creerProduit("bracelet-cartier-love-blanc-4-diamants", "Bracelet Cartier Love Or Blanc 18K Classique – 4 Diamants – Boîte et Papiers", "Cartier", 4800),
   creerProduit("bracelet-cartier-love-jaune-17", "Bracelet Cartier Love Or Jaune 18K – Taille 17 cm – Authentique avec Boîte et Papiers", "Cartier", 4300, null, ["accessoires"], { image: "aa56a573-19df-423f-b5b4-0cef2b38ea6b.JPG" }),
-  creerProduit("bracelet-cartier-love-jaune-18", "Bracelet Cartier Love Or Jaune 18K Authentique – Taille 18 – Jonc Homme/Femme", "Cartier", 3500),
+  creerProduit("bracelet-cartier-love-jaune-18", "Bracelet Cartier Love Or Jaune 18K Authentique – Taille 18 – Jonc Homme/Femme", "Cartier", 3800),
   creerProduit("bracelet-cartier-love-rose-16-complet-page3", "Bracelet Cartier Love Or Rose 18K – Taille 16 – Ensemble Complet, Excellent État", "Cartier", 3800),
   creerProduit("bracelet-cartier-love-jaune-2023", "Bracelet Cartier Love Taille Classique – Or Jaune 18k, avec Boîte & Certifiacat (2023)", "Cartier", 3699),
   creerProduit("bracelet-cartier-love-jaune-2024-19", "Bracelet Cartier Love, taille 19 (modèle 2024), ensemble complet, or jaune.", "Cartier", 3700),
