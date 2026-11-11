@@ -131,7 +131,7 @@ const produits = [
   creerProduit("cartier-juste-un-clou-petit-16", "Cartier Juste un Clou – Bracelet petit modèle en or jaune 18 carats, taille 16, avec écrin et certificat", "Cartier", 2015),
   creerProduit("cartier-juste-un-clou-bague-52", "Cartier Juste Un Clou Bague en or rose 18 carats Taille 52 / US 6", "Cartier", 1850),
   creerProduit("cartier-juste-un-clou-diamant-rose", "Cartier Juste Un Clou Diamant Or Rose Bracelet", "Cartier", 5500),
-  creerProduit("cartier-juste-un-clou-ring-jaune-49", "Cartier Juste Un Clou Ring 49mm US 5 18K Jaune Modèle Classique", "Cartier", 2500),
+  creerProduit("cartier-juste-un-clou-ring-jaune-49", "Cartier Juste Un Clou Ring 49mm US 5 18K Jaune Modèle Classique", "Cartier", 2500, null, ["accessoires"], { image: "assets/1b9e978d-bc8e-4bfb-abb3-465a2d26a219.JPG" }),
   creerProduit("cartier-love-bracelet-jaune-18-2020", "Cartier Love Bracelet – Taille 18, or jaune 18 carats, collection Love (2020)", "Cartier", 3269),
   creerProduit("cartier-tank-homme-wsta0056", "Cartier Tank Homme – Acier inoxydable – Cadran vert – 25 mm – Quartz – WSTA0056", "Cartier", 2000, 3000, ["accessoires", "homme"], { reference: "WSTA0056" }),
   creerProduit("collier-vca-magic-alhambra", "Collier long motif Magic Alhambra 1 de Van Cleef & Arpels en or blanc et diamants", "Van Cleef & Arpels", 13750, 16500),
