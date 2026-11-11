@@ -152,6 +152,7 @@ const produits = [
   creerProduit("cartier-santos-wssa0062", "Cartier Santos de Cartier WSSA0062 – Cadran vert", "Cartier", 6000, null, ["homme"], {
     reference: "WSSA0062",
     image: "assets/16e7b339-c2b3-42bf-92a9-57a8fd0b1259.JPG",
+    images: ["assets/16e7b339-c2b3-42bf-92a9-57a8fd0b1259.JPG", "assets/24dd6da1-4ba2-4ec5-afe4-c98db37fd2df.JPG"],
     description: "Montre automatique Cartier Santos en acier, cadran vert, boîte et papiers.",
     ficheSource: "https://bijouterielamalmaison.fr/product/cartier-santos-de-cartierwssa0062-ensemble-complet-garantie/"
   }),
