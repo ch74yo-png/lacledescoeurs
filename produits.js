@@ -120,7 +120,7 @@ const produits = [
   creerProduit("royal-pop-orenji-hachi", "Bracelet Royal Pop Orenji Hachi – Bioceramic Swiss Made", "AP x Swatch", 53, null, ["accessoires", "ap-swatch"]),
   creerProduit("royal-pop-otg-roz", "Bracelet Royal Pop Otg Roz – Bioceramic Swiss Made", "AP x Swatch", 53, null, ["accessoires", "ap-swatch"]),
   creerProduit("royal-pop-otto-rosso", "Bracelet Royal Pop Otto Rosso – Bioceramic Swiss Made", "AP x Swatch", 53, null, ["accessoires", "ap-swatch"]),
-  creerProduit("bracelet-vca-malachite-5-motifs", "Bracelet Van Cleef & Arpels 5 Motifs Malachite en Or Jaune 18k – Avec Boîte & Certificat", "Van Cleef & Arpels", 2500, null, ["accessoires"], { image: "a53fbd1b-0773-431b-b2d2-cf9288ece29e.JPG" }),
+  creerProduit("bracelet-vca-malachite-5-motifs", "Bracelet Van Cleef & Arpels 5 Motifs Malachite en Or Jaune 18k – Avec Boîte & Certificat", "Van Cleef & Arpels", 2500, null, ["accessoires"], { image: "a53fbd1b-0773-431b-b2d2-cf9288ece29e.JPG", images: ["a53fbd1b-0773-431b-b2d2-cf9288ece29e.JPG", "assets/1a42118e-b69c-4799-a707-66ba7ebf644a.JPG", "assets/1b681efb-e673-4ebe-b6d1-f91dcb8b0b35.JPG"] }),
   creerProduit("bracelet-vca-alhambra-onyx-vintage", "Bracelet Van Cleef & Arpels Alhambra 5 Motifs – Or 18K et Onyx – Vintage", "Van Cleef & Arpels", 3000),
 
   // PAGE 6
