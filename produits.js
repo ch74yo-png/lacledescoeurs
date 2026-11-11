@@ -130,7 +130,7 @@ const produits = [
   creerProduit("bracelet-cartier-love-18-2024", "Bracelet/bracelet Cartier Love taille 18 – petit modèle 2024 ensemble complet or jaune", "Cartier", 3600),
   creerProduit("cartier-juste-un-clou-petit-16", "Cartier Juste un Clou – Bracelet petit modèle en or jaune 18 carats, taille 16, avec écrin et certificat", "Cartier", 2015),
   creerProduit("cartier-juste-un-clou-bague-52", "Cartier Juste Un Clou Bague en or rose 18 carats Taille 52 / US 6", "Cartier", 1850),
-  creerProduit("cartier-juste-un-clou-diamant-rose", "Cartier Juste Un Clou Diamant Or Rose Bracelet", "Cartier", 5500, null, ["accessoires", "assets/3b9b218e-c634-449d-ac49-c9a0164b350f.JPG"], { image: "assets/1ecece59-9a76-461e-aca3-d5b31de5bf3b.JPG", images: ["assets/1ecece59-9a76-461e-aca3-d5b31de5bf3b.JPG", "assets/2b45e114-2bf9-4f82-834c-210103f8f866.JPG", "assets/356a2f65-eea7-4dcc-8d55-4963e94a138a.JPG", "assets/39496461-e422-4350-97e6-7fd510dacd45.JPG", "assets/3b9b218e-c634-449d-ac49-c9a0164b350f.JPG", "assets/4018b180-1235-4879-a957-0d0c5135216b.JPG"] }),
+  creerProduit("cartier-juste-un-clou-diamant-rose", "Cartier Juste Un Clou Diamant Or Rose Bracelet", "Cartier", 5500, null, ["accessoires"], { image: "assets/1ecece59-9a76-461e-aca3-d5b31de5bf3b.JPG", images: ["assets/1ecece59-9a76-461e-aca3-d5b31de5bf3b.JPG", "assets/2b45e114-2bf9-4f82-834c-210103f8f866.JPG", "assets/356a2f65-eea7-4dcc-8d55-4963e94a138a.JPG", "assets/39496461-e422-4350-97e6-7fd510dacd45.JPG", "assets/3b9b218e-c634-449d-ac49-c9a0164b350f.JPG", "assets/4018b180-1235-4879-a957-0d0c5135216b.JPG"] }),
   creerProduit("cartier-juste-un-clou-ring-jaune-49", "Cartier Juste Un Clou Ring 49mm US 5 18K Jaune Modèle Classique", "Cartier", 2500, null, ["accessoires"], { image: "assets/1b9e978d-bc8e-4bfb-abb3-465a2d26a219.JPG" }),
   creerProduit("cartier-love-bracelet-jaune-18-2020", "Cartier Love Bracelet – Taille 18, or jaune 18 carats, collection Love (2020)", "Cartier", 3269),
   creerProduit("cartier-tank-homme-wsta0056", "Cartier Tank Homme – Acier inoxydable – Cadran vert – 25 mm – Quartz – WSTA0056", "Cartier", 2000, 3000, ["accessoires", "homme"], { reference: "WSTA0056" }),
@@ -152,8 +152,7 @@ const produits = [
   creerProduit("cartier-santos-wssa0062", "Cartier Santos de Cartier WSSA0062 – Cadran vert", "Cartier", 6000, null, ["homme"], {
     reference: "WSSA0062",
     image: "assets/16e7b339-c2b3-42bf-92a9-57a8fd0b1259.JPG",
-    images: ["assets/16e7b339-c2b3-42bf-92a9-57a8fd0b1259.JPG", "assets/24dd6da1-4ba2-4ec5-afe4-c98db37fd2df.JPG", "assets/25faf4a3-50bb-4388-aed1-6ed90a48ec31.JPG"],
-    images: ["assets/16e7b339-c2b3-42bf-92a9-57a8fd0b1259.JPG", "assets/24dd6da1-4ba2-4ec5-afe4-c98db37fd2df.JPG"],
+    images: ["assets/16e7b339-c2b3-42bf-92a9-57a8fd0b1259.JPG", "assets/24dd6da1-4ba2-4ec5-afe4-c98db37fd2df.JPG", "assets/25faf4a3-50bb-4388-aed1-6ed90a48ec31.JPG", "assets/43ba34b1-bc56-49ea-bb75-9cf12023f51b.JPG"],
     description: "Montre automatique Cartier Santos en acier, cadran vert, boîte et papiers.",
     ficheSource: "https://bijouterielamalmaison.fr/product/cartier-santos-de-cartierwssa0062-ensemble-complet-garantie/"
   }),
@@ -208,7 +207,7 @@ const produits = [
   // Fiches reprises du catalogue d'origine ; images laissées vides volontairement.
   creerProduit("bracelet-cartier-juste-un-clou-femme-original", "BRACELET À ONGLES CLASSIQUE CARTIER AUTHENTIQUE JUSTE UN CLOU 18K taille 17 boîte et certificat.", "Cartier", 3699, null, ["femme"]),
   creerProduit("cartier-baignoire-wgba0025-femme", "Cartier Baignoire Petit WGBA0025 « Femme » Quartz Or Jaune (2025) Taille 16 NEUF", "Cartier", 16000, null, ["femme"], { image: "assets/279bc8c3-7a0c-425b-8b96-fa4214b75f3e.JPG", images: ["assets/279bc8c3-7a0c-425b-8b96-fa4214b75f3e.JPG", "assets/31b55f37-31b0-4f46-8a38-af551223bee2.JPG", "assets/17174298-608b-48f7-8e3d-7a42cf23795e.JPG", "assets/231f2837-a847-4679-a615-8474d2343c3b.JPG"] }),
-  creerProduit("cartier-panthere-22mm-femme", "Cartier Panthère 22 mm Femme – Montre Or Jaune | Service Officiel & Boîte", "Cartier", 7000, null, ["femme", "assets/3d4ba205-dae4-420f-89bf-da8157582d3a.JPG", "assets/3ea20b8f-48a7-4541-ac1b-d715beb67729.JPG"], { image: "assets/13c78fcb-e84a-4cd1-9928-7e5b9ad10a34.JPG", images: ["assets/13c78fcb-e84a-4cd1-9928-7e5b9ad10a34.JPG", "assets/3ea20b8f-48a7-4541-ac1b-d715beb67729.JPG", "assets/3d4ba205-dae4-420f-89bf-da8157582d3a.JPG", "assets/3ea20b8f-48a7-4541-ac1b-d715beb67729.JPG"] }),
+  creerProduit("cartier-panthere-22mm-femme", "Cartier Panthère 22 mm Femme – Montre Or Jaune | Service Officiel & Boîte", "Cartier", 7000, null, ["femme", "assets/3d4ba205-dae4-420f-89bf-da8157582d3a.JPG", "assets/3ea20b8f-48a7-4541-ac1b-d715beb67729.JPG"], { image: "assets/13c78fcb-e84a-4cd1-9928-7e5b9ad10a34.JPG", images: ["assets/13c78fcb-e84a-4cd1-9928-7e5b9ad10a34.JPG", "assets/3ea20b8f-48a7-4541-ac1b-d715beb67729.JPG", "assets/3d4ba205-dae4-420f-89bf-da8157582d3a.JPG", "assets/4368a53b-31bc-40d8-a6bd-53200e5a75ee.JPG"] }),
   creerProduit("cartier-tank-must-femme", "Cartier Tank Must – Montre de Luxe avec Ensemble Complet, Boîte et Papiers", "Cartier", 2000, null, ["femme"], { image: "assets/384a2b30-36a0-49f9-a39b-32af8e59933a.JPG" }),
   creerProduit("jaeger-lecoultre-reverso-2024-femme", "Jaeger-LeCoultre Reverso 2024 – Acier inoxydable – Réf. 214.8.62 Q3858522", "Jaeger-LeCoultre", 4599, 6000, ["femme"]),
   creerProduit("cartier-faberge-67082-femme", "Montre Cartier Fabergé 67082 en or massif 18 carats", "Cartier", 3000, 3800, ["femme"]),
