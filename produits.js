@@ -232,7 +232,7 @@ const produits = [
   creerProduit("breitling-superocean-heritage-ab2020", "Breitling Superocean Heritage AB2020 – 46 mm – Cadran Bleu Soleil – Acier Inoxydable – Étanche 200 m", "Breitling", 2200, null, ["homme"]),
   creerProduit("cartier-panthere-wspn0006-homme-source", "Cartier Panthère pour femme WSPN0006 Quartz", "Cartier", 4100, null, ["homme"]),
   creerProduit("cartier-santos-wssa0062-cadran-vert-source", "Cartier Santos – WSSA0062 – Grande taille – Cadran vert – Coffret et papiers", "Cartier", 4099, 5299, ["homme"]),
-  creerProduit("cartier-santos-wssa0037-noir-source", "Cartier Santos 2025 – WSSA0037 – Boîtier Noir ADLC & Acier – Coffret et papiers", "Cartier", 4400, 6000, ["homme"]),
+  creerProduit("cartier-santos-wssa0037-noir-source", "Cartier Santos 2025 – WSSA0037 – Boîtier Noir ADLC & Acier – Coffret et papiers", "Cartier", 4400, 6000, ["homme"], { image: "a180a0bd-df0b-4d42-84af-3f2c3c0b1751.JPG" }),
   creerProduit("cartier-santos-2025-grand-modele-vert", "Cartier Santos 2025 Grand Modèle – Cadran Vert – WSSA0062 – Bracelet Acier & Cuir – Coffret Complet", "Cartier", 4600, 5500, ["homme"]),
   creerProduit("cartier-santos-carree-2961-bordeaux", "Cartier Santos Carrée 2961 – Cadran Bordeaux « Swiss Only » – 1982 – Boîte & Papiers – Rare", "Cartier", 4300, 5100, ["homme"]),
   creerProduit("cartier-santos-grand-modele-vert-degrade", "Cartier Santos de Cartier – Grand Modèle Vert Dégradé", "Cartier", 4000, null, ["homme"]),
