@@ -60,7 +60,7 @@ const produits = [
   },
   creerProduit("bracelet-alhambra-cornaline-2", "Bracelet Alhambra en or rose 18 carats et cornaline de VanCleef & Arpels, avec boite et certificat.", "Van Cleef & Arpels", 3299),
   creerProduit("bracelet-cartier-love-authentique", "Bracelet authentique CARTIER Love", "Cartier", 5500, null, ["accessoires"], { image: "9dfa5e12-05b5-4ebe-bcff-6345bd518ea2.JPG" }),
-  creerProduit("bracelet-cartier-love-jaune-16", "Bracelet CARTIER « LOVE » en or jaune 18 carats 750 taille 16", "Cartier", 3599, null, ["accessoires"], { image: "9f928690-30f6-4aed-a2b6-4e445c19f5bc.JPG" }),
+  creerProduit("bracelet-cartier-love-jaune-16", "Bracelet CARTIER « LOVE » en or jaune 18 carats 750 taille 16", "Cartier", 3599, null, ["accessoires"], { image: "9f928690-30f6-4aed-a2b6-4e445c19f5bc.JPG", images: ["9f928690-30f6-4aed-a2b6-4e445c19f5bc.JPG", "assets/202ab02a-adb1-4058-8720-3e0c99a6d4cd.JPG"] }),
   creerProduit("bracelet-cartier-juste-un-clou-2025", "Bracelet Cartier Juste Un Clou 18K Or Jaune 18 cm – Bijou de Luxe Authentique 2025", "Cartier", 2000, null, ["accessoires"], { image: "9d2c3185-4e92-4583-9784-55dc6934b73b.JPG" }),
   creerProduit("bracelet-cartier-juste-un-clou-36mm", "Bracelet Cartier JUSTE UN CLOU en or jaune 18 carats de 3,6 mm, taille 17, boîte cadeau, reçu", "Cartier", 4300, null, ["accessoires"], { image: "adf24613-321d-4caf-98db-ec58214a896d.JPG" }),
   creerProduit("bracelet-cartier-juste-un-clou-small-15", "Bracelet Cartier Juste Un Clou Small Or 18K 15 cm – Bijou de Luxe Authentique", "Cartier", 2300),
