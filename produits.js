@@ -165,6 +165,7 @@ const produits = [
     null,
     ["accessoires"],
     {
+      image: "assets/1d611b43-7cb8-4617-b08b-ae332ea032bb.JPG",
       description: "Condition : Occasion – Très bon état.\nÉtat : Ce bracelet Cartier est en très bon état. Toutes les parties fonctionnent correctement."
     }
   ),
