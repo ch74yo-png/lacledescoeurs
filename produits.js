@@ -226,7 +226,7 @@ const produits = [
   creerProduit("bracelet-cartier-juste-un-clou-homme-15-complet", "Bracelet Cartier Juste Un Clou en or jaune 18 carats, taille 15 – Coffret complet avec boîte et certificat.", "Cartier", 2899, null, ["homme"]),
   creerProduit("bracelet-cartier-love-moyen-jaune-16-homme", "Bracelet Cartier Love – Modèle moyen – Or jaune 18K – Taille 16", "Cartier", 3900, null, ["homme"]),
   creerProduit("bracelet-cartier-love-rose-17-homme", "Bracelet Cartier Love – Or rose 18 carats – Taille 17", "Cartier", 3199, 4500, ["homme"]),
-  creerProduit("bracelet-cartier-love-jaune-4-diamants-18-homme", "BRACELET CARTIER LOVE EN OR JAUNE 18 CARATS, 4 DIAMANTS, 0,42 CT, TAILLE 18, ENSEMBLE COMPLET", "Cartier", 4899, null, ["homme"], { image: "assets/259f2a57-b6a2-4e55-8650-ea197681aaed.JPG" }),
+  creerProduit("bracelet-cartier-love-jaune-4-diamants-18-homme", "BRACELET CARTIER LOVE EN OR JAUNE 18 CARATS, 4 DIAMANTS, 0,42 CT, TAILLE 18, ENSEMBLE COMPLET", "Cartier", 4899, null, ["homme"], { image: "assets/259f2a57-b6a2-4e55-8650-ea197681aaed.JPG", images: ["assets/259f2a57-b6a2-4e55-8650-ea197681aaed.JPG", "assets/2c3bf3d9-ee93-4caa-8755-d4fde8c0ab45.JPG"] }),
   creerProduit("bracelet-cartier-love-jaune-classique-18-homme", "Bracelet Love Cartier en or jaune, modèle classique – Taille 18", "Cartier", 3099, null, ["homme"]),
   creerProduit("bracelet-cartier-love-manchette-blanc-homme", "Bracelet manchette Love Cartier en or blanc 18 carats", "Cartier", 2599, 3500, ["homme"]),
   creerProduit("breitling-ab0162121g1s1-superocean-heritage", "Breitling AB0162121G1S1 Superocean Heritage B01 Chronographe 44 mm 2019 Kit complet", "Breitling", 2500, null, ["homme"]),
