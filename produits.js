@@ -152,6 +152,7 @@ const produits = [
   creerProduit("cartier-santos-wssa0062", "Cartier Santos de Cartier WSSA0062 – Cadran vert", "Cartier", 6000, null, ["homme"], {
     reference: "WSSA0062",
     image: "assets/16e7b339-c2b3-42bf-92a9-57a8fd0b1259.JPG",
+    images: ["assets/16e7b339-c2b3-42bf-92a9-57a8fd0b1259.JPG", "assets/24dd6da1-4ba2-4ec5-afe4-c98db37fd2df.JPG", "assets/25faf4a3-50bb-4388-aed1-6ed90a48ec31.JPG"],
     images: ["assets/16e7b339-c2b3-42bf-92a9-57a8fd0b1259.JPG", "assets/24dd6da1-4ba2-4ec5-afe4-c98db37fd2df.JPG"],
     description: "Montre automatique Cartier Santos en acier, cadran vert, boîte et papiers.",
     ficheSource: "https://bijouterielamalmaison.fr/product/cartier-santos-de-cartierwssa0062-ensemble-complet-garantie/"
@@ -205,7 +206,7 @@ const produits = [
   // RESTAURATION DES 14 PRODUITS DE LA CATÉGORIE MONTRES FEMME
   // Fiches reprises du catalogue d'origine ; images laissées vides volontairement.
   creerProduit("bracelet-cartier-juste-un-clou-femme-original", "BRACELET À ONGLES CLASSIQUE CARTIER AUTHENTIQUE JUSTE UN CLOU 18K taille 17 boîte et certificat.", "Cartier", 3699, null, ["femme"]),
-  creerProduit("cartier-baignoire-wgba0025-femme", "Cartier Baignoire Petit WGBA0025 « Femme » Quartz Or Jaune (2025) Taille 16 NEUF", "Cartier", 16000, null, ["femme"], { images: ["assets/231f2837-a847-4679-a615-8474d2343c3b.JPG", "assets/17174298-608b-48f7-8e3d-7a42cf23795e.JPG"] }),
+  creerProduit("cartier-baignoire-wgba0025-femme", "Cartier Baignoire Petit WGBA0025 « Femme » Quartz Or Jaune (2025) Taille 16 NEUF", "Cartier", 16000, null, ["femme"], { images: ["assets/17174298-608b-48f7-8e3d-7a42cf23795e.JPG", "assets/231f2837-a847-4679-a615-8474d2343c3b.JPG"] }),
   creerProduit("cartier-panthere-22mm-femme", "Cartier Panthère 22 mm Femme – Montre Or Jaune | Service Officiel & Boîte", "Cartier", 7000, null, ["femme"], { image: "assets/13c78fcb-e84a-4cd1-9928-7e5b9ad10a34.JPG" }),
   creerProduit("cartier-tank-must-femme", "Cartier Tank Must – Montre de Luxe avec Ensemble Complet, Boîte et Papiers", "Cartier", 2000, null, ["femme"]),
   creerProduit("jaeger-lecoultre-reverso-2024-femme", "Jaeger-LeCoultre Reverso 2024 – Acier inoxydable – Réf. 214.8.62 Q3858522", "Jaeger-LeCoultre", 4599, 6000, ["femme"]),
