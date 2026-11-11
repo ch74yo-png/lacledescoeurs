@@ -74,7 +74,7 @@ const produits = [
   creerProduit("bracelet-cartier-love-jaune-17-complet", "Bracelet Cartier Love Authentique Or Jaune 18K – Taille 17 cm – Boîte et Papiers", "Cartier", 4500, null, ["accessoires"], { image: "a36de3d2-f315-434a-bde1-73ec08bf24d0.JPG" }),
   creerProduit("bracelet-cartier-love-4-diamants-blanc-17", "Bracelet Cartier Love Classique – 4 Diamants – Or blanc 18 carats – Taille 17", "Cartier", 4299, 5500),
   creerProduit("bracelet-cartier-love-rose-21", "Bracelet Cartier Love Classique – Or Rose 18 Carats – 21 cm – Occasion 2022 avec Coffret et Certificat", "Cartier", 2500),
-  creerProduit("bracelet-cartier-love-blanc-17-complet", "Bracelet Cartier LOVE en or blanc 18 carats, taille 17, coffret complet et certificat", "Cartier", 3699, 4500, ["accessoires"], { image: "a3eb8bfd-99ea-416c-ad89-32b2eeb9b2a3.JPG" }),
+  creerProduit("bracelet-cartier-love-blanc-17-complet", "Bracelet Cartier LOVE en or blanc 18 carats, taille 17, coffret complet et certificat", "Cartier", 3699, 4500, ["accessoires"], { image: "a3eb8bfd-99ea-416c-ad89-32b2eeb9b2a3.JPG", images: ["a3eb8bfd-99ea-416c-ad89-32b2eeb9b2a3.JPG", "assets/15f97781-c36a-436b-90be-c30da98f5569.JPG"] }),
   creerProduit("bracelet-cartier-love-jaune-16-page2", "Bracelet Cartier Love en Or jaune 18 carats – Taille 16", "Cartier", 4099),
   creerProduit("bracelet-cartier-love-jaune-15-a", "Bracelet Cartier Love en or jaune 18 carats taille 15.", "Cartier", 4099),
   creerProduit("bracelet-cartier-love-jaune-15-b", "Bracelet Cartier Love en or jaune 18 carats, taille 15", "Cartier", 4200),
