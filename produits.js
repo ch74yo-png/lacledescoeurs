@@ -55,7 +55,7 @@ const produits = [
     image: "https://bijouterielamalmaison.fr/wp-content/uploads/2026/05/AC1-1-430x350.webp"
   },
   {
-    ...creerProduit("bracelet-alhambra-cornaline-1", "Bracelet Alhambra en or rose 18 carats et cornaline de VanCleef & Arpels, avec boite et certificat.", "Van Cleef & Arpels", 3299, null, ["accessoires"], { image: "assets/181f650e-098a-4939-b752-d9398827d157.JPG" }),
+    ...creerProduit("bracelet-alhambra-cornaline-1", "Bracelet Alhambra en or rose 18 carats et cornaline de VanCleef & Arpels, avec boite et certificat.", "Van Cleef & Arpels", 3299, null, ["accessoires"], { image: "assets/181f650e-098a-4939-b752-d9398827d157.JPG", images: ["assets/181f650e-098a-4939-b752-d9398827d157.JPG", "assets/2dc97fae-1323-44a5-bb8c-da2de3036c01.JPG"] }),
     image: "https://bijouterielamalmaison.fr/wp-content/uploads/2026/05/CC4-430x368.jpeg"
   },
   creerProduit("bracelet-alhambra-cornaline-2", "Bracelet Alhambra en or rose 18 carats et cornaline de VanCleef & Arpels, avec boite et certificat.", "Van Cleef & Arpels", 3299),
