@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#211916">
 <title>Paiement | LA CLE DES COEURS</title>
-<link rel="stylesheet" href="styles.css?v=20261112-choix-paiement-v24">
+<link rel="stylesheet" href="styles.css?v=20261112-fond-boutique-v23">
 <script src="https://js.stripe.com/endive/stripe.js"></script>
 
 <style>
@@ -56,15 +56,6 @@
   color:#e8c78e;
 }
 .payment-section-intro{display:none}
-
-.payment-choices{display:grid;gap:12px;margin:8px 0 22px}
-.payment-choice{display:flex;align-items:center;gap:14px;padding:16px;border:1px solid rgba(201,164,94,.55);background:rgba(0,0,0,.28);cursor:pointer;color:#f3e8d8}
-.payment-choice:has(input:checked){border-color:var(--gold);background:rgba(201,164,94,.12)}
-.payment-choice input{width:19px;height:19px;flex:0 0 19px;accent-color:var(--gold)}
-.payment-choice-copy{display:grid;gap:5px}
-.payment-choice-copy strong{font-size:15px;color:#e6c58e}
-.payment-choice-copy small{font-size:12px;line-height:1.5;color:#d5c8b8}
-
 #payment-element{
   margin:18px 0 25px;
   min-height:100px;
@@ -142,23 +133,16 @@
     <section class="payment-card">
       <div class="payment-section-intro" aria-hidden="true"></div>
 
-      <div class="payment-choices" role="radiogroup" aria-label="Choisissez votre moyen de paiement">
-        <label class="payment-choice">
-          <input type="radio" name="cdcPaymentMethod" value="card">
-          <span class="payment-choice-copy"><strong>Carte bancaire</strong><small>Visa, Mastercard, American Express et Apple Pay si disponible sur votre appareil</small></span>
-        </label>
-        <label class="payment-choice">
-          <input type="radio" name="cdcPaymentMethod" value="customer_balance">
-          <span class="payment-choice-copy"><strong>Virement bancaire</strong><small>Coordonnées bancaires et référence de virement fournies par Stripe</small></span>
-        </label>
-      </div>
+      <div id="payment-element"></div>
 
       <label class="payment-terms" style="display:flex;gap:10px;align-items:flex-start;margin:18px 0;color:#fff;font-size:12px"><input id="acceptPaymentTerms" type="checkbox" style="width:17px;height:17px;accent-color:#d9ad45"><span>J’accepte les <a href="conditions-generales.html" target="_blank" style="color:#d9ad45">conditions générales d’achat et de vente</a>.</span></label>
       <p id="paymentMessage" class="payment-message">
         
       </p>
 
-      <button id="payButton" class="pay-button" type="button" disabled>PAYER</button>
+      <button id="payButton" class="pay-button" type="button" disabled>
+        PAYER
+      </button>
     </section>
 
   </div>
@@ -168,145 +152,275 @@
 "use strict";
 
 const API = "https://cdc-paiement-api.bagzful.workers.dev";
-const money = cents => new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR"}).format(Number(cents||0)/100);
-function readStorage(key) {
-  try { return JSON.parse(localStorage.getItem(key)||"null"); }
-  catch { return null; }
-}
 
-const cart = readStorage("cdc_cart") || [];
-const customer = readStorage("cdc_customer") || {};
-const promo = readStorage("cdc_promo") || {};
-const orderReference = localStorage.getItem("cdc_order_reference") || "";
-const payButton = document.getElementById("payButton");
-const message = document.getElementById("paymentMessage");
-const terms = document.getElementById("acceptPaymentTerms");
-const methodInputs = [...document.querySelectorAll('input[name="cdcPaymentMethod"]')];
-let busy = false;
+const STRIPE_PUBLIC_KEY =
+  "pk_live_51UYnKB8R9yJlbTy40jlXgQ6VY17BUzg4r1uYaO9K7DGvn6iBCZzBsqpnnjeP6craQlZXYQ6mlFh49IFE1ISJuMyf00LnUjFMgF";
 
-function selectedMethod() {
-  return methodInputs.find(input => input.checked)?.value || "";
-}
+const money = cents =>
+  new Intl.NumberFormat("fr-FR",{
+    style:"currency",
+    currency:"EUR"
+  }).format(Number(cents||0)/100);
 
-function updateButton() {
-  payButton.disabled = busy || !terms.checked || !selectedMethod();
-}
+const moneyEuros = euros =>
+  new Intl.NumberFormat("fr-FR",{
+    style:"currency",
+    currency:"EUR"
+  }).format(Number(euros||0));
 
-function showError(error) {
-  message.textContent = error;
-  message.classList.add("payment-error");
-  payButton.disabled = false;
-  busy = false;
-  updateButton();
-}
+const safe = value =>
+  String(value??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c]));
 
-function validateOrder() {
-  if (!Array.isArray(cart) || !cart.length) throw new Error("Votre panier est vide.");
-  if (!customer.email || !customer.fullName || !customer.phone ||
-      !customer.address || !customer.postalCode || !customer.city ||
-      !customer.countryCode) {
-    throw new Error("Vos coordonnées ou votre adresse sont incomplètes. Retournez à la page commande.");
+function readStorage(key){
+  try{
+    return JSON.parse(localStorage.getItem(key)||"null");
+  }catch{
+    return null;
   }
-  return cart.map(item => {
-    const id = String(item.id || item.slug || item.productId || "");
-    const quantity = Number(item.quantity) || 1;
-    if (!/^[a-zA-Z0-9_-]+$/.test(id) || !Number.isInteger(quantity) || quantity < 1 || quantity > 10) {
-      throw new Error("Un article ou une quantité du panier est invalide.");
+}
+
+const cart=readStorage("cdc_cart")||[];
+const customer=readStorage("cdc_customer")||{};
+const shippingData=readStorage("cdc_shipping")||{};
+const promo=readStorage("cdc_promo")||{};
+const orderReference=localStorage.getItem("cdc_order_reference")||"";
+
+const payButton=document.getElementById("payButton");
+const message=document.getElementById("paymentMessage");
+
+let checkoutUrl=null;
+let checkoutReady=false;
+let paymentInProgress=false;
+let termsAccepted=false;
+
+function showError(text){
+  message.textContent=text;
+  message.classList.add("payment-error");
+  payButton.disabled=true;
+}
+
+function displayCustomer(){
+  document.getElementById("orderReferenceDisplay").textContent=orderReference?"N° "+orderReference:"N° indisponible";
+  const rows=[
+    ["Nom complet",customer.fullName],
+    ["E-mail",customer.email],
+    ["Téléphone",customer.phone],
+    ["Adresse",customer.address],
+    ["Code postal",customer.postalCode],
+    ["Ville",customer.city],
+    ["Pays",customer.country]
+  ];
+
+  document.getElementById("customerDetails").innerHTML=
+    rows.map(([label,value])=>`
+      <div class="payment-line">
+        <span>${safe(label)}</span>
+        <strong>${safe(value||"—")}</strong>
+      </div>
+    `).join("");
+}
+
+function displayCart(){
+  document.getElementById("orderItems").innerHTML=
+    cart.map(item=>{
+      const quantity=Number(item.quantity)||1;
+      const price=Number(item.price)||0;
+
+      const image=item.image||(Array.isArray(item.images)?item.images[0]:"")||item.photo||"";
+      return `
+        <div class="payment-line payment-product-line">
+          ${image ? `<img class="payment-product-image" src="${safe(image)}" alt="${safe(item.name||item.nom||"Article")}" loading="eager">` : ""}
+          <span>${safe(item.name||item.nom||"Article")} × ${quantity}</span>
+          <strong>${safe(moneyEuros(price*quantity))}</strong>
+        </div>
+      `;
+    }).join("") || '<p class="payment-message">Panier vide.</p>';
+
+  document.getElementById("discount").textContent=
+    moneyEuros(Number(promo.discount)||0);
+}
+
+function validateBeforePayment(){
+  if(!Array.isArray(cart)||!cart.length){
+    throw new Error("Votre panier est vide.");
+  }
+
+  if(
+    !customer.email||
+    !customer.fullName||
+    !customer.phone||
+    !customer.address||
+    !customer.postalCode||
+    !customer.city||
+    !customer.countryCode
+  ){
+    throw new Error(
+      "Vos coordonnées ou votre adresse sont incomplètes. Retournez à la page commande."
+    );
+  }
+
+  return cart.map(item=>{
+    const id=String(
+      item.id||item.slug||item.productId||""
+    );
+    const quantity=Number(item.quantity)||1;
+
+    if(!/^[a-zA-Z0-9_-]+$/.test(id)){
+      throw new Error(
+        "Un article du panier n'a pas d'identifiant valide. Retournez au panier."
+      );
     }
-    return {id, quantity};
+
+    if(
+      !Number.isInteger(quantity)||
+      quantity<1||
+      quantity>10
+    ){
+      throw new Error("Une quantité du panier est invalide.");
+    }
+
+    return {id,quantity};
   });
 }
 
-async function verifyReturnedPayment() {
-  const sessionId = new URLSearchParams(location.search).get("session_id");
-  if (!sessionId) return false;
+async function verifyReturnedPayment(){
+  const sessionId=
+    new URLSearchParams(location.search).get("session_id");
 
-  document.getElementById("paymentContent").hidden = true;
-  const panel = document.getElementById("successPanel");
-  panel.hidden = false;
-  const successMessage = document.getElementById("successMessage");
-  successMessage.textContent = "Nous vérifions le statut de votre paiement...";
+  if(!sessionId)return false;
 
-  try {
-    const response = await fetch(API + "/checkout-session?session_id=" + encodeURIComponent(sessionId));
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.erreur || "Vérification impossible.");
-    document.getElementById("successReference").textContent =
-      orderReference ? "Référence : " + orderReference : "Commande " + data.id;
+  document.getElementById("paymentContent").hidden=true;
+  document.getElementById("successPanel").hidden=false;
 
-    if (data.payment_status === "paid") {
-      successMessage.textContent = "Votre paiement est confirmé. Merci de votre confiance.";
+  const successMessage=
+    document.getElementById("successMessage");
+
+  successMessage.textContent=
+    "Nous vérifions le statut de votre paiement...";
+
+  try{
+    const response=await fetch(
+      API+"/checkout-session?session_id="+
+      encodeURIComponent(sessionId)
+    );
+
+    const data=await response.json();
+
+    if(!response.ok){
+      throw new Error(
+        data.erreur||"Vérification impossible."
+      );
+    }
+
+    if(data.payment_status==="paid"){
+      location.replace("confirmation.html?session_id="+encodeURIComponent(sessionId));
+      return true;
+      successMessage.textContent=
+        "Votre paiement est confirmé. Merci de votre confiance.";
+
+      document.getElementById("successReference").textContent=
+        orderReference
+          ? "Référence : "+orderReference
+          : (data.orderReference ? "Référence : "+data.orderReference : "Votre commande est confirmée.");
+
       localStorage.removeItem("cdc_cart");
       localStorage.removeItem("cdc_customer");
       localStorage.removeItem("cdc_shipping");
       localStorage.removeItem("cdc_promo");
       localStorage.removeItem("cdc_order_reference");
       localStorage.removeItem("cdc_order_cart_signature");
-    } else {
-      successMessage.textContent = "Votre paiement est en attente. Si vous avez choisi le virement bancaire, utilisez les coordonnées et la référence fournies par Stripe. La commande sera confirmée après réception des fonds.";
+
+    }else{
+      successMessage.textContent=
+        "Votre demande de paiement a été transmise. Si vous avez choisi le virement bancaire, utilisez les coordonnées et la référence fournies par Stripe. Votre commande restera en attente jusqu'à la réception et à la confirmation des fonds.";
+      document.getElementById("successReference").textContent=
+        orderReference ? "Référence de commande : "+orderReference : "Virement en attente de confirmation";
     }
-  } catch (error) {
-    successMessage.textContent = error.message || "Impossible de vérifier le paiement.";
+
+  }catch(error){
+    successMessage.textContent=
+      error.message||"Impossible de vérifier le paiement.";
   }
+
   return true;
 }
 
-async function beginPayment() {
-  if (busy) return;
-  busy = true;
-  updateButton();
-  message.classList.remove("payment-error");
-  message.textContent = "Préparation de votre paiement...";
+async function startPayment(){
+  try{
+    const items=validateBeforePayment();
 
-  try {
-    const items = validateOrder();
-    const paymentMethod = selectedMethod();
-    const response = await fetch(API + "/create-checkout-session", {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({
-        items,
-        orderReference,
-        paymentMethod,
-        customer: {
-          fullName: customer.fullName,
-          firstName: customer.firstName || String(customer.fullName||"").trim().split(/\s+/)[0],
-          lastName: customer.lastName || String(customer.fullName||"").trim().split(/\s+/).slice(1).join(" "),
-          email: customer.email,
-          phone: customer.phone || "",
-          address: customer.address,
-          postalCode: customer.postalCode,
-          city: customer.city,
-          country: customer.countryCode,
-          countryCode: customer.countryCode,
-          countryName: customer.country
-        },
-        promoCode: promo.code || ""
-      })
-    });
+    const response=await fetch(
+      API+"/create-checkout-session",
+      {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          items,
+          orderReference,
+          customer:{
+            fullName:customer.fullName,
+            firstName:customer.firstName||String(customer.fullName||"").trim().split(/\\s+/)[0],
+            lastName:customer.lastName||String(customer.fullName||"").trim().split(/\\s+/).slice(1).join(" "),
+            email:customer.email,
+            phone:customer.phone||"",
+            address:customer.address,
+            postalCode:customer.postalCode,
+            city:customer.city,
+            country:customer.countryCode,
+            countryCode:customer.countryCode,
+            countryName:customer.country
+          },
+          promoCode:promo.code||""
+        })
+      }
+    );
 
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.erreur || "Impossible de préparer le paiement.");
-    if (!data.checkoutUrl || !String(data.checkoutUrl).startsWith("https://checkout.stripe.com/")) {
+    const data=await response.json();
+
+    if(!response.ok){
+      throw new Error(data.erreur||"Impossible de préparer le paiement.");
+    }
+
+    if(!data.checkoutUrl || !String(data.checkoutUrl).startsWith("https://checkout.stripe.com/")){
       throw new Error("Stripe n'a pas fourni de lien de paiement sécurisé valide.");
     }
 
-    message.textContent = "Redirection vers Stripe pour confirmer votre paiement...";
-    location.assign(data.checkoutUrl);
-  } catch (error) {
-    console.error("CDC paiement :", error);
-    showError(error.message || "Une erreur est survenue.");
+    checkoutUrl=data.checkoutUrl;
+    checkoutReady=true;
+    payButton.disabled=!termsAccepted;
+    message.textContent="Choisissez votre moyen de paiement. Vous serez redirigé vers la page sécurisée de Stripe.";
+    message.classList.remove("payment-error");
+
+  }catch(error){
+    console.error("CDC paiement :",error);
+    showError(error.message||"Une erreur est survenue.");
   }
 }
 
-methodInputs.forEach(input => input.addEventListener("change", updateButton));
-terms.addEventListener("change", updateButton);
-payButton.addEventListener("click", beginPayment);
+payButton.addEventListener("click",()=>{
+  if(!termsAccepted||!checkoutReady||!checkoutUrl||paymentInProgress)return;
 
-(async function init() {
-  if (await verifyReturnedPayment()) return;
-  message.textContent = "Choisissez votre moyen de paiement, acceptez les conditions générales, puis cliquez sur PAYER.";
-  updateButton();
+  paymentInProgress=true;
+  payButton.disabled=true;
+  payButton.textContent="REDIRECTION...";
+  message.textContent="Redirection vers le paiement sécurisé Stripe...";
+  message.classList.remove("payment-error");
+
+  location.assign(checkoutUrl);
+});
+
+document.getElementById("acceptPaymentTerms").addEventListener("change",event=>{termsAccepted=event.target.checked;if(!paymentInProgress)payButton.disabled=!checkoutReady||!termsAccepted;});
+
+(async function init(){
+  if(await verifyReturnedPayment())return;
+
+  await startPayment();
 })();
 </script>
 
