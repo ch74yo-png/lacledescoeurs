@@ -2307,3 +2307,59 @@ body *:not(img):not(video):not(canvas):not(svg):not(path):not(.cdc-logo-image)
 .cdc-header,.cdc-footer {
   background-color: #000 !important;
 }
+
+/* CORRECTION FOND BOUTIQUE V2 — image en arrière-plan fixe et conteneurs réellement transparents */
+/* Le pseudo-élément garantit que l'image reste visible derrière toutes les pages. */
+html, body {
+  background: transparent !important;
+  background-image: none !important;
+}
+body {
+  position: relative !important;
+  isolation: isolate !important;
+  min-height: 100vh !important;
+}
+body::before {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+  background:
+    linear-gradient(rgba(8,7,6,.48), rgba(8,7,6,.48)),
+    url("images/nouvelle-enseigne/IMG_4033.JPG") center center / cover no-repeat !important;
+}
+/* Retirer le fond noir des grands conteneurs, sans toucher aux cartes ni aux zones fixes. */
+body > main,
+body > main > section,
+body > main > div:not(.cdc-header):not(.cdc-footer):not(.home-category):not(.product-card):not(.favorite-card):not(.checkout-card):not(.payment-card):not(.cgv-section):not(.contact-form-box),
+main > section,
+main > .catalogue-page,
+main > .checkout-page,
+main > .contact-page,
+main > .legal-page,
+main > .info-page,
+.cgv-page,
+.cgv-hero,
+.cgv-container,
+.catalogue-heading,
+.favorites-heading,
+.home-intro,
+.home-categories-grid,
+.welcome-section,
+.categories-section,
+.featured-section,
+.editorial-section,
+.store-showcase,
+.store-showcase-image,
+.contact-hero,
+.contact-information {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+/* L'en-tête et le pied de page restent inchangés visuellement. */
+.cdc-header, .cdc-footer {
+  background: #000 !important;
+  background-color: #000 !important;
+}
