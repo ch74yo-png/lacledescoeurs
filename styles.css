@@ -2357,3 +2357,45 @@ main > .info-page,
   background: #000 !important;
   background-color: #000 !important;
 }
+
+
+/* LISIBILITÉ RENFORCÉE — fond boutique assombri et textes mieux détachés */
+body::before{
+  background:
+    linear-gradient(rgba(0,0,0,.74), rgba(0,0,0,.74)),
+    url("images/nouvelle-enseigne/IMG_4033.JPG") center center / cover no-repeat !important;
+}
+/* Les zones principalement textuelles sont posées sur un panneau sombre translucide. */
+.home-intro,
+.store-showcase,
+.catalogue-heading,
+.favorites-heading,
+.contact-hero,
+.contact-information,
+.contact-info,
+.legal-page,
+.info-page,
+.confirmation-page,
+.cgv-page,
+.cgv-hero,
+.cgv-container,
+.product-detail-info,
+.cart-summary,
+.checkout-summary,
+.payment-summary{
+  background:rgba(0,0,0,.82)!important;
+  color:#fff!important;
+  border:1px solid rgba(212,175,55,.48)!important;
+  border-radius:8px!important;
+  box-shadow:0 8px 28px rgba(0,0,0,.35)!important;
+}
+.home-intro h2,.home-intro p,
+.store-showcase p,
+.catalogue-heading h1,.catalogue-heading h2,
+.favorites-heading h1,.contact-hero h1,
+.contact-information p,.legal-page p,.info-page p,
+.confirmation-page p,.cgv-page p,.cgv-container p,
+.product-detail-info h1,.product-detail-info p{
+  color:#fff!important;
+  text-shadow:0 2px 5px rgba(0,0,0,.95)!important;
+}
