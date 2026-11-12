@@ -168,6 +168,7 @@
     </a>
   </div>
 </main>
+<script src="produits.js?v=20261112-cart-images"></script>
 <script>
 "use strict";
 const cartContents = document.getElementById("cartContents");
@@ -181,7 +182,19 @@ function lirePanier() {
       (article.name || article.nom) &&
       Number.isFinite(Number(article.price ?? article.prix)) &&
       Number(article.price ?? article.prix) >= 0
-    ) : [];
+    ).map(article => {
+      const source = (Array.isArray(window.produits) ? window.produits : [])
+        .find(p => String(p.id) === String(article.id));
+      if (source) {
+        const photos = Array.isArray(source.images) && source.images.length
+          ? source.images.filter(Boolean) : (source.image ? [source.image] : []);
+        if ((!article.image || !String(article.image).trim()) && photos.length) article.image = photos[0];
+        if ((!Array.isArray(article.images) || !article.images.length) && photos.length) article.images = photos;
+        if (!article.name) article.name = source.nom;
+        if (!Number.isFinite(Number(article.price))) article.price = Number(source.prix);
+      }
+      return article;
+    }) : [];
     if (JSON.stringify(valides) !== JSON.stringify(panier)) {
       localStorage.setItem("cdc_cart", JSON.stringify(valides));
     }
@@ -248,7 +261,7 @@ function afficherPanier() {
       image.alt = nomArticle(article);
       image.loading = "lazy";
       image.addEventListener("error", () => {
-        imageConteneur.textContent = "Photo indisponible";
+        image.remove(); imageConteneur.textContent = "Photo indisponible";
       });
       imageConteneur.appendChild(image);
     } else {
