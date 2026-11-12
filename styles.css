@@ -2217,3 +2217,78 @@ a[href^="mailto:"],
   font-size:clamp(10px,2.7vw,14px)!important;
   letter-spacing:0!important;
 }
+
+
+/* FOND BOUTIQUE — toutes les pages, sans modifier l’en-tête ni le pied de page */
+html, body {
+  min-height: 100%;
+  background-color: #080706 !important;
+  background-image:
+    linear-gradient(rgba(8, 7, 6, .48), rgba(8, 7, 6, .48)),
+    url("images/nouvelle-enseigne/IMG_4033.JPG") !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+/* Les grandes zones de contenu laissent apparaître la photo de fond. */
+body > main,
+body main,
+.home-intro,
+.home-categories-grid,
+.store-showcase,
+.store-showcase-image,
+.welcome-section,
+.categories-section,
+.featured-section,
+.editorial-section,
+.catalogue-page,
+.catalogue-heading,
+.favorites-heading,
+.checkout-page,
+.contact-page,
+.legal-page,
+.info-page,
+.confirmation-page,
+.cgv-page,
+.cgv-hero,
+.cgv-container,
+.contact-hero,
+.contact-information {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+/* Le bandeau d’accueil utilise lui aussi la photo de la boutique. */
+.hero {
+  background-color: #080706 !important;
+  background-image:
+    linear-gradient(rgba(8, 7, 6, .48), rgba(8, 7, 6, .48)),
+    url("images/nouvelle-enseigne/IMG_4033.JPG") !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+/* Préserver les surfaces des éléments, l’en-tête et le pied de page. */
+.cdc-header,
+.cdc-footer,
+.home-category,
+.product-card,
+.product-item,
+.favorite-card,
+.account-card,
+.cart-item,
+.checkout-card,
+.payment-card,
+.contact-form-box,
+.contact-form,
+.cgv-section,
+.product-image,
+.favorite-image,
+.cart-item-image,
+.product-detail-image,
+.home-product-card,
+.home-product-info,
+.category-card,
+.category-image {
+  background-color: #080706 !important;
+}
