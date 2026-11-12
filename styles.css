@@ -2434,3 +2434,19 @@ body > main{
 @media(max-width:600px){
   body > main{padding-top:76px!important}
 }
+
+
+/* FOND BOUTIQUE — récapitulatif et paiement : laisser la photo visible */
+body::before{
+  background:
+    linear-gradient(rgba(0,0,0,.58),rgba(0,0,0,.58)),
+    url("images/nouvelle-enseigne/IMG_4033.JPG") center center / cover no-repeat !important;
+}
+.order-card,
+.payment-card{
+  background:rgba(8,7,6,.72)!important;
+  background-color:rgba(8,7,6,.72)!important;
+  border:1px solid rgba(212,175,55,.55)!important;
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px);
+}
