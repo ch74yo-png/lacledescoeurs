@@ -359,45 +359,49 @@ async function startPayment(){
 
     const items=validateBeforePayment();
 
-    const response=await fetch(
-      API+"/create-checkout-session",
-      {
+    const payload={
+      items,
+      orderReference,
+      customer:{
+        fullName:customer.fullName,
+        firstName:customer.firstName||String(customer.fullName||"").trim().split(/\\s+/)[0],
+        lastName:customer.lastName||String(customer.fullName||"").trim().split(/\\s+/).slice(1).join(" "),
+        email:customer.email,
+        phone:customer.phone||"",
+        address:customer.address,
+        postalCode:customer.postalCode,
+        city:customer.city,
+        country:customer.countryCode,
+        countryCode:customer.countryCode,
+        countryName:customer.country
+      },
+      promoCode:promo.code||""
+    };
+    const fingerprint=JSON.stringify(payload);
+    let clientSecret=null;
+    try{
+      const prepared=JSON.parse(sessionStorage.getItem("cdc_prepared_checkout")||"null");
+      if(prepared&&prepared.clientSecret&&prepared.fingerprint===fingerprint&&
+         Date.now()-prepared.createdAt<20*60*1000){
+        clientSecret=prepared.clientSecret;
+      }
+    }catch{}
+    if(!clientSecret){
+      const response=await fetch(API+"/create-checkout-session",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
-          items,
-          orderReference,
-          customer:{
-            fullName:customer.fullName,
-            firstName:customer.firstName||String(customer.fullName||"").trim().split(/\s+/)[0],
-            lastName:customer.lastName||String(customer.fullName||"").trim().split(/\s+/).slice(1).join(" "),
-            email:customer.email,
-            phone:customer.phone||"",
-            address:customer.address,
-            postalCode:customer.postalCode,
-            city:customer.city,
-            country:customer.countryCode,
-            countryCode:customer.countryCode,
-            countryName:customer.country
-          },
-          promoCode:promo.code||""
-        })
+        body:fingerprint
+      });
+      const data=await response.json();
+      if(!response.ok){
+        throw new Error(data.erreur||"Impossible de préparer le paiement.");
       }
-    );
-
-    const data=await response.json();
-
-    if(!response.ok){
-      throw new Error(
-        data.erreur||"Impossible de préparer le paiement."
-      );
+      clientSecret=data.clientSecret;
     }
-
-    if(!data.clientSecret){
-      throw new Error(
-        "Stripe n'a pas fourni la référence de paiement."
-      );
+    if(!clientSecret){
+      throw new Error("Stripe n'a pas fourni la référence de paiement.");
     }
+    sessionStorage.removeItem("cdc_prepared_checkout");
 
     const stripe=Stripe(STRIPE_PUBLIC_KEY);
 
