@@ -319,10 +319,10 @@ export default {
       form.set("success_url", SITE_URL + "/paiement.html?session_id={CHECKOUT_SESSION_ID}");
       form.set("cancel_url", SITE_URL + "/paiement.html?annule=1");
 
-      /* Carte bancaire (Apple Pay est proposé via carte si l'appareil le permet)
-         + virement bancaire classique Stripe (customer_balance). */
-      form.set("payment_method_types[0]", "card");
-      form.set("payment_method_types[1]", "customer_balance");
+      /* Les moyens de paiement sont gérés dynamiquement dans le Dashboard Stripe.
+         Activer "Cartes" (Apple Pay apparaît comme portefeuille compatible)
+         et "Virements bancaires" pour customer_balance.
+         IMPORTANT : ne pas envoyer payment_method_types avec l'API Stripe 2026-09-30.endive. */
       form.set("payment_method_options[customer_balance][funding_type]", "bank_transfer");
       form.set("payment_method_options[customer_balance][bank_transfer][type]", "eu_bank_transfer");
       form.set("payment_method_options[customer_balance][bank_transfer][eu_bank_transfer][country]", "FR");
