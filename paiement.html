@@ -385,7 +385,7 @@ async function startPayment(){
       throw new Error(data.erreur||"Impossible de préparer le paiement.");
     }
 
-    if(!data.checkoutUrl || !/^https:\\/\\/checkout\\.stripe\\.com\\//.test(data.checkoutUrl)){
+    if(!data.checkoutUrl || !String(data.checkoutUrl).startsWith("https://checkout.stripe.com/")){
       throw new Error("Stripe n'a pas fourni de lien de paiement sécurisé valide.");
     }
 
