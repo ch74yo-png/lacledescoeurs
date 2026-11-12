@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#000000"><title>Confirmation de commande | LA CLÉ DES CŒURS</title><link rel="stylesheet" href="styles.css?v=20261112-fixe-v22"><style>.confirmation-page{max-width:760px;margin:55px auto;padding:20px 18px 70px}.confirmation-card{text-align:center;padding:38px 24px;border:1px solid #806b4c;background:#000;color:#fff}.confirmation-card h1{font:400 clamp(30px,5vw,44px) var(--serif);color:#d9ad45}.confirmation-card p{line-height:1.8}.confirmation-ref{margin:22px 0;padding:15px;border:1px solid #806b4c;color:#d9ad45;overflow-wrap:anywhere}.confirmation-home{display:inline-block;margin-top:18px;padding:14px 25px;background:#d9ad45;color:#000;text-decoration:none;letter-spacing:1px}.confirmation-error{color:#ffb2a8}.confirmed-items{margin:20px 0;text-align:left}.confirmed-item{display:grid;grid-template-columns:76px 1fr auto;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #806b4c}.confirmed-item img{width:76px;height:76px;object-fit:contain;background:#111}.confirmed-item span{font-size:13px}@media(max-width:600px){.confirmation-page{margin:20px auto;padding:12px}}</style></head><body><main class="confirmation-page"><section class="confirmation-card"><h1 id="statusTitle">VÉRIFICATION DU PAIEMENT</h1><p id="statusText">Nous vérifions votre paiement auprès de notre prestataire.</p><div class="confirmation-ref" id="orderRef"></div><div id="confirmedItems" class="confirmed-items"></div><a class="confirmation-home" href="index.html">RETOUR À L’ACCUEIL</a></section></main><script>
 "use strict";
+const bankTransferParams=new URLSearchParams(location.search);
+if(bankTransferParams.get("mode")==="bank-transfer"){
+ const reference=bankTransferParams.get("reference")||"";
+ document.getElementById("statusTitle").textContent="VIREMENT DÉCLARÉ";
+ document.getElementById("statusText").textContent="Votre déclaration de virement a été enregistrée sur cet appareil. Votre commande reste en attente de vérification : elle ne sera confirmée qu'après réception effective des fonds sur le compte bancaire.";
+ document.getElementById("orderRef").textContent=reference?"Référence de commande : "+reference:"Référence de commande indisponible";
+ document.getElementById("confirmedItems").textContent="Statut : VIREMENT EN ATTENTE DE VÉRIFICATION";
+}
 const API="https://cdc-paiement-api.bagzful.workers.dev";
 const sessionId=new URLSearchParams(location.search).get("session_id");
 const ref=localStorage.getItem("cdc_order_reference")||"";
 document.getElementById("orderRef").textContent=ref?"N° "+ref:"N° indisponible";
 (async()=>{
  const title=document.getElementById("statusTitle"),message=document.getElementById("statusText");
+ if(bankTransferParams.get("mode")==="bank-transfer")return;
  if(!sessionId){title.textContent="PAIEMENT NON VÉRIFIÉ";message.textContent="Aucune référence de paiement n’a été reçue. Votre commande n’est pas encore confirmée.";message.className="confirmation-error";return}
  try{
   const response=await fetch(API+"/checkout-session?session_id="+encodeURIComponent(sessionId));
