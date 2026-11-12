@@ -133,6 +133,23 @@
     <section class="payment-card">
       <div class="payment-section-intro" aria-hidden="true"></div>
 
+      <style>
+        .cdc-bank-transfer-choice{display:flex;align-items:center;gap:12px;padding:15px;border:1px solid rgba(201,164,94,.6);margin:12px 0;color:#f3e8d8;cursor:pointer}
+        .cdc-bank-transfer-choice input{accent-color:#d9ad45;width:18px;height:18px}
+        .cdc-bank-transfer-details{display:none;padding:18px;border:1px solid rgba(201,164,94,.6);margin:12px 0 20px;color:#f3e8d8;line-height:1.9;overflow-wrap:anywhere}
+        .cdc-bank-transfer-details strong{color:#e6c58e}
+        .cdc-bank-transfer-details.is-visible{display:block}
+      </style>
+      <label class="cdc-bank-transfer-choice">
+        <input id="cdcManualBankTransfer" type="checkbox">
+        <strong>Virement bancaire</strong>
+      </label>
+      <div id="cdcBankTransferDetails" class="cdc-bank-transfer-details" aria-live="polite">
+        <strong>M. MADI BOINALI NASSIM</strong><br>
+        FR7640618805190004045245470<br>
+        BOUSFRPPXXX<br><br>
+        Référence: lacledescoeurs.com# (numéro de commande)
+      </div>
       <div id="payment-element"></div>
 
       <label class="payment-terms" style="display:flex;gap:10px;align-items:flex-start;margin:18px 0;color:#fff;font-size:12px"><input id="acceptPaymentTerms" type="checkbox" style="width:17px;height:17px;accent-color:#d9ad45"><span>J’accepte les <a href="conditions-generales.html" target="_blank" style="color:#d9ad45">conditions générales d’achat et de vente</a>.</span></label>
@@ -494,6 +511,19 @@ payButton.addEventListener("click",async()=>{
   }
 });
 
+document.getElementById("cdcManualBankTransfer").addEventListener("change",event=>{
+  const selected=event.target.checked;
+  document.getElementById("cdcBankTransferDetails").classList.toggle("is-visible",selected);
+  document.getElementById("payment-element").hidden=selected;
+  payButton.hidden=selected;
+  if(selected){
+    message.textContent="Effectuez le virement avec les coordonnées bancaires et la référence indiquées ci-dessus.";
+  }else{
+    message.textContent="";
+    payButton.hidden=false;
+    payButton.disabled=!checkoutReady||!termsAccepted;
+  }
+});
 document.getElementById("acceptPaymentTerms").addEventListener("change",event=>{termsAccepted=event.target.checked;if(!paymentInProgress)payButton.disabled=!checkoutReady||!termsAccepted;});
 
 (async function init(){
