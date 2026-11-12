@@ -2295,13 +2295,7 @@ body main,
 
 
 /* Transparence des conteneurs pour laisser voir le fond boutique, en préservant les cartes et contrôles. */
-body *:not(img):not(video):not(canvas):not(svg):not(path):not(.cdc-logo-image)
-:not(.cdc-header):not(.cdc-footer):not(.home-category):not(.product-card)
-:not(.product-item):not(.favorite-card):not(.account-card):not(.cart-item)
-:not(.checkout-card):not(.payment-card):not(.contact-form-box):not(.contact-form)
-:not(.cgv-section):not(.product-image):not(.favorite-image):not(.cart-item-image)
-:not(.product-detail-image):not(.home-product-card):not(.home-product-info)
-:not(.category-card):not(.category-image):not(button):not(input):not(select):not(textarea) {
+body *:not(img):not(video):not(canvas):not(svg):not(path):not(.cdc-logo-image):not(.cdc-header):not(.cdc-footer):not(.home-category):not(.product-card):not(.product-item):not(.favorite-card):not(.account-card):not(.cart-item):not(.checkout-card):not(.payment-card):not(.contact-form-box):not(.contact-form):not(.cgv-section):not(.product-image):not(.favorite-image):not(.cart-item-image):not(.product-detail-image):not(.home-product-card):not(.home-product-info):not(.category-card):not(.category-image):not(button):not(input):not(select):not(textarea) {
   background-color: transparent !important;
 }
 .cdc-header,.cdc-footer {
