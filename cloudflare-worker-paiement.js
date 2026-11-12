@@ -312,17 +312,17 @@ export default {
 
       const form = new URLSearchParams();
       form.set("mode", "payment");
+      form.set("ui_mode", "elements");
       form.set("locale", "fr");
       form.set("customer", stripeCustomer.id);
       form.set("billing_address_collection", "required");
       form.set("client_reference_id", orderReference);
-      form.set("success_url", SITE_URL + "/paiement.html?session_id={CHECKOUT_SESSION_ID}");
-      form.set("cancel_url", SITE_URL + "/paiement.html?annule=1");
+      form.set("return_url", SITE_URL + "/confirmation.html?session_id={CHECKOUT_SESSION_ID}");
 
-      /* Les moyens de paiement sont gérés dynamiquement dans le Dashboard Stripe.
-         Activer "Cartes" (Apple Pay apparaît comme portefeuille compatible)
-         et "Virements bancaires" pour customer_balance.
-         IMPORTANT : ne pas envoyer payment_method_types avec l'API Stripe 2026-09-30.endive. */
+      /* Stripe Payment Element affiche les moyens activés et éligibles
+         directement dans le cadre de paiement du site.
+         Apple Pay apparaît comme portefeuille si l'appareil et le domaine le permettent.
+         Le virement bancaire classique est proposé par Stripe lorsqu'il est éligible. */
       form.set("payment_method_options[customer_balance][funding_type]", "bank_transfer");
       form.set("payment_method_options[customer_balance][bank_transfer][type]", "eu_bank_transfer");
       form.set("payment_method_options[customer_balance][bank_transfer][eu_bank_transfer][country]", "FR");
@@ -362,9 +362,9 @@ export default {
         body: formBody
       }, env.STRIPE_SECRET_KEY);
 
-      if (!session.url) throw new Error("Stripe n'a pas retourné l'URL de paiement hébergé.");
+      if (!session.client_secret) throw new Error("Stripe n'a pas retourné le secret de la session intégrée.");
       return json({
-        checkoutUrl: session.url,
+        clientSecret: session.client_secret,
         amount: total,
         subtotal,
         discount,
