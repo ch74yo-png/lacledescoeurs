@@ -162,6 +162,55 @@ function shippingForCountry(code) {
   if (asiaOceania.has(code)) return 4990;
   return 5990;
 }
+
+async function calculateTrustedOrder(body) {
+  const customerInput = body.customer || {};
+  const email = clean(customerInput.email, 254).toLowerCase();
+  const fullName = clean(customerInput.fullName || [customerInput.firstName || "", customerInput.lastName || ""].join(" "), 200);
+  const phone = clean(customerInput.phone, 100);
+  const address = clean(customerInput.address, 200);
+  const postalCode = clean(customerInput.postalCode, 40);
+  const city = clean(customerInput.city, 100);
+  const countryCode = clean(customerInput.countryCode || customerInput.country_code || customerInput.country, 2).toUpperCase();
+  const items = body.items;
+  if (!validEmail(email)) throw new Error("Adresse e-mail invalide.");
+  if (!fullName || !phone || !address || !postalCode || !city || !/^[A-Z]{2}$/.test(countryCode)) throw new Error("Les coordonnées ou l'adresse de livraison sont incomplètes.");
+  if (!Array.isArray(items) || !items.length || items.length > 50) throw new Error("Panier vide ou invalide.");
+  const normalized = [];
+  const seen = new Set();
+  for (const item of items) {
+    const id = clean(item.id, 150);
+    const quantity = Number(item.quantity);
+    if (!/^[a-zA-Z0-9_-]+$/.test(id) || !Number.isInteger(quantity) || quantity < 1 || quantity > 15 || seen.has(id)) throw new Error("Un article ou une quantité du panier est invalide.");
+    seen.add(id);
+    normalized.push({ id, quantity });
+  }
+  const shipping = shippingForCountry(countryCode);
+  if (shipping === null) throw new Error("La livraison n'est pas disponible pour ce pays.");
+  const submittedPromoCode = clean(body.promoCode, 80).toUpperCase();
+  if (submittedPromoCode && submittedPromoCode !== PROMO_CODE) throw new Error("Code promo invalide.");
+  const promoApplied = submittedPromoCode === PROMO_CODE;
+  const trustedProducts = await getTrustedProducts(normalized.map(item => item.id));
+  let subtotal = 0, discountedSubtotal = 0;
+  const lines = [];
+  for (const item of normalized) {
+    const product = trustedProducts.get(item.id);
+    if (!product) throw new Error("Produit introuvable : " + item.id);
+    const originalUnitAmount = product.unitAmount;
+    const unitAmount = promoApplied ? Math.round(originalUnitAmount * (100 - PROMO_PERCENT) / 100) : originalUnitAmount;
+    const originalLineTotal = originalUnitAmount * item.quantity;
+    const lineTotal = unitAmount * item.quantity;
+    if (!Number.isSafeInteger(originalLineTotal) || !Number.isSafeInteger(lineTotal)) throw new Error("Montant de commande invalide.");
+    subtotal += originalLineTotal;
+    discountedSubtotal += lineTotal;
+    lines.push({ id: item.id, name: product.name, quantity: item.quantity, originalUnitAmount, unitAmount, originalLineTotal, lineTotal });
+  }
+  const discount = subtotal - discountedSubtotal;
+  const total = discountedSubtotal + shipping;
+  if (!Number.isSafeInteger(total) || total < 100 || total > 99999999) throw new Error("Montant de commande invalide.");
+  return { email, fullName, phone, address, postalCode, city, countryCode, normalized, lines, subtotal, discount, discountedSubtotal, shipping, total, promoCode: promoApplied ? PROMO_CODE : "", promoPercent: promoApplied ? PROMO_PERCENT : 0 };
+}
+
 function validEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -222,6 +271,56 @@ export default {
     }
 
     if (!ALLOWED_ORIGINS.has(origin)) return json({ erreur: "Origine non autorisée." }, 403, origin);
+
+    if (request.method === "POST" && url.pathname === "/bank-transfer-declaration") {
+      try {
+        if (!env.DB) return json({ erreur: "La base D1 n'est pas reliée au Worker (binding DB)." }, 500, origin);
+        const body = await request.json();
+        const order = await calculateTrustedOrder(body);
+        const orderReference = clean(body.orderReference || ("CDC-" + crypto.randomUUID()), 80);
+        if (!/^[A-Za-z0-9_-]{3,80}$/.test(orderReference)) return json({ erreur: "Référence de commande invalide." }, 400, origin);
+        const itemsJson = JSON.stringify({
+          items: order.normalized, lines: order.lines, subtotal: order.subtotal,
+          discount: order.discount, promoCode: order.promoCode,
+          promoPercent: order.promoPercent, shipping: order.shipping
+        });
+        await env.DB.prepare(`
+          INSERT OR IGNORE INTO bank_transfer_declarations
+          (order_reference, customer_name, customer_email, customer_phone,
+           customer_address, customer_postal_code, customer_city, customer_country,
+           items_json, amount_cents, currency, status)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'EUR', 'pending_verification')
+        `).bind(
+          orderReference, order.fullName, order.email, order.phone, order.address,
+          order.postalCode, order.city, order.countryCode, itemsJson, order.total
+        ).run();
+        const saved = await env.DB.prepare(
+          "SELECT order_reference, amount_cents, currency, status, declared_at FROM bank_transfer_declarations WHERE order_reference = ?"
+        ).bind(orderReference).first();
+        if (!saved) throw new Error("La déclaration n'a pas pu être enregistrée dans D1.");
+        return json({ success: true, orderReference: saved.order_reference, amount: saved.amount_cents, currency: saved.currency, status: saved.status, declaredAt: saved.declared_at }, 200, origin);
+      } catch (error) {
+        console.error("CDC_BANK_TRANSFER_SAVE_ERROR", error);
+        return json({ erreur: error.message || "Impossible d'enregistrer la déclaration de virement." }, 400, origin);
+      }
+    }
+
+    if (request.method === "GET" && url.pathname === "/bank-transfer-status") {
+      try {
+        if (!env.DB) return json({ erreur: "La base D1 n'est pas reliée au Worker." }, 500, origin);
+        const reference = clean(url.searchParams.get("reference"), 80);
+        if (!/^[A-Za-z0-9_-]{3,80}$/.test(reference)) return json({ erreur: "Référence de commande invalide." }, 400, origin);
+        const saved = await env.DB.prepare(
+          "SELECT order_reference, status, declared_at, amount_cents, currency FROM bank_transfer_declarations WHERE order_reference = ?"
+        ).bind(reference).first();
+        if (!saved) return json({ erreur: "Aucune déclaration trouvée pour cette référence." }, 404, origin);
+        return json({ orderReference: saved.order_reference, status: saved.status, declaredAt: saved.declared_at, amount: saved.amount_cents, currency: saved.currency }, 200, origin);
+      } catch (error) {
+        console.error("CDC_BANK_TRANSFER_STATUS_ERROR", error);
+        return json({ erreur: "Impossible de vérifier le statut du virement." }, 500, origin);
+      }
+    }
+
     if (!env.STRIPE_SECRET_KEY) return json({ erreur: "La clé secrète Stripe n'est pas configurée." }, 500, origin);
 
     if (request.method === "GET" && url.pathname === "/checkout-session") {
