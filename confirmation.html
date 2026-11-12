@@ -4,10 +4,10 @@
 const bankTransferParams=new URLSearchParams(location.search);
 if(bankTransferParams.get("mode")==="bank-transfer"){
  const reference=bankTransferParams.get("reference")||"";
- document.getElementById("statusTitle").textContent="VIREMENT DÉCLARÉ";
- document.getElementById("statusText").textContent="Votre déclaration de virement a été enregistrée sur cet appareil. Votre commande reste en attente de vérification : elle ne sera confirmée qu'après réception effective des fonds sur le compte bancaire.";
+ document.getElementById("statusTitle").textContent="VÉRIFICATION DE LA DÉCLARATION";
+ document.getElementById("statusText").textContent="Nous vérifions l'enregistrement de votre déclaration auprès de notre serveur.";
  document.getElementById("orderRef").textContent=reference?"Référence de commande : "+reference:"Référence de commande indisponible";
- document.getElementById("confirmedItems").textContent="Statut : VIREMENT EN ATTENTE DE VÉRIFICATION";
+ document.getElementById("confirmedItems").textContent="";
 }
 const API="https://cdc-paiement-api.bagzful.workers.dev";
 const sessionId=new URLSearchParams(location.search).get("session_id");
@@ -15,7 +15,24 @@ const ref=localStorage.getItem("cdc_order_reference")||"";
 document.getElementById("orderRef").textContent=ref?"N° "+ref:"N° indisponible";
 (async()=>{
  const title=document.getElementById("statusTitle"),message=document.getElementById("statusText");
- if(bankTransferParams.get("mode")==="bank-transfer")return;
+ if(bankTransferParams.get("mode")==="bank-transfer"){
+  const reference=bankTransferParams.get("reference")||"";
+  try{
+   if(!reference)throw new Error("Référence de commande absente.");
+   const response=await fetch(API+"/bank-transfer-status?reference="+encodeURIComponent(reference));
+   const data=await response.json();
+   if(!response.ok)throw new Error(data.erreur||"Vérification impossible.");
+   title.textContent="VIREMENT DÉCLARÉ";
+   message.textContent="Votre déclaration a bien été enregistrée. Votre commande reste en attente de vérification et ne sera confirmée qu'après réception effective des fonds sur le compte bancaire.";
+   document.getElementById("orderRef").textContent="Référence de commande : "+data.orderReference;
+   document.getElementById("confirmedItems").textContent="Statut : VIREMENT EN ATTENTE DE VÉRIFICATION";
+  }catch(error){
+   title.textContent="DÉCLARATION NON VÉRIFIÉE";
+   message.textContent=error.message||"La déclaration n'a pas pu être retrouvée sur le serveur. Contactez la boutique avant de refaire un virement.";
+   message.className="confirmation-error";
+  }
+  return;
+ }
  if(!sessionId){title.textContent="PAIEMENT NON VÉRIFIÉ";message.textContent="Aucune référence de paiement n’a été reçue. Votre commande n’est pas encore confirmée.";message.className="confirmation-error";return}
  try{
   const response=await fetch(API+"/checkout-session?session_id="+encodeURIComponent(sessionId));
