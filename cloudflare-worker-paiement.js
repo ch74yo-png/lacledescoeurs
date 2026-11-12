@@ -280,11 +280,6 @@ export default {
       const shipping = shippingForCountry(countryCode);
       if (shipping === null) return json({ erreur: "La livraison n'est pas disponible pour ce pays." }, 400, origin);
 
-      const paymentMethod = clean(body.paymentMethod, 40);
-      if (!["card", "customer_balance"].includes(paymentMethod)) {
-        return json({ erreur: "Veuillez choisir un moyen de paiement valide." }, 400, origin);
-      }
-
       const submittedPromoCode = clean(body.promoCode, 80).toUpperCase();
       if (submittedPromoCode && submittedPromoCode !== PROMO_CODE) return json({ erreur: "Code promo invalide." }, 400, origin);
       const promoApplied = submittedPromoCode === PROMO_CODE;
@@ -324,15 +319,13 @@ export default {
       form.set("success_url", SITE_URL + "/paiement.html?session_id={CHECKOUT_SESSION_ID}");
       form.set("cancel_url", SITE_URL + "/paiement.html?annule=1");
 
-      /* Le client choisit le moyen de paiement sur la page de la boutique.
-         Stripe héberge ensuite uniquement l'étape de confirmation.
-         API 2026-09-30.endive : utiliser allowed_payment_method_types. */
-      form.set("allowed_payment_method_types[0]", paymentMethod);
-      if (paymentMethod === "customer_balance") {
-        form.set("payment_method_options[customer_balance][funding_type]", "bank_transfer");
-        form.set("payment_method_options[customer_balance][bank_transfer][type]", "eu_bank_transfer");
-        form.set("payment_method_options[customer_balance][bank_transfer][eu_bank_transfer][country]", "FR");
-      }
+      /* Les moyens de paiement sont gérés dynamiquement dans le Dashboard Stripe.
+         Activer "Cartes" (Apple Pay apparaît comme portefeuille compatible)
+         et "Virements bancaires" pour customer_balance.
+         IMPORTANT : ne pas envoyer payment_method_types avec l'API Stripe 2026-09-30.endive. */
+      form.set("payment_method_options[customer_balance][funding_type]", "bank_transfer");
+      form.set("payment_method_options[customer_balance][bank_transfer][type]", "eu_bank_transfer");
+      form.set("payment_method_options[customer_balance][bank_transfer][eu_bank_transfer][country]", "FR");
 
       form.set("metadata[order_reference]", orderReference);
       form.set("metadata[customer_name]", fullName);
