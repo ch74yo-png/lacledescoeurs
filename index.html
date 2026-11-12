@@ -489,7 +489,22 @@
 .home-product-name a{color:#fff!important;text-decoration:none!important}
 .home-product-price{font-size:12px!important;margin:5px 0!important}
 @media(max-width:600px){.home-category-photo{height:145px!important}.home-product-card{flex-basis:132px!important;min-width:132px!important}.home-product-name{font-size:12px!important;min-height:48px!important}}
-</style>
+
+/* ACCUEIL — quatre cases de catégories avec une seule photo animée par case */
+.home-categories-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:22px!important;max-width:1250px!important;margin:0 auto!important;padding:34px 20px 58px!important;background:#000!important}
+.home-category{position:relative!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important;min-width:0!important;min-height:clamp(260px,32vw,420px)!important;padding:0!important;overflow:hidden!important;border:1px solid rgba(212,175,55,.75)!important;background:#111!important;cursor:pointer!important}
+.home-category-photo{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;padding:24px!important;background:#080808!important;opacity:1;transition:opacity .55s ease!important}
+.home-category-photo.is-changing{opacity:.12!important}
+.home-category-heading{position:relative!important;z-index:2!important;width:100%!important;min-height:0!important;margin:0!important;padding:18px 12px!important;text-align:center!important;background:linear-gradient(transparent,rgba(0,0,0,.92))!important}
+.home-category-heading .eyebrow{display:block!important;color:#d4af37!important;margin:0 0 5px!important}
+.home-category-heading h2{margin:0!important;color:#d4af37!important;font-size:clamp(20px,2.7vw,32px)!important}
+.home-category-heading h2 a{color:#d4af37!important;text-decoration:none!important}
+.home-category-heading p:not(.eyebrow){display:none!important}
+.home-category-heading>a{display:inline-block!important;margin-top:8px!important;color:#fff!important;text-decoration:none!important;font-size:10px!important;letter-spacing:1.6px!important}
+.home-products,.home-product-card{display:none!important}
+@media(max-width:600px){.home-categories-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;padding:20px 10px 38px!important}.home-category{min-height:clamp(175px,52vw,250px)!important}.home-category-photo{padding:8px!important}.home-category-heading{padding:12px 5px!important}.home-category-heading .eyebrow{font-size:8px!important;letter-spacing:1px!important}.home-category-heading h2{font-size:16px!important}.home-category-heading>a{font-size:8px!important;letter-spacing:1px!important}}
+
+  </style>
 </head>
 
 <body>
@@ -588,37 +603,38 @@
   <script>
     "use strict";
 
-    // Affiche des produits réels dans chacune des quatre catégories de l'accueil.
+    // Une seule photo visible à la fois dans chaque catégorie, avec défilement automatique.
     const accueilProduits = Array.isArray(window.produits) ? window.produits : [];
-    const accueilEchapper = value => String(value ?? "").replace(/[&<>"']/g, c => ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-    })[c]);
     document.querySelectorAll(".home-category[data-category-url]").forEach(section => {
-      const categorie = new URL(section.dataset.categoryUrl, location.href).searchParams.get("categorie");
-      const selection = accueilProduits.filter(p => p && p.actif !== false &&
-        (Array.isArray(p.categories) ? p.categories : [p.categorie]).includes(categorie)).slice(0, 8);
-      const rail = document.createElement("div");
-      rail.className = "home-products";
-      rail.setAttribute("aria-label", "Produits de la catégorie " + categorie);
-      rail.innerHTML = selection.map(p => {
-        const image = Array.isArray(p.images) && p.images.length ? p.images[0] : (p.image || "");
-        const imageHTML = image
-          ? '<img src="' + accueilEchapper(image) + '" alt="' + accueilEchapper(p.nom) + '" loading="lazy" onerror="this.onerror=null;this.src=\'/logo-officiel.svg\';">'
-          : '<img src="/logo-officiel.svg" alt="LA CLÉ DES CŒURS" loading="lazy">';
-        return '<article class="home-product-card">' +
-          '<a class="home-product-image" href="produit.html?id=' + encodeURIComponent(p.id) + '">' + imageHTML + '</a>' +
-          '<div class="home-product-info"><div class="home-product-brand">' + accueilEchapper(p.marque || "") + '</div>' +
-          '<h3 class="home-product-name"><a href="produit.html?id=' + encodeURIComponent(p.id) + '">' + accueilEchapper(p.nom) + '</a></h3>' +
-          '<p class="home-product-price">' + new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR"}).format(Number(p.prix)||0) + '</p></div></article>';
-      }).join("");
-      if (selection.length) section.appendChild(rail);
-    });
-
-    document.querySelectorAll(".home-category[data-category-url]").forEach(card => {
-      card.style.cursor = "pointer";
-      card.addEventListener("click", event => {
+      const categorie = new URL(section.dataset.categoryUrl, window.location.href).searchParams.get("categorie");
+      const photos = accueilProduits
+        .filter(p => p && p.actif !== false &&
+          (Array.isArray(p.categories) ? p.categories : [p.categorie]).includes(categorie))
+        .flatMap(p => {
+          const liste = Array.isArray(p.images) && p.images.length ? p.images : [p.image];
+          return liste.filter(src => typeof src === "string" && src.trim()).map(src => ({src, alt:p.nom || categorie}));
+        });
+      const image = section.querySelector(".home-category-photo");
+      if (image && photos.length) {
+        let index = 0;
+        image.src = photos[0].src;
+        image.alt = photos[0].alt;
+        if (photos.length > 1) {
+          window.setInterval(() => {
+            image.classList.add("is-changing");
+            window.setTimeout(() => {
+              index = (index + 1) % photos.length;
+              image.src = photos[index].src;
+              image.alt = photos[index].alt;
+              image.classList.remove("is-changing");
+            }, 350);
+          }, 3200);
+        }
+      }
+      section.style.cursor = "pointer";
+      section.addEventListener("click", event => {
         if (event.target.closest("a")) return;
-        window.location.href = card.dataset.categoryUrl;
+        window.location.href = section.dataset.categoryUrl;
       });
     });
   </script>
