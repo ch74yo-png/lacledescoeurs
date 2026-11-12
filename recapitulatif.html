@@ -126,12 +126,66 @@ if(promo.verified&&promo.code===PROMO_CODE){
 refreshTotals();
 document.getElementById("applyPromo").addEventListener("click",applyPromo);
 promoInput.addEventListener("keydown",event=>{if(event.key==="Enter"){event.preventDefault();applyPromo()}});
-document.getElementById("continuePay").addEventListener("click",()=>{
+const continuePayButton=document.getElementById("continuePay");
+function buildCheckoutPayload(){
+  const items=cart.map(item=>{
+    const id=String(item.id||item.slug||item.productId||"");
+    const quantity=Number(item.quantity)||1;
+    if(!/^[a-zA-Z0-9_-]+$/.test(id)||!Number.isInteger(quantity)||quantity<1||quantity>10){
+      throw new Error("Un article du panier ou sa quantité est invalide.");
+    }
+    return {id,quantity};
+  });
+  return {
+    items,
+    orderReference:ref,
+    customer:{
+      fullName:customer.fullName,
+      firstName:customer.firstName||String(customer.fullName||"").trim().split(/\\s+/)[0],
+      lastName:customer.lastName||String(customer.fullName||"").trim().split(/\\s+/).slice(1).join(" "),
+      email:customer.email,
+      phone:customer.phone||"",
+      address:customer.address,
+      postalCode:customer.postalCode,
+      city:customer.city,
+      country:customer.countryCode,
+      countryCode:customer.countryCode,
+      countryName:customer.country
+    },
+    promoCode:promo.code||""
+  };
+}
+continuePayButton.addEventListener("click",async()=>{
   if(!cart.length){alert("Votre panier est vide.");return}
   if(!customer.fullName||!customer.email||!customer.phone||!customer.address||!customer.postalCode||!customer.city||!customer.countryCode||!ref){
     alert("Les informations de commande sont incomplètes. Retournez à la page de commande.");return
   }
-  location.href="paiement.html";
+  continuePayButton.disabled=true;
+  continuePayButton.textContent="PRÉPARATION DU PAIEMENT…";
+  try{
+    const payload=buildCheckoutPayload();
+    const fingerprint=JSON.stringify(payload);
+    const response=await fetch("https://cdc-paiement-api.bagzful.workers.dev/create-checkout-session",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:fingerprint
+    });
+    const data=await response.json();
+    if(!response.ok||!data.clientSecret){
+      throw new Error(data.erreur||"Stripe n'a pas pu préparer le paiement.");
+    }
+    sessionStorage.setItem("cdc_prepared_checkout",JSON.stringify({
+      clientSecret:data.clientSecret,
+      fingerprint,
+      createdAt:Date.now()
+    }));
+    location.href="paiement.html";
+  }catch(error){
+    console.error("Préparation du paiement :",error);
+    alert(error.message||"Impossible de préparer le paiement. Réessayez.");
+    continuePayButton.disabled=false;
+    continuePayButton.textContent="PROCÉDER AU PAIEMENT";
+  }
 });
 </script>
 <script src="site-shell.js?v=20261110-language-complete-v18" defer></script>
