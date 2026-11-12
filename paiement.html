@@ -430,15 +430,16 @@ async function startPayment(){
     const paymentElement=checkout.createPaymentElement();
     paymentElement.mount("#payment-element");
 
-    checkout.on("change",session=>{
+    checkout.on("change",()=>{
       if(!paymentInProgress){
-        payButton.disabled=!session.canConfirm||!termsAccepted;
+        // L'élément Stripe gère lui-même la validation du moyen choisi.
+        // Le bouton dépend uniquement du chargement Stripe et de l'accord CGV.
+        payButton.disabled=!checkoutReady||!termsAccepted;
       }
     });
 
     checkoutReady=true;
-    payButton.disabled=
-      !checkoutActions.getSession().canConfirm||!termsAccepted;
+    payButton.disabled=!termsAccepted;
 
     message.textContent="";
     message.classList.remove("payment-error");
@@ -467,22 +468,16 @@ payButton.addEventListener("click",async()=>{
   try{
     const result=await checkoutActions.confirm();
 
-    if(result.type==="error"){
+    if(result && result.error){
       throw new Error(
-        result.error?.message||"Le paiement a échoué."
+        result.error.message||"Le paiement n'a pas pu être confirmé."
       );
     }
 
-    if(result.type==="success"&&result.session?.id){
-      location.assign(
-        "confirmation.html?session_id="+
-        encodeURIComponent(result.session.id)
-      );
-      return;
-    }
-
+    // Stripe gère lui-même les authentifications et redirections bancaires
+    // selon le moyen sélectionné, puis utilise le return_url de la session.
     message.textContent=
-      "Paiement transmis. Vérification en cours...";
+      "Demande de paiement transmise. Suivez les instructions de votre banque ou de Stripe.";
 
   }catch(error){
     console.error("CDC confirmation :",error);
@@ -499,7 +494,7 @@ payButton.addEventListener("click",async()=>{
   }
 });
 
-document.getElementById("acceptPaymentTerms").addEventListener("change",event=>{termsAccepted=event.target.checked;if(checkoutActions&&!paymentInProgress)payButton.disabled=!checkoutActions.getSession().canConfirm||!termsAccepted;});
+document.getElementById("acceptPaymentTerms").addEventListener("change",event=>{termsAccepted=event.target.checked;if(!paymentInProgress)payButton.disabled=!checkoutReady||!termsAccepted;});
 
 (async function init(){
   if(await verifyReturnedPayment())return;
