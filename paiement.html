@@ -338,7 +338,9 @@ async function verifyReturnedPayment(){
 
     }else{
       successMessage.textContent=
-        "Le paiement n'est pas encore confirmé. Veuillez patienter ou contacter la boutique.";
+        "Votre demande de paiement a été transmise. Si vous avez choisi le virement bancaire, utilisez les coordonnées et la référence fournies par Stripe. Votre commande restera en attente jusqu'à la réception et à la confirmation des fonds.";
+      document.getElementById("successReference").textContent=
+        orderReference ? "Référence de commande : "+orderReference : "Virement en attente de confirmation";
     }
 
   }catch(error){
