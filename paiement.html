@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#211916">
 <title>Paiement | LA CLE DES COEURS</title>
-<link rel="stylesheet" href="styles.css?v=20261112-fond-boutique-v23">
+<link rel="stylesheet" href="styles.css?v=20261110-email-nowrap-v17">
 <script src="https://js.stripe.com/endive/stripe.js"></script>
 
 <style>
@@ -194,7 +194,7 @@ const orderReference=localStorage.getItem("cdc_order_reference")||"";
 const payButton=document.getElementById("payButton");
 const message=document.getElementById("paymentMessage");
 
-let checkoutUrl=null;
+let checkoutActions=null;
 let checkoutReady=false;
 let paymentInProgress=false;
 let termsAccepted=false;
@@ -338,9 +338,7 @@ async function verifyReturnedPayment(){
 
     }else{
       successMessage.textContent=
-        "Votre demande de paiement a été transmise. Si vous avez choisi le virement bancaire, utilisez les coordonnées et la référence fournies par Stripe. Votre commande restera en attente jusqu'à la réception et à la confirmation des fonds.";
-      document.getElementById("successReference").textContent=
-        orderReference ? "Référence de commande : "+orderReference : "Virement en attente de confirmation";
+        "Le paiement n'est pas encore confirmé. Veuillez patienter ou contacter la boutique.";
     }
 
   }catch(error){
@@ -353,6 +351,12 @@ async function verifyReturnedPayment(){
 
 async function startPayment(){
   try{
+    if(!window.Stripe){
+      throw new Error(
+        "Le service de paiement Stripe n'a pas pu être chargé."
+      );
+    }
+
     const items=validateBeforePayment();
 
     const response=await fetch(
@@ -365,8 +369,8 @@ async function startPayment(){
           orderReference,
           customer:{
             fullName:customer.fullName,
-            firstName:customer.firstName||String(customer.fullName||"").trim().split(/\\s+/)[0],
-            lastName:customer.lastName||String(customer.fullName||"").trim().split(/\\s+/).slice(1).join(" "),
+            firstName:customer.firstName||String(customer.fullName||"").trim().split(/\s+/)[0],
+            lastName:customer.lastName||String(customer.fullName||"").trim().split(/\s+/).slice(1).join(" "),
             email:customer.email,
             phone:customer.phone||"",
             address:customer.address,
@@ -384,17 +388,59 @@ async function startPayment(){
     const data=await response.json();
 
     if(!response.ok){
-      throw new Error(data.erreur||"Impossible de préparer le paiement.");
+      throw new Error(
+        data.erreur||"Impossible de préparer le paiement."
+      );
     }
 
-    if(!data.checkoutUrl || !String(data.checkoutUrl).startsWith("https://checkout.stripe.com/")){
-      throw new Error("Stripe n'a pas fourni de lien de paiement sécurisé valide.");
+    if(!data.clientSecret){
+      throw new Error(
+        "Stripe n'a pas fourni la référence de paiement."
+      );
     }
 
-    checkoutUrl=data.checkoutUrl;
+    const stripe=Stripe(STRIPE_PUBLIC_KEY);
+
+    const checkout=stripe.initCheckoutElementsSdk({
+      clientSecret:data.clientSecret,
+      elementsOptions:{
+        appearance:{
+          theme:"stripe",
+          variables:{
+            colorPrimary:"#987d60",
+            colorText:"#40372f",
+            borderRadius:"3px",
+            fontFamily:"Arial,sans-serif"
+          }
+        }
+      }
+    });
+
+    const loaded=await checkout.loadActions();
+
+    if(loaded.type!=="success"){
+      throw new Error(
+        loaded.error?.message||
+        "Impossible d'initialiser le formulaire Stripe."
+      );
+    }
+
+    checkoutActions=loaded.actions;
+
+    const paymentElement=checkout.createPaymentElement();
+    paymentElement.mount("#payment-element");
+
+    checkout.on("change",session=>{
+      if(!paymentInProgress){
+        payButton.disabled=!session.canConfirm||!termsAccepted;
+      }
+    });
+
     checkoutReady=true;
-    payButton.disabled=!termsAccepted;
-    message.textContent="Choisissez votre moyen de paiement. Vous serez redirigé vers la page sécurisée de Stripe.";
+    payButton.disabled=
+      !checkoutActions.getSession().canConfirm||!termsAccepted;
+
+    message.textContent="";
     message.classList.remove("payment-error");
 
   }catch(error){
@@ -403,19 +449,57 @@ async function startPayment(){
   }
 }
 
-payButton.addEventListener("click",()=>{
-  if(!termsAccepted||!checkoutReady||!checkoutUrl||paymentInProgress)return;
+payButton.addEventListener("click",async()=>{
+  if(
+    !termsAccepted||
+    !checkoutReady||
+    !checkoutActions||
+    paymentInProgress
+  )return;
 
   paymentInProgress=true;
   payButton.disabled=true;
-  payButton.textContent="REDIRECTION...";
-  message.textContent="Redirection vers le paiement sécurisé Stripe...";
+  payButton.textContent="TRAITEMENT...";
+
+  message.textContent="Validation de votre paiement...";
   message.classList.remove("payment-error");
 
-  location.assign(checkoutUrl);
+  try{
+    const result=await checkoutActions.confirm();
+
+    if(result.type==="error"){
+      throw new Error(
+        result.error?.message||"Le paiement a échoué."
+      );
+    }
+
+    if(result.type==="success"&&result.session?.id){
+      location.assign(
+        "confirmation.html?session_id="+
+        encodeURIComponent(result.session.id)
+      );
+      return;
+    }
+
+    message.textContent=
+      "Paiement transmis. Vérification en cours...";
+
+  }catch(error){
+    console.error("CDC confirmation :",error);
+
+    paymentInProgress=false;
+    payButton.disabled=
+      !checkoutActions.getSession().canConfirm||!termsAccepted;
+
+    payButton.textContent="PAYER";
+    message.textContent=
+      error.message||"Le paiement n'a pas abouti.";
+
+    message.classList.add("payment-error");
+  }
 });
 
-document.getElementById("acceptPaymentTerms").addEventListener("change",event=>{termsAccepted=event.target.checked;if(!paymentInProgress)payButton.disabled=!checkoutReady||!termsAccepted;});
+document.getElementById("acceptPaymentTerms").addEventListener("change",event=>{termsAccepted=event.target.checked;if(checkoutActions&&!paymentInProgress)payButton.disabled=!checkoutActions.getSession().canConfirm||!termsAccepted;});
 
 (async function init(){
   if(await verifyReturnedPayment())return;
