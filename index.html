@@ -493,8 +493,8 @@
 /* ACCUEIL — quatre cases de catégories avec une seule photo animée par case */
 .home-categories-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:22px!important;max-width:1250px!important;margin:0 auto!important;padding:34px 20px 58px!important;background:#000!important}
 .home-category{position:relative!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important;min-width:0!important;min-height:clamp(260px,32vw,420px)!important;padding:0!important;overflow:hidden!important;border:1px solid rgba(212,175,55,.75)!important;background:#111!important;cursor:pointer!important}
-.home-category-photo{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;padding:24px!important;background:#080808!important;opacity:1;transition:opacity .55s ease!important}
-.home-category-photo.is-changing{opacity:.12!important}
+.home-category-photo{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;padding:24px!important;background:transparent!important;opacity:1;transition:none!important}
+.home-category-photo.is-changing{opacity:1!important}
 .home-category-heading{position:relative!important;z-index:2!important;width:100%!important;min-height:0!important;margin:0!important;padding:18px 12px!important;text-align:center!important;background:linear-gradient(transparent,rgba(0,0,0,.92))!important}
 .home-category-heading .eyebrow{display:block!important;color:#d4af37!important;margin:0 0 5px!important}
 .home-category-heading h2{margin:0!important;color:#d4af37!important;font-size:clamp(20px,2.7vw,32px)!important}
@@ -600,35 +600,62 @@
   <script>
     "use strict";
 
-    // Une seule photo visible à la fois dans chaque catégorie, avec défilement automatique.
+    // Chaque tuile ne fait défiler que des photos réellement chargeables de sa catégorie.
     const accueilProduits = Array.isArray(window.produits) ? window.produits : [];
     document.querySelectorAll(".home-category[data-category-url]").forEach(section => {
       const categorie = new URL(section.dataset.categoryUrl, window.location.href).searchParams.get("categorie");
+      const image = section.querySelector(".home-category-photo");
+      if (!image) return;
+
       const photos = accueilProduits
         .filter(p => p && p.actif !== false &&
           (Array.isArray(p.categories) ? p.categories : [p.categorie]).includes(categorie))
         .flatMap(p => {
           const liste = Array.isArray(p.images) && p.images.length ? p.images : [p.image];
-          return liste.filter(src => typeof src === "string" && src.trim()).map(src => ({src, alt:p.nom || categorie}));
+          return liste.filter(src => typeof src === "string" && src.trim())
+            .map(src => ({src, alt:p.nom || categorie}));
         });
-      const image = section.querySelector(".home-category-photo");
-      if (image && photos.length) {
-        let index = 0;
-        image.src = photos[0].src;
-        image.alt = photos[0].alt;
-        if (photos.length > 1) {
-          window.setInterval(() => {
-            image.classList.add("is-changing");
-            window.setTimeout(() => {
-              index = (index + 1) % photos.length;
-              image.src = photos[index].src;
-              image.alt = photos[index].alt;
-              image.classList.remove("is-changing");
-            }, 350);
-          }, 3200);
+
+      // Retirer les doublons sans mélanger les catégories.
+      const uniques = [...new Map(photos.map(photo => [photo.src, photo])).values()];
+      let index = -1;
+      let timer = null;
+      let generation = 0;
+      image.removeAttribute("src");
+      image.alt = "Chargement des photos de la catégorie";
+
+      function afficherPhotoSuivante() {
+        if (!uniques.length) return;
+        const token = ++generation;
+        let essais = 0;
+        function essayer() {
+          if (essais >= uniques.length || token !== generation) return;
+          const prochain = (index + 1 + essais) % uniques.length;
+          const candidate = uniques[prochain];
+          essais++;
+          const prechargement = new Image();
+          prechargement.onload = () => {
+            if (token !== generation) return;
+            index = prochain;
+            image.src = candidate.src;
+            image.alt = candidate.alt;
+            image.style.visibility = "visible";
+          };
+          prechargement.onerror = essayer;
+          prechargement.src = candidate.src;
         }
+        essayer();
       }
-      section.style.cursor = "pointer";
+
+      image.style.visibility = "hidden";
+      afficherPhotoSuivante();
+      if (uniques.length > 1) timer = window.setInterval(afficherPhotoSuivante, 3500);
+
+      // Une photo qui échoue après affichage est immédiatement remplacée.
+      image.addEventListener("error", () => {
+        image.style.visibility = "hidden";
+        afficherPhotoSuivante();
+      });
       section.addEventListener("click", event => {
         if (event.target.closest("a")) return;
         window.location.href = section.dataset.categoryUrl;
