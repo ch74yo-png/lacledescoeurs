@@ -391,7 +391,7 @@
             "assets/cartier-love-classic-16-6.jpg",
             "assets/cartier-love-classic-16-7.jpg"
           ]
-        : (produit.image ? [produit.image] : []);
+        : (Array.isArray(produit.images) && produit.images.length ? produit.images.filter(Boolean) : (produit.image ? [produit.image] : []));
       const imagePrincipale = imagesProduit[0] || "";
       const visuel = imagePrincipale
         ? `<div class="product-gallery">
