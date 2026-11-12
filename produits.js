@@ -426,6 +426,56 @@ produits.forEach((produit) => {
 });
 
 
+// Attribution provisoire par famille visuelle pour rendre le catalogue illustré.
+// Les images sont des photos locales du dossier assets/ du dépôt.
+const photosFamilleMontres = [
+  "assets/2e747dfc-aa00-4c91-8905-f47a4ccebee6.JPG",
+  "assets/ea6b4cc7-b158-4d32-9528-f0a6f6b1ff8d.JPG",
+  "assets/08022864-0a94-45c5-ac84-4a35c2defb35.JPG",
+  "assets/953db2df-4006-4f3a-b7bc-d3cf3bd58475.JPG",
+  "assets/01d4db1c-fb1b-42c5-91be-63e6e8a28f4b.JPG",
+  "assets/ed1d8467-04a8-442d-851b-997d80e79371.JPG",
+  "assets/279bc8c3-7a0c-425b-8b96-fa4214b75f3e.JPG",
+  "assets/70b43dd4-c665-4687-839b-e75ab6ac9dc9.JPG",
+  "assets/a07962e6-1332-4df7-8328-78d1c17f0b28.JPG",
+  "assets/087e9905-74d9-4ed9-a3f5-7fa362a8ecd5.JPG"
+];
+const photosFamilleBracelets = [
+  "assets/89be6250-cb0a-446d-bb9a-37c47de006ad.JPG",
+  "assets/4ccb682f-5902-4531-b159-ed385ffb9f91.JPG",
+  "assets/14b3351a-2a1e-41d1-b3fd-1fa7c833c109.JPG",
+  "assets/e62a6918-6af5-47d4-b905-d434ba7a2078.JPG",
+  "assets/39496461-e422-4350-97e6-7fd510dacd45.JPG",
+  "assets/fcab0876-7444-4762-bb3b-ab0ea67824ab.JPG",
+  "assets/231f2837-a847-4679-a615-8474d2343c3b.JPG",
+  "assets/5354bb91-963a-487f-854f-91d654d943a3.JPG",
+  "assets/a36de3d2-f315-434a-bde1-73ec08bf24d0.JPG",
+  "assets/267bbe42-c07a-45b9-88c0-48e03656a0cc.JPG",
+  "assets/5700542e-a5de-44ed-8b51-2834506e1517.JPG",
+  "assets/a7dbba38-ae80-48d1-88a7-ba824ad84625.JPG",
+  "assets/e342eb8b-87a0-41ed-abc2-3c2b17934713.JPG",
+  "assets/8d0c87d0-3cce-40d3-bda3-1fee15253266.JPG",
+  "assets/092f8620-2f83-43c4-b9ba-b1b67b5f2a26.JPG",
+  "assets/ec4bf426-a176-4718-bbb0-0685b868f7a8.JPG",
+  "assets/44b3f403-83ad-49b3-84fd-ee84c7819e0d.JPG",
+  "assets/b1ba6151-31f4-45f7-aeb8-2d0dec5ac498.JPG"
+];
+let indexMontre = 0;
+let indexBracelet = 0;
+produits.forEach((produit) => {
+  if (produit.id === "details" || produit.image) return;
+  const texte = (String(produit.nom || "") + " " + String(produit.marque || "")).toLowerCase();
+  const estMontre = /montre|watch|chronographe|chronomaster|black bay|royal pop|santos|tank|baignoire|datejust|submariner|seamaster|speedmaster|reverso|navitimer|rolex|tudor|omega|zenith|patek|breitling|jaeger/.test(texte);
+  const estBracelet = /bracelet|jonc|manchette|force 10|love|alhambra|panth[eè]re/.test(texte);
+  if (estMontre) {
+    produit.image = photosFamilleMontres[indexMontre % photosFamilleMontres.length];
+    indexMontre++;
+  } else if (estBracelet) {
+    produit.image = photosFamilleBracelets[indexBracelet % photosFamilleBracelets.length];
+    indexBracelet++;
+  }
+});
+
 // Les fiches sans correspondance validée restent sans photo plutôt que
 // d'afficher l'image d'un autre produit.
 
