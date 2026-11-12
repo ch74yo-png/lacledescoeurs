@@ -530,30 +530,51 @@ manualBankChoice.addEventListener("change",event=>{
     payButton.disabled=!checkoutReady||!termsAccepted;
   }
 });
-bankDoneButton.addEventListener("click",()=>{
-  if(!termsAccepted||!manualBankChoice.checked)return;
-  const reference=orderReference||("CDC-"+Date.now());
-  const order={
-    reference,
-    date:new Date().toISOString(),
-    status:"bank_transfer_pending",
-    paymentMethod:"Virement bancaire classique",
-    customerName:customer.fullName||"",
-    customerEmail:customer.email||"",
-    items:cart,
-    bankTransferDeclared:true
-  };
-  let orders=[];
+bankDoneButton.addEventListener("click",async()=>{
+  if(!termsAccepted||!manualBankChoice.checked||bankDoneButton.disabled)return;
+  bankDoneButton.disabled=true;
+  const originalLabel=bankDoneButton.textContent;
+  bankDoneButton.textContent="ENREGISTREMENT...";
+  message.classList.remove("payment-error");
+  message.textContent="Enregistrement sécurisé de votre déclaration...";
   try{
-    orders=JSON.parse(localStorage.getItem("cdc_orders")||"[]");
-    if(!Array.isArray(orders))orders=[];
-  }catch{orders=[];}
-  if(!orders.some(item=>item.reference===reference&&item.status==="bank_transfer_pending")){
-    orders.push(order);
-    localStorage.setItem("cdc_orders",JSON.stringify(orders));
+    const items=validateBeforePayment();
+    const response=await fetch(API+"/bank-transfer-declaration",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        items,
+        orderReference,
+        customer:{
+          fullName:customer.fullName,
+          email:customer.email,
+          phone:customer.phone,
+          address:customer.address,
+          postalCode:customer.postalCode,
+          city:customer.city,
+          countryCode:customer.countryCode
+        },
+        promoCode:promo.code||""
+      })
+    });
+    const data=await response.json();
+    if(!response.ok||!data.success)throw new Error(data.erreur||"La déclaration n'a pas pu être enregistrée.");
+    localStorage.setItem("cdc_order_reference",data.orderReference);
+    localStorage.setItem("cdc_pending_bank_transfer",JSON.stringify({
+      reference:data.orderReference,
+      date:data.declaredAt,
+      status:data.status,
+      paymentMethod:"Virement bancaire classique",
+      bankTransferDeclared:true
+    }));
+    location.assign("confirmation.html?mode=bank-transfer&reference="+encodeURIComponent(data.orderReference));
+  }catch(error){
+    console.error("CDC déclaration de virement :",error);
+    message.textContent=error.message||"Impossible d'enregistrer la déclaration. Réessayez.";
+    message.classList.add("payment-error");
+    bankDoneButton.disabled=false;
+    bankDoneButton.textContent=originalLabel;
   }
-  localStorage.setItem("cdc_pending_bank_transfer",JSON.stringify(order));
-  location.assign("confirmation.html?mode=bank-transfer&reference="+encodeURIComponent(reference));
 });
 document.getElementById("acceptPaymentTerms").addEventListener("change",event=>{
   termsAccepted=event.target.checked;
